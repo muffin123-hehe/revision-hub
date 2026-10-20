@@ -1,0 +1,1017 @@
+
+/* ==========================================
+   🐾 Revision Hub — COZY PASTEL DESIGN
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&family=Patrick+Hand&display=swap');
+
+:root {
+  --pink: #f4cbd2;
+  --pink-light: #fff0f1;
+  --pink-dark: #d98f9f;
+  --lavender: #e9e1fa;
+  --lavender-dark: #a998d5;
+  --cream: #fffaf0;
+  --sage: #dcebdc;
+  --peach: #ffe2d2;
+  --brown: #514448;
+  --muted: #8b7b80;
+  --white: #ffffff;
+  --border: #f0e4e6;
+  --shadow: 0 10px 30px rgba(119, 83, 99, 0.09);
+  --shadow-hover: 0 16px 36px rgba(119, 83, 99, 0.15);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--brown);
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+body::selection {
+  background: var(--pink);
+  color: var(--brown);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button,
+.button {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+button:hover,
+.button:hover {
+  transform: translateY(-2px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--lavender-dark);
+  outline-offset: 4px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  color: var(--brown);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+p {
+  margin-top: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================
+   HEADER & NAVIGATION
+   ========================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 16px clamp(18px, 5vw, 72px);
+  background: rgba(255, 250, 240, 0.94);
+  border-bottom: 1px solid rgba(240, 228, 230, 0.8);
+  backdrop-filter: blur(16px);
+}
+
+.brand,
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--brown);
+  font-size: 1.35rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.brand-paw {
+  font-size: 1.65rem;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.main-nav a {
+  padding: 9px 16px;
+  border-radius: 30px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  background: var(--pink-light);
+  color: #a75f73;
+}
+
+.header-cat {
+  font-size: 1.8rem;
+}
+
+/* ==========================================
+   HOMEPAGE HERO
+   ========================================== */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(32px, 6vw, 90px);
+  max-width: 1320px;
+  min-height: 600px;
+  margin: 0 auto;
+  padding: 75px clamp(22px, 6vw, 85px);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy h1 {
+  margin-bottom: 24px;
+}
+
+.hero-copy h1 span {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 2rem;
+  animation: paw-bounce 2.8s ease-in-out infinite;
+}
+
+.hero-text {
+  max-width: 520px;
+  margin-bottom: 25px;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+
+.handwritten {
+  margin: 24px 0 30px;
+  color: #b37c91;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.7rem;
+  line-height: 1.35;
+  transform: rotate(-2deg);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 14px 25px;
+  border: none;
+  border-radius: 18px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.button-primary {
+  background: var(--pink);
+  color: #65444e;
+  box-shadow: 0 7px 18px rgba(217, 143, 159, 0.2);
+}
+
+.button-primary:hover {
+  background: #edb8c3;
+  box-shadow: var(--shadow);
+}
+
+.button-primary span {
+  font-size: 1.2rem;
+}
+
+/* ==========================================
+   CSS-ILLUSTRATED CAT CAFÉ
+   ========================================== */
+
+.hero-art {
+  position: relative;
+  min-height: 410px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 8px solid rgba(255, 255, 255, 0.8);
+  border-radius: 48% 48% 30px 30px;
+  background:
+    radial-gradient(circle at 78% 18%, #fff6c9 0 5%, transparent 5.5%),
+    linear-gradient(180deg, #f5e5f5 0%, #ffece1 62%, #f4d5c8 100%);
+  box-shadow: var(--shadow);
+}
+
+.window {
+  position: absolute;
+  top: 28px;
+  left: 11%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 52%;
+  height: 155px;
+  padding-top: 15px;
+  border: 9px solid #fffaf2;
+  border-radius: 48% 48% 10px 10px;
+  background: linear-gradient(160deg, #d4e9ef, #fff4dc);
+  box-shadow: 0 5px 15px rgba(100, 75, 75, 0.08);
+}
+
+.window span {
+  color: #e6b85c;
+  font-size: 1.4rem;
+}
+
+.window span:nth-child(2) {
+  margin-top: 35px;
+  color: #fff;
+}
+
+.window span:nth-child(3) {
+  margin-top: 60px;
+  color: #fff;
+}
+
+.shelf {
+  position: absolute;
+  top: 215px;
+  left: 0;
+  width: 100%;
+  height: 13px;
+  background: #b98570;
+  box-shadow: 0 7px 0 rgba(143, 94, 77, 0.12);
+}
+
+.plant {
+  position: absolute;
+  z-index: 2;
+  font-size: 3rem;
+}
+
+.plant-one {
+  top: 157px;
+  left: 5%;
+}
+
+.hero-books {
+  position: absolute;
+  bottom: 32px;
+  left: 7%;
+  z-index: 2;
+  font-size: clamp(2.4rem, 5vw, 3.7rem);
+  letter-spacing: -10px;
+  filter: drop-shadow(0 6px 4px rgba(90, 65, 60, 0.12));
+}
+
+.sleepy-cat {
+  position: absolute;
+  right: 16%;
+  bottom: 35px;
+  z-index: 3;
+  font-size: clamp(6rem, 12vw, 9rem);
+  line-height: 1;
+  filter: drop-shadow(0 8px 5px rgba(90, 65, 60, 0.1));
+  animation: cat-breathe 4s ease-in-out infinite;
+}
+
+.tiny-sign {
+  position: absolute;
+  top: 32%;
+  right: 6%;
+  padding: 12px 14px;
+  border: 2px solid #e4c4b9;
+  border-radius: 8px;
+  background: #fffaf0;
+  color: #a36e78;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  transform: rotate(4deg);
+}
+
+.sparkle {
+  position: absolute;
+  color: #e5b35f;
+  font-size: 1.7rem;
+}
+
+.sparkle-one {
+  top: 48%;
+  left: 38%;
+}
+
+/* ==========================================
+   GENTLE REMINDER
+   ========================================== */
+
+.gentle-reminder {
+  margin: 0 auto 70px;
+  padding: 0 clamp(20px, 6vw, 80px);
+}
+
+.reminder-content {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 38px clamp(24px, 5vw, 60px);
+  overflow: hidden;
+  border: 1px solid #f0dfe1;
+  border-radius: 30px;
+  background: linear-gradient(115deg, #fff0f1, #f3edff);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: #b4778b;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.reminder-content h3 {
+  margin-bottom: 8px;
+  font-size: 1.7rem;
+}
+
+.reminder-text {
+  max-width: 600px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.cat-doodle {
+  position: absolute;
+  right: 7%;
+  bottom: 12px;
+  font-size: 3.8rem;
+}
+
+/* ==========================================
+   GENERAL PAGE LAYOUT
+   ========================================== */
+
+.page-container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 55px 0 85px;
+}
+
+.page-heading {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-heading h1 {
+  margin-bottom: 14px;
+}
+
+.page-heading > p:last-child {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* ==========================================
+   SUBJECT CARDS
+   ========================================== */
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.subject-card {
+  position: relative;
+  display: flex;
+  min-height: 230px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 22px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.subject-card::before {
+  position: absolute;
+  top: -42px;
+  right: -35px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  content: "";
+}
+
+.subject-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.subject-icon {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  margin-bottom: 14px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 2.3rem;
+}
+
+.subject-card h2 {
+  margin-bottom: 18px;
+  font-size: 1.5rem;
+}
+
+.subject-card button,
+.revision-heading button,
+.revision-tabs button {
+  padding: 11px 19px;
+  border: 1px solid rgba(130, 100, 110, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--brown);
+  font-weight: 800;
+}
+
+.subject-card button:hover,
+.revision-tabs button:hover {
+  background: white;
+  box-shadow: 0 5px 12px rgba(80, 60, 70, 0.08);
+}
+
+.maths-card {
+  background: #f9e3e9;
+}
+
+.science-card {
+  background: #e1edf8;
+}
+
+.english-card {
+  background: #f1e5fb;
+}
+
+.history-card {
+  background: #f8e9d7;
+}
+
+.geography-card {
+  background: #e0efdf;
+}
+
+.spanish-card {
+  background: #ffe8df;
+}
+
+.korean-card {
+  background: #f6e4ef;
+}
+
+/* ==========================================
+   REVISION ROOM
+   ========================================== */
+
+.revision-room {
+  margin-top: 55px;
+  padding: clamp(22px, 4vw, 45px);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: white;
+  box-shadow: var(--shadow);
+  scroll-margin-top: 110px;
+}
+
+.revision-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.revision-heading h2 {
+  margin-bottom: 0;
+}
+
+.revision-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.revision-tabs button {
+  background: #faf5ff;
+}
+
+.revision-tabs button.active,
+.revision-tabs button[aria-selected="true"] {
+  background: var(--lavender);
+  color: #594a80;
+}
+
+#revision-content {
+  min-height: 180px;
+}
+
+#revision-content h3 {
+  margin-bottom: 15px;
+}
+
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="search"],
+select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #eadde5;
+  border-radius: 15px;
+  background: #fffdfd;
+  color: var(--brown);
+}
+
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+#revision-content textarea {
+  margin-bottom: 15px;
+}
+
+#revision-content button,
+.action-button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--pink);
+  color: var(--brown);
+  font-weight: 900;
+}
+
+#revision-content button:hover,
+.action-button:hover {
+  background: #edb8c3;
+}
+
+/* General learning content */
+
+.lesson-card,
+.topic-card,
+.content-card,
+.notes-card,
+.flashcard,
+.fact-card,
+.practice-card,
+.checklist-card {
+  margin-bottom: 18px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: #fffdfd;
+  box-shadow: 0 5px 16px rgba(119, 83, 99, 0.05);
+}
+
+.lesson-card h2,
+.lesson-card h3,
+.topic-card h2,
+.content-card h2 {
+  margin-bottom: 12px;
+}
+
+.lesson-card p,
+.topic-card p,
+.content-card p {
+  color: #74676c;
+}
+
+ul,
+ol {
+  padding-left: 25px;
+}
+
+li {
+  margin-bottom: 7px;
+}
+
+.checklist-card label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.checklist-card input[type="checkbox"] {
+  width: 19px;
+  height: 19px;
+  margin-top: 5px;
+  accent-color: var(--pink-dark);
+}
+
+/* ==========================================
+   CURRICULUM / LESSON CONTAINERS
+   ========================================== */
+
+#study-paws-app,
+#ks3-science-app,
+#app {
+  width: min(1100px, calc(100% - 36px));
+  margin: 35px auto 80px;
+}
+
+#study-paws-app h1,
+#ks3-science-app h1,
+#app h1 {
+  margin-bottom: 22px;
+}
+
+#study-paws-app button,
+#ks3-science-app button,
+#app button {
+  border-radius: 13px;
+}
+
+#study-paws-app pre,
+#ks3-science-app pre,
+#app pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f8f2fa;
+}
+
+/* ==========================================
+   POMODORO TIMER & PROGRESS
+   ========================================== */
+
+.timer-card,
+.progress-card,
+.dashboard-card {
+  margin: 20px 0;
+  padding: clamp(24px, 5vw, 45px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: linear-gradient(135deg, #fff0f1, #f0eaff);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.timer-display {
+  margin: 20px 0;
+  color: #a477a9;
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-controls,
+.timer-modes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.timer-controls button,
+.timer-modes button {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 14px;
+  background: white;
+  color: var(--brown);
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(80, 60, 70, 0.06);
+}
+
+.timer-controls button:first-child {
+  background: var(--pink);
+}
+
+.progress-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f0e8ef;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #e9b9c8, #c6b4ec);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================
+   FOOTER (IF PRESENT)
+   ========================================== */
+
+.site-footer {
+  padding: 30px 20px;
+  border-top: 1px solid var(--border);
+  background: #fff5f3;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ==========================================
+   LITTLE ANIMATIONS
+   ========================================== */
+
+@keyframes paw-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(8deg);
+  }
+}
+
+@keyframes cat-breathe {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================
+   TABLET
+   ========================================== */
+
+@media (max-width: 900px) {
+  .site-header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding-top: 55px;
+    padding-bottom: 55px;
+  }
+
+  .hero-art {
+    min-height: 350px;
+  }
+
+  .subjects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .header-cat {
+    display: none;
+  }
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  .site-header {
+    position: relative;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .brand,
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .main-nav {
+    width: 100%;
+    gap: 4px;
+  }
+
+  .main-nav a {
+    padding: 8px 11px;
+    font-size: 0.83rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    min-height: auto;
+    padding: 50px 22px;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+
+  .hero-text {
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 1rem;
+  }
+
+  .hero-art {
+    width: 100%;
+    min-height: 320px;
+    border-radius: 42% 42% 25px 25px;
+  }
+
+  .window {
+    height: 130px;
+  }
+
+  .shelf {
+    top: 190px;
+  }
+
+  .plant-one {
+    top: 140px;
+  }
+
+  .sleepy-cat {
+    right: 12%;
+    bottom: 28px;
+  }
+
+  .hero-books {
+    bottom: 28px;
+    font-size: 2.4rem;
+  }
+
+  .tiny-sign {
+    top: 33%;
+    font-size: 0.85rem;
+  }
+
+  .gentle-reminder {
+    margin-bottom: 45px;
+    padding: 0 18px;
+  }
+
+  .reminder-content {
+    padding: 30px 24px 95px;
+  }
+
+  .cat-doodle {
+    right: 20px;
+    bottom: 8px;
+    font-size: 3.2rem;
+  }
+
+  .page-container {
+    width: calc(100% - 32px);
+    padding-top: 38px;
+  }
+
+  .page-heading {
+    margin-bottom: 28px;
+  }
+
+  .subjects-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .subject-card {
+    min-height: 205px;
+  }
+
+  .revision-room {
+    margin-top: 35px;
+    padding: 22px 16px;
+  }
+
+  .revision-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .revision-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .revision-tabs button {
+    padding: 11px 8px;
+    font-size: 0.9rem;
+  }
+
+  .lesson-card,
+  .topic-card,
+  .content-card,
+  .notes-card,
+  .flashcard,
+  .fact-card,
+  .practice-card,
+  .checklist-card {
+    padding: 19px;
+  }
+}

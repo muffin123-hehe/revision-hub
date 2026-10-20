@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress | Revision Hub</title>
+
+  <style>
+    :root {
+      --pink: #f4b8cc;
+      --pink-dark: #d9799b;
+      --lavender: #dcd4ff;
+      --purple: #8a78bd;
+      --cream: #fffaf7;
+      --text: #51465f;
+      --green: #b9dfc5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, #fff4f8, #f3efff);
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 22px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      color: var(--purple);
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    header p { color: #81748f; }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+      background: rgba(255,255,255,.75);
+      border-block: 1px solid #f0e6f5;
+    }
+
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 17px;
+      border-radius: 22px;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: var(--lavender);
+      color: #65549b;
+    }
+
+    main {
+      width: min(1050px, 92%);
+      margin: 35px auto 55px;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .welcome h2 {
+      font-size: 1.9rem;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #81748f;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card, .panel {
+      background: rgba(255,255,255,.9);
+      border: 2px solid #f0e5fa;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(116,91,145,.08);
+    }
+
+    .stat-card { text-align: center; }
+
+    .stat-icon { font-size: 2.2rem; }
+
+    .stat-card h3 {
+      color: #81748f;
+      font-size: .95rem;
+      margin: 12px 0 8px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--purple);
+      overflow-wrap: anywhere;
+    }
+
+    .stat-card p {
+      color: #9b8ca4;
+      font-size: .9rem;
+      margin-bottom: 0;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      color: var(--purple);
+    }
+
+    .panel > p {
+      color: #81748f;
+      line-height: 1.6;
+    }
+
+    .progress-row { margin: 22px 0; }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px;
+      font-weight: bold;
+      font-size: .95rem;
+    }
+
+    .bar {
+      height: 13px;
+      background: #eee7f5;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 20px;
+      transition: width .35s ease;
+      background: linear-gradient(90deg, var(--pink), #b6a4ef);
+    }
+
+    .bar-fill.green {
+      background: linear-gradient(90deg, #b9dfc5, #82c69b);
+    }
+
+    .goal-form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    input {
+      min-width: 0;
+      flex: 1;
+      width: 100px;
+      padding: 11px;
+      border: 2px solid #e8def4;
+      border-radius: 12px;
+      font: inherit;
+      color: var(--text);
+      background: #fffafd;
+    }
+
+    button {
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      border-radius: 13px;
+      padding: 11px 15px;
+      transition: transform .15s;
+    }
+
+    button:hover { transform: translateY(-2px); }
+
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid #9b89d1;
+      outline-offset: 3px;
+    }
+
+    .primary-btn {
+      background: var(--pink-dark);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: var(--lavender);
+      color: #65549b;
+    }
+
+    .milestones {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .milestone {
+      padding: 16px 10px;
+      text-align: center;
+      border-radius: 17px;
+      background: #f7f2ff;
+      opacity: .55;
+    }
+
+    .milestone.unlocked {
+      opacity: 1;
+      background: #fff0f6;
+      border: 1px solid #f3c6d8;
+    }
+
+    .milestone span {
+      display: block;
+      font-size: 1.9rem;
+      margin-bottom: 7px;
+    }
+
+    .milestone strong { font-size: .95rem; }
+
+    .milestone p {
+      margin: 6px 0 0;
+      color: #8d7f97;
+      font-size: .8rem;
+    }
+
+    .encouragement {
+      margin-top: 24px;
+      padding: 22px;
+      text-align: center;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fff0f6, #f0ebff);
+      line-height: 1.7;
+    }
+
+    .encouragement h3 {
+      margin-top: 0;
+      color: var(--purple);
+    }
+
+    .small-note {
+      font-size: .85rem;
+      color: #93859d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #93859d;
+    }
+
+    @media (max-width: 720px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .content-grid { grid-template-columns: 1fr; }
+      .stat-card { padding: 19px; }
+      .panel { padding: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🐾 Revision Hub</h1>
+  </header>
+
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="subjects.html">Subjects</a>
+    <a href="pomodoro.html">Pomodoro</a>
+    <a href="progress.html" class="active" aria-current="page">Progress</a>
+  </nav>
+
+  <main>
+    <section class="welcome">
+      <h2>🌷 Your Progress Garden</h2>
+      <p>
+        Look how far you've come! Every task, every study session
+        and every little effort counts. 💗
+      </p>
+    </section>
+
+    <section class="stats-grid" aria-label="Your study statistics">
+      <article class="stat-card">
+        <div class="stat-icon">📚</div>
+        <h3>Tasks completed</h3>
+        <div class="stat-number" id="completed-tasks">0</div>
+        <p>Little goals achieved!</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon">🍅</div>
+        <h3>Focus sessions</h3>
+        <div class="stat-number" id="focus-sessions">0</div>
+        <p>Pomodoros completed</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <h3>Study streak</h3>
+        <div class="stat-number" id="study-streak">0</div>
+        <p>Consecutive study days</p>
+      </article>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel">
+        <h3>🌱 Your daily goals</h3>
+        <p>Set a goal that feels achievable today.</p>
+
+        <div class="progress-row">
+          <div class="progress-label">
+            <span>📚 Task completion</span>
+            <span id="task-percentage">0%</span>
+          </div>
+          <div class="bar" role="progressbar"
+               aria-label="Task completion"
+               aria-valuemin="0" aria-valuemax="100"
+               aria-valuenow="0" id="task-bar">
+            <div class="bar-fill green" id="task-fill"></div>
+          </div>
+          <p class="small-note" id="task-detail">0 of 0 tasks completed</p>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-label">
+            <span>🍅 Focus goal</span>
+            <span id="focus-percentage">0%</span>
+          </div>
+          <div class="bar" role="progressbar"
+               aria-label="Daily focus goal"
+               aria-valuemin="0" aria-valuemax="100"
+               aria-valuenow="0" id="focus-bar">
+            <div class="bar-fill" id="focus-fill"></div>
+          </div>
+          <p class="small-note" id="focus-detail">0 of 4 sessions completed today</p>
+        </div>
+
+        <form class="goal-form" id="goal-form">
+          <label for="daily-goal">Daily focus goal:</label>
+          <input id="daily-goal" type="number" min="1" max="50" value="4" required>
+          <button class="primary-btn" type="submit">Save goal</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h3>🏆 Your achievements</h3>
+        <p>Keep going to unlock your study milestones!</p>
+
+        <div class="milestones">
+          <div class="milestone" id="badge-first">
+            <span>🌱</span>
+            <strong>First Steps</strong>
+            <p>Complete your first task</p>
+          </div>
+
+          <div class="milestone" id="badge-five">
+            <span>🐾</span>
+            <strong>Little Learner</strong>
+            <p>Complete 5 tasks</p>
+          </div>
+
+          <div class="milestone" id="badge-focus">
+            <span>🍅</span>
+            <strong>Focus Friend</strong>
+            <p>Complete 4 focus sessions</p>
+          </div>
+
+          <div class="milestone" id="badge-streak">
+            <span>🔥</span>
+            <strong>Consistency Star</strong>
+            <p>Reach a 3-day streak</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="encouragement">
+      <h3 id="encouragement-title">💗 You're doing great!</h3>
+      <p id="encouragement-message">
+        Your progress doesn't have to be perfect. Just keep showing up.
+      </p>
+      <a href="pomodoro.html">Head to your Pomodoro timer →</a>
+    </section>
+  </main>
+  
+  <script>
+    const $ = id => document.getElementById(id);
+
+    // Load the saved study tasks.
+    function loadTasks() {
+      try {
+        const tasks = JSON.parse(
+          localStorage.getItem("studyPawsTasks") || "[]"
+        );
+        return Array.isArray(tasks) ? tasks : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function loadNumber(key, fallback = 0) {
+      const value = Number(localStorage.getItem(key));
+      return Number.isFinite(value) && value >= 0 ? value : fallback;
+    }
+
+    function getToday() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function getYesterday() {
+      const date = new Date();
+      date.setDate(date.getDate() - 1);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    let dailyGoal = loadNumber("studyPawsDailyGoal", 4);
+    dailyGoal = Math.max(1, Math.min(50, dailyGoal || 4));
+
+    function updateProgressBar(fillId, barId, percent) {
+      const safePercent = Math.max(0, Math.min(100, percent));
+      $(fillId).style.width = safePercent + "%";
+      $(barId).setAttribute("aria-valuenow", Math.round(safePercent));
+    }
+
+    function updateProgress() {
+      const tasks = loadTasks();
+      const completedTasks = tasks.filter(task => task.completed).length;
+      const totalTasks = tasks.length;
+
+      // The Pomodoro page will save completed sessions using this key.
+      const today = getToday();
+      const dailySessions = loadNumber("studyPawsSessions-" + today, 0);
+      const totalSessions = loadNumber("studyPawsTotalSessions", 0);
+
+      // Study streak is based on dates recorded by the Pomodoro page.
+      const lastStudyDate = localStorage.getItem("studyPawsLastStudyDate");
+      let streak = loadNumber("studyPawsStreak", 0);
+
+      if (lastStudyDate !== today && lastStudyDate !== getYesterday()) {
+        streak = 0;
+      }
+
+      $("completed-tasks").textContent = completedTasks;
+      $("focus-sessions").textContent = totalSessions;
+      $("study-streak").textContent = streak;
+
+      const taskPercent = totalTasks
+        ? (completedTasks / totalTasks) * 100
+        : 0;
+
+      $("task-percentage").textContent = Math.round(taskPercent) + "%";
+      $("task-detail").textContent =
+        `${completedTasks} of ${totalTasks} tasks completed`;
+
+      updateProgressBar("task-fill", "task-bar", taskPercent);
+
+      const focusPercent = (dailySessions / dailyGoal) * 100;
+      $("focus-percentage").textContent =
+        Math.round(Math.min(100, focusPercent)) + "%";
+      $("focus-detail").textContent =
+        `${dailySessions} of ${dailyGoal} sessions completed today`;
+
+      updateProgressBar("focus-fill", "focus-bar", focusPercent);
+
+      $("daily-goal").value = dailyGoal;
+
+      $("badge-first").classList.toggle("unlocked", completedTasks >= 1);
+      $("badge-five").classList.toggle("unlocked", completedTasks >= 5);
+      $("badge-focus").classList.toggle("unlocked", dailySessions >= 4);
+      $("badge-streak").classList.toggle("unlocked", streak >= 3);
+
+      if (dailySessions >= dailyGoal) {
+        $("encouragement-title").textContent = "🎉 Daily goal achieved!";
+        $("encouragement-message").textContent =
+          "You did it! Take a breath and be proud of yourself. 🐾";
+      } else if (completedTasks >= 1 || dailySessions >= 1) {
+        $("encouragement-title").textContent = "🌸 Look at you go!";
+        $("encouragement-message").textContent =
+          "You're making progress already. Keep taking those little steps!";
+      } else {
+        $("encouragement-title").textContent = "💗 Every journey starts small";
+        $("encouragement-message").textContent =
+          "Try a study task or start a Pomodoro session to begin growing your progress garden.";
+      }
+    }
+
+    $("goal-form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const enteredGoal = Number($("daily-goal").value);
+
+      if (!Number.isInteger(enteredGoal) ||
+          enteredGoal < 1 || enteredGoal > 50) {
+        alert("Choose a daily goal between 1 and 50 sessions.");
+        return;
+      }
+
+      dailyGoal = enteredGoal;
+      localStorage.setItem("studyPawsDailyGoal", String(dailyGoal));
+      updateProgress();
+    });
+
+    // Refresh when returning to this page or changing saved browser data.
+    window.addEventListener("focus", updateProgress);
+    window.addEventListener("storage", updateProgress);
+
+    updateProgress();
+  </script>
+</body>
+</html>

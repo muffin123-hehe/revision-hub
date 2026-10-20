@@ -1,0 +1,2135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History Revision | Revision Hub</title>
+
+  <style>
+    :root {
+      --purple: #7957c8;
+      --purple-dark: #56369c;
+      --lavender: #eee7ff;
+      --pink: #ffe5ef;
+      --cream: #fffaf3;
+      --ink: #302944;
+      --muted: #746d83;
+      --white: #ffffff;
+      --border: #e7def5;
+      --green: #dff7e8;
+      --red: #ffe1e1;
+      --shadow: 0 8px 24px rgba(74, 49, 119, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--purple-dark);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button,
+    select {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid #e3a7ff;
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 14px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      color: var(--purple-dark);
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    /* Original Revision Hub navbar */
+    .main-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .main-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 8px 13px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--purple-dark);
+      background: var(--lavender);
+    }
+
+    main {
+      width: min(1100px, 92%);
+      margin: auto;
+      padding: 32px 0 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #eee7ff, #ffe5ef);
+      padding: 36px 28px;
+      border-radius: 25px;
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 12px auto;
+    }
+
+    .paw {
+      font-size: 2.5rem;
+    }
+
+    .panel,
+    .lesson-card,
+    .timeline-card,
+    .quiz-card,
+    .tip-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 23px;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      line-height: 1.3;
+    }
+
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .year-button {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 15px 8px;
+      color: var(--ink);
+      font-weight: 750;
+      transition: 0.2s;
+    }
+
+    .year-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--purple);
+    }
+
+    .year-button.active {
+      background: var(--purple);
+      color: white;
+      border-color: var(--purple);
+    }
+
+    .year-button span {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .toolbar input,
+    .toolbar select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      color: var(--ink);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 5px;
+    }
+
+    .small-button,
+    .primary-button,
+    .secondary-button {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 15px;
+      font-weight: 700;
+    }
+
+    .primary-button {
+      background: var(--purple);
+      color: white;
+    }
+
+    .primary-button:hover {
+      background: var(--purple-dark);
+    }
+
+    .secondary-button,
+    .small-button {
+      background: var(--lavender);
+      color: var(--purple-dark);
+    }
+
+    .lesson-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .lesson-card {
+      overflow: hidden;
+    }
+
+    .lesson-dropdown summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .lesson-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .lesson-dropdown summary:hover {
+      background: #fcfaff;
+    }
+
+    .lesson-title {
+      display: block;
+      font-weight: 800;
+      font-size: 1.08rem;
+    }
+
+    .lesson-meta {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .chevron {
+      color: var(--purple);
+      font-size: 1.4rem;
+      transition: transform 0.2s;
+    }
+
+    details[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .lesson-content {
+      padding: 0 22px 23px;
+      border-top: 1px solid var(--border);
+    }
+
+    .lesson-content h3 {
+      margin-top: 23px;
+      margin-bottom: 7px;
+      color: var(--purple-dark);
+    }
+
+    .lesson-content p {
+      margin-top: 8px;
+    }
+
+    .key-point {
+      background: var(--lavender);
+      border-left: 4px solid var(--purple);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin: 15px 0;
+    }
+
+    .vocab-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .vocab-list li {
+      background: var(--pink);
+      padding: 6px 11px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+
+    .vocab-list strong {
+      color: #79375c;
+    }
+
+    .exam-tip {
+      background: #fff6d9;
+      border-radius: 12px;
+      padding: 13px 15px;
+      margin-top: 15px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 13px;
+      background: #fcfaff;
+      border-radius: 12px;
+      border-left: 4px solid var(--purple);
+    }
+
+    .timeline-year {
+      font-weight: 800;
+      color: var(--purple-dark);
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 25px 0;
+    }
+
+    .tip-card,
+    .timeline-card,
+    .quiz-card {
+      padding: 22px;
+    }
+
+    .tip-card ul {
+      padding-left: 22px;
+    }
+
+    .quiz-question {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quiz-question p {
+      font-weight: 750;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+    }
+
+    .quiz-question input {
+      margin-right: 7px;
+      accent-color: var(--purple);
+    }
+
+    .quiz-feedback {
+      padding: 14px;
+      margin-top: 15px;
+      border-radius: 12px;
+    }
+
+    .quiz-feedback.good {
+      background: var(--green);
+    }
+
+    .quiz-feedback.bad {
+      background: var(--red);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .empty-message {
+      background: white;
+      padding: 22px;
+      border: 1px dashed var(--border);
+      border-radius: 15px;
+    }
+
+    footer {
+      background: white;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding: 25px 15px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 750px) {
+      .year-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .toolbar,
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        justify-content: center;
+      }
+
+      .main-nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .year-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding: 27px 17px;
+      }
+
+      .panel {
+        padding: 17px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+    }
+
+    
+.deeper-explanation {
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fcfaff, #fff7fb);
+}
+
+.deeper-explanation h3 {
+  margin-top: 0;
+  color: var(--purple-dark);
+}
+
+.deeper-explanation h4 {
+  margin: 12px 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.deeper-explanation p {
+  line-height: 1.85;
+}
+
+.deeper-explanation .key-point {
+  margin-bottom: 0;
+}
+
+
+.flashcards-panel {
+  margin: 25px 0;
+}
+
+.flashcard-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.flashcard-controls label {
+  font-weight: 700;
+}
+
+.flashcard-controls select {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--ink);
+}
+
+.flashcard-stage {
+  max-width: 650px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+.flashcard {
+  width: 100%;
+  min-height: 240px;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border: 2px solid var(--border);
+  border-radius: 22px;
+  background: linear-gradient(135deg, #eee7ff, #ffe5ef);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.flashcard:hover {
+  transform: translateY(-3px);
+  border-color: var(--purple);
+}
+
+.flashcard strong {
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
+  line-height: 1.5;
+}
+
+#flashcardSide {
+  color: var(--purple-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+#flashcardHint {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.flashcard-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.flashcard-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .flashcard {
+    min-height: 220px;
+    padding: 22px 16px;
+  }
+
+  .flashcard-actions button {
+    flex: 1;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">🐾 Revision Hub</a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="subjects.html" class="active" aria-current="page">Subjects</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="progress.html">Progress</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>History</h1>
+      <p>
+        Travel through the past! Choose your school year,
+        explore history lessons, learn key dates and test what you know.
+      </p>
+      <p><strong>From Year 7 to Year 11</strong></p>
+    </section>
+
+    <section class="panel" aria-labelledby="year-heading">
+      <h2 id="year-heading">Choose your year group 🎓</h2>
+      <p class="muted">
+        Select your year to see lessons designed for that stage of school.
+      </p>
+
+      <div class="year-grid" role="group" aria-label="Choose school year">
+        <button class="year-button active" data-year="7" aria-pressed="true">
+          Year 7 <span>Medieval history</span>
+        </button>
+        <button class="year-button" data-year="8" aria-pressed="false">
+          Year 8 <span>Tudors and change</span>
+        </button>
+        <button class="year-button" data-year="9" aria-pressed="false">
+          Year 9 <span>Industry and empire</span>
+        </button>
+        <button class="year-button" data-year="10" aria-pressed="false">
+          Year 10 <span>Modern history</span>
+        </button>
+        <button class="year-button" data-year="11" aria-pressed="false">
+          Year 11 <span>GCSE revision</span>
+        </button>
+      </div>
+
+      <div class="toolbar">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="🔎 Search lessons, people or dates..."
+          aria-label="Search history lessons"
+        >
+
+        <select id="periodFilter" aria-label="Filter by historical period">
+          <option value="all">All historical periods</option>
+          <option value="medieval">Medieval history</option>
+          <option value="tudor">Tudor and Stuart history</option>
+          <option value="industry">Industry and empire</option>
+          <option value="modern">Modern history</option>
+          <option value="gcse">GCSE skills and revision</option>
+        </select>
+      </div>
+    </section>
+
+    <section aria-labelledby="lessons-heading">
+      <div class="section-heading">
+        <div>
+          <h2 id="lessons-heading">Year 7 lessons</h2>
+          <p id="yearDescription" class="muted">
+            Discover medieval England, castles and the Norman Conquest.
+          </p>
+        </div>
+
+        <button class="small-button" id="toggleLessons" type="button">
+          Expand all
+        </button>
+      </div>
+
+      <div id="lessonList" class="lesson-list">
+
+        <!-- YEAR 7 -->
+        <article class="lesson-card" data-year="7" data-period="medieval">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">1. The Norman Conquest</span>
+                <span class="lesson-meta">Year 7 · 1066 · Kings and power</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>Why was 1066 important?</h3>
+              <p>
+                In 1066, King Edward the Confessor died without a direct heir.
+                Several people claimed the English throne. Harold Godwinson
+                became king, but William, Duke of Normandy, believed he had a
+                right to rule England. Harald Hardrada of Norway also invaded.
+              </p>
+              <p>
+                Harold defeated Hardrada at the Battle of Stamford Bridge in
+                September 1066. He then marched south to face William's army at
+                the Battle of Hastings on 14 October. William's army won, and
+                Harold was killed. William was crowned king on Christmas Day
+                1066.
+              </p>
+              <h3>How did William control England?</h3>
+              <p>
+                William rewarded supporters with land and built castles to
+                strengthen Norman control. Motte-and-bailey castles could be
+                built relatively quickly. He also replaced many English
+                nobles with Norman lords. Resistance continued in parts of
+                England, so William used harsh punishments, including the
+                Harrying of the North.
+              </p>
+              <div class="key-point">
+                <strong>Remember:</strong> William's victory changed England's
+                ruling class, land ownership, castles and links with Europe.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Claimant:</strong> person claiming a throne</li>
+                <li><strong>Conquest:</strong> taking control by force</li>
+                <li><strong>Feudal system:</strong> hierarchy of land and loyalty</li>
+              </ul>
+              <div class="exam-tip">
+                <strong>Revision tip:</strong> Practise explaining why William
+                won. Consider leadership, tactics, Harold's earlier battle and
+                the armies' positions.
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="7" data-period="medieval">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">2. Medieval life and the feudal system</span>
+                <span class="lesson-meta">Year 7 · Society · Land and loyalty</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>How was medieval society organised?</h3>
+              <p>
+                Medieval England was mainly an agricultural society. Most
+                people lived in villages and worked on the land. After the
+                Norman Conquest, land and loyalty were central to the feudal
+                system. The king granted land to powerful nobles, who owed
+                loyalty and military service. Lords granted land or rights to
+                others, while peasants worked the land and owed duties.
+              </p>
+              <p>
+                Life depended greatly on wealth, status and where a person
+                lived. Peasants could face heavy work and rents. The Church
+                influenced education, festivals, beliefs and everyday life.
+                Towns grew through trade and crafts, although most people
+                remained connected to farming.
+              </p>
+              <h3>Castles and control</h3>
+              <p>
+                Castles were military strongholds, homes for lords and symbols
+                of authority. Stone castles generally offered stronger
+                defences than early wooden structures but required more time
+                and resources to build.
+              </p>
+              <div class="key-point">
+                <strong>Big idea:</strong> Land created wealth and power.
+                Social status affected people's duties and opportunities.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Noble:</strong> member of the upper class</li>
+                <li><strong>Peasant:</strong> rural worker</li>
+                <li><strong>Manor:</strong> estate controlled by a lord</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="7" data-period="medieval">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">3. The Black Death</span>
+                <span class="lesson-meta">Year 7 · 1348–1349 · Disease and society</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>What was the Black Death?</h3>
+              <p>
+                The Black Death was a devastating plague pandemic that reached
+                England in 1348. It spread through trade networks and caused
+                enormous loss of life. People at the time did not understand
+                bacteria or how the disease spread, so explanations included
+                religious ideas and theories about polluted air.
+              </p>
+              <h3>What changed?</h3>
+              <p>
+                The population fell sharply. With fewer workers available,
+                surviving labourers could sometimes demand better wages or
+                conditions. Landowners struggled to find enough workers, and
+                some land was used differently. These changes did not happen
+                equally everywhere or immediately.
+              </p>
+              <p>
+                In 1351, the English government introduced the Statute of
+                Labourers, attempting to limit wages and restrict workers'
+                movement. Such measures show why labour shortages could
+                challenge existing social arrangements.
+              </p>
+              <div class="key-point">
+                <strong>Cause and consequence:</strong> The disease caused
+                population loss; population loss contributed to labour
+                shortages and changes in bargaining power.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Pandemic:</strong> widespread disease outbreak</li>
+                <li><strong>Labour:</strong> work performed by people</li>
+                <li><strong>Consequence:</strong> result of an event</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <!-- YEAR 8 -->
+        <article class="lesson-card" data-year="8" data-period="tudor">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">1. Henry VIII and the Reformation</span>
+                <span class="lesson-meta">Year 8 · 1509–1547 · Religion and monarchy</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>Why did Henry VIII break with Rome?</h3>
+              <p>
+                Henry VIII became king in 1509. He wanted a male heir and
+                sought to end his marriage to Catherine of Aragon after they
+                had no surviving son. The Pope did not grant the annulment
+                Henry wanted. Henry's desire to control the English Church,
+                political concerns and the succession crisis all contributed
+                to the break with Rome.
+              </p>
+              <p>
+                The Reformation Parliament passed laws that reduced the
+                Pope's authority in England. The Act of Supremacy of 1534
+                recognised Henry as the supreme head of the Church of England.
+                The monasteries were dissolved and their wealth transferred
+                to the Crown and other owners.
+              </p>
+              <h3>Did religion change immediately?</h3>
+              <p>
+                Not entirely. Under Henry, many traditional Catholic beliefs
+                and practices remained, even as royal control of the Church
+                changed. Later monarchs made further religious changes.
+                Edward VI promoted Protestant reforms, Mary I restored
+                Catholicism, and Elizabeth I established a lasting religious
+                settlement in 1559.
+              </p>
+              <div class="key-point">
+                <strong>Remember:</strong> The English Reformation involved
+                religion, political power, money and the royal succession.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Reformation:</strong> major religious change</li>
+                <li><strong>Annulment:</strong> declaration that a marriage was invalid</li>
+                <li><strong>Monastery:</strong> religious community building</li>
+              </ul>
+              <div class="exam-tip">
+                <strong>Exam tip:</strong> Avoid saying Henry changed everything
+                for only one reason. Explain how personal, political and
+                religious factors connected.
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="8" data-period="tudor">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">2. Elizabeth I and the Spanish Armada</span>
+                <span class="lesson-meta">Year 8 · 1558–1603 · Conflict and monarchy</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>Why was Elizabeth's reign challenging?</h3>
+              <p>
+                Elizabeth I became queen in 1558. She faced religious
+                divisions, questions about who should succeed her, and
+                tensions with Spain. Spain's Philip II opposed aspects of
+                Elizabeth's religious policy and English support for attacks
+                on Spanish interests.
+              </p>
+              <p>
+                In 1588, the Spanish Armada sailed to help facilitate an
+                invasion of England. English ships, the use of fireships at
+                Calais, Spanish difficulties and severe weather contributed
+                to the Armada's failure to achieve its objective. It was not
+                simply a story of English ships defeating Spain in one battle.
+              </p>
+              <h3>Why does the Armada matter?</h3>
+              <p>
+                Its failure strengthened Elizabeth's position and became an
+                important part of the story of her reign. However, Spain
+                remained a major power, and conflict between the two countries
+                continued after 1588.
+              </p>
+              <div class="key-point">
+                <strong>Key date:</strong> 1588 — the Spanish Armada campaign.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Armada:</strong> large fleet of ships</li>
+                <li><strong>Invasion:</strong> entering a country by force</li>
+                <li><strong>Propaganda:</strong> material designed to influence opinions</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="8" data-period="tudor">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">3. The English Civil War</span>
+                <span class="lesson-meta">Year 8 · 1642–1651 · King versus Parliament</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>Why did civil war begin?</h3>
+              <p>
+                Tensions grew between King Charles I and Parliament over
+                taxation, royal authority and religion. Charles's attempts to
+                govern without Parliament and disagreements about the Church
+                contributed to a wider political crisis. Fighting began in
+                1642 between Royalists, who supported the king, and
+                Parliamentarians, who fought for Parliament.
+              </p>
+              <p>
+                Parliament's forces eventually won. Charles I was tried and
+                executed in 1649. England became a republic, known as the
+                Commonwealth, and later Oliver Cromwell became Lord Protector.
+                The monarchy was restored under Charles II in 1660.
+              </p>
+              <div class="key-point">
+                <strong>Big idea:</strong> The war challenged the relationship
+                between the monarch and Parliament and raised questions about
+                where political authority should lie.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Royalist:</strong> supporter of the king</li>
+                <li><strong>Parliamentarian:</strong> supporter of Parliament</li>
+                <li><strong>Republic:</strong> state without a monarch as head of state</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <!-- YEAR 9 -->
+        <article class="lesson-card" data-year="9" data-period="industry">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">1. The Industrial Revolution</span>
+                <span class="lesson-meta">Year 9 · c.1750 onwards · Factories and change</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>What was the Industrial Revolution?</h3>
+              <p>
+                From the eighteenth century, production in Britain changed
+                as machinery, factories and new sources of power transformed
+                many industries. Textile production grew, coal and iron became
+                increasingly important, and steam engines helped power
+                factories, mines and transport.
+              </p>
+              <p>
+                Britain's industrial growth had several causes, including
+                access to coal, investment, trade, inventions, labour and
+                transport networks. The process was gradual and varied between
+                regions and industries.
+              </p>
+              <h3>How did life change?</h3>
+              <p>
+                Many people moved from the countryside to growing industrial
+                towns and cities. Factory work could involve long hours,
+                dangerous machinery and low pay. Overcrowded housing and poor
+                sanitation contributed to disease. Industrialisation also
+                created jobs, increased production and helped expand railways
+                and trade.
+              </p>
+              <p>
+                Campaigners and reformers pushed for changes to working
+                conditions. Factory legislation gradually introduced
+                restrictions and protections, although enforcement and
+                improvements took time.
+              </p>
+              <div class="key-point">
+                <strong>Balanced answer:</strong> Industrialisation created
+                wealth and new technology, but many workers faced difficult
+                conditions.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Urbanisation:</strong> growth of towns and cities</li>
+                <li><strong>Industrialisation:</strong> growth of machine-based industry</li>
+                <li><strong>Reform:</strong> change intended to improve something</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="9" data-period="industry">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">2. The British Empire</span>
+                <span class="lesson-meta">Year 9 · Expansion, trade and resistance</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>How did the British Empire grow?</h3>
+              <p>
+                The British Empire developed over centuries through trade,
+                settlement, warfare, conquest and political agreements. Its
+                size and form changed over time. Britain's navy and commercial
+                networks helped it expand, while companies and colonial
+                governments exercised power in different places.
+              </p>
+              <h3>What were the effects?</h3>
+              <p>
+                The empire connected territories through trade and migration,
+                but imperial rule was unequal. In many places, land and
+                resources were taken or controlled by colonial authorities.
+                Enslavement, forced labour, racial discrimination and violence
+                shaped parts of imperial history. People under colonial rule
+                also resisted through rebellions, political organising and
+                independence movements.
+              </p>
+              <p>
+                Britain abolished its transatlantic slave trade in 1807, and
+                slavery was abolished across most of the British Empire by
+                legislation passed in 1833, with the main provisions taking
+                effect in 1834. These changes followed long campaigns by
+                enslaved people, abolitionists and other activists.
+              </p>
+              <div class="key-point">
+                <strong>When revising:</strong> Examine who benefited, who
+                suffered, how people resisted, and how experiences differed
+                across regions and time periods.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Empire:</strong> territories ruled by a central power</li>
+                <li><strong>Colonialism:</strong> control over another territory</li>
+                <li><strong>Abolition:</strong> ending a law or practice</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="9" data-period="industry">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">3. The causes of the First World War</span>
+                <span class="lesson-meta">Year 9 · 1914 · Alliances and tension</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>Why did war break out in 1914?</h3>
+              <p>
+                Europe experienced growing tensions before 1914. Militarism,
+                alliances, imperial rivalry and nationalism are often used to
+                organise the main long-term causes. Countries expanded armed
+                forces, competed for influence and formed agreements that
+                affected how they responded to international crises.
+              </p>
+              <p>
+                On 28 June 1914, Archduke Franz Ferdinand of Austria-Hungary
+                was assassinated in Sarajevo. The July Crisis followed, as
+                Austria-Hungary, Serbia, Russia, Germany, France and Britain
+                made decisions that widened the conflict. Britain declared
+                war on Germany on 4 August 1914 after Germany invaded Belgium.
+              </p>
+              <h3>Long-term and short-term causes</h3>
+              <p>
+                The assassination was the immediate trigger, but it did not
+                explain the whole war. Earlier rivalries, military planning,
+                political decisions and the alliance system help explain why
+                a regional crisis became a much larger war.
+              </p>
+              <div class="key-point">
+                <strong>Remember:</strong> Distinguish between long-term
+                causes and the immediate trigger of war.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Alliance:</strong> agreement between countries</li>
+                <li><strong>Militarism:</strong> emphasis on military power</li>
+                <li><strong>Nationalism:</strong> strong identification with a nation</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <!-- YEAR 10 -->
+        <article class="lesson-card" data-year="10" data-period="modern">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">1. The First World War</span>
+                <span class="lesson-meta">Year 10 · 1914–1918 · Warfare and society</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>What was trench warfare?</h3>
+              <p>
+                On the Western Front, armies dug extensive trench systems.
+                Barbed wire, machine guns, artillery and difficult terrain
+                made attacks costly. Soldiers faced mud, disease, poor
+                sanitation, shelling and the psychological strain of combat.
+                Conditions varied by location, season and military role.
+              </p>
+              <h3>Why was the war so destructive?</h3>
+              <p>
+                Industrial production supplied weapons and ammunition on a
+                scale not seen in many earlier wars. Artillery caused many
+                casualties, and new technologies such as tanks, aircraft and
+                chemical weapons affected how fighting developed. The war also
+                relied on resources, labour and finance from societies far
+                behind the front lines.
+              </p>
+              <h3>How did the war affect Britain?</h3>
+              <p>
+                The government expanded its role in the economy and society.
+                Women took on a wider range of jobs as many men served in the
+                armed forces. Their contribution was important, but women's
+                experiences differed and the changes did not automatically
+                produce equality in every area.
+              </p>
+              <p>
+                The armistice with Germany took effect on 11 November 1918.
+                The Treaty of Versailles, signed in 1919, set peace terms with
+                Germany and included territorial losses, military restrictions
+                and reparations.
+              </p>
+              <div class="key-point">
+                <strong>Useful distinction:</strong> An armistice stops the
+                fighting; a peace treaty establishes formal peace terms.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Armistice:</strong> agreement to stop fighting</li>
+                <li><strong>Conscription:</strong> compulsory military service</li>
+                <li><strong>Home Front:</strong> civilian life during wartime</li>
+              </ul>
+              <div class="exam-tip">
+                <strong>Exam tip:</strong> Use precise examples when explaining
+                the impact of warfare on soldiers and civilians.
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="10" data-period="modern">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">2. The Second World War</span>
+                <span class="lesson-meta">Year 10 · 1939–1945 · Global conflict</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>Why did the Second World War begin?</h3>
+              <p>
+                The peace settlement after the First World War, the Great
+                Depression, the growth of aggressive dictatorships and the
+                failure of international efforts to prevent expansion all
+                contributed to the crisis. Nazi Germany invaded Poland on
+                1 September 1939. Britain and France declared war on Germany
+                on 3 September.
+              </p>
+              <h3>Britain in the war</h3>
+              <p>
+                In 1940, Britain fought Germany during the Battle of Britain,
+                an air campaign linked to Germany's plans to gain air
+                superiority. The Blitz involved sustained bombing of British
+                towns and cities. Civilians experienced evacuation, rationing,
+                air raids and disruption to everyday life.
+              </p>
+              <p>
+                The war became truly global, involving European, African,
+                Asian and Pacific theatres. Germany invaded the Soviet Union
+                in 1941. Japan attacked Pearl Harbor in December 1941, bringing
+                the United States directly into the war. The Allies eventually
+                defeated Germany in May 1945; Japan surrendered later that year.
+              </p>
+              <h3>What was the Holocaust?</h3>
+              <p>
+                The Holocaust was the systematic persecution and murder of
+                six million Jewish people by Nazi Germany and its collaborators.
+                Nazi persecution also targeted Roma people, disabled people,
+                Polish and Soviet civilians, Soviet prisoners of war, political
+                opponents, gay men and other groups. Their experiences were
+                not identical, and the Holocaust must be studied with care
+                and respect.
+              </p>
+              <div class="key-point">
+                <strong>Key dates:</strong> 1939 — war begins in Europe;
+                1940 — Battle of Britain; 1944 — D-Day; 1945 — war in Europe
+                ends and Japan surrenders later that year.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Evacuation:</strong> moving people to safety</li>
+                <li><strong>Rationing:</strong> controlling access to scarce goods</li>
+                <li><strong>Genocide:</strong> intent to destroy a protected group</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="10" data-period="modern">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">3. Nazi Germany and dictatorship</span>
+                <span class="lesson-meta">Year 10 · 1933–1945 · Power and persecution</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>How did Hitler establish a dictatorship?</h3>
+              <p>
+                The Nazi Party gained support during a period of political
+                instability and economic hardship. Hitler became Chancellor
+                of Germany in January 1933. After the Reichstag Fire, emergency
+                measures were used against political opponents. The Enabling
+                Act of March 1933 allowed Hitler's government to make laws
+                without normal parliamentary approval, helping dismantle
+                democracy.
+              </p>
+              <p>
+                The Nazi regime used propaganda, censorship, intimidation,
+                secret police and concentration camps to control society.
+                Opposition could be dangerous, but some individuals and groups
+                resisted. The regime also promoted racist ideas and expanded
+                persecution, which escalated into genocide during the war.
+              </p>
+              <h3>How should you explain dictatorship?</h3>
+              <p>
+                Consider how a leader gains power, how laws and institutions
+                change, how force and propaganda are used, and how people
+                respond. Separate the reasons people supported a regime from
+                the methods it used to maintain control.
+              </p>
+              <div class="key-point">
+                <strong>Key idea:</strong> Dictatorships can use a combination
+                of legal changes, coercion, propaganda and the destruction
+                of political opposition.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Dictatorship:</strong> government with concentrated power</li>
+                <li><strong>Censorship:</strong> controlling what can be published</li>
+                <li><strong>Propaganda:</strong> information designed to influence people</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <!-- YEAR 11 -->
+        <article class="lesson-card" data-year="11" data-period="gcse">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">1. GCSE History: source analysis</span>
+                <span class="lesson-meta">Year 11 · Skills practice · Sources and evidence</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>How do you analyse a historical source?</h3>
+              <p>
+                A historical source is evidence from or about the past. Sources
+                include letters, photographs, speeches, newspapers, diaries,
+                official records and objects. Before using a source, identify
+                what it says or shows and connect that information to the
+                historical context.
+              </p>
+              <p>
+                Consider who created the source, when it was produced, its
+                purpose and its intended audience. These details can help
+                explain why the source presents events in a particular way.
+                However, a source should not be dismissed simply because its
+                creator had a viewpoint. Ask what it can reliably tell you
+                about the specific question.
+              </p>
+              <h3>A useful answer structure</h3>
+              <ol>
+                <li>Make a clear point about what the source suggests.</li>
+                <li>Use a short, precise quotation or visual detail.</li>
+                <li>Explain what that detail reveals.</li>
+                <li>Connect it to accurate contextual knowledge.</li>
+                <li>Address the question directly.</li>
+              </ol>
+              <div class="key-point">
+                <strong>Remember:</strong> Provenance means information about
+                a source's origin, such as its author, date and purpose.
+                Provenance is useful when it helps answer the question.
+              </div>
+              <h3>Key vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Provenance:</strong> origin of a source</li>
+                <li><strong>Inference:</strong> conclusion drawn from evidence</li>
+                <li><strong>Context:</strong> relevant historical circumstances</li>
+                <li><strong>Reliability:</strong> how far evidence can be trusted for a purpose</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="11" data-period="gcse">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">2. GCSE History: explaining causes and consequences</span>
+                <span class="lesson-meta">Year 11 · Structured paragraphs · Causation</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>How do you write a strong explanation?</h3>
+              <p>
+                A strong history explanation does more than list facts. It
+                answers the question, selects relevant evidence and explains
+                why that evidence matters. For a question about causes,
+                identify factors and explain how they contributed to the
+                event. For consequences, show what changed and why.
+              </p>
+              <h3>Try this paragraph structure</h3>
+              <ol>
+                <li><strong>Point:</strong> state your main reason or argument.</li>
+                <li><strong>Evidence:</strong> provide an accurate date, event or detail.</li>
+                <li><strong>Explain:</strong> show how the evidence supports your point.</li>
+                <li><strong>Link:</strong> connect the explanation to the question.</li>
+              </ol>
+              <p>
+                For example, when explaining why the Norman Conquest mattered,
+                do not just state that William built castles. Explain that
+                castles helped establish military control and demonstrate
+                Norman authority in England.
+              </p>
+              <div class="key-point">
+                <strong>Important:</strong> The exact question formats and
+                mark schemes depend on your GCSE exam board and specification.
+                Practise using the format your teacher gives you.
+              </div>
+              <h3>Useful vocabulary</h3>
+              <ul class="vocab-list">
+                <li><strong>Factor:</strong> a contributing reason</li>
+                <li><strong>Significance:</strong> importance of an event</li>
+                <li><strong>Turning point:</strong> event that changes the direction of developments</li>
+                <li><strong>Interpretation:</strong> an explanation of the past</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="lesson-card" data-year="11" data-period="gcse">
+          <details class="lesson-dropdown">
+            <summary>
+              <span>
+                <span class="lesson-title">3. GCSE History: revision and exam planning</span>
+                <span class="lesson-meta">Year 11 · Revision methods · Exam readiness</span>
+              </span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <div class="lesson-content">
+              <h3>How should you revise history?</h3>
+              <p>
+                Start by checking your exam board specification and the topics
+                your class has studied. Make a checklist of the knowledge and
+                skills you need. Use active recall by answering questions
+                without looking at your notes, then check your answers and
+                correct gaps.
+              </p>
+              <p>
+                Practise timelines, key people, dates, causes, consequences
+                and changes over time. Compare similar events to avoid
+                mixing them up. Complete timed exam questions and use teacher
+                feedback or your exam board's mark scheme to identify
+                specific improvements.
+              </p>
+              <h3>A simple 30-minute revision session</h3>
+              <ol>
+                <li>5 minutes: write down everything you remember.</li>
+                <li>10 minutes: check notes and correct missing information.</li>
+                <li>10 minutes: answer one exam-style question.</li>
+                <li>5 minutes: mark your answer and record what to revisit.</li>
+              </ol>
+              <div class="key-point">
+                <strong>GCSE reminder:</strong> There is no single universal
+                GCSE History course. Content and question types differ between
+                exam boards, so revise the specification you actually study.
+              </div>
+              <h3>Before your exam</h3>
+              <ul>
+                <li>Check the question wording carefully.</li>
+                <li>Use specific evidence, not vague statements.</li>
+                <li>Explain your reasoning instead of just listing facts.</li>
+                <li>Manage time across all questions.</li>
+                <li>Leave a moment to check that each answer addresses the question.</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <p id="noResults" class="empty-message" hidden>
+        No lessons match your search. Try a different word, year group or
+        historical period.
+      </p>
+    </section>
+
+    <section class="support-grid">
+      <div class="timeline-card">
+        <h2>📅 Key history timeline</h2>
+        <p class="muted">A quick selection of important dates.</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-year">1066</span>
+            <span>Battle of Hastings and the Norman Conquest.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">1348</span>
+            <span>The Black Death reaches England.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">1534</span>
+            <span>Act of Supremacy under Henry VIII.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">1588</span>
+            <span>Spanish Armada campaign.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">1642</span>
+            <span>English Civil War begins.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">c.1750</span>
+            <span>Industrial Revolution gathers pace in Britain.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">1914–1918</span>
+            <span>First World War.</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">1939–1945</span>
+            <span>Second World War.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <h2>Revision Hub tips</h2>
+        <ul>
+          <li><strong>Active recall:</strong> cover your notes and explain a topic from memory.</li>
+          <li><strong>Spaced practice:</strong> revisit topics over several days.</li>
+          <li><strong>Timelines:</strong> practise putting events in chronological order.</li>
+          <li><strong>Cause and effect:</strong> explain why events happened and what changed.</li>
+          <li><strong>Evidence:</strong> use specific examples to support an argument.</li>
+          <li><strong>Exam practice:</strong> check your answers against teacher guidance.</li>
+        </ul>
+        <div class="key-point">
+          Small, regular revision sessions can be more useful than trying
+          to learn everything in one sitting.
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-card" aria-labelledby="quiz-heading">
+       
+<section class="quiz-card flashcards-panel" aria-labelledby="flashcards-heading">
+  <h2 id="flashcards-heading">🐱 History Flashcards</h2>
+  <p>Pick a topic, think of the answer, then flip the card to check!</p>
+
+  <div class="flashcard-controls">
+    <label for="flashcardTopic">Choose a topic:</label>
+    <select id="flashcardTopic">
+      <option value="all">All topics</option>
+      <option value="medieval">Medieval history</option>
+      <option value="tudor">Tudor and Stuart history</option>
+      <option value="industry">Industry and empire</option>
+      <option value="modern">Modern history</option>
+      <option value="gcse">GCSE skills</option>
+    </select>
+  </div>
+
+  <div class="flashcard-stage">
+    <p id="flashcardCounter" class="muted">Card 1</p>
+
+    <button type="button" id="flashcardFlip"
+      class="flashcard" aria-label="Reveal flashcard answer"
+      aria-pressed="false">
+      <span id="flashcardSide">QUESTION</span>
+      <strong id="flashcardText">Loading your first question...</strong>
+      <span id="flashcardHint">🐾 Tap to reveal the answer</span>
+    </button>
+
+    <div class="flashcard-actions">
+      <button type="button" id="flashcardPrev" class="secondary-button">
+        ← Previous
+      </button>
+      <button type="button" id="flashcardNext" class="primary-button">
+        Next →
+      </button>
+    </div>
+
+    <div class="flashcard-actions">
+      <button type="button" id="flashcardShuffle" class="secondary-button">
+        🔀 Shuffle cards
+      </button>
+      <button type="button" id="flashcardReset" class="secondary-button">
+        ↻ Restart
+      </button>
+    </div>
+  </div>
+</section>
+
+      <h2 id="quiz-heading">🧠 History knowledge quiz</h2>
+      <p>
+        Test yourself with these ten questions from across the five year
+        groups. Choose one answer for each question, then check your score.
+      </p>
+
+      <form id="historyQuiz">
+        <div class="quiz-question">
+          <p>1. In which year was the Battle of Hastings?</p>
+          <label><input type="radio" name="q1" value="a"> 1066</label>
+          <label><input type="radio" name="q1" value="b"> 1215</label>
+          <label><input type="radio" name="q1" value="c"> 1348</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Which disease caused the Black Death pandemic?</p>
+          <label><input type="radio" name="q2" value="a"> Influenza</label>
+          <label><input type="radio" name="q2" value="b"> Plague</label>
+          <label><input type="radio" name="q2" value="c"> Smallpox</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Which king broke with the authority of the Pope in England?</p>
+          <label><input type="radio" name="q3" value="a"> Henry VIII</label>
+          <label><input type="radio" name="q3" value="b"> Charles II</label>
+          <label><input type="radio" name="q3" value="c"> William I</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. What was one important feature of the Industrial Revolution?</p>
+          <label><input type="radio" name="q4" value="a"> The end of all trade</label>
+          <label><input type="radio" name="q4" value="b"> The disappearance of towns</label>
+          <label><input type="radio" name="q4" value="c"> Growth of factories and machine production</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Which event helped trigger the July Crisis of 1914?</p>
+          <label><input type="radio" name="q5" value="a"> The Spanish Armada</label>
+          <label><input type="radio" name="q5" value="b"> The assassination of Archduke Franz Ferdinand</label>
+          <label><input type="radio" name="q5" value="c"> The Battle of Hastings</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>6. When did the First World War end with an armistice?</p>
+          <label><input type="radio" name="q6" value="a"> 1918</label>
+          <label><input type="radio" name="q6" value="b"> 1939</label>
+          <label><input type="radio" name="q6" value="c"> 1945</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>7. Which country did Nazi Germany invade in September 1939?</p>
+          <label><input type="radio" name="q7" value="a"> Spain</label>
+          <label><input type="radio" name="q7" value="b"> Poland</label>
+          <label><input type="radio" name="q7" value="c"> Switzerland</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>8. What does provenance mean when studying a source?</p>
+          <label><input type="radio" name="q8" value="a"> The source's origin</label>
+          <label><input type="radio" name="q8" value="b"> The source's length</label>
+          <label><input type="radio" name="q8" value="c"> The source's colour</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>9. What should a historical explanation include?</p>
+          <label><input type="radio" name="q9" value="a"> Only personal opinions</label>
+          <label><input type="radio" name="q9" value="b"> Unrelated facts</label>
+          <label><input type="radio" name="q9" value="c"> A point, evidence and explanation</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>10. What is the best first step for GCSE History revision?</p>
+          <label><input type="radio" name="q10" value="a"> Ignore the specification</label>
+          <label><input type="radio" name="q10" value="b"> Check your topics and exam board</label>
+          <label><input type="radio" name="q10" value="c"> Learn dates without understanding them</label>
+        </div>
+
+        <button type="submit" class="primary-button">Check my answers</button>
+        <button type="reset" class="secondary-button">Try again</button>
+      </form>
+
+      <div id="quizFeedback" class="quiz-feedback" aria-live="polite" hidden></div>
+    </section>
+  </main>
+
+
+  <script>
+    const yearButtons = document.querySelectorAll(".year-button");
+    const lessonCards = [...document.querySelectorAll(".lesson-card")];
+    const searchInput = document.getElementById("searchInput");
+    const periodFilter = document.getElementById("periodFilter");
+    const lessonList = document.getElementById("lessonList");
+    const noResults = document.getElementById("noResults");
+    const lessonsHeading = document.getElementById("lessons-heading");
+    const yearDescription = document.getElementById("yearDescription");
+    const toggleLessons = document.getElementById("toggleLessons");
+
+    let selectedYear = "7";
+
+    const yearDescriptions = {
+      "7": "Discover medieval England, castles and the Norman Conquest.",
+      "8": "Explore the Tudors, religious change, Elizabeth I and the Civil War.",
+      "9": "Investigate industrialisation, empire and the causes of the First World War.",
+      "10": "Study modern conflict, wartime experiences and Nazi Germany.",
+      "11": "Practise GCSE source analysis, explanations and revision techniques."
+    };
+
+    function filterLessons() {
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedPeriod = periodFilter.value;
+      let visibleCount = 0;
+
+      lessonCards.forEach(card => {
+        const matchesYear = card.dataset.year === selectedYear;
+        const matchesPeriod =
+          selectedPeriod === "all" ||
+          card.dataset.period === selectedPeriod;
+
+        const matchesSearch =
+          card.textContent.toLowerCase().includes(query);
+
+        const visible = matchesYear && matchesPeriod && matchesSearch;
+
+        card.hidden = !visible;
+
+        if (visible) {
+          visibleCount++;
+        } else {
+          card.querySelector("details").open = false;
+        }
+      });
+
+      lessonsHeading.textContent = `Year ${selectedYear} lessons`;
+      yearDescription.textContent = yearDescriptions[selectedYear];
+      noResults.hidden = visibleCount !== 0;
+
+      toggleLessons.textContent =
+        visibleCount > 0 &&
+        lessonCards.some(card =>
+          !card.hidden && !card.querySelector("details").open
+        )
+          ? "Expand all"
+          : "Collapse all";
+    }
+
+    yearButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        selectedYear = button.dataset.year;
+
+        yearButtons.forEach(item => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+
+        // Reset filters so the new year group is easy to explore.
+        searchInput.value = "";
+        periodFilter.value = "all";
+
+        filterLessons();
+
+        document.getElementById("lessons-heading")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    searchInput.addEventListener("input", filterLessons);
+    periodFilter.addEventListener("change", filterLessons);
+
+    toggleLessons.addEventListener("click", () => {
+      const visibleCards = lessonCards.filter(card => !card.hidden);
+
+      const shouldOpen = visibleCards.some(card =>
+        !card.querySelector("details").open
+      );
+
+      visibleCards.forEach(card => {
+        card.querySelector("details").open = shouldOpen;
+      });
+
+      toggleLessons.textContent = shouldOpen ? "Collapse all" : "Expand all";
+    });
+
+    const answers = {
+      q1: "a",
+      q2: "b",
+      q3: "a",
+      q4: "c",
+      q5: "b",
+      q6: "a",
+      q7: "b",
+      q8: "a",
+      q9: "c",
+      q10: "b"
+    };
+
+    const explanations = {
+      q1: "The Battle of Hastings took place in 1066.",
+      q2: "The Black Death was a plague pandemic.",
+      q3: "Henry VIII broke with papal authority in England.",
+      q4: "Factories and machine production expanded during industrialisation.",
+      q5: "The assassination of Franz Ferdinand helped trigger the July Crisis.",
+      q6: "The armistice ending the fighting on the Western Front took effect in 1918.",
+      q7: "Nazi Germany invaded Poland on 1 September 1939.",
+      q8: "Provenance refers to a source's origin.",
+      q9: "A good explanation uses a point, evidence and reasoning.",
+      q10: "Your exam board and specification identify the course content and assessment."
+    };
+
+    const quizForm = document.getElementById("historyQuiz");
+    const quizFeedback = document.getElementById("quizFeedback");
+
+    quizForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      let score = 0;
+      const feedbackLines = [];
+
+      Object.entries(answers).forEach(([question, answer]) => {
+        const selected = quizForm.querySelector(
+          `input[name="${question}"]:checked`
+        );
+
+        if (selected && selected.value === answer) {
+          score++;
+        } else {
+          feedbackLines.push(explanations[question]);
+        }
+      });
+
+      quizFeedback.hidden = false;
+      quizFeedback.className =
+        "quiz-feedback " + (score >= 7 ? "good" : "bad");
+
+      const heading = document.createElement("h3");
+      heading.textContent = `You scored ${score} out of 10!`;
+      quizFeedback.replaceChildren(heading);
+
+      const message = document.createElement("p");
+
+      if (score === 10) {
+        message.textContent =
+          "Amazing work! You answered every question correctly. 🐾";
+      } else if (score >= 7) {
+        message.textContent =
+          "Great effort! Review the explanations below and keep practising.";
+      } else {
+        message.textContent =
+          "Good start! Revisit the lessons and try the quiz again.";
+      }
+
+      quizFeedback.appendChild(message);
+
+      if (feedbackLines.length > 0) {
+        const reviewHeading = document.createElement("strong");
+        reviewHeading.textContent = "Topics to revise:";
+        quizFeedback.appendChild(reviewHeading);
+
+        const list = document.createElement("ul");
+
+        feedbackLines.forEach(line => {
+          const item = document.createElement("li");
+          item.textContent = line;
+          list.appendChild(item);
+        });
+
+        quizFeedback.appendChild(list);
+      }
+
+      quizFeedback.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    });
+
+    quizForm.addEventListener("reset", () => {
+      quizFeedback.hidden = true;
+      quizFeedback.replaceChildren();
+      quizFeedback.className = "quiz-feedback";
+    });
+
+    
+const deeperHistoryLessons = [
+  {
+    title: "Understanding the Norman Conquest",
+    paragraphs: [
+      "The Norman Conquest was more than a change of king. It changed who held land, who exercised political authority and how England was governed. William had to turn a military victory into lasting control, which meant dealing with people who had supported Harold or resisted Norman rule.",
+      "Castles helped William because they provided defended bases for soldiers and officials. Giving land to Norman supporters also rewarded loyalty and helped the new king build a network of people who depended on him. However, resistance showed that winning a battle did not automatically mean everyone accepted the new government.",
+      "When explaining William's success, separate the events that helped him win at Hastings from the methods he used afterwards to control England. This distinction helps you explain both the conquest itself and its longer-term consequences."
+    ]
+  },
+  {
+    title: "Understanding medieval society",
+    paragraphs: [
+      "Medieval society depended heavily on land because farming produced much of the food and wealth. Control of land therefore gave powerful people the resources to support households, maintain authority and provide military service. The feudal system describes relationships built around land, loyalty and obligations, although arrangements varied across medieval England.",
+      "A person's position affected their opportunities and responsibilities. Lords could exercise authority over estates, while many peasants had to work, pay rents or fulfil customary duties. The Church also influenced beliefs, education, charity and the calendar of everyday life.",
+      "To understand medieval life, consider how these parts of society depended on one another. Agricultural workers produced food, landowners controlled resources, and religious institutions shaped community life. This helps explain why changes in landownership or labour could affect the wider social order."
+    ]
+  },
+  {
+    title: "Understanding the Black Death",
+    paragraphs: [
+      "The Black Death spread into England through the connected trade and travel networks of the fourteenth century. People did not have modern knowledge of infectious disease, so their explanations and attempts to protect themselves were often based on ideas that could not identify the actual cause.",
+      "The enormous loss of life had economic consequences as well as personal and social ones. With fewer workers available, some surviving labourers had greater opportunities to negotiate wages or leave for better conditions. Landowners, meanwhile, could find it harder to maintain their usual farming arrangements.",
+      "The government responded with measures such as the Statute of Labourers in 1351, which attempted to restrict wages and workers' movement. This illustrates an important historical relationship: a demographic crisis created economic pressures, and those pressures encouraged political responses. The changes were uneven, rather than happening in the same way everywhere."
+    ]
+  },
+  {
+    title: "Understanding Henry VIII and the Reformation",
+    paragraphs: [
+      "Henry VIII's break with Rome involved a question about marriage and succession, but it also became a struggle over who had authority over the English Church. Henry wanted an annulment of his marriage to Catherine of Aragon, and the Pope did not grant the outcome he wanted. Royal government then used Parliament to change the legal relationship between England and the papacy.",
+      "The Act of Supremacy of 1534 recognised Henry as supreme head of the Church of England. This increased royal control over the Church, while the dissolution of the monasteries transferred monastic property and wealth to new owners. Religious change therefore affected politics, property and the lives of local communities as well as beliefs.",
+      "It is important to distinguish a change in church leadership from a complete change in religious practice. Henry retained some traditional Catholic beliefs, while later monarchs introduced different reforms. Edward VI promoted Protestant changes, Mary I restored Catholicism, and Elizabeth I established a religious settlement in 1559."
+    ]
+  },
+  {
+    title: "Understanding Elizabeth I and the Spanish Armada",
+    paragraphs: [
+      "The conflict between Elizabeth I and Philip II of Spain grew from several connected disagreements. Religion mattered because Elizabeth's government supported a Protestant settlement in England, while Philip was a Catholic monarch. Political rivalry, English involvement in conflict affecting Spanish interests, and the struggle for influence also contributed.",
+      "The Spanish Armada campaign of 1588 was part of a wider plan connected to an invasion of England. English naval attacks, the use of fireships near Calais, Spanish logistical difficulties and severe weather all played a role in the failure of the campaign. It is misleading to explain the outcome through a single battle or one factor alone.",
+      "The Armada's failure strengthened Elizabeth's position, but it did not end Spanish power or immediately bring all conflict to a close. When writing about the event, explain how different factors interacted and distinguish the immediate outcome from its longer-term significance."
+    ]
+  },
+  {
+    title: "Understanding the English Civil War",
+    paragraphs: [
+      "The English Civil War developed because Charles I and Parliament disagreed about political authority, taxation and religion. These disputes became more serious when the king attempted to govern without Parliament and mistrust grew over his religious and political decisions. There was no single cause that explains every aspect of the conflict.",
+      "The war divided people into Royalists, who supported the king, and Parliamentarians, who fought for Parliament. These labels describe the main sides, but people's loyalties could be influenced by local circumstances, religious beliefs and personal relationships.",
+      "Charles I's execution in 1649 was a major challenge to the traditional idea that a king should rule as monarch. England became a republic, later experienced Cromwell's Protectorate, and restored the monarchy in 1660. The sequence shows that removing a monarch did not automatically settle disagreements about how the country should be governed."
+    ]
+  },
+  {
+    title: "Understanding the Industrial Revolution",
+    paragraphs: [
+      "The Industrial Revolution was a gradual transformation in how goods were made and how people worked. Machinery, factories, coal, iron, steam power, investment and transport networks helped production grow. These developments reinforced one another: factories needed power and workers, while expanding industries created demand for materials and transport.",
+      "Industrialisation encouraged urbanisation as people moved to towns and cities for work. Growing industrial communities could offer new employment and access to manufactured goods, but rapid population growth also placed pressure on housing, sanitation and public services. Factory workers could face long hours, low pay and dangerous machinery.",
+      "The effects were not identical for everyone. Business owners and some workers could benefit from expanding production, while others experienced harsh conditions and insecurity. Reforms developed over time in response to concerns about working life. A balanced historical explanation considers both the opportunities industrialisation created and the problems that accompanied it."
+    ]
+  },
+  {
+    title: "Understanding the British Empire",
+    paragraphs: [
+      "The British Empire expanded over several centuries through trade, settlement, warfare, conquest and political agreements. Its growth was connected to commercial interests, naval power and competition with other states, but the reasons and methods of expansion differed between territories.",
+      "Imperial rule created connections through trade and migration, but it also involved unequal power. In many places, colonial authorities controlled land and resources, while enslavement, forced labour, racial discrimination and violence caused profound harm. The effects depended on the location, period and people involved.",
+      "People living under imperial rule were not simply passive. Resistance included rebellions, everyday acts of opposition, campaigning and organised independence movements. Studying the empire therefore means asking who held power, who benefited, who suffered and how people responded. Britain's abolition of its transatlantic slave trade in 1807 and the later abolition of slavery across most of the empire were important changes shaped by sustained campaigning and resistance."
+    ]
+  },
+  {
+    title: "Understanding the causes of the First World War",
+    paragraphs: [
+      "The First World War began in 1914 after years of tension between European powers. Militarism encouraged the expansion of armed forces, alliances shaped countries' expectations of support, imperial rivalry created competition, and nationalism could intensify hostility. These factors help organise the explanation, but they did not make war inevitable on their own.",
+      "The assassination of Archduke Franz Ferdinand on 28 June 1914 was the immediate trigger for the July Crisis. What followed depended on decisions by governments, military planning, diplomatic failures and the relationships between countries. Austria-Hungary's conflict with Serbia widened as other powers became involved.",
+      "A strong answer distinguishes long-term causes from the immediate trigger. The assassination explains why the crisis began at that moment, while the wider political and military situation helps explain why the crisis grew into a major European war. Britain's declaration of war on Germany on 4 August followed Germany's invasion of Belgium."
+    ]
+  },
+  {
+    title: "Understanding the First World War",
+    paragraphs: [
+      "Trench warfare on the Western Front developed into a system of defended positions that were difficult and costly to attack. Machine guns, artillery, barbed wire and the terrain made advances dangerous. Neither side could always turn an attack into a decisive breakthrough, so fighting often resulted in heavy casualties for limited territorial gains.",
+      "The war's industrial scale meant that factories, transport systems, finance and civilian labour became central to military effort. The conflict affected people far from the front line through shortages, government controls, changing employment and the loss of family members. Women's employment expanded into many roles, although the effects varied and did not create immediate equality.",
+      "The armistice took effect on 11 November 1918 and stopped the fighting with Germany on the Western Front. The Treaty of Versailles was signed in 1919 and set peace terms with Germany. Keeping these events separate helps explain the difference between ending active fighting and negotiating a formal settlement."
+    ]
+  },
+  {
+    title: "Understanding the Second World War",
+    paragraphs: [
+      "The Second World War grew from a combination of long-term problems and immediate political decisions. The peace settlement after the First World War, economic hardship during the Great Depression, aggressive expansion by dictatorships and the inability of international efforts to prevent further aggression all contributed to the crisis. Germany's invasion of Poland on 1 September 1939 led Britain and France to declare war two days later.",
+      "The war became global as fighting spread across Europe, North Africa, Asia and the Pacific. Germany's invasion of the Soviet Union in 1941 and Japan's attack on Pearl Harbor later that year widened the conflict further. Different countries and communities experienced the war in different ways, including military service, bombing, evacuation, rationing and occupation.",
+      "The Holocaust was the systematic persecution and murder of six million Jewish people by Nazi Germany and its collaborators. Other groups were also persecuted and murdered by the Nazi regime, though the reasons, policies and experiences differed. Studying this history carefully means recognising the people targeted, the role of Nazi ideology and state power, and the choices and actions of perpetrators, collaborators, bystanders and rescuers."
+    ]
+  },
+  {
+    title: "Understanding Nazi Germany and dictatorship",
+    paragraphs: [
+      "Hitler became Chancellor in January 1933 during a period of political instability and economic hardship. His appointment did not mean that dictatorship was instantly complete. The Nazi government used emergency powers, legal changes, intimidation and the suppression of political opponents to dismantle democratic institutions. The Enabling Act of March 1933 was particularly important because it allowed the government to make laws without normal parliamentary approval.",
+      "The regime maintained control through several connected methods. Propaganda promoted Nazi ideas, censorship restricted information, and the police and concentration camps helped intimidate and punish opponents. These methods worked alongside changes to institutions and laws, making it harder for people to organise opposition.",
+      "Nazi rule also rested on racist and antisemitic ideology. Persecution escalated over time and developed into genocide during the Second World War. When explaining dictatorship, distinguish how a regime gains power from how it keeps power, and connect its methods to their effects on individuals and society."
+    ]
+  },
+  {
+    title: "Understanding GCSE source analysis",
+    paragraphs: [
+      "A historical source is useful when it provides evidence that helps answer a historical question. The first step is to identify what the source actually says or shows. You can then make an inference: a conclusion drawn from a detail in the source. A quotation or visual detail should support the inference rather than simply being copied into the answer.",
+      "Provenance means information about a source's origin, such as who created it, when it was produced and why. This information can help explain the source's viewpoint and intended audience. However, knowing the author or purpose does not automatically prove that a source is reliable or unreliable. Reliability depends on what you are trying to find out and how the evidence compares with other information.",
+      "Historical context helps you interpret the source by connecting it to what was happening at the time. A strong answer combines precise source details with relevant knowledge and explains why the evidence matters for the question. The exact assessment requirements depend on your GCSE exam board."
+    ]
+  },
+  {
+    title: "Understanding GCSE explanations and revision",
+    paragraphs: [
+      "A historical explanation needs a clear argument, accurate evidence and reasoning that connects the evidence to the question. Listing several facts is not enough if you do not explain their significance. For a question about causes, show how a factor contributed to an event; for consequences, explain what changed and why the change mattered.",
+      "A useful paragraph often begins with a point, supports it with a precise example, explains the link and then returns to the question. This structure is a guide rather than a rigid rule: follow the instructions and assessment criteria your teacher gives you, because GCSE History courses and question types vary between exam boards.",
+      "For revision, use active recall by trying to explain a topic without looking at your notes. Check what you missed, correct it and return to the topic after a gap. Timelines help you organise events chronologically, while practice questions help you use knowledge in an exam-style argument. Short sessions spread across several days can make it easier to identify and revisit gaps in your understanding."
+    ]
+  }
+];
+
+function addDeeperHistoryExplanations() {
+  const cards = [...document.querySelectorAll(".lesson-card")];
+
+  cards.forEach((card, index) => {
+    const content = card.querySelector(".lesson-content");
+    const lesson = deeperHistoryLessons[index];
+
+    if (!content || !lesson || content.querySelector(".deeper-explanation")) {
+      return;
+    }
+
+    const section = document.createElement("section");
+    section.className = "deeper-explanation";
+
+    const heading = document.createElement("h3");
+    heading.textContent = "Understand it, don't just memorise it 🐾";
+    section.appendChild(heading);
+
+    const title = document.createElement("h4");
+    title.textContent = lesson.title;
+    section.appendChild(title);
+
+    lesson.paragraphs.forEach(text => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      section.appendChild(paragraph);
+    });
+
+    const takeaway = document.createElement("div");
+    takeaway.className = "key-point";
+    takeaway.innerHTML =
+      "<strong>Think like a historian:</strong> Ask what changed, " +
+      "why it changed, who was affected and what evidence supports your explanation.";
+    section.appendChild(takeaway);
+
+    content.appendChild(section);
+  });
+}
+
+addDeeperHistoryExplanations();
+
+const historyFlashcards = [
+  // Year 7 — Medieval history
+  { topic: "medieval", q: "In which year was the Battle of Hastings?", a: "1066. William, Duke of Normandy, defeated Harold Godwinson." },
+  { topic: "medieval", q: "Who became king of England after the Norman Conquest?", a: "William I, also known as William the Conqueror." },
+  { topic: "medieval", q: "What was the feudal system?", a: "A system of land, loyalty and duties linking the king, nobles and other people." },
+  { topic: "medieval", q: "When did the Black Death reach England?", a: "1348. The plague caused enormous loss of life." },
+  { topic: "medieval", q: "What was one consequence of the Black Death?", a: "Labour shortages gave some surviving workers greater bargaining power." },
+
+  // Year 8 — Tudors and Stuarts
+  { topic: "tudor", q: "Which king broke with the authority of the Pope?", a: "Henry VIII. His break with Rome helped establish royal control over the English Church." },
+  { topic: "tudor", q: "What did the Act of Supremacy of 1534 do?", a: "It recognised Henry VIII as supreme head of the Church of England." },
+  { topic: "tudor", q: "In which year was the Spanish Armada campaign?", a: "1588. The Spanish attempt to achieve its invasion objective failed." },
+  { topic: "tudor", q: "Who were the Royalists in the English Civil War?", a: "People who supported King Charles I." },
+  { topic: "tudor", q: "When was Charles I executed?", a: "1649, after the Royalists lost the English Civil War." },
+
+  // Year 9 — Industry, empire and WWI causes
+  { topic: "industry", q: "What was the Industrial Revolution?", a: "A gradual transformation towards machine-based production, factories and new sources of power." },
+  { topic: "industry", q: "What does urbanisation mean?", a: "The growth of towns and cities, often as people move there to find work." },
+  { topic: "industry", q: "When did Britain abolish its transatlantic slave trade?", a: "1807. This was distinct from the later abolition of slavery across most of the empire." },
+  { topic: "industry", q: "What does nationalism mean?", a: "Strong identification with a nation, which can influence political choices and international relations." },
+  { topic: "industry", q: "What event triggered the July Crisis of 1914?", a: "The assassination of Archduke Franz Ferdinand on 28 June 1914." },
+
+  // Year 10 — Modern history
+  { topic: "modern", q: "When did the First World War armistice take effect?", a: "11 November 1918. It stopped the fighting with Germany on the Western Front." },
+  { topic: "modern", q: "When was the Treaty of Versailles signed?", a: "1919. It set peace terms with Germany after the First World War." },
+  { topic: "modern", q: "Which country did Nazi Germany invade on 1 September 1939?", a: "Poland. Britain and France declared war on Germany on 3 September." },
+  { topic: "modern", q: "What was the Battle of Britain?", a: "An air campaign in 1940 linked to Germany's attempt to gain air superiority." },
+  { topic: "modern", q: "What was the Holocaust?", a: "The systematic persecution and murder of six million Jewish people by Nazi Germany and its collaborators." },
+  { topic: "modern", q: "When did Hitler become Chancellor of Germany?", a: "January 1933. The Nazi regime then dismantled democracy and established dictatorship." },
+
+  // Year 11 — GCSE skills
+  { topic: "gcse", q: "What does provenance mean?", a: "A source's origin, including who created it, when and why." },
+  { topic: "gcse", q: "What is an inference?", a: "A conclusion drawn from evidence, such as a detail in a historical source." },
+  { topic: "gcse", q: "What should a strong historical explanation include?", a: "A clear point, accurate evidence and reasoning that connects the evidence to the question." },
+  { topic: "gcse", q: "What is active recall?", a: "Trying to remember information without looking at your notes, then checking and correcting gaps." },
+  { topic: "gcse", q: "Why should you check your GCSE exam board?", a: "Different boards can cover different topics and use different question formats." }
+];
+
+const flashcardTopic = document.getElementById("flashcardTopic");
+const flashcardFlip = document.getElementById("flashcardFlip");
+const flashcardText = document.getElementById("flashcardText");
+const flashcardSide = document.getElementById("flashcardSide");
+const flashcardHint = document.getElementById("flashcardHint");
+const flashcardCounter = document.getElementById("flashcardCounter");
+const flashcardPrev = document.getElementById("flashcardPrev");
+const flashcardNext = document.getElementById("flashcardNext");
+const flashcardShuffle = document.getElementById("flashcardShuffle");
+const flashcardReset = document.getElementById("flashcardReset");
+
+let activeFlashcards = [...historyFlashcards];
+let flashcardIndex = 0;
+let showingAnswer = false;
+
+function renderFlashcard() {
+  if (activeFlashcards.length === 0) {
+    flashcardSide.textContent = "NO CARDS";
+    flashcardText.textContent = "No cards found for this topic.";
+    flashcardHint.textContent = "Choose another topic.";
+    flashcardCounter.textContent = "0 cards";
+    flashcardPrev.disabled = true;
+    flashcardNext.disabled = true;
+    flashcardFlip.disabled = true;
+    return;
+  }
+
+  const card = activeFlashcards[flashcardIndex];
+
+  flashcardFlip.disabled = false;
+  flashcardSide.textContent = showingAnswer ? "ANSWER" : "QUESTION";
+  flashcardText.textContent = showingAnswer ? card.a : card.q;
+  flashcardHint.textContent = showingAnswer
+    ? "🐾 Tap to see the question"
+    : "🐾 Tap to reveal the answer";
+
+  flashcardFlip.setAttribute("aria-pressed", String(showingAnswer));
+  flashcardCounter.textContent =
+    `Card ${flashcardIndex + 1} of ${activeFlashcards.length}`;
+
+  flashcardPrev.disabled = flashcardIndex === 0;
+  flashcardNext.disabled = flashcardIndex === activeFlashcards.length - 1;
+}
+
+function showFlashcard(index) {
+  if (index < 0 || index >= activeFlashcards.length) return;
+
+  flashcardIndex = index;
+  showingAnswer = false;
+  renderFlashcard();
+}
+
+flashcardFlip.addEventListener("click", () => {
+  if (!activeFlashcards.length) return;
+
+  showingAnswer = !showingAnswer;
+  renderFlashcard();
+});
+
+flashcardPrev.addEventListener("click", () => {
+  showFlashcard(flashcardIndex - 1);
+});
+
+flashcardNext.addEventListener("click", () => {
+  showFlashcard(flashcardIndex + 1);
+});
+
+flashcardTopic.addEventListener("change", () => {
+  activeFlashcards = flashcardTopic.value === "all"
+    ? [...historyFlashcards]
+    : historyFlashcards.filter(card => card.topic === flashcardTopic.value);
+
+  flashcardIndex = 0;
+  showingAnswer = false;
+  renderFlashcard();
+});
+
+flashcardShuffle.addEventListener("click", () => {
+  for (let i = activeFlashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [activeFlashcards[i], activeFlashcards[j]] =
+      [activeFlashcards[j], activeFlashcards[i]];
+  }
+
+  flashcardIndex = 0;
+  showingAnswer = false;
+  renderFlashcard();
+});
+
+flashcardReset.addEventListener("click", () => {
+  activeFlashcards = flashcardTopic.value === "all"
+    ? [...historyFlashcards]
+    : historyFlashcards.filter(card => card.topic === flashcardTopic.value);
+
+  flashcardIndex = 0;
+  showingAnswer = false;
+  renderFlashcard();
+});
+
+renderFlashcard();
+
+    filterLessons();
+  </script>
+</body>
+</html>

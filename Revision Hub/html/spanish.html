@@ -1,0 +1,1196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish | Revision Hub</title>
+
+<style>
+:root {
+  --purple: #8064c9;
+  --light-purple: #f0ebff;
+  --pink: #ffe8f0;
+  --blue: #e7f3ff;
+  --green: #e5f8ed;
+  --text: #302b42;
+  --muted: #777287;
+  --border: #e9e4f2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: #faf9ff;
+  line-height: 1.6;
+}
+
+header {
+  background: white;
+  padding: 18px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  color: var(--purple);
+  font-size: 1.7rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 9px 15px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  background: var(--light-purple);
+  color: var(--purple);
+}
+
+.hero {
+  padding: 48px 7%;
+  background: linear-gradient(135deg, #eee8ff, #fff0f5);
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  color: var(--purple);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  margin: 16px 0 12px;
+}
+
+.hero p { max-width: 650px; color: #5d5672; }
+
+main {
+  max-width: 1100px;
+  padding: 32px 20px 60px;
+  margin: auto;
+}
+
+.year-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.year-btn, .action-btn {
+  border: 0;
+  padding: 11px 17px;
+  border-radius: 12px;
+  background: white;
+  color: var(--text);
+  font-weight: 700;
+  box-shadow: 0 5px 20px rgba(70,50,110,.08);
+}
+
+.year-btn.active, .primary {
+  background: var(--purple);
+  color: white;
+}
+
+.year-intro {
+  background: white;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  margin-bottom: 25px;
+}
+
+.year-intro h2 { margin-top: 0; }
+
+.search-box {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font: inherit;
+  background: white;
+  margin-bottom: 22px;
+  outline-color: var(--purple);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 26px 0 15px;
+}
+
+.section-heading h2 { margin: 0; }
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.topic-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(70,50,110,.08);
+}
+
+.topic-top { padding: 19px; }
+
+.topic-icon { font-size: 2rem; }
+
+.topic-card h3 { margin: 8px 0; }
+
+.topic-card p { color: var(--muted); margin: 0; }
+
+.tag {
+  display: inline-block;
+  background: var(--light-purple);
+  color: var(--purple);
+  font-size: .8rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+details { border-top: 1px solid var(--border); }
+
+summary {
+  padding: 14px 19px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--purple);
+}
+
+.notes { padding: 0 19px 20px; }
+
+.notes table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.notes th, .notes td {
+  border: 1px solid var(--border);
+  text-align: left;
+  padding: 8px;
+}
+
+.notes th { background: var(--light-purple); }
+
+.tip {
+  background: #fff4d6;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.empty {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.quiz-panel {
+  margin-top: 36px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.question {
+  border-top: 1px solid var(--border);
+  padding: 17px 0;
+}
+
+.question p { font-weight: 700; margin-top: 0; }
+
+.question label {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.question label:hover { background: var(--light-purple); }
+
+.question input { margin-right: 8px; }
+
+#quiz-result { font-weight: 700; margin-top: 15px; }
+
+.tips {
+  margin-top: 30px;
+  padding: 22px;
+  background: var(--green);
+  border-radius: 18px;
+}
+
+footer {
+  padding: 25px 20px;
+  text-align: center;
+  color: var(--muted);
+  background: white;
+  border-top: 1px solid var(--border);
+}
+
+@media(max-width:600px) {
+  header { padding: 16px 5%; }
+  .main-nav a { padding: 8px 10px; }
+  .hero { padding: 35px 5%; }
+  main { padding: 24px 15px 45px; }
+  .topic-grid { grid-template-columns: 1fr; }
+}
+
+
+/* Spanish Flashcards */
+.spanish-flashcards {
+  max-width: 850px;
+  margin: 60px auto 30px;
+  padding: 30px 20px;
+  text-align: center;
+  color: #54256f;
+}
+
+.spanish-flashcards h2 {
+  color: #8b43c7;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.spanish-filters,
+.spanish-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.spanish-flashcards select,
+.spanish-flashcards button {
+  font: inherit;
+  padding: 11px 16px;
+  border: 2px solid #e7b7f5;
+  border-radius: 14px;
+}
+
+.spanish-flashcards select {
+  background: white;
+  color: #54256f;
+}
+
+.spanish-flashcards button {
+  background: #9b59d0;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.spanish-flashcards button:hover {
+  background: #7d38b5;
+  transform: translateY(-2px);
+}
+
+.spanish-card {
+  max-width: 580px;
+  min-height: 230px;
+  margin: 25px auto;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border: 3px solid #e8c7f7;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #f7e9ff, #ffe8f4);
+  box-shadow: 0 8px 20px #8b43c72a;
+}
+
+.spanish-card h3 {
+  color: #622c91;
+  font-size: 1.8rem;
+  margin: 8px 0;
+}
+
+#spanish-answer {
+  font-size: 1.25rem;
+  color: #8b3687;
+  margin: 8px 0;
+}
+
+#spanish-count {
+  color: #6c3989;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .spanish-flashcards {
+    padding: 20px 12px;
+  }
+
+  .spanish-card {
+    min-height: 200px;
+  }
+
+  .spanish-flashcards select,
+  .spanish-flashcards button {
+    max-width: 100%;
+  }
+}
+
+</style>
+</head>
+
+<body>
+<header>
+  <a class="logo" href="index.html">🐾 Revision Hub</a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="subjects.html" class="active" aria-current="page">Subjects</a>
+    <a href="pomodoro.html">Pomodoro</a>
+    <a href="progress.html">Progress</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">🇪🇸 ¡Vamos a aprender!</span>
+    <h1>Spanish</h1>
+    <p>Build your vocabulary, practise grammar and test yourself.</p>
+  </div>
+</section>
+
+<main>
+  <h2>Choose your year</h2>
+  <div class="year-picker">
+    <button class="year-btn active" data-year="7">Year 7</button>
+    <button class="year-btn" data-year="8">Year 8</button>
+    <button class="year-btn" data-year="9">Year 9</button>
+    <button class="year-btn" data-year="10">Year 10</button>
+    <button class="year-btn" data-year="11">Year 11</button>
+  </div>
+
+  <section class="year-intro">
+    <h2 id="year-title">Year 7 Spanish</h2>
+    <p id="year-description">Start with greetings, introductions and everyday vocabulary.</p>
+    <p>💡 <strong>Tip:</strong> Say each Spanish word aloud, cover the English meaning
+       and see if you can remember it.</p>
+  </section>
+
+  <input id="search" class="search-box" type="search"
+    placeholder="🔎 Search vocabulary, grammar or topics..."
+    aria-label="Search Spanish topics">
+
+  <div class="section-heading">
+    <h2 id="units-heading">Year 7 topics</h2>
+    <button class="action-btn" id="toggle-all" type="button">Expand all</button>
+  </div>
+
+  <div class="topic-grid" id="topic-grid"></div>
+  <p id="search-status" aria-live="polite"></p>
+
+  <section class="quiz-panel">
+    <h2>🧠 Spanish mini quiz</h2>
+    <p>Choose the correct answer for each question.</p>
+    <form id="quiz-form">
+      <div id="quiz-questions"></div>
+      <button class="action-btn primary" type="submit">Check my answers</button>
+      <button class="action-btn" type="button" id="reset-quiz">Try again</button>
+      <p id="quiz-result" aria-live="polite"></p>
+    </form>
+  </section>
+
+  
+<section class="spanish-flashcards" id="spanish-flashcards">
+  <h2>🇪🇸 Spanish Flashcards</h2>
+  <p>Practise your español, one card at a time! 🐱</p>
+
+  <div class="spanish-filters">
+    <select id="spanish-year">
+      <option value="all">All Years</option>
+      <option value="7">Year 7</option>
+      <option value="8">Year 8</option>
+      <option value="9">Year 9</option>
+      <option value="10">Year 10</option>
+      <option value="11">Year 11</option>
+    </select>
+
+    <select id="spanish-topic">
+      <option value="all">All Topics</option>
+      <option value="Vocabulary">Vocabulary</option>
+      <option value="Phrases">Useful Phrases</option>
+      <option value="Grammar">Grammar</option>
+      <option value="Verbs">Verbs</option>
+      <option value="GCSE">GCSE Practice</option>
+    </select>
+  </div>
+
+  <div class="spanish-card" id="spanish-card">
+    <p id="spanish-label">Spanish → English</p>
+    <h3 id="spanish-question">¡Hola!</h3>
+    <p id="spanish-answer" hidden>Hello!</p>
+    <button id="spanish-flip" type="button">Reveal Answer 💜</button>
+  </div>
+
+  <div class="spanish-controls">
+    <button id="spanish-prev" type="button">← Previous</button>
+    <span id="spanish-count">1 / 1</span>
+    <button id="spanish-next" type="button">Next →</button>
+  </div>
+
+  <div class="spanish-controls">
+    <button id="spanish-shuffle" type="button">🔀 Shuffle</button>
+    <button id="spanish-reset" type="button">↻ Reset</button>
+  </div>
+</section>
+
+  <section class="tips">
+    <h2>🐾 Revision Hub language-learning tips</h2>
+    <ul>
+      <li>Learn five new words every day.</li>
+      <li>Practise saying complete sentences out loud.</li>
+      <li>Use flashcards for Spanish on one side and English on the other.</li>
+      <li>Learn verbs with their pronouns.</li>
+      <li>Review words you got wrong the next day.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+const data = {
+  7: {
+    description: "Start with greetings, introductions and everyday vocabulary.",
+    topics: [
+      {
+        title: "Greetings and Introductions",
+        icon: "👋",
+        tag: "Vocabulary",
+        summary: "Say hello, goodbye and introduce yourself.",
+        words: [
+          ["Hola", "Hello"],
+          ["Buenos días", "Good morning"],
+          ["Buenas tardes", "Good afternoon"],
+          ["Adiós", "Goodbye"],
+          ["¿Cómo te llamas?", "What is your name?"],
+          ["Me llamo...", "My name is..."],
+          ["¿Qué tal?", "How are you?"],
+          ["Muy bien", "Very well"],
+          ["Gracias", "Thank you"],
+          ["Por favor", "Please"]
+        ],
+        tip: "Practise a short conversation using a greeting and your name."
+      },
+      {
+        title: "Numbers and Age",
+        icon: "🔢",
+        tag: "Vocabulary",
+        summary: "Learn numbers and say how old you are.",
+        words: [
+          ["Uno", "One"],
+          ["Dos", "Two"],
+          ["Tres", "Three"],
+          ["Cuatro", "Four"],
+          ["Cinco", "Five"],
+          ["Diez", "Ten"],
+          ["Quince", "Fifteen"],
+          ["Veinte", "Twenty"],
+          ["¿Cuántos años tienes?", "How old are you?"],
+          ["Tengo doce años", "I am twelve years old"]
+        ],
+        tip: "In Spanish, say tengo ... años to give your age."
+      },
+      {
+        title: "Personality and Appearance",
+        icon: "😊",
+        tag: "Vocabulary",
+        summary: "Describe yourself and other people.",
+        words: [
+          ["Soy", "I am"],
+          [" simpático/a", "Nice / friendly"],
+          ["Divertido/a", "Funny"],
+          ["Inteligente", "Intelligent"],
+          ["Tímido/a", "Shy"],
+          ["Alto/a", "Tall"],
+          ["Bajo/a", "Short"],
+          ["Tengo el pelo largo", "I have long hair"]
+        ],
+        tip: "Many adjectives change their ending to agree with the person described."
+      },
+      {
+        title: "School",
+        icon: "🏫",
+        tag: "Vocabulary",
+        summary: "Talk about school subjects and your timetable.",
+        words: [
+          ["El colegio", "School"],
+          ["El profesor / la profesora", "The teacher"],
+          ["El inglés", "English"],
+          ["Las matemáticas", "Maths"],
+          ["La historia", "History"],
+          ["La geografía", "Geography"],
+          ["Me gusta", "I like"],
+          ["No me gusta", "I don't like"],
+          ["Porque", "Because"],
+          ["Difícil", "Difficult"]
+        ],
+        tip: "Build a sentence: Me gusta ... porque es interesante."
+      },
+      {
+        title: "Family and Pets",
+        icon: "🐶",
+        tag: "Vocabulary",
+        summary: "Describe family members and animals.",
+        words: [
+          ["La madre", "Mother"],
+          ["El padre", "Father"],
+          ["El hermano", "Brother"],
+          ["La hermana", "Sister"],
+          ["La familia", "Family"],
+          ["El perro", "Dog"],
+          ["El gato", "Cat"],
+          ["Tengo", "I have"],
+          ["No tengo", "I don't have"]
+        ],
+        tip: "Use tengo or no tengo to describe your family and pets."
+      },
+      {
+        title: "Present-Tense Basics",
+        icon: "✍️",
+        tag: "Grammar",
+        summary: "Learn simple sentences and useful verbs.",
+        words: [
+          ["Soy", "I am"],
+          ["Tengo", "I have"],
+          ["Me llamo", "My name is"],
+          ["Vivo", "I live"],
+          ["Me gusta", "I like"],
+          ["Hablo", "I speak"],
+          ["Estudio", "I study"]
+        ],
+        tip: "Learn each verb as part of a complete sentence."
+      }
+    ]
+  },
+
+  8: {
+    description: "Build longer sentences about hobbies, food, home and daily life.",
+    topics: [
+      {
+        title: "Free Time and Hobbies",
+        icon: "⚽",
+        tag: "Vocabulary",
+        summary: "Say what you like doing in your free time.",
+        words: [
+          ["Jugar al fútbol", "To play football"],
+          ["Escuchar música", "To listen to music"],
+          ["Leer", "To read"],
+          ["Bailar", "To dance"],
+          ["Ver la televisión", "To watch television"],
+          ["Me encanta", "I love"],
+          ["Odio", "I hate"],
+          ["A veces", "Sometimes"],
+          ["Todos los días", "Every day"]
+        ],
+        tip: "Give an opinion and a reason to make your sentences more interesting."
+      },
+      {
+        title: "Food and Drink",
+        icon: "🥘",
+        tag: "Vocabulary",
+        summary: "Order food and describe what you eat.",
+        words: [
+          ["El desayuno", "Breakfast"],
+          ["El almuerzo", "Lunch"],
+          ["La cena", "Dinner"],
+          ["El agua", "Water"],
+          ["El pan", "Bread"],
+          ["La fruta", "Fruit"],
+          ["Tengo hambre", "I am hungry"],
+          ["Quisiera...", "I would like..."]
+        ],
+        tip: "Practise ordering a meal politely in Spanish."
+      },
+      {
+        title: "Home and Town",
+        icon: "🏡",
+        tag: "Vocabulary",
+        summary: "Describe your house and places in town.",
+        words: [
+          ["La casa", "House"],
+          ["El dormitorio", "Bedroom"],
+          ["La cocina", "Kitchen"],
+          ["El jardín", "Garden"],
+          ["El parque", "Park"],
+          ["La tienda", "Shop"],
+          ["Hay", "There is / there are"],
+          ["A la derecha", "On the right"],
+          ["A la izquierda", "On the left"]
+        ],
+        tip: "Use hay to say what is in your home or town."
+      },
+      {
+        title: "Opinions and Reasons",
+        icon: "💬",
+        tag: "Grammar",
+        summary: "Make opinions more detailed.",
+        words: [
+          ["Me gusta", "I like"],
+          ["Me encanta", "I love"],
+          ["Prefiero", "I prefer"],
+          ["Porque", "Because"],
+          ["Interesante", "Interesting"],
+          ["Aburrido/a", "Boring"],
+          ["Divertido/a", "Fun"],
+          ["Sin embargo", "However"]
+        ],
+        tip: "Join an opinion and a reason with porque."
+      }
+    ]
+  },
+
+  9: {
+    description: "Expand your vocabulary and practise describing past events and future plans.",
+    topics: [
+      {
+        title: "Holidays and Travel",
+        icon: "🏖️",
+        tag: "Vocabulary",
+        summary: "Describe destinations, transport and holidays.",
+        words: [
+          ["Las vacaciones", "The holidays"],
+          ["La playa", "The beach"],
+          ["La montaña", "The mountain"],
+          ["El avión", "The plane"],
+          ["El tren", "The train"],
+          ["Fui", "I went"],
+          ["Lo pasé bien", "I had a good time"],
+          ["El año pasado", "Last year"]
+        ],
+        tip: "Practise describing where you went and what you did."
+      },
+      {
+        title: "Technology and Social Media",
+        icon: "📱",
+        tag: "Vocabulary",
+        summary: "Discuss phones, the internet and online activities.",
+        words: [
+          ["El móvil", "Mobile phone"],
+          ["El ordenador", "Computer"],
+          ["Internet", "Internet"],
+          ["Las redes sociales", "Social media"],
+          ["Enviar mensajes", "To send messages"],
+          ["Todos los días", "Every day"],
+          ["Es útil", "It is useful"],
+          ["Es peligroso", "It is dangerous"]
+        ],
+        tip: "Give both advantages and disadvantages in your answers."
+      },
+      {
+        title: "Past-Tense Introduction",
+        icon: "⏳",
+        tag: "Grammar",
+        summary: "Talk about completed past activities.",
+        words: [
+          ["Ayer", "Yesterday"],
+          ["La semana pasada", "Last week"],
+          ["Fui", "I went"],
+          ["Hice", "I did / made"],
+          ["Comí", "I ate"],
+          ["Jugué", "I played"],
+          ["Visité", "I visited"],
+          ["Fue divertido", "It was fun"]
+        ],
+        tip: "Learn useful past-tense verbs alongside time expressions."
+      },
+      {
+        title: "Future Plans",
+        icon: "🔮",
+        tag: "Grammar",
+        summary: "Explain what you are going to do.",
+        words: [
+          ["Voy a", "I am going to"],
+          ["Vamos a", "We are going to"],
+          ["Mañana", "Tomorrow"],
+          ["El próximo año", "Next year"],
+          ["Viajar", "To travel"],
+          ["Estudiar", "To study"],
+          ["Espero que", "I hope that"]
+        ],
+        tip: "Use voy a followed by an infinitive to describe a plan."
+      }
+    ]
+  },
+
+  10: {
+    description: "Develop GCSE-style speaking and writing with opinions, reasons and different tenses.",
+    topics: [
+      {
+        title: "Identity and Relationships",
+        icon: "👥",
+        tag: "Vocabulary",
+        summary: "Describe personality, family and relationships.",
+        words: [
+          ["Llevarse bien", "To get on well"],
+          ["Llevarse mal", "To get on badly"],
+          ["Generoso/a", "Generous"],
+          ["Trabajador/a", "Hard-working"],
+          ["Me llevo bien con...", "I get on well with..."],
+          ["En mi opinión", "In my opinion"],
+          ["Aunque", "Although"]
+        ],
+        tip: "Add detail and examples to descriptions."
+      },
+      {
+        title: "Work and Future Plans",
+        icon: "💼",
+        tag: "Vocabulary",
+        summary: "Discuss jobs, ambitions and future study.",
+        words: [
+          ["El trabajo", "Work / job"],
+          ["El sueldo", "Salary"],
+          ["Solicitar", "To apply for"],
+          ["Quiero ser...", "I want to be..."],
+          ["Me gustaría", "I would like"],
+          ["En el futuro", "In the future"],
+          ["Ganar dinero", "To earn money"]
+        ],
+        tip: "Explain what job you want and why."
+      },
+      {
+        title: "Using Different Tenses",
+        icon: "🕒",
+        tag: "Grammar",
+        summary: "Combine present, past and future forms.",
+        words: [
+          ["Trabajo", "I work"],
+          ["Trabajé", "I worked"],
+          ["Voy a trabajar", "I am going to work"],
+          ["Trabajaré", "I will work"],
+          ["Ayer", "Yesterday"],
+          ["Mañana", "Tomorrow"],
+          ["Normalmente", "Normally"]
+        ],
+        tip: "Underline the time phrase first, then choose the correct tense."
+      },
+      {
+        title: "Environment",
+        icon: "🌱",
+        tag: "Vocabulary",
+        summary: "Discuss environmental problems and solutions.",
+        words: [
+          ["El medio ambiente", "The environment"],
+          ["La contaminación", "Pollution"],
+          ["Reciclar", "To recycle"],
+          ["Ahorrar agua", "To save water"],
+          ["El cambio climático", "Climate change"],
+          ["Deberíamos", "We should"],
+          ["Es importante", "It is important"]
+        ],
+        tip: "Use deberíamos to recommend ways to help the environment."
+      }
+    ]
+  },
+
+  11: {
+    description: "Revise vocabulary, grammar, speaking and writing for your Spanish exams.",
+    topics: [
+      {
+        title: "Exam Vocabulary",
+        icon: "📚",
+        tag: "Revision",
+        summary: "Review opinions, connectives and useful expressions.",
+        words: [
+          ["Sin embargo", "However"],
+          ["Además", "Furthermore"],
+          ["Por lo tanto", "Therefore"],
+          ["Aunque", "Although"],
+          ["Por un lado", "On one hand"],
+          ["Por otro lado", "On the other hand"],
+          ["En mi opinión", "In my opinion"],
+          ["Lo mejor es que", "The best thing is that"]
+        ],
+        tip: "Learn connectives to make your writing flow naturally."
+      },
+      {
+        title: "Grammar Revision",
+        icon: "✍️",
+        tag: "Grammar",
+        summary: "Practise verbs, adjective agreement and sentence structure.",
+        words: [
+          ["Ser", "To be"],
+          ["Estar", "To be"],
+          ["Tener", "To have"],
+          ["Ir", "To go"],
+          ["Hacer", "To do / make"],
+          ["Querer", "To want"],
+          ["Poder", "To be able to"],
+          ["Deber", "Should / ought to"]
+        ],
+        tip: "Practise the verbs in sentences, not just as isolated lists."
+      },
+      {
+        title: "Speaking Exam Practice",
+        icon: "🎤",
+        tag: "Exam skills",
+        summary: "Prepare extended answers and spontaneous responses.",
+        words: [
+          ["¿Qué piensas de...?", "What do you think of...?"],
+          ["Creo que...", "I think that..."],
+          ["En el pasado...", "In the past..."],
+          ["En el futuro...", "In the future..."],
+          ["Por ejemplo", "For example"],
+          ["Depende", "It depends"],
+          ["Estoy de acuerdo", "I agree"]
+        ],
+        tip: "Prepare ideas and vocabulary, but practise answering flexibly."
+      },
+      {
+        title: "Writing Exam Practice",
+        icon: "📝",
+        tag: "Exam skills",
+        summary: "Write accurate, detailed answers with varied language.",
+        words: [
+          ["Primero", "First"],
+          ["Luego", "Then"],
+          ["Finalmente", "Finally"],
+          ["Porque", "Because"],
+          ["Cuando era pequeño/a", "When I was little"],
+          ["Si pudiera", "If I could"],
+          ["Me gustaría", "I would like"]
+        ],
+        tip: "Check verb endings, accents, adjective agreement and word order."
+      }
+    ]
+  }
+};
+
+const quizzes = {
+  7: [
+    { q: 'What does "Hola" mean?', options: ["Goodbye", "Hello", "Please"], answer: 1 },
+    { q: 'How do you say "thank you"?', options: ["Gracias", "Adiós", "Por favor"], answer: 0 },
+    { q: 'What does "Tengo doce años" mean?', options: ["I am twelve years old", "I have twelve pets", "I am twelve minutes late"], answer: 0 },
+    { q: 'What does "el perro" mean?', options: ["The cat", "The dog", "The house"], answer: 1 },
+    { q: 'What does "me gusta" mean?', options: ["I like", "I went", "I am called"], answer: 0 }
+  ],
+  8: [
+    { q: 'What does "escuchar música" mean?', options: ["To read", "To listen to music", "To dance"], answer: 1 },
+    { q: 'What does "la cocina" mean?', options: ["Kitchen", "Bedroom", "Garden"], answer: 0 },
+    { q: 'What does "porque" mean?', options: ["However", "Because", "Tomorrow"], answer: 1 }
+  ],
+  9: [
+    { q: 'What does "el año pasado" mean?', options: ["Next year", "Last year", "Every day"], answer: 1 },
+    { q: 'What does "fui" mean in a past-tense sentence?', options: ["I went", "I go", "I will go"], answer: 0 },
+    { q: 'What does "voy a viajar" mean?', options: ["I travelled", "I am going to travel", "I never travel"], answer: 1 }
+  ],
+  10: [
+    { q: 'What does "me gustaría" mean?', options: ["I used to", "I would like", "I dislike"], answer: 1 },
+    { q: 'What does "el medio ambiente" mean?', options: ["The environment", "The classroom", "The future"], answer: 0 },
+    { q: 'What does "deberíamos" mean?', options: ["We went", "We should", "We have"], answer: 1 }
+  ],
+  11: [
+    { q: 'What does "sin embargo" mean?', options: ["For example", "However", "Yesterday"], answer: 1 },
+    { q: 'What does "estoy de acuerdo" mean?', options: ["I agree", "I am hungry", "I would like"], answer: 0 },
+    { q: 'What does "primero" mean?', options: ["Finally", "First", "Although"], answer: 1 }
+  ]
+};
+
+const grid = document.getElementById("topic-grid");
+const search = document.getElementById("search");
+const questionsBox = document.getElementById("quiz-questions");
+const result = document.getElementById("quiz-result");
+let year = 7;
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#039;"
+  })[c]);
+}
+
+function renderTopics() {
+  const current = data[year];
+  const term = search.value.trim().toLowerCase();
+
+  document.getElementById("year-title").textContent = `Year ${year} Spanish`;
+  document.getElementById("year-description").textContent = current.description;
+  document.getElementById("units-heading").textContent = `Year ${year} topics`;
+
+  const topics = current.topics.filter(topic =>
+    [topic.title, topic.tag, topic.summary, topic.tip,
+     ...topic.words.flat()].join(" ").toLowerCase().includes(term)
+  );
+
+  grid.innerHTML = topics.length ? topics.map(topic => `
+    <article class="topic-card">
+      <div class="topic-top">
+        <div class="topic-icon">${escapeHTML(topic.icon)}</div>
+        <h3>${escapeHTML(topic.title)}</h3>
+        <p>${escapeHTML(topic.summary)}</p>
+        <span class="tag">${escapeHTML(topic.tag)}</span>
+      </div>
+      <details>
+        <summary>Open vocabulary and notes</summary>
+        <div class="notes">
+          <table>
+            <thead><tr><th>Spanish</th><th>English</th></tr></thead>
+            <tbody>
+              ${topic.words.map(pair =>
+                `<tr><td>${escapeHTML(pair[0].trim())}</td><td>${escapeHTML(pair[1])}</td></tr>`
+              ).join("")}
+            </tbody>
+          </table>
+          <div class="tip"><strong>🐾 Study tip:</strong> ${escapeHTML(topic.tip)}</div>
+        </div>
+      </details>
+    </article>
+  `).join("") : '<div class="empty">No topics found. Try another search.</div>';
+
+  document.getElementById("search-status").textContent =
+    `${topics.length} topic(s) found for Year ${year}.`;
+
+  renderQuiz();
+}
+
+function renderQuiz() {
+  result.textContent = "";
+  questionsBox.innerHTML = quizzes[year].map((item, i) => `
+    <div class="question">
+      <p>${i + 1}. ${escapeHTML(item.q)}</p>
+      ${item.options.map((option, j) => `
+        <label>
+          <input type="radio" name="q${i}" value="${j}" required>
+          ${escapeHTML(option)}
+        </label>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+document.querySelectorAll(".year-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    year = Number(button.dataset.year);
+    document.querySelectorAll(".year-btn").forEach(item => {
+      item.classList.toggle("active", item === button);
+      item.setAttribute("aria-pressed", String(item === button));
+    });
+    search.value = "";
+    renderTopics();
+  });
+});
+
+search.addEventListener("input", renderTopics);
+
+document.getElementById("toggle-all").addEventListener("click", () => {
+  const cards = [...grid.querySelectorAll("details")];
+  if (!cards.length) return;
+
+  const expand = cards.some(item => !item.open);
+  cards.forEach(item => item.open = expand);
+  document.getElementById("toggle-all").textContent =
+    expand ? "Collapse all" : "Expand all";
+});
+
+document.getElementById("quiz-form").addEventListener("submit", event => {
+  event.preventDefault();
+  let score = 0;
+  const questions = quizzes[year];
+
+  questions.forEach((item, i) => {
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    if (chosen && Number(chosen.value) === item.answer) score++;
+  });
+
+  result.textContent = `You scored ${score} out of ${questions.length}! ` +
+    (score === questions.length ? "¡Excelente! 🎉" : "¡Buen trabajo! Keep practising! 🐾");
+});
+
+document.getElementById("reset-quiz").addEventListener("click", () => {
+  document.getElementById("quiz-form").reset();
+  result.textContent = "";
+});
+
+renderTopics();
+
+
+const spanishCards = [
+  { year: 7, topic: "Vocabulary", q: "Hola", a: "Hello" },
+  { year: 7, topic: "Vocabulary", q: "Adiós", a: "Goodbye" },
+  { year: 7, topic: "Vocabulary", q: "Por favor", a: "Please" },
+  { year: 7, topic: "Vocabulary", q: "Gracias", a: "Thank you" },
+  { year: 7, topic: "Vocabulary", q: "¿Cómo te llamas?", a: "What is your name?" },
+  { year: 7, topic: "Phrases", q: "Me llamo…", a: "My name is…" },
+  { year: 7, topic: "Phrases", q: "¿Qué tal?", a: "How are you?" },
+  { year: 7, topic: "Vocabulary", q: "Tengo trece años", a: "I am thirteen years old" },
+  { year: 7, topic: "Vocabulary", q: "La familia", a: "The family" },
+  { year: 7, topic: "Vocabulary", q: "El colegio", a: "The school" },
+
+  { year: 8, topic: "Vocabulary", q: "Me gusta", a: "I like" },
+  { year: 8, topic: "Vocabulary", q: "No me gusta", a: "I don't like" },
+  { year: 8, topic: "Vocabulary", q: "Escuchar música", a: "To listen to music" },
+  { year: 8, topic: "Vocabulary", q: "Jugar al fútbol", a: "To play football" },
+  { year: 8, topic: "Vocabulary", q: "La comida", a: "The food" },
+  { year: 8, topic: "Phrases", q: "En mi tiempo libre…", a: "In my free time…" },
+  { year: 8, topic: "Phrases", q: "Normalmente", a: "Normally / usually" },
+  { year: 8, topic: "Grammar", q: "muy", a: "Very" },
+
+  { year: 9, topic: "Vocabulary", q: "Ayer", a: "Yesterday" },
+  { year: 9, topic: "Vocabulary", q: "Mañana", a: "Tomorrow" },
+  { year: 9, topic: "Vocabulary", q: "El medio ambiente", a: "The environment" },
+  { year: 9, topic: "Vocabulary", q: "La contaminación", a: "Pollution" },
+  { year: 9, topic: "Phrases", q: "En mi opinión…", a: "In my opinion…" },
+  { year: 9, topic: "Phrases", q: "Creo que…", a: "I think that…" },
+  { year: 9, topic: "Grammar", q: "porque", a: "because" },
+
+  { year: 10, topic: "Verbs", q: "Tengo", a: "I have" },
+  { year: 10, topic: "Verbs", q: "Soy", a: "I am (identity or characteristics)" },
+  { year: 10, topic: "Verbs", q: "Estoy", a: "I am (state or location)" },
+  { year: 10, topic: "Verbs", q: "Fui", a: "I went / I was (preterite of ir/ser)" },
+  { year: 10, topic: "Grammar", q: "Voy a + infinitive", a: "I am going to…" },
+  { year: 10, topic: "Grammar", q: "Más… que", a: "More… than" },
+  { year: 10, topic: "GCSE", q: "Sin embargo", a: "However" },
+  { year: 10, topic: "GCSE", q: "Por un lado… por otro lado…", a: "On one hand… on the other hand…" },
+
+  { year: 11, topic: "Verbs", q: "He visitado", a: "I have visited" },
+  { year: 11, topic: "Verbs", q: "Me gustaría", a: "I would like" },
+  { year: 11, topic: "Verbs", q: "Si tuviera…", a: "If I had…" },
+  { year: 11, topic: "Grammar", q: "Aunque", a: "Although / even though" },
+  { year: 11, topic: "GCSE", q: "Es importante que…", a: "It is important that…" },
+  { year: 11, topic: "GCSE", q: "En el futuro", a: "In the future" },
+  { year: 11, topic: "GCSE", q: "Desde mi punto de vista", a: "From my point of view" }
+];
+
+const spanishYear = document.getElementById("spanish-year");
+const spanishTopic = document.getElementById("spanish-topic");
+const spanishQuestion = document.getElementById("spanish-question");
+const spanishAnswer = document.getElementById("spanish-answer");
+const spanishLabel = document.getElementById("spanish-label");
+const spanishCount = document.getElementById("spanish-count");
+const spanishFlip = document.getElementById("spanish-flip");
+
+let spanishDeck = [...spanishCards];
+let spanishIndex = 0;
+let spanishRevealed = false;
+
+function filterSpanishCards() {
+  const year = spanishYear.value;
+  const topic = spanishTopic.value;
+
+  spanishDeck = spanishCards.filter(card =>
+    (year === "all" || String(card.year) === year) &&
+    (topic === "all" || card.topic === topic)
+  );
+
+  spanishIndex = 0;
+  spanishRevealed = false;
+  showSpanishCard();
+}
+
+function showSpanishCard() {
+  if (!spanishDeck.length) {
+    spanishLabel.textContent = "No cards found";
+    spanishQuestion.textContent = "Try another filter!";
+    spanishAnswer.hidden = true;
+    spanishFlip.hidden = true;
+    spanishCount.textContent = "0 / 0";
+    return;
+  }
+
+  const card = spanishDeck[spanishIndex];
+
+  spanishFlip.hidden = false;
+  spanishLabel.textContent = "Spanish → English";
+  spanishQuestion.textContent = card.q;
+  spanishAnswer.textContent = card.a;
+  spanishAnswer.hidden = !spanishRevealed;
+  spanishFlip.textContent = spanishRevealed
+    ? "Hide Answer 💜"
+    : "Reveal Answer 💜";
+  spanishCount.textContent = `${spanishIndex + 1} / ${spanishDeck.length}`;
+}
+
+spanishFlip.addEventListener("click", () => {
+  spanishRevealed = !spanishRevealed;
+  showSpanishCard();
+});
+
+document.getElementById("spanish-next").addEventListener("click", () => {
+  if (!spanishDeck.length) return;
+  spanishIndex = (spanishIndex + 1) % spanishDeck.length;
+  spanishRevealed = false;
+  showSpanishCard();
+});
+
+document.getElementById("spanish-prev").addEventListener("click", () => {
+  if (!spanishDeck.length) return;
+  spanishIndex = (spanishIndex - 1 + spanishDeck.length) % spanishDeck.length;
+  spanishRevealed = false;
+  showSpanishCard();
+});
+
+document.getElementById("spanish-shuffle").addEventListener("click", () => {
+  for (let i = spanishDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [spanishDeck[i], spanishDeck[j]] = [spanishDeck[j], spanishDeck[i]];
+  }
+  spanishIndex = 0;
+  spanishRevealed = false;
+  showSpanishCard();
+});
+
+document.getElementById("spanish-reset").addEventListener("click", () => {
+  spanishYear.value = "all";
+  spanishTopic.value = "all";
+  filterSpanishCards();
+});
+
+spanishYear.addEventListener("change", filterSpanishCards);
+spanishTopic.addEventListener("change", filterSpanishCards);
+
+showSpanishCard();
+
+</script>
+</body>
+</html>

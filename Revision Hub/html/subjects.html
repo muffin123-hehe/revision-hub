@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects | Revision Hub 🐾</title>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">🐾 Revision Hub</a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="subjects.html" class="active">Subjects</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <section class="page-heading">
+      <p class="eyebrow">YOUR STUDY CORNER ✨</p>
+      <h1>Choose a subject 🌷</h1>
+      <p>Pick a subject and start learning.</p>
+    </section>
+
+    <section class="subjects-grid" aria-label="Subjects">
+
+     
+<article class="subject-card maths-card">
+  <div class="subject-icon">➗</div>
+  <h2>Maths</h2>
+  <a href="maths.html" class="button">
+  Let's study
+</a>
+</article>
+
+<article class="subject-card science-card">
+  <div class="subject-icon">🧪</div>
+  <h2>Science</h2>
+  <a href="science.html" class="button">
+  Let's study
+</a>
+</article>
+
+<article class="subject-card english-card">
+  <div class="subject-icon">📚</div>
+  <h2>English</h2>
+  <a href="english.html" class="button">
+  Let's study
+</a>
+</article>
+
+<article class="subject-card history-card">
+  <div class="subject-icon">🏛️</div>
+  <h2>History</h2>
+  <a href="history.html" class="button">
+  Let's study
+</a>
+</article>
+
+<article class="subject-card geography-card">
+  <div class="subject-icon">🌍</div>
+  <h2>Geography</h2>
+  <a href="geography.html" class="button">
+  Let's study
+</a>
+</article>
+
+<article class="subject-card spanish-card">
+  <div class="subject-icon">🌸</div>
+  <h2>Spanish</h2>
+  <a href="spanish.html" class="button">
+  Let's study
+</a>
+</article>
+
+<article class="subject-card korean-card">
+  <div class="subject-icon">🐱</div>
+  <h2>Korean</h2>
+  <a href="korean.html" class="button">
+  Let's study
+</a>
+</article>
+
+
+    </section>
+
+    <section id="revision-room" class="revision-room" hidden>
+      <div class="revision-heading">
+        <p class="eyebrow">LET'S LEARN TOGETHER 🐾</p>
+        <h2 id="selected-subject">Your study room</h2>
+        <button onclick="backToSubjects()">← Back to subjects</button>
+      </div>
+
+      <div class="revision-tabs">
+        <button onclick="showTab('notes')">📝 Notes</button>
+        <button onclick="showTab('flashcards')">🃏 Flashcards</button>
+        <button onclick="showTab('checklist')">✅ Checklist</button>
+        <button onclick="showTab('facts')">⭐ Key facts</button>
+        <button onclick="showTab('practice')">✏️ Practice</button>
+      </div>
+
+      <div id="revision-content">
+        <h3>Your notes</h3>
+        <textarea
+          id="subject-notes"
+          placeholder="Write your notes here..."
+        ></textarea>
+        <button onclick="saveSubjectNotes()">Save notes ♡</button>
+      </div>
+    </section>
+  </main>
+
+<script src="subjects.js"></script>
+
+</body>
+</html>

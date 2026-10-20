@@ -1,0 +1,2653 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English | Revision Hub</title>
+
+<style>
+:root {
+  --pink: #f6b8cf;
+  --pink-dark: #d96d99;
+  --pink-light: #fff0f6;
+  --cream: #fffaf5;
+  --purple: #e9ddff;
+  --blue: #dff1ff;
+  --green: #e0f5e6;
+  --text: #55434c;
+  --white: #ffffff;
+  --shadow: 0 5px 18px rgba(180, 105, 139, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+}
+
+header {
+  text-align: center;
+  padding: 25px 16px 18px;
+  background: linear-gradient(135deg, #ffe5ef, #f7eaff);
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--pink-dark);
+}
+
+header p {
+  margin: 8px 0 0;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 10px 17px;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 28px auto;
+}
+
+.hero {
+  padding: 30px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ffe4ef, #eee5ff);
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  margin-top: 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.hero p {
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+.paw {
+  font-size: 2.5rem;
+}
+
+.section-title {
+  margin: 30px 0 15px;
+}
+
+.year-tabs,
+.subject-tabs,
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+.tab-button,
+.subject-button,
+.filter-button {
+  border: 0;
+  padding: 11px 17px;
+  border-radius: 20px;
+  background: white;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-weight: bold;
+}
+
+.tab-button.active,
+.subject-button.active,
+.filter-button.active {
+  background: var(--pink-dark);
+  color: white;
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px 17px;
+  border: 2px solid #f5d4e1;
+  border-radius: 18px;
+  background: white;
+  outline: none;
+}
+
+.search-box:focus {
+  border-color: var(--pink-dark);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 22px 0;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--pink-dark);
+}
+
+.progress-track {
+  height: 12px;
+  background: #f4dce7;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ed91b7, #b9a1ed);
+  transition: width 0.3s;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.topic-card {
+  background: white;
+  padding: 21px;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topic-card:hover {
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+.topic-card h3 {
+  margin: 0;
+}
+
+.topic-card p {
+  line-height: 1.55;
+  margin: 0;
+}
+
+.topic-tag {
+  display: inline-block;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background: var(--pink-light);
+}
+
+.topic-tag.language {
+  background: var(--blue);
+}
+
+.topic-tag.literature {
+  background: var(--purple);
+}
+
+.card-button,
+.primary-button {
+  border: 0;
+  border-radius: 16px;
+  padding: 11px 15px;
+  background: var(--pink);
+  color: #694052;
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.card-button:hover,
+.primary-button:hover {
+  background: var(--pink-dark);
+  color: white;
+}
+
+.done-button {
+  background: var(--green);
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.panel p,
+.panel li {
+  line-height: 1.75;
+}
+
+.note-box {
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--pink-light);
+  margin: 15px 0;
+}
+
+.key-box {
+  padding: 16px;
+  border-radius: 16px;
+  background: #f1eaff;
+  margin: 15px 0;
+}
+
+.quiz-question {
+  padding: 17px;
+  margin: 14px 0;
+  border-radius: 17px;
+  background: #fff7fa;
+}
+
+.quiz-question label {
+  display: block;
+  padding: 8px 4px;
+  cursor: pointer;
+}
+
+.feedback {
+  padding: 14px;
+  border-radius: 14px;
+  margin-top: 14px;
+  font-weight: bold;
+}
+
+.feedback.good {
+  background: var(--green);
+}
+
+.feedback.retry {
+  background: #fff0d9;
+}
+
+.empty-message {
+  padding: 25px;
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+}
+
+footer {
+  margin-top: 45px;
+  padding: 25px;
+  text-align: center;
+  background: #ffe7f0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 22px;
+  }
+
+  .main-nav a {
+    padding: 9px 12px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+}
+
+.deep-learning {
+  background: linear-gradient(135deg, #fff4f8, #f6f0ff);
+  border: 1px solid #f2d6e5;
+  border-radius: 20px;
+  padding: 22px;
+  margin: 22px 0;
+}
+
+.deep-learning h3 {
+  color: var(--pink-dark);
+  margin-top: 0;
+}
+
+.deep-learning h4 {
+  color: #9b6590;
+  margin: 22px 0 8px;
+}
+
+.deep-learning p {
+  line-height: 1.85;
+  margin: 12px 0;
+}
+
+.deep-learning .learning-example {
+  background: white;
+  padding: 15px;
+  border-radius: 14px;
+  margin: 15px 0;
+  border-left: 4px solid var(--pink);
+}
+
+.deep-learning .learning-check {
+  background: #e8f7eb;
+  padding: 15px;
+  border-radius: 14px;
+  margin-top: 18px;
+}
+
+
+/* 💗 REVISION HUB — ENGLISH FLASHCARDS */
+
+.english-flashcards,
+.english-flashcards * {
+  box-sizing: border-box;
+}
+
+.english-flashcards {
+  width: 100%;
+  max-width: 950px;
+  margin: 35px auto;
+  padding: 30px;
+  border: 2px solid #e8c8ff;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, #f4dcff 0, transparent 40%),
+    linear-gradient(145deg, #fffaff, #ffedf7);
+  box-shadow: 0 12px 35px rgba(133, 69, 180, 0.12);
+  color: #45245f;
+  text-align: center;
+  font-family: inherit;
+}
+
+.english-flashcards h2 {
+  margin: 0 0 10px;
+  color: #853dc0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+}
+
+.english-flashcard-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.english-flashcard-filters label {
+  color: #70418e;
+  font-weight: 700;
+}
+
+.english-flashcard-filters select {
+  appearance: none;
+  min-width: 130px;
+  padding: 11px 14px;
+  border: 1.5px solid #d9b1fa;
+  border-radius: 13px;
+  background: #fff;
+  color: #58316f;
+  font: inherit;
+  cursor: pointer;
+}
+
+.english-flashcard {
+  width: 100%;
+  max-width: 700px;
+  min-height: 290px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 2px solid #dbb2ff;
+  border-radius: 25px;
+  background: linear-gradient(155deg, #fff, #fff4fa);
+  box-shadow: 0 12px 28px rgba(137, 70, 183, 0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.english-flashcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 17px 34px rgba(137, 70, 183, 0.19);
+}
+
+#english-card-count {
+  color: #9b6bb6;
+  font-size: 0.9rem;
+}
+
+#english-card-label {
+  color: #a33e96;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+#english-card-text {
+  max-width: 600px;
+  margin: 10px 0;
+  color: #39234f;
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+#english-card-hint {
+  margin-top: 10px;
+  color: #9b78aa;
+  font-size: 0.9rem;
+}
+
+.english-card-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.english-card-controls button {
+  appearance: none;
+  min-height: 44px;
+  padding: 11px 19px;
+  border: 1px solid #8d48c6;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #9850d0, #803bc0);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(126, 57, 180, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.english-card-controls button:hover {
+  background: linear-gradient(135deg, #b14ba7, #9341bd);
+  transform: translateY(-2px);
+}
+
+.english-flashcard:focus-visible,
+.english-flashcard-filters select:focus-visible,
+.english-card-controls button:focus-visible {
+  outline: 3px solid #edb5e5;
+  outline-offset: 4px;
+}
+
+#english-card-status {
+  margin-top: 20px;
+  color: #8954a5;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .english-flashcards {
+    padding: 18px 14px;
+    border-radius: 21px;
+  }
+
+  .english-flashcard {
+    min-height: 250px;
+    padding: 22px 16px;
+  }
+
+  .english-card-controls {
+    gap: 9px;
+  }
+
+  .english-card-controls button {
+    flex: 1 1 40%;
+    padding: 11px 10px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="main-nav" aria-label="Main navigation">
+  <a href="index.html">Home</a>
+  <a href="subjects.html" class="active" aria-current="page">Subjects</a>
+  <a href="pomodoro.html">Pomodoro</a>
+  <a href="progress.html">Progress</a>
+</nav>
+
+<main class="container">
+
+  <section class="hero">
+    <h1>English</h1>
+    <p>
+      Welcome to your English study space! Practise language techniques,
+      explore literature, revise poetry and improve your writing skills.
+      Choose your year, pick a topic and let's get learning!
+    </p>
+  </section>
+
+  <h2 class="section-title">🌷 Choose your year</h2>
+  <div class="year-tabs" id="yearTabs">
+    <button class="tab-button active" data-year="7">Year 7</button>
+    <button class="tab-button" data-year="8">Year 8</button>
+    <button class="tab-button" data-year="9">Year 9</button>
+    <button class="tab-button" data-year="10">Year 10</button>
+    <button class="tab-button" data-year="11">Year 11</button>
+  </div>
+
+  <section class="stats">
+    <div class="stat-card">
+      <span class="stat-number" id="totalTopics">0</span>
+      Topics available
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="completedTopics">0</span>
+      Topics completed
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="progressPercent">0%</span>
+      Your progress
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">🔎 Find your next topic</h2>
+  <input
+    class="search-box"
+    id="searchInput"
+    type="search"
+    placeholder="Search topics, e.g. metaphors, poetry, essays..."
+    aria-label="Search English topics"
+  >
+
+  <div class="subject-tabs">
+    <button class="subject-button active" data-subject="All">All topics</button>
+    <button class="subject-button" data-subject="Language">English Language</button>
+    <button class="subject-button" data-subject="Literature">English Literature</button>
+  </div>
+
+  <div class="filters">
+    <button class="filter-button active" data-filter="all">All topics</button>
+    <button class="filter-button" data-filter="todo">Not completed</button>
+    <button class="filter-button" data-filter="done">Completed ✓</button>
+  </div>
+
+  <h2 class="section-title" id="topicHeading">Year 7 topics 🌸</h2>
+  <section class="topic-grid" id="topicGrid"></section>
+
+  <section class="panel hidden" id="lessonPanel">
+    <h2 id="lessonTitle">Topic</h2>
+    <span class="topic-tag" id="lessonTag">English</span>
+
+    <h3>📝 Revision notes</h3>
+    <div id="lessonNotes"></div>
+
+    <section class="deep-learning">
+  <h3>📚 Learn it properly</h3>
+  <div id="deepLessonNotes"></div>
+</section>
+
+    <div class="note-box">
+      <strong>💡 Remember:</strong>
+      <p id="lessonTip"></p>
+    </div>
+
+    <div class="key-box">
+      <strong>⭐ Key ideas</strong>
+      <ul id="lessonKeyIdeas"></ul>
+    </div>
+
+    <button class="primary-button" id="startQuizButton">
+      Test yourself ✏️
+    </button>
+    <button class="primary-button done-button" id="markDoneButton">
+      Mark topic complete ✓
+    </button>
+    <button class="primary-button" id="closeLessonButton">
+      Back to topics
+    </button>
+  </section>
+
+  <section class="panel hidden" id="quizPanel">
+    <h2>🧠 Mini quiz</h2>
+    <p>Choose your answers and see how you do!</p>
+    <form id="quizForm">
+      <div id="quizQuestions"></div>
+      <button class="primary-button" type="submit">Check answers ✨</button>
+    </form>
+    <div id="quizFeedback" aria-live="polite"></div>
+    <button class="primary-button" id="backToLessonButton">
+      Back to revision notes
+    </button>
+  </section>
+
+  <section class="english-flashcards">
+  <h2>📚 English Flashcards</h2>
+  <p>Build your vocabulary, analyse texts and revise literature! 💜</p>
+
+  <div class="english-flashcard-filters">
+    <label for="english-year">School year:</label>
+    <select id="english-year">
+      <option value="all">All years</option>
+      <option value="7">Year 7</option>
+      <option value="8">Year 8</option>
+      <option value="9">Year 9</option>
+      <option value="10">Year 10</option>
+      <option value="11">Year 11</option>
+    </select>
+
+    <label for="english-topic">Topic:</label>
+    <select id="english-topic">
+      <option value="all">All topics</option>
+      <option value="Language">English Language</option>
+      <option value="Literature">English Literature</option>
+      <option value="Poetry">Poetry</option>
+      <option value="Shakespeare">Shakespeare</option>
+      <option value="Techniques">Literary techniques</option>
+      <option value="Writing">Creative writing</option>
+    </select>
+  </div>
+
+  <div class="english-flashcard" id="english-flashcard"
+       tabindex="0" role="button"
+       aria-label="English flashcard. Click to reveal the answer.">
+    <span id="english-card-count">Card 1</span>
+    <h3 id="english-card-label">QUESTION ✨</h3>
+    <p id="english-card-text">Loading flashcards...</p>
+    <small id="english-card-hint">Click to reveal the answer ✨</small>
+  </div>
+
+  <div class="english-card-controls">
+    <button type="button" id="english-prev">⬅️ Previous</button>
+    <button type="button" id="english-flip">🔄 Flip card</button>
+    <button type="button" id="english-next">Next ➡️</button>
+  </div>
+
+  <div class="english-card-controls">
+    <button type="button" id="english-shuffle">🔀 Shuffle</button>
+    <button type="button" id="english-reset">↻ Start again</button>
+  </div>
+
+  <p id="english-card-status" aria-live="polite"></p>
+</section>
+
+</main>
+
+
+
+<script>
+const topicBank = {
+  7: [
+    {
+      title: "Similes and Metaphors",
+      subject: "Language",
+      description: "Compare things creatively to create vivid images.",
+      notes: [
+        "A simile compares two things using 'like' or 'as'. For example, 'Her smile shone like the sun.'",
+        "A metaphor describes something as if it is something else. For example, 'The classroom was a zoo.'",
+        "Writers use comparisons to help readers imagine scenes, understand feelings and create atmosphere."
+      ],
+      tip: "Explain the image created and why the comparison is effective.",
+      keys: ["Similes use like or as.", "Metaphors describe one thing as another.", "Always explain the effect on the reader."],
+      quiz: [
+        { q: "Which phrase is a simile?", options: ["The sky was a blanket", "As quiet as a mouse", "The angry storm"], a: 1, why: "A simile uses a comparison with 'as' or 'like'." },
+        { q: "What is a metaphor?", options: ["A direct comparison", "A question mark", "A list of adjectives"], a: 0, why: "A metaphor describes one thing as another." }
+      ]
+    },
+    {
+      title: "Adjectives and Adverbs",
+      subject: "Language",
+      description: "Make descriptions more precise and interesting.",
+      notes: [
+        "An adjective describes a noun, such as 'the enormous castle'.",
+        "An adverb often describes a verb, adjective or another adverb, such as 'she spoke quietly'.",
+        "Choose precise words rather than adding lots of unnecessary description."
+      ],
+      tip: "Ask yourself which word is being described.",
+      keys: ["Adjectives describe nouns.", "Adverbs can describe how an action happens.", "Precise vocabulary makes writing clearer."],
+      quiz: [
+        { q: "Which word is an adjective in 'the ancient tree'?", options: ["the", "ancient", "tree"], a: 1, why: "'Ancient' describes the tree." },
+        { q: "Which word is an adverb in 'he ran quickly'?", options: ["he", "ran", "quickly"], a: 2, why: "'Quickly' describes how he ran." }
+      ]
+    },
+    {
+      title: "Punctuation Basics",
+      subject: "Language",
+      description: "Use commas, apostrophes and full stops accurately.",
+      notes: [
+        "A full stop ends a statement.",
+        "A comma can separate items in a list or help organise a sentence.",
+        "An apostrophe can show possession, as in 'the girl's book', or a contraction, as in 'don't'.",
+        "Question marks end direct questions, while exclamation marks show strong feeling or emphasis."
+      ],
+      tip: "Read your writing aloud to check where punctuation is needed.",
+      keys: ["Use punctuation for clarity.", "Apostrophes can show possession or omission.", "Avoid comma splices."],
+      quiz: [
+        { q: "Which sentence uses an apostrophe correctly?", options: ["The dogs bowl", "The dog's bowl", "The dogs' bowl is dog"], a: 1, why: "'Dog's' shows that one dog owns the bowl." },
+        { q: "Which punctuation ends a direct question?", options: ["Full stop", "Comma", "Question mark"], a: 2, why: "A direct question ends with a question mark." }
+      ]
+    },
+    {
+      title: "Creative Story Writing",
+      subject: "Language",
+      description: "Build characters, settings and engaging plots.",
+      notes: [
+        "A story usually has an opening, a development and an ending.",
+        "Use sensory details to describe what characters see, hear, smell, taste and touch.",
+        "Vary sentence lengths to control pace. Short sentences can create tension.",
+        "Give characters goals, problems and reactions so that readers care about them."
+      ],
+      tip: "Plan a beginning, a turning point and an ending before you write.",
+      keys: ["Use a clear structure.", "Show character feelings through actions.", "Vary vocabulary and sentence length."],
+      quiz: [
+        { q: "What can a short sentence help create?", options: ["Tension or impact", "A bibliography", "A longer paragraph automatically"], a: 0, why: "Short sentences can create tension and emphasis." },
+        { q: "Which is a sensory detail?", options: ["It was a place", "The sharp smell of smoke", "Something happened"], a: 1, why: "Smell is one of the senses." }
+      ]
+    },
+    {
+      title: "Poetry: Imagery",
+      subject: "Literature",
+      description: "Explore how poets create pictures with words.",
+      notes: [
+        "Imagery is language that helps readers imagine an experience.",
+        "Poets can use similes, metaphors and personification to create imagery.",
+        "When analysing a quotation, identify the method, explore a key word and explain the effect."
+      ],
+      tip: "Think about the picture, feeling or atmosphere the words create.",
+      keys: ["Select a short quotation.", "Identify a language method.", "Explain a possible interpretation."],
+      quiz: [
+        { q: "What does imagery help a reader do?", options: ["Imagine an experience", "Count paragraphs", "Identify page numbers"], a: 0, why: "Imagery helps readers picture or sense what is described." },
+        { q: "What should you explain after identifying a method?", options: ["Only the writer's name", "Its possible effect", "The number of letters"], a: 1, why: "Analysis explains how language may affect the reader." }
+      ]
+    },
+    {
+      title: "Characterisation",
+      subject: "Literature",
+      description: "Understand how writers present characters.",
+      notes: [
+        "Writers reveal characters through their actions, dialogue, thoughts and descriptions.",
+        "A character's choices can reveal their values, fears and relationships.",
+        "Use evidence from the text to support your interpretation."
+      ],
+      tip: "Look at what a character says and what they actually do.",
+      keys: ["Use evidence.", "Consider actions and dialogue.", "Explain what the details suggest."],
+      quiz: [
+        { q: "Which can reveal a character's personality?", options: ["Their actions", "The book's price", "The chapter number alone"], a: 0, why: "Actions can reveal traits, motives and values." },
+        { q: "What supports a character analysis?", options: ["An unsupported guess", "Evidence from the text", "A random fact"], a: 1, why: "Textual evidence makes an interpretation convincing." }
+      ]
+    },
+    {
+      title: "Persuasive Writing",
+      subject: "Language",
+      description: "Convince readers using reasons and rhetorical choices.",
+      notes: [
+        "Persuasive writing aims to influence the reader's opinions or actions.",
+        "You can use rhetorical questions, direct address, facts, examples and emotive language.",
+        "Organise your ideas into clear paragraphs, each developing a main point."
+      ],
+      tip: "Support opinions with reasons and relevant examples.",
+      keys: ["Know your audience.", "Use clear arguments.", "Choose techniques for a purpose."],
+      quiz: [
+        { q: "What is the aim of persuasive writing?", options: ["To influence a reader", "To list random words", "To avoid having a viewpoint"], a: 0, why: "Persuasive writing tries to influence thought or action." },
+        { q: "Which is a rhetorical question?", options: ["What time is it?", "Who wouldn't want a safer park?", "The park is green."], a: 1, why: "It is phrased to encourage agreement rather than request a simple answer." }
+      ]
+    },
+    {
+      title: "Myths and Legends",
+      subject: "Literature",
+      description: "Explore traditional stories, heroes and symbolism.",
+      notes: [
+        "Myths often explore origins, gods, nature or big questions about human life.",
+        "Legends are traditional stories associated with heroic figures or events.",
+        "Look at recurring themes such as courage, pride, loyalty and consequences."
+      ],
+      tip: "Ask what a story might teach its audience.",
+      keys: ["Consider the cultural context.", "Identify themes and symbols.", "Explore how characters respond to challenges."],
+      quiz: [
+        { q: "What might a traditional legend feature?", options: ["A heroic figure", "Only scientific instructions", "No characters"], a: 0, why: "Legends often centre on heroes or notable events." },
+        { q: "What is a theme?", options: ["A central idea", "A punctuation mark", "A book cover"], a: 0, why: "A theme is a central idea explored by a text." }
+      ]
+    },
+    {
+      title: "Formal and Informal Writing",
+      subject: "Language",
+      description: "Adapt tone and vocabulary to the situation.",
+      notes: [
+        "Formal writing often uses precise vocabulary and avoids slang.",
+        "Informal writing may use contractions, conversational expressions and a friendly tone.",
+        "Choose your register based on the audience, purpose and form."
+      ],
+      tip: "Before writing, decide who will read your work and why.",
+      keys: ["Audience affects style.", "Purpose affects content.", "Tone should suit the form."],
+      quiz: [
+        { q: "Which phrase is more formal?", options: ["Hey, what's up?", "I am writing to enquire", "That's so cool"], a: 1, why: "It uses a more formal register." },
+        { q: "What should guide your choice of tone?", options: ["Audience and purpose", "Random choice", "Word length only"], a: 0, why: "Tone should suit the reader and reason for writing." }
+      ]
+    },
+    {
+      title: "Reading Comprehension",
+      subject: "Language",
+      description: "Find evidence and explain what a passage suggests.",
+      notes: [
+        "Read the question carefully and identify exactly what it asks.",
+        "Use a short quotation or precise reference to support your answer.",
+        "Inference means working out what is suggested rather than directly stated."
+      ],
+      tip: "For inference, combine evidence with a reasonable interpretation.",
+      keys: ["Answer the question asked.", "Support ideas with evidence.", "Separate explicit facts from inference."],
+      quiz: [
+        { q: "What is inference?", options: ["A supported conclusion from clues", "Copying every sentence", "Guessing without evidence"], a: 0, why: "Inference uses evidence and reasoning to work out what is implied." },
+        { q: "What should support an interpretation?", options: ["Textual evidence", "A random opinion", "An unrelated story"], a: 0, why: "Evidence connects your interpretation to the passage." }
+      ]
+    }
+  ],
+
+  8: [
+    {
+      title: "Personification",
+      subject: "Language",
+      description: "Give human qualities to non-human things.",
+      notes: [
+        "Personification describes an object, animal or idea as if it has human qualities.",
+        "For example, 'The wind whispered through the trees' gives the wind a human action.",
+        "It can create mood, make descriptions vivid or suggest how a setting feels."
+      ],
+      tip: "Explain why the writer chose that particular human quality.",
+      keys: ["Identify the non-human subject.", "Find the human quality.", "Explain the image or mood."],
+      quiz: [
+        { q: "Which example uses personification?", options: ["The door groaned", "The door was wooden", "The door was brown"], a: 0, why: "'Groaned' gives the door a human-like action." },
+        { q: "What should you analyse about personification?", options: ["Its effect and meaning", "Only its spelling", "The page colour"], a: 0, why: "Analysis explores the image and its possible significance." }
+      ]
+    },
+    {
+      title: "Sentence Structures",
+      subject: "Language",
+      description: "Use simple, compound and complex sentences.",
+      notes: [
+        "A simple sentence contains one main clause.",
+        "A compound sentence joins main clauses, often with a coordinating conjunction.",
+        "A complex sentence contains a main clause and at least one subordinate clause.",
+        "Vary structures to control rhythm, emphasis and pace."
+      ],
+      tip: "Try changing the sentence structure to see how the effect changes.",
+      keys: ["Main clauses can stand alone.", "Subordinate clauses depend on another clause.", "Variety helps control pace."],
+      quiz: [
+        { q: "Which sentence is complex?", options: ["The bell rang.", "I left because it was late.", "The bell rang, and we left."], a: 1, why: "It has a main clause and a subordinate clause beginning with 'because'." },
+        { q: "Why vary sentence structures?", options: ["To control pace and emphasis", "To remove meaning", "To make every sentence identical"], a: 0, why: "Different structures create different effects." }
+      ]
+    },
+    {
+      title: "News Reports",
+      subject: "Language",
+      description: "Write clearly using headlines, facts and quotations.",
+      notes: [
+        "News reports usually prioritise the most important information.",
+        "A headline summarises the main event, while the opening paragraph often answers who, what, where, when and why.",
+        "Quotes can add viewpoints, but facts and opinions should be distinguished."
+      ],
+      tip: "Keep the opening clear and make sure details are consistent.",
+      keys: ["Use an informative headline.", "Prioritise important information.", "Attribute quotations to speakers."],
+      quiz: [
+        { q: "What does a headline usually do?", options: ["Summarises the main event", "Lists every detail", "Replaces the whole report"], a: 0, why: "A headline gives readers a quick idea of the story." },
+        { q: "Why attribute a quotation?", options: ["To show who said it", "To make it anonymous automatically", "To remove context"], a: 0, why: "Attribution identifies the source of the statement." }
+      ]
+    },
+    {
+      title: "Poetry: Tone and Mood",
+      subject: "Literature",
+      description: "Explore the speaker's attitude and the atmosphere.",
+      notes: [
+        "Tone is the attitude conveyed by the speaker or writer.",
+        "Mood is the atmosphere created for the reader.",
+        "Word choices, imagery, rhythm and punctuation can all influence tone and mood."
+      ],
+      tip: "Support descriptions like 'uneasy' or 'joyful' with specific words.",
+      keys: ["Tone relates to attitude.", "Mood relates to atmosphere.", "Support interpretations with quotations."],
+      quiz: [
+        { q: "What is tone?", options: ["The speaker's attitude", "The number of stanzas", "The paper size"], a: 0, why: "Tone describes the attitude conveyed by the speaker or writer." },
+        { q: "What can create mood?", options: ["Imagery and word choice", "Only the title length", "The author's handwriting"], a: 0, why: "Language choices can shape the atmosphere." }
+      ]
+    },
+    {
+      title: "Shakespeare: Characters",
+      subject: "Literature",
+      description: "Explore motives, conflict and character development.",
+      notes: [
+        "Shakespeare's characters may reveal their motives through soliloquies, dialogue and actions.",
+        "Conflict can occur within a character or between characters.",
+        "Consider how relationships change and what those changes reveal about the play's themes."
+      ],
+      tip: "Look at what a character wants and what prevents them getting it.",
+      keys: ["Analyse dialogue and actions.", "Explore conflict.", "Connect characters to themes."],
+      quiz: [
+        { q: "What is a soliloquy?", options: ["A speech expressing a character's thoughts alone", "A list of stage props", "A chapter heading"], a: 0, why: "A soliloquy lets an audience hear a character's thoughts." },
+        { q: "What can conflict reveal?", options: ["Motives and relationships", "Only the setting's colour", "Nothing about characters"], a: 0, why: "Conflict can expose what characters value or fear." }
+      ]
+    },
+    {
+      title: "Persuasive Speeches",
+      subject: "Language",
+      description: "Use rhetorical choices to influence an audience.",
+      notes: [
+        "A speech is written to be heard, so rhythm, repetition and direct address can be effective.",
+        "Rhetorical questions encourage an audience to consider an idea.",
+        "A strong speech develops clear arguments and ends with a purposeful conclusion or call to action."
+      ],
+      tip: "Read your speech aloud to test whether it sounds natural.",
+      keys: ["Address the audience.", "Build a clear argument.", "Use repetition selectively."],
+      quiz: [
+        { q: "Why use direct address in a speech?", options: ["To engage the audience", "To avoid the audience", "To remove the argument"], a: 0, why: "Direct address makes the audience feel involved." },
+        { q: "What is a call to action?", options: ["A request for the audience to act", "A character description", "A punctuation rule"], a: 0, why: "A call to action encourages a specific response." }
+      ]
+    },
+    {
+      title: "Gothic Fiction",
+      subject: "Literature",
+      description: "Explore suspense, mystery and unsettling settings.",
+      notes: [
+        "Gothic fiction often uses isolated settings, secrets, threatening events and uncertainty.",
+        "Writers may describe darkness, weather or architecture to create unease.",
+        "Suspense develops when readers anticipate a threat but do not know exactly what will happen."
+      ],
+      tip: "Notice how setting and information are revealed to the reader.",
+      keys: ["Explore atmosphere.", "Look for mystery and uncertainty.", "Explain how suspense is created."],
+      quiz: [
+        { q: "Which setting could create a Gothic atmosphere?", options: ["An isolated ruined mansion", "A bright ordinary classroom only", "A shopping list"], a: 0, why: "An isolated ruined mansion can suggest mystery and danger." },
+        { q: "What is suspense?", options: ["Tension about what may happen", "A list of characters", "A type of punctuation"], a: 0, why: "Suspense makes readers anticipate uncertain events." }
+      ]
+    },
+    {
+      title: "Analytical Paragraphs",
+      subject: "Language",
+      description: "Build an argument using evidence and explanation.",
+      notes: [
+        "Start with a clear point that answers the question.",
+        "Include a short quotation or specific detail as evidence.",
+        "Explain how the evidence supports your point and explore important words.",
+        "Link your explanation back to the question."
+      ],
+      tip: "Avoid dropping a quotation into a paragraph without explaining it.",
+      keys: ["Point.", "Evidence.", "Explanation.", "Link to the question."],
+      quiz: [
+        { q: "Why include evidence?", options: ["To support your point", "To make the answer unrelated", "To avoid analysis"], a: 0, why: "Evidence shows where your interpretation comes from." },
+        { q: "What should follow a quotation?", options: ["Explanation of its significance", "An unrelated fact", "No further thought"], a: 0, why: "Analysis explains how the evidence supports your point." }
+      ]
+    },
+    {
+      title: "Travel Writing",
+      subject: "Language",
+      description: "Describe places using viewpoint and sensory details.",
+      notes: [
+        "Travel writing can inform, describe or persuade readers to visit a place.",
+        "Specific details help readers imagine the landscape, sounds and atmosphere.",
+        "The writer's viewpoint shapes which features are emphasised."
+      ],
+      tip: "Choose details that support the impression you want to create.",
+      keys: ["Establish viewpoint.", "Use sensory description.", "Match style to purpose."],
+      quiz: [
+        { q: "What helps readers imagine a place?", options: ["Specific sensory details", "Only repeated general words", "No description"], a: 0, why: "Sensory details make a place more vivid." },
+        { q: "What can viewpoint influence?", options: ["Which details are emphasised", "The spelling of every word automatically", "Nothing in the text"], a: 0, why: "Viewpoint affects how a place is presented." }
+      ]
+    },
+    {
+      title: "Comparing Texts",
+      subject: "Language",
+      description: "Compare writers' ideas, methods and viewpoints.",
+      notes: [
+        "Identify a meaningful similarity or difference between the texts.",
+        "Use evidence from both texts and explain the writers' choices.",
+        "Compare methods and effects rather than simply retelling what happens."
+      ],
+      tip: "Use comparative words such as 'whereas', 'similarly' and 'in contrast'.",
+      keys: ["Make a clear comparison.", "Use evidence from both texts.", "Compare methods and viewpoints."],
+      quiz: [
+        { q: "What makes a comparison analytical?", options: ["Explaining methods and effects", "Retelling one text only", "Listing titles without discussion"], a: 0, why: "Analysis explores how the texts create meaning." },
+        { q: "Which phrase signals contrast?", options: ["In contrast", "For example only", "Firstly only"], a: 0, why: "'In contrast' signals a difference." }
+      ]
+    }
+  ],
+
+  9: [
+    {
+      title: "Language Analysis",
+      subject: "Language",
+      description: "Explore how writers use words to shape meaning.",
+      notes: [
+        "Select a short quotation that supports your idea.",
+        "Identify a method such as metaphor, contrast, repetition or a semantic field.",
+        "Zoom in on individual words and consider their connotations.",
+        "Offer a supported interpretation of the effect on the reader."
+      ],
+      tip: "There can be more than one valid interpretation if you support it.",
+      keys: ["Choose precise evidence.", "Analyse specific words.", "Explain possible effects."],
+      quiz: [
+        { q: "What are connotations?", options: ["Ideas or associations linked to a word", "Only a word's syllables", "The page number"], a: 0, why: "Connotations are associations or ideas a word suggests." },
+        { q: "What should an interpretation be based on?", options: ["Evidence from the text", "A random guess", "The cover colour"], a: 0, why: "Textual evidence supports a convincing interpretation." }
+      ]
+    },
+    {
+      title: "Narrative Viewpoint",
+      subject: "Literature",
+      description: "Understand who tells the story and what they know.",
+      notes: [
+        "First-person narration uses 'I' and presents events through a narrator's perspective.",
+        "Third-person narration refers to characters as 'he', 'she' or 'they'.",
+        "A narrator may have limited knowledge, strong opinions or an unreliable account.",
+        "Viewpoint affects which information readers receive and when."
+      ],
+      tip: "Ask what the narrator knows, believes and might misunderstand.",
+      keys: ["Identify the narrative perspective.", "Consider what is withheld.", "Explore reliability and bias."],
+      quiz: [
+        { q: "Which pronoun often signals first-person narration?", options: ["I", "They", "He"], a: 0, why: "First-person narrators often use 'I' or 'we'." },
+        { q: "What is an unreliable narrator?", options: ["A narrator whose account may not be fully trusted", "A narrator who never speaks", "A list of events"], a: 0, why: "An unreliable narrator may mislead or misunderstand events." }
+      ]
+    },
+    {
+      title: "Poetry: Structure",
+      subject: "Literature",
+      description: "Explore stanzas, line breaks, rhythm and form.",
+      notes: [
+        "A stanza is a group of lines in a poem.",
+        "Enjambment occurs when a sentence continues beyond a line break.",
+        "End-stopping occurs when a line ends with a clear pause or punctuation.",
+        "Structure can affect pace, emphasis and the way ideas develop."
+      ],
+      tip: "Connect structural choices to a specific idea or moment in the poem.",
+      keys: ["Notice stanza changes.", "Explore line breaks.", "Link structure to meaning."],
+      quiz: [
+        { q: "What is enjambment?", options: ["A sentence continuing across a line break", "A type of rhyme only", "A character speaking"], a: 0, why: "Enjambment carries a sentence beyond the end of a line." },
+        { q: "What can a stanza change signal?", options: ["A shift in idea or focus", "The book's price", "The author's age automatically"], a: 0, why: "A new stanza may mark a change in focus or tone." }
+      ]
+    },
+    {
+      title: "Shakespeare: Themes",
+      subject: "Literature",
+      description: "Explore ambition, power, conflict and responsibility.",
+      notes: [
+        "Themes are central ideas explored across a text.",
+        "Track how a theme develops through characters, language and events.",
+        "Consider the historical context and what an audience at the time might have thought.",
+        "Use quotations to support your interpretation."
+      ],
+      tip: "Follow a theme through the beginning, middle and end of the play.",
+      keys: ["Identify a central theme.", "Track its development.", "Consider context carefully."],
+      quiz: [
+        { q: "What is a theme?", options: ["A central idea explored in a text", "A single punctuation mark", "A list of stage directions"], a: 0, why: "A theme is an idea developed across a text." },
+        { q: "What can context help explain?", options: ["Values and expectations around the text", "Every interpretation with certainty", "Only the length of the play"], a: 0, why: "Context can help explain ideas and audience responses." }
+      ]
+    },
+    {
+      title: "Transactional Writing",
+      subject: "Language",
+      description: "Write articles, letters, speeches and reviews.",
+      notes: [
+        "Transactional writing includes forms such as letters, articles, speeches and reviews.",
+        "Each form has conventions. A letter may need an appropriate greeting; an article needs an engaging headline.",
+        "Adapt tone, vocabulary and structure to the audience and purpose.",
+        "Develop a clear viewpoint and support it with examples."
+      ],
+      tip: "Check that your response matches the form named in the task.",
+      keys: ["Recognise the form.", "Adapt tone to audience.", "Organise arguments clearly."],
+      quiz: [
+        { q: "What should a formal letter usually use?", options: ["An appropriate formal tone", "Unexplained slang throughout", "No clear purpose"], a: 0, why: "A formal letter should suit its audience and purpose." },
+        { q: "Why use paragraphs?", options: ["To organise ideas", "To hide the argument", "To make all ideas identical"], a: 0, why: "Paragraphs help organise and develop points." }
+      ]
+    },
+    {
+      title: "Poetry Comparison",
+      subject: "Literature",
+      description: "Compare ideas and methods across poems.",
+      notes: [
+        "Begin with a clear similarity or difference in the poems' ideas.",
+        "Use short quotations from both poems.",
+        "Compare language, imagery, structure and tone where relevant.",
+        "Explain how each poet presents the idea differently or similarly."
+      ],
+      tip: "Keep both poems in the discussion rather than analysing one completely alone.",
+      keys: ["Compare ideas.", "Use evidence from both poems.", "Explain similarities and differences in methods."],
+      quiz: [
+        { q: "What should a poem comparison include?", options: ["Evidence from both poems", "Only a plot summary", "Only one poem's title"], a: 0, why: "Both poems need to be part of the comparison." },
+        { q: "What can you compare besides ideas?", options: ["Language and structure", "Paper weight only", "The number of pages in the anthology"], a: 0, why: "Writers' methods help show how ideas are presented." }
+      ]
+    },
+    {
+      title: "Unseen Fiction",
+      subject: "Language",
+      description: "Analyse an unfamiliar extract independently.",
+      notes: [
+        "Read the extract once for overall meaning and again for important details.",
+        "Identify how the writer presents a character, setting or event.",
+        "Choose concise evidence and analyse language and structure.",
+        "Keep each point linked to the question."
+      ],
+      tip: "You do not need to know the whole story to analyse an extract.",
+      keys: ["Read the question first.", "Choose relevant quotations.", "Explain how methods shape meaning."],
+      quiz: [
+        { q: "What is an unseen extract?", options: ["A text you have not studied beforehand", "A passage with no words", "A text you wrote yourself"], a: 0, why: "An unseen extract is unfamiliar before the assessment." },
+        { q: "What should guide your analysis?", options: ["The question and the evidence", "An unrelated text", "A memorised answer only"], a: 0, why: "Your response should address the task using the extract." }
+      ]
+    },
+    {
+      title: "Non-Fiction Viewpoints",
+      subject: "Language",
+      description: "Explore how writers present opinions and experiences.",
+      notes: [
+        "Non-fiction texts can include articles, speeches, letters, memoirs and travel writing.",
+        "Identify the writer's viewpoint and purpose.",
+        "Look for persuasive methods, examples, facts, anecdotes and emotive language.",
+        "Consider how the intended audience may respond."
+      ],
+      tip: "Separate what the writer says from how they try to persuade.",
+      keys: ["Identify purpose and audience.", "Analyse persuasive choices.", "Use evidence to support your reading."],
+      quiz: [
+        { q: "What is a writer's viewpoint?", options: ["Their perspective or position", "The text's font size", "The number of paragraphs"], a: 0, why: "Viewpoint describes the perspective presented by the writer." },
+        { q: "Why use an anecdote?", options: ["To illustrate a point through a brief story", "To remove all evidence", "To list punctuation rules"], a: 0, why: "An anecdote can make an argument relatable or vivid." }
+      ]
+    },
+    {
+      title: "Character and Conflict",
+      subject: "Literature",
+      description: "Analyse relationships, tension and change.",
+      notes: [
+        "Conflict may be internal, between characters or between a character and society.",
+        "Writers use dialogue, actions and narrative details to present relationships.",
+        "Changes in behaviour can reveal character development.",
+        "Consider how conflict links to wider themes."
+      ],
+      tip: "Compare how a character behaves before and after an important event.",
+      keys: ["Identify the type of conflict.", "Use evidence about relationships.", "Link character development to themes."],
+      quiz: [
+        { q: "What is internal conflict?", options: ["A struggle within a character", "A disagreement between two countries only", "A description of a room"], a: 0, why: "Internal conflict happens within a character's thoughts or feelings." },
+        { q: "What can a character's change reveal?", options: ["Development and response to events", "The book's publication price", "Nothing about the story"], a: 0, why: "Change can reveal motives, learning or consequences." }
+      ]
+    },
+    {
+      title: "Planning Strong Essays",
+      subject: "Language",
+      description: "Organise a clear argument before writing.",
+      notes: [
+        "Break the question into its key terms.",
+        "Plan two or three points that answer the question directly.",
+        "Select evidence for each point and decide what you will explain.",
+        "Finish with a conclusion that reinforces your overall argument."
+      ],
+      tip: "A short plan can stop your essay drifting away from the question.",
+      keys: ["Understand the task.", "Sequence points logically.", "Support each point with evidence."],
+      quiz: [
+        { q: "What is a useful first step in planning?", options: ["Understand the question", "Write a random conclusion", "Ignore the task"], a: 0, why: "A plan needs to respond directly to the question." },
+        { q: "What should a conclusion do?", options: ["Reinforce the main argument", "Introduce unrelated evidence", "Repeat every paragraph word for word"], a: 0, why: "A conclusion draws together the main argument." }
+      ]
+    }
+  ],
+
+  10: [
+    {
+      title: "Language Paper Skills",
+      subject: "Language",
+      description: "Practise analysis, evaluation and clear evidence.",
+      notes: [
+        "Read each question carefully and identify its focus.",
+        "Select evidence that directly supports your point.",
+        "Analyse language choices and explain how they shape meaning.",
+        "For evaluation, make a clear judgement and support it with details from the text."
+      ],
+      tip: "Use the wording of the question to keep your answer focused.",
+      keys: ["Answer the exact question.", "Use precise evidence.", "Explain rather than merely identify."],
+      quiz: [
+        { q: "What makes evaluation convincing?", options: ["A clear judgement supported by evidence", "A judgement with no explanation", "A summary unrelated to the task"], a: 0, why: "Evaluation needs a reasoned judgement supported by the text." },
+        { q: "What should quotations do?", options: ["Support your point", "Replace all explanation", "Distract from the question"], a: 0, why: "Evidence should be relevant to the point being made." }
+      ]
+    },
+    {
+      title: "Literature Essay Skills",
+      subject: "Literature",
+      description: "Develop interpretations with quotations and analysis.",
+      notes: [
+        "Start with an argument that answers the essay question.",
+        "Choose short, relevant quotations.",
+        "Analyse language, form or structure and connect methods to meaning.",
+        "Develop an interpretation across the essay instead of writing disconnected observations."
+      ],
+      tip: "Make every paragraph contribute to your overall argument.",
+      keys: ["Establish an argument.", "Support it with evidence.", "Explore methods and meanings."],
+      quiz: [
+        { q: "What should an essay introduction establish?", options: ["A response to the question", "Every quotation in the book", "An unrelated biography"], a: 0, why: "The introduction should establish the line of argument." },
+        { q: "Why analyse a quotation?", options: ["To explain how it supports your interpretation", "To avoid explaining ideas", "To count its words"], a: 0, why: "Analysis explores how textual details create meaning." }
+      ]
+    },
+    {
+      title: "Poetry: Language and Form",
+      subject: "Literature",
+      description: "Explore imagery, sound, rhythm and poetic choices.",
+      notes: [
+        "Consider imagery, word associations, sound patterns and repetition.",
+        "Explore how the poem's form and structure shape its ideas.",
+        "Look at shifts in tone or focus and how the ending affects interpretation.",
+        "Avoid assuming a technique has the same effect in every poem."
+      ],
+      tip: "Always link the method to the specific poem and quotation.",
+      keys: ["Analyse specific words.", "Consider form and structure.", "Support interpretations with evidence."],
+      quiz: [
+        { q: "What is the best approach to a poetic method?", options: ["Explain its effect in context", "Name it and stop", "Assume one effect always applies"], a: 0, why: "Methods need to be discussed in the context of the poem." },
+        { q: "What can repetition emphasise?", options: ["An idea or feeling", "Only the page number", "Nothing at all"], a: 0, why: "Repetition can draw attention to a word, idea or emotion." }
+      ]
+    },
+    {
+      title: "Creative Writing: Description",
+      subject: "Language",
+      description: "Craft vivid descriptions with controlled structure.",
+      notes: [
+        "Choose a clear focus, such as a place, object or moment.",
+        "Use precise sensory details and varied sentence structures.",
+        "Control the reader's attention by moving between details.",
+        "Edit for accuracy, punctuation and unnecessary repetition."
+      ],
+      tip: "A few carefully chosen details can be stronger than a long list.",
+      keys: ["Use precise vocabulary.", "Control focus and pace.", "Proofread carefully."],
+      quiz: [
+        { q: "What helps a description feel controlled?", options: ["A deliberate focus and sequence", "Random details in any order", "Repeating the same adjective"], a: 0, why: "A deliberate sequence guides the reader through the description." },
+        { q: "What should you do after drafting?", options: ["Edit and proofread", "Never reread it", "Remove all punctuation"], a: 0, why: "Editing helps improve clarity, accuracy and effect." }
+      ]
+    },
+    {
+      title: "Creative Writing: Narrative",
+      subject: "Language",
+      description: "Shape plot, character, tension and resolution.",
+      notes: [
+        "Plan a central situation or conflict rather than too many events.",
+        "Use dialogue selectively to reveal character or move the action forward.",
+        "Control pacing through sentence length, paragraphing and the order of information.",
+        "End with a purposeful resolution, realisation or image."
+      ],
+      tip: "Keep the plot manageable so you have space to develop it well.",
+      keys: ["Plan a central conflict.", "Control pacing.", "Give the ending a purpose."],
+      quiz: [
+        { q: "What can dialogue reveal?", options: ["Character and relationships", "Only the weather", "The number of pages"], a: 0, why: "Dialogue can reveal motives, relationships and personality." },
+        { q: "Why control pacing?", options: ["To shape tension and emphasis", "To make every moment equally detailed", "To remove the plot"], a: 0, why: "Pacing controls how quickly events unfold for the reader." }
+      ]
+    },
+    {
+      title: "Shakespeare: Context and Interpretation",
+      subject: "Literature",
+      description: "Connect the play's ideas to its historical setting.",
+      notes: [
+        "Context includes relevant social beliefs, values and historical circumstances.",
+        "Use context to deepen an interpretation of the play rather than inserting unrelated facts.",
+        "Consider how an original audience and a modern audience might respond differently.",
+        "Ground your points in the language and events of the play."
+      ],
+      tip: "Context is most useful when it helps explain a specific moment.",
+      keys: ["Use relevant context.", "Connect context to textual evidence.", "Allow for different interpretations."],
+      quiz: [
+        { q: "How should context be used?", options: ["To deepen textual analysis", "As an unrelated fact list", "Instead of reading the play"], a: 0, why: "Context should help explain the text's meanings and ideas." },
+        { q: "Can audiences interpret a play differently?", options: ["Yes, responses may vary", "No, only one response is possible", "Only if they read different titles"], a: 0, why: "Different audiences can respond according to their perspectives and contexts." }
+      ]
+    },
+    {
+      title: "Unseen Poetry",
+      subject: "Literature",
+      description: "Build an interpretation of an unfamiliar poem.",
+      notes: [
+        "Read the poem more than once and identify its central concerns.",
+        "Notice significant words, images, contrasts, shifts and structural choices.",
+        "Choose short quotations and explain what they suggest.",
+        "Build an overall interpretation rather than listing techniques."
+      ],
+      tip: "Start with what the poem seems to explore, then examine how.",
+      keys: ["Establish an interpretation.", "Select precise evidence.", "Analyse methods in context."],
+      quiz: [
+        { q: "What should you do first with an unfamiliar poem?", options: ["Read for overall meaning", "Count every letter", "Assume the theme from the title alone"], a: 0, why: "An overall reading helps you understand the poem before analysing details." },
+        { q: "What makes an interpretation stronger?", options: ["Relevant quotations and explanation", "A list of techniques only", "A guess without evidence"], a: 0, why: "Evidence and explanation make an interpretation convincing." }
+      ]
+    },
+    {
+      title: "Comparing Writers' Viewpoints",
+      subject: "Language",
+      description: "Compare perspectives, methods and intended effects.",
+      notes: [
+        "Identify what each writer thinks or feels about the topic.",
+        "Compare the methods used to convey those viewpoints.",
+        "Consider audience, purpose and the different contexts of the texts.",
+        "Use evidence from both sources to support the comparison."
+      ],
+      tip: "Compare how the writers communicate, not just what they say.",
+      keys: ["Identify each viewpoint.", "Compare methods.", "Support both sides with evidence."],
+      quiz: [
+        { q: "What is important when comparing viewpoints?", options: ["Ideas and how they are conveyed", "Only the texts' lengths", "Only the writers' first names"], a: 0, why: "A comparison should explore both viewpoints and their presentation." },
+        { q: "What should support the comparison?", options: ["Evidence from both texts", "Evidence from neither text", "Unrelated examples"], a: 0, why: "Evidence from both texts makes the comparison grounded." }
+      ]
+    },
+    {
+      title: "Argumentative Writing",
+      subject: "Language",
+      description: "Build a balanced and convincing argument.",
+      notes: [
+        "State your position clearly and develop reasons for it.",
+        "Use examples, facts or logical reasoning where appropriate.",
+        "You can address counterarguments and explain why your position remains convincing.",
+        "Use paragraphs and linking phrases to guide the reader."
+      ],
+      tip: "Acknowledge a reasonable opposing view when it strengthens your argument.",
+      keys: ["Make a clear claim.", "Develop reasons and examples.", "Organise the argument logically."],
+      quiz: [
+        { q: "What is a counterargument?", options: ["An opposing point of view", "A punctuation mark", "The title of an essay"], a: 0, why: "A counterargument presents a different or opposing position." },
+        { q: "What helps an argument persuade?", options: ["Reasoning and relevant examples", "Unrelated repetition", "No clear position"], a: 0, why: "Reasoning and evidence help support the writer's position." }
+      ]
+    },
+    {
+      title: "Exam Timing and Planning",
+      subject: "Language",
+      description: "Use your time strategically in assessments.",
+      notes: [
+        "Read the whole task and note what each question requires.",
+        "Allocate time according to the marks, instructions and total exam time.",
+        "Make brief plans for extended responses.",
+        "Leave time to check that you have answered the task and proofread your writing."
+      ],
+      tip: "Practise with timed questions so your approach feels familiar.",
+      keys: ["Read instructions carefully.", "Plan realistically.", "Leave time to check."],
+      quiz: [
+        { q: "Why plan your time?", options: ["To give each task appropriate attention", "To avoid answering questions", "To guarantee every answer is perfect"], a: 0, why: "Planning helps you manage the available time." },
+        { q: "What should you do near the end?", options: ["Check your work if time allows", "Start a completely unrelated essay", "Ignore unfinished questions"], a: 0, why: "A final check can catch mistakes or missing points." }
+      ]
+    }
+  ],
+
+  11: [
+    {
+      title: "Language Analysis: Precision",
+      subject: "Language",
+      description: "Develop detailed interpretations of writers' choices.",
+      notes: [
+        "Choose short, precise quotations that directly answer the question.",
+        "Explore connotations, contrasts, imagery and patterns of language.",
+        "Explain how a choice shapes meaning in its context.",
+        "Develop interpretations rather than relying on formulaic phrases."
+      ],
+      tip: "The quality of your explanation matters more than naming lots of techniques.",
+      keys: ["Be selective with evidence.", "Zoom in on meaningful details.", "Explain effects in context."],
+      quiz: [
+        { q: "What makes close analysis effective?", options: ["Explaining meaningful word choices", "Naming every technique without explanation", "Repeating the question only"], a: 0, why: "Close analysis explores how specific details create meaning." },
+        { q: "Should every technique have the same effect?", options: ["No, effects depend on context", "Yes, always", "Only in long texts"], a: 0, why: "Interpretations should reflect the particular text and context." }
+      ]
+    },
+    {
+      title: "Literature: Developing Arguments",
+      subject: "Literature",
+      description: "Build a thoughtful and sustained essay response.",
+      notes: [
+        "Establish a clear interpretation of the question.",
+        "Select evidence that develops your argument across the text.",
+        "Explore language, form, structure and relevant context.",
+        "Consider alternative interpretations where they genuinely help your analysis."
+      ],
+      tip: "Return to the question throughout your essay, not just in the introduction.",
+      keys: ["Sustain a clear argument.", "Use well-chosen evidence.", "Explore interpretations and methods."],
+      quiz: [
+        { q: "What does a sustained argument do?", options: ["Develops a consistent response to the question", "Lists unrelated quotations", "Avoids interpretation"], a: 0, why: "A sustained argument develops a connected line of reasoning." },
+        { q: "When are alternative interpretations useful?", options: ["When supported by the text", "Whenever they contradict evidence", "Only as a final sentence"], a: 0, why: "Alternative interpretations should be plausible and evidence-based." }
+      ]
+    },
+    {
+      title: "Unseen Poetry: Independent Analysis",
+      subject: "Literature",
+      description: "Explore a poem's meaning without relying on memorised notes.",
+      notes: [
+        "Read for overall meaning, speaker, situation and shifts in tone.",
+        "Select details that seem important to the poem's central ideas.",
+        "Analyse how language, form and structure work together.",
+        "Build a coherent interpretation supported by evidence."
+      ],
+      tip: "Be open to the poem's specific meanings instead of forcing a memorised theme onto it.",
+      keys: ["Read carefully.", "Select evidence.", "Build a supported interpretation."],
+      quiz: [
+        { q: "What should guide an unseen-poetry interpretation?", options: ["The poem's details and evidence", "A memorised answer regardless of the poem", "The title alone"], a: 0, why: "Your interpretation should arise from the poem itself." },
+        { q: "Why look for shifts in tone?", options: ["They may reveal a change in feeling or perspective", "They always mean the poem has ended", "They are never significant"], a: 0, why: "A shift can change how a speaker or idea is presented." }
+      ]
+    },
+    {
+      title: "Comparative Poetry",
+      subject: "Literature",
+      description: "Compare ideas and methods across two poems.",
+      notes: [
+        "Identify the main point of comparison and develop it clearly.",
+        "Use concise evidence from both poems.",
+        "Explore similarities and differences in imagery, structure, voice or tone.",
+        "Explain why the poets' choices matter to their presentation of the topic."
+      ],
+      tip: "Organise paragraphs around comparisons rather than treating the poems as unrelated essays.",
+      keys: ["Establish a comparison.", "Discuss both poems.", "Analyse methods and meaning."],
+      quiz: [
+        { q: "How can you organise a comparison?", options: ["Around shared ideas or meaningful differences", "By ignoring one poem", "By listing every line"], a: 0, why: "A focused comparison connects both poems through a clear idea." },
+        { q: "What should quotations help you explain?", options: ["How the poets present their ideas", "Only how long each poem is", "The order in which you read them"], a: 0, why: "Evidence should support analysis of the poets' choices." }
+      ]
+    },
+    {
+      title: "Creative Writing: Craft and Control",
+      subject: "Language",
+      description: "Use deliberate structure, imagery and sentence choices.",
+      notes: [
+        "Choose a clear purpose and plan a manageable focus.",
+        "Use specific details rather than relying on familiar clichés.",
+        "Vary sentence length and paragraphing to control pace and emphasis.",
+        "Edit for clarity, accuracy and deliberate effects."
+      ],
+      tip: "Make each description or event contribute to the overall effect.",
+      keys: ["Write with a clear purpose.", "Control pace and focus.", "Edit deliberately."],
+      quiz: [
+        { q: "What can sentence variety achieve?", options: ["Control pace and emphasis", "Make every sentence identical", "Remove all meaning"], a: 0, why: "Different sentence patterns create different rhythms and effects." },
+        { q: "What is a useful editing question?", options: ["Does this detail serve my purpose?", "Can I add random adjectives?", "Can I avoid rereading?"], a: 0, why: "Editing checks whether each choice contributes to the writing." }
+      ]
+    },
+    {
+      title: "Persuasive and Transactional Writing",
+      subject: "Language",
+      description: "Adapt arguments to different forms and audiences.",
+      notes: [
+        "Identify the audience, purpose and form before planning.",
+        "Establish a clear viewpoint and develop it with reasoning and examples.",
+        "Use rhetorical methods where they suit the purpose.",
+        "Match conventions and tone to the task, then proofread."
+      ],
+      tip: "A speech, article and formal letter may need different approaches even when they share a viewpoint.",
+      keys: ["Adapt form and tone.", "Develop a clear argument.", "Use methods purposefully."],
+      quiz: [
+        { q: "What should determine your writing style?", options: ["Audience, purpose and form", "Random preference alone", "The longest possible words"], a: 0, why: "Effective writing adapts to the task and reader." },
+        { q: "What makes a rhetorical method effective?", options: ["It serves the argument and audience", "It is included without a purpose", "It replaces the whole argument"], a: 0, why: "A technique should help communicate the intended message." }
+      ]
+    },
+    {
+      title: "Shakespeare: Detailed Analysis",
+      subject: "Literature",
+      description: "Explore language, character, themes and dramatic choices.",
+      notes: [
+        "Analyse the precise words used in dialogue and stage directions.",
+        "Consider how characters change and how their relationships develop.",
+        "Explore dramatic methods such as entrances, exits, soliloquies and contrasts.",
+        "Use relevant context to deepen your reading of the play."
+      ],
+      tip: "Remember that a play is written for performance as well as reading.",
+      keys: ["Analyse language in context.", "Consider dramatic effects.", "Connect characters and themes."],
+      quiz: [
+        { q: "Why consider stage directions?", options: ["They can shape performance and audience understanding", "They are always irrelevant", "They replace all dialogue"], a: 0, why: "Stage directions can influence how events and characters are presented." },
+        { q: "What can a soliloquy reveal?", options: ["A character's thoughts or conflict", "Only the setting's age", "The play's page count"], a: 0, why: "A soliloquy can reveal private thoughts and dilemmas." }
+      ]
+    },
+    {
+      title: "Revision and Retrieval Practice",
+      subject: "Language",
+      description: "Remember key methods and practise using them.",
+      notes: [
+        "Test yourself before looking at notes.",
+        "Practise explaining quotations, methods and interpretations in your own words.",
+        "Return to difficult topics at spaced intervals.",
+        "Use practice questions to identify gaps and improve your answers."
+      ],
+      tip: "Short, regular practice is often more useful than only rereading notes.",
+      keys: ["Retrieve information from memory.", "Practise applying knowledge.", "Review topics you find difficult."],
+      quiz: [
+        { q: "What is retrieval practice?", options: ["Trying to recall information without looking", "Copying notes without thinking", "Highlighting every sentence"], a: 0, why: "Retrieval practice involves actively recalling information." },
+        { q: "What should you do after a practice question?", options: ["Review mistakes and improve", "Ignore all feedback", "Memorise only the score"], a: 0, why: "Reviewing mistakes helps identify what to practise next." }
+      ]
+    },
+    {
+      title: "Exam Questions and Evidence",
+      subject: "Language",
+      description: "Answer the task directly and select relevant details.",
+      notes: [
+        "Underline the key instruction and topic in each question.",
+        "Plan a response that matches the task and available time.",
+        "Use relevant textual evidence and explain its significance.",
+        "Check that each paragraph contributes to the answer."
+      ],
+      tip: "A focused answer with well-explained evidence is better than an unrelated long answer.",
+      keys: ["Understand the question.", "Select relevant evidence.", "Check focus and clarity."],
+      quiz: [
+        { q: "What should your evidence be?", options: ["Relevant to the question", "Unrelated but interesting", "As long as possible"], a: 0, why: "Relevant evidence helps answer the specific task." },
+        { q: "What should each paragraph do?", options: ["Develop the response", "Change the subject randomly", "Repeat the title only"], a: 0, why: "Each paragraph should contribute to the overall answer." }
+      ]
+    },
+    {
+      title: "Proofreading and Accuracy",
+      subject: "Language",
+      description: "Check spelling, punctuation, grammar and clarity.",
+      notes: [
+        "Check sentence boundaries, commas, apostrophes and capital letters.",
+        "Look for repeated words, unclear expressions and inconsistent tense.",
+        "Make sure paragraphs are logically ordered.",
+        "Read your work slowly, focusing on one type of error at a time."
+      ],
+      tip: "Leave a little time at the end for a careful check.",
+      keys: ["Check punctuation.", "Check spelling and grammar.", "Check that ideas are clear."],
+      quiz: [
+        { q: "What is proofreading for?", options: ["Finding and correcting errors", "Adding unrelated ideas", "Removing every comma"], a: 0, why: "Proofreading checks accuracy and clarity." },
+        { q: "What can help you spot mistakes?", options: ["Reading slowly and carefully", "Skipping the final check", "Looking only at the title"], a: 0, why: "Careful reading makes errors easier to notice." }
+      ]
+    }
+  ]
+};
+
+// Build Years 7–9 with a reusable bank of topics.
+// The topics below are educational practice material, not an official exam-board specification.
+const sharedTopic = (title, subject, description, notes, tip, keys, quiz) => ({
+  title, subject, description, notes, tip, keys, quiz
+});
+
+const deepExplanations = {
+  "Similes and Metaphors": {
+    heading: "How comparisons create meaning",
+    paragraphs: [
+      "Writers use comparisons to help readers understand something by connecting it to an image, feeling or experience they already recognise. Instead of simply telling us that a character is frightened, a writer might compare their heartbeat to a drum. The comparison gives the reader a more vivid impression of the character's experience.",
+      "A simile makes a comparison using words such as 'like' or 'as'. A metaphor presents one thing as another. When analysing either technique, do not stop after naming it. Explore what the two things have in common, which associations the comparison creates and why those associations suit the situation.",
+      "The same image can suggest different things depending on its context. Comparing a person to a storm might suggest anger, energy or danger. The surrounding words and events help you decide which interpretation is most convincing."
+    ],
+    example: "Example: 'The classroom was a zoo.' The metaphor compares the classroom to a place associated with noisy, uncontrolled animals. This may suggest that the pupils are behaving wildly and that the room feels chaotic.",
+    check: "When you spot a comparison, ask: What is being compared? What does the image suggest? How does it help present the subject?"
+  },
+
+  "Adjectives and Adverbs": {
+    heading: "How word choices shape description",
+    paragraphs: [
+      "An adjective gives information about a noun, such as a person, place or object. In 'the ancient castle', the adjective 'ancient' tells us more about the castle and may suggest age, history or mystery. An adverb can modify a verb, an adjective or another adverb. In 'she spoke quietly', the adverb explains how she spoke.",
+      "These word classes help writers make meaning more precise, but adding more descriptive words does not automatically improve writing. A carefully chosen adjective can communicate more than several vague ones. Think about whether each word contributes a useful detail, feeling or impression.",
+      "When analysing a writer's vocabulary, consider why one word has been chosen instead of a possible alternative. 'Strode', for example, can suggest confidence or determination more strongly than the general verb 'walked'. The effect depends on the context and the character's behaviour."
+    ],
+    example: "Compare 'He walked into the room' with 'He crept into the room.' The verb 'crept' suggests slow, careful movement and may imply fear, secrecy or an attempt not to be noticed.",
+    check: "Identify the word being described, then explain how the chosen word changes the reader's impression."
+  },
+
+  "Punctuation Basics": {
+    heading: "How punctuation guides the reader",
+    paragraphs: [
+      "Punctuation helps readers understand where ideas begin and end and how parts of a sentence relate to one another. Full stops separate complete statements. Commas can divide items in a list, separate introductory phrases or mark certain pauses within a sentence. Punctuation should clarify meaning rather than simply reproduce every pause you make when speaking.",
+      "Apostrophes have two main uses: showing possession and indicating omitted letters in contractions. In 'the girl's coat', the apostrophe shows possession by one girl. In 'the girls' coats', it shows possession by more than one girl. In 'don't', the apostrophe marks the omitted letter in 'do not'.",
+      "Question marks end direct questions, while exclamation marks can convey strong emotion or emphasis. Colons can introduce explanations or lists, and semicolons can connect closely related independent clauses. Accurate punctuation helps make writing easier to follow and can influence emphasis and rhythm."
+    ],
+    example: "Compare 'Let's eat, Grandma!' with 'Let's eat Grandma!' The comma in the first sentence addresses Grandma. Without it, the sentence appears to say something very different.",
+    check: "Check that every sentence is complete, commas have a clear purpose and apostrophes show the correct possession or omission."
+  },
+
+  "Creative Story Writing": {
+    heading: "How to build a convincing story",
+    paragraphs: [
+      "A successful story does more than describe a sequence of events. It gives the reader a reason to care about what happens. A character may want something, face an obstacle and have to make a decision. This creates a central conflict that can develop throughout the narrative.",
+      "The opening establishes a situation, character or setting. The middle develops the situation and may introduce a turning point. The ending shows the result or gives the reader a meaningful final impression. You do not need lots of dramatic events; a small situation can be engaging if the character's reactions and the details are carefully developed.",
+      "Description, dialogue and action each have different purposes. Sensory details help establish an atmosphere, dialogue can reveal relationships and short sentences can increase pace or emphasise an important moment. Longer sentences can slow the action and allow the reader to notice a series of details."
+    ],
+    example: "Instead of writing 'She was scared', describe her fingers tightening around the handle and her attention shifting towards a sound in the corridor. These actions allow the reader to infer her fear.",
+    check: "Ask what the character wants, what prevents them getting it and how each event changes the situation."
+  },
+
+  "Poetry: Imagery": {
+    heading: "How poets make ideas vivid",
+    paragraphs: [
+      "Imagery is language that appeals to the senses or creates a mental picture. Poets may describe sights, sounds, smells, tastes and physical sensations to make an experience feel more immediate. Imagery can also communicate abstract ideas, such as loneliness or hope, through concrete pictures.",
+      "A metaphor, simile or example of personification can create imagery, but imagery is not limited to those techniques. A collection of words associated with darkness, cold and silence, for instance, may create a bleak atmosphere without using an obvious comparison.",
+      "To analyse imagery, begin with the literal picture created by the words. Then consider the associations of important details and how they connect to the poem's wider ideas. Avoid claiming that every reader will feel exactly the same thing; explain what the language may suggest and support your interpretation with evidence."
+    ],
+    example: "If a poet describes 'a thin thread of sunlight', the image may suggest that the light is delicate or limited. If the poem concerns hope, the sunlight might also represent a small possibility of improvement.",
+    check: "Move from the image itself to its associations, then connect those associations to the poem's meaning."
+  },
+
+  "Characterisation": {
+    heading: "How writers reveal characters",
+    paragraphs: [
+      "Characterisation is the way a writer creates and develops a character. Writers may describe appearance, report thoughts, show actions, present dialogue or reveal how other characters respond to someone. These details allow readers to form interpretations about personality and motivation.",
+      "A character's words and actions may agree, but they can also contradict each other. Someone might claim to be brave while avoiding every difficult situation. This contrast can suggest insecurity, dishonesty or a difference between the character's public image and private feelings.",
+      "Characters can also change as the story develops. An important decision or conflict may reveal a quality that was previously hidden. When writing about characterisation, select evidence that shows the quality you are discussing and explain how the writer presents it rather than simply describing what happens."
+    ],
+    example: "A character who gives away their last piece of food may appear generous or selfless. If they do it while looking anxiously at the people watching, the writer may also be suggesting that they want approval.",
+    check: "Look at what a character says, what they do, how others treat them and whether their behaviour changes."
+  },
+
+  "Persuasive Writing": {
+    heading: "How to make an argument convincing",
+    paragraphs: [
+      "Persuasive writing aims to influence what an audience thinks, feels or does. Before writing, decide who the audience is, what you want them to believe and which reasons might matter to them. A convincing argument develops a clear position and supports it with relevant reasoning and examples.",
+      "Rhetorical questions can encourage readers to consider an issue from the writer's perspective. Direct address uses words such as 'you' to involve the audience. Emotive language encourages an emotional response, while facts and examples can help make an argument more concrete. No technique is automatically persuasive: its usefulness depends on the audience and context.",
+      "Paragraphs should develop separate stages of the argument. Linking phrases show how ideas relate, while a conclusion reinforces the main position. Strong persuasion combines purposeful language with logical reasoning instead of relying on dramatic words alone."
+    ],
+    example: "Instead of saying 'The park is good', explain that the park gives children a safe place to play, provides residents with green space and offers a shared area for the community.",
+    check: "For each argument, ask: What is my point? What supports it? Why should this audience care?"
+  },
+
+  "Myths and Legends": {
+    heading: "How traditional stories communicate ideas",
+    paragraphs: [
+      "Myths and legends are traditional stories that have been passed down through cultures. Myths often explore origins, gods, nature or questions about human existence. Legends frequently focus on heroes, memorable figures or events that may combine historical elements with imaginative storytelling. The categories can overlap.",
+      "These stories often explore themes such as courage, loyalty, pride, justice and the consequences of choices. A hero's challenge may represent more than a physical struggle: it might test their values or reveal the qualities their society admires.",
+      "Context can help explain why a story values certain behaviours or fears particular dangers. Symbols, repeated events and the way a conflict is resolved can also reveal the story's ideas. Avoid assuming that every traditional story has one simple moral; consider what the details support."
+    ],
+    example: "If a character ignores warnings because they believe they are invincible, the consequences may explore pride and the danger of refusing advice.",
+    check: "Look beyond the events: what values are rewarded, what choices have consequences and what ideas does the story explore?"
+  },
+
+  "Formal and Informal Writing": {
+    heading: "Adapting your writing to the situation",
+    paragraphs: [
+      "Register is the level of formality used in communication. Formal writing is often used for official letters, applications, reports or situations where a professional tone is expected. Informal writing is common when communicating with friends or people you know well. Neither register is always better; the right choice depends on the situation.",
+      "Audience, purpose and form work together. A formal complaint should explain the problem clearly and politely, while a message to a friend may be more conversational. Vocabulary, sentence structure, greetings and contractions can all help establish the appropriate register.",
+      "Formal writing does not mean using the longest words possible. Clear, precise language is usually more effective than complicated wording that makes the meaning difficult to understand. Informal writing can also be carefully written when clarity matters."
+    ],
+    example: "Informal: 'Can you sort this out for me?' More formal: 'I would be grateful if you could resolve this issue.' Both communicate a request, but they suit different situations.",
+    check: "Before writing, identify your audience, purpose and form, then choose a tone that suits all three."
+  },
+
+  "Reading Comprehension": {
+    heading: "Understanding what a text says and implies",
+    paragraphs: [
+      "Reading comprehension involves understanding information, interpreting details and explaining how a text creates meaning. Begin by identifying the focus of the question. A question about a character's feelings requires different evidence from a question about the writer's description of a setting.",
+      "Explicit information is stated directly. Inference involves using clues to work out something that is suggested but not directly stated. A character who avoids eye contact and gives short answers might be nervous, embarrassed or hiding something. The surrounding context helps determine which interpretation is most likely.",
+      "A strong answer connects evidence to reasoning. A short quotation or precise reference shows which detail you are using, and your explanation shows what you think it suggests. Avoid copying a large section without explaining how it answers the question."
+    ],
+    example: "If a passage says, 'Mia checked the clock for the fifth time and tapped her foot', you could infer that she is impatient or anxious. The repeated checking and tapping provide the evidence.",
+    check: "Separate what the text explicitly states from what you infer, and support every inference with a clue."
+  },
+
+  "Personification": {
+    heading: "Giving human qualities to non-human things",
+    paragraphs: [
+      "Personification describes an animal, object, place or abstract idea as if it has human qualities. This allows a writer to present a scene in a more imaginative way and can make an atmosphere or emotion easier to picture.",
+      "The human action matters because it shapes the image. A wind that 'whispers' may seem gentle or secretive, while a wind that 'roars' may seem powerful and threatening. These words do more than describe sound: they encourage the reader to imagine the wind in a particular way.",
+      "When analysing personification, identify the non-human subject and the human quality given to it. Then explore what that quality suggests in the context. The effect might be comforting, unsettling, humorous or threatening depending on the language around it."
+    ],
+    example: "'The old house watched us.' The house is given the human ability to watch. This may make the building seem alert or threatening, as though it knows what the characters are doing.",
+    check: "Ask what human quality is being given and how that changes the way the reader imagines the subject."
+  },
+
+  "Sentence Structures": {
+    heading: "How sentence patterns affect meaning",
+    paragraphs: [
+      "Sentence structure affects how information is organised and how quickly a reader moves through a piece of writing. A simple sentence contains one main clause. A compound sentence joins two or more main clauses, while a complex sentence includes a main clause and at least one subordinate clause.",
+      "A subordinate clause adds information but cannot usually stand alone as a complete sentence in the way the main clause can. Words such as 'because', 'although' and 'when' often introduce subordinate clauses. Recognising these relationships helps you understand how a writer connects causes, contrasts and events.",
+      "Writers vary sentence structures for reasons. A short sentence may emphasise a sudden event or create a pause. A longer sentence may slow the pace, build a description or connect several details. Do not assume that short sentences always create tension; explain what the particular sentence does in its context."
+    ],
+    example: "'The door opened. Nobody moved.' The short second sentence isolates the characters' reaction and may create suspense by delaying what happens next.",
+    check: "Identify the sentence pattern, notice what information is emphasised and explain how the structure suits the moment."
+  },
+
+  "News Reports": {
+    heading: "How news reports organise information",
+    paragraphs: [
+      "A news report aims to communicate an event clearly to readers. It usually prioritises important information near the beginning so that readers can quickly understand what happened. The opening often establishes key details such as who was involved, what happened, where and when it occurred, and why or how where that information is known.",
+      "A headline summarises the central event and attracts attention. Later paragraphs provide additional details, background and reactions. Quotations can show what witnesses, officials or other people said, but the report should make clear who is speaking and distinguish reported facts from opinions or allegations.",
+      "Accuracy and fairness matter. A report should not present an unverified claim as a confirmed fact, and its tone should suit the purpose of informing readers. Clear paragraphing and precise vocabulary help readers distinguish the main event from supporting details."
+    ],
+    example: "A report about a school fundraiser might begin with the amount raised and the event's purpose, then give details about activities and include a clearly attributed quotation from an organiser.",
+    check: "Check that the headline fits the report, the most important facts appear early and quotations are attributed accurately."
+  },
+
+  "Poetry: Tone and Mood": {
+    heading: "Distinguishing attitude from atmosphere",
+    paragraphs: [
+      "Tone is the attitude conveyed by the speaker or writer towards a subject. It might seem admiring, bitter, playful, regretful or sarcastic. Mood is the atmosphere created by the text for the reader, such as unease, excitement or sadness. Tone and mood can influence one another, but they are not the same thing.",
+      "Writers create tone and mood through word choices, imagery, rhythm, punctuation and the events or ideas they present. A speaker may sound calm while describing something disturbing, creating an unsettling contrast. A shift in tone can also show that the speaker's feelings or understanding are changing.",
+      "Choose words such as 'uneasy' or 'nostalgic' only when you can support them with evidence. Explain which details create that impression and how they connect to the poem's subject. There may be more than one reasonable interpretation."
+    ],
+    example: "A description of a room as 'silent', 'cold' and 'empty' may create a lonely mood. If the speaker describes it with affection, the tone could still be nostalgic rather than simply miserable.",
+    check: "Ask: What attitude does the speaker convey? What atmosphere is created? Which words support each interpretation?"
+  },
+
+  "Shakespeare: Characters": {
+    heading: "Understanding characters on stage",
+    paragraphs: [
+      "Shakespeare develops characters through dialogue, actions, relationships and dramatic situations. What a character says may reveal their beliefs or intentions, while what they do can support or contradict their words. Stage directions and the reactions of other characters can add further information.",
+      "A soliloquy is a speech in which a character speaks their thoughts aloud, often while alone on stage. It can reveal private doubts, desires or conflicts that other characters do not know about. Dramatic irony occurs when the audience knows something that one or more characters do not, creating tension or changing how their actions are understood.",
+      "Characters should be analysed in relation to the play as a whole. Their decisions may change, their relationships may become more complicated and their behaviour may reveal wider themes such as power, loyalty or ambition. Relevant historical context can help explain the expectations facing them, but evidence from the play should remain central."
+    ],
+    example: "If a character speaks confidently to others but expresses fear in a soliloquy, the contrast may show the difference between their public appearance and private feelings.",
+    check: "Explore what the character says, what they do, what the audience knows and how the character changes."
+  },
+
+  "Persuasive Speeches": {
+    heading: "Writing for an audience that is listening",
+    paragraphs: [
+      "A persuasive speech is written to be delivered aloud. This means the writer must consider not only what the audience reads, but what they can follow while listening. Clear points, signposting, repetition and direct address can help listeners understand and remember the argument.",
+      "Rhetorical questions can invite the audience to consider a position, while repetition can make a key phrase memorable. A call to action tells listeners what they are being encouraged to do. These methods work best when they develop a meaningful argument rather than replacing evidence and reasoning.",
+      "A speech often begins by introducing the issue and establishing why it matters. The main section develops reasons and examples, and the ending reinforces the message. Reading the speech aloud helps reveal awkward phrasing, sentences that are too long and places where emphasis could be clearer."
+    ],
+    example: "A speech encouraging recycling could explain the problem, give practical examples of what the audience can change and finish by asking everyone to take one specific action.",
+    check: "Imagine hearing your speech once. Is the argument clear, memorable and suited to the audience?"
+  },
+
+  "Gothic Fiction": {
+    heading: "Creating fear, mystery and suspense",
+    paragraphs: [
+      "Gothic fiction often explores fear, uncertainty, secrets and disturbing settings. Writers may use ruined buildings, isolated landscapes, darkness or strange sounds to make a place feel threatening. These settings can reflect a character's emotions or suggest that something dangerous is hidden.",
+      "Suspense develops when readers anticipate that something might happen but do not know exactly what or when. A writer can delay important information, focus on a character's uncertain reactions or introduce small clues before revealing a threat. The reader's imagination helps fill the gaps.",
+      "Gothic stories may also explore psychological fears, guilt, forbidden desires or the conflict between appearance and reality. When analysing a Gothic extract, consider how setting, narrative viewpoint, pacing and language work together. A dark setting alone does not prove that the text is Gothic; look at the wider pattern of effects."
+    ],
+    example: "If a character hears footsteps in an empty corridor but cannot see anyone, the gap between the sound and its unknown source creates uncertainty and may build suspense.",
+    check: "Identify what the reader knows, what remains uncertain and how the writer controls the release of information."
+  },
+
+  "Analytical Paragraphs": {
+    heading: "Building a point, evidence and explanation",
+    paragraphs: [
+      "An analytical paragraph develops one main idea that answers the question. Begin with a point, then select evidence that supports it. Explain how the evidence creates meaning and why it matters to your argument. A quotation is not analysis by itself: the explanation is where you show your understanding.",
+      "Short quotations often make analysis easier because they allow you to focus closely on specific words. Consider their associations, contrasts or implications, and connect your observations to the question. You can discuss a method such as metaphor or repetition when it genuinely helps explain how the writing works.",
+      "A paragraph should move logically from claim to evidence to reasoning. You do not need to follow a rigid formula in every sentence, but your reader should be able to see how each detail supports your interpretation. Link back to the question so that the paragraph contributes to the overall answer."
+    ],
+    example: "Point: The writer presents the setting as threatening. Evidence: 'The narrow corridor swallowed the light.' Explanation: The verb 'swallowed' makes the darkness seem active, as though it is consuming the space and making the corridor feel dangerous.",
+    check: "After each quotation, ask yourself: What does this detail suggest, and how does it support my point?"
+  },
+
+  "Travel Writing": {
+    heading: "Presenting a place through a viewpoint",
+    paragraphs: [
+      "Travel writing may inform readers about a place, describe an experience or persuade people to visit. The writer chooses details that shape the reader's impression. A lively account might emphasise colour, sound and movement, while a reflective account might focus on quiet moments and personal memories.",
+      "Sensory description helps readers imagine a location, but details should be selected carefully. A description of salty air, rough stone and distant gulls can establish a coastal setting without simply listing everything the writer notices. The order of details can guide the reader's attention from a wide view to a small, significant moment.",
+      "Viewpoint influences the way a place is presented. Two writers can visit the same location and create very different impressions because they have different experiences, purposes or attitudes. Analyse what is emphasised and what is left out, and use evidence to support claims about the writer's perspective."
+    ],
+    example: "A busy market could be presented as exciting through bright colours and overlapping voices, or as overwhelming through crowds, noise and a narrator struggling to move.",
+    check: "Identify the impression of the place, then explain which details and viewpoint create it."
+  },
+
+  "Comparing Texts": {
+    heading: "Making meaningful comparisons",
+    paragraphs: [
+      "Comparing texts means exploring how they are similar and different in their ideas, viewpoints and methods. Start with a clear basis for comparison, such as how two writers present danger or describe a community. This gives your answer a focus instead of turning it into two separate summaries.",
+      "Use evidence from both texts and explain how each detail supports the comparison. The writers may use different methods to communicate similar ideas, or similar methods to communicate different viewpoints. Words such as 'similarly', 'whereas' and 'in contrast' can make the relationship between your points clear.",
+      "A strong comparison explains significance. Rather than simply stating that both writers describe a place, consider whether one presents it as welcoming while the other presents it as threatening, and how their language creates those impressions. Always check that the comparison is supported by the actual texts."
+    ],
+    example: "One writer may describe a city as 'buzzing with life', while another calls it 'a relentless maze'. Both describe activity, but the first phrase may suggest energy and excitement while the second suggests confusion or exhaustion.",
+    check: "Keep both texts in view and explain what the similarities or differences reveal about each writer's choices."
+  },
+
+  "Language Analysis": {
+    heading: "Explaining how a writer's choices work",
+    paragraphs: [
+      "Language analysis explores how words and phrases create meaning. Begin with a clear idea about how the writer presents a person, place, event or viewpoint. Select a short quotation that supports your idea, then examine the details that make it significant.",
+      "Connotations are the associations or ideas linked to a word beyond its basic meaning. For example, 'slender' and 'skinny' can both describe a narrow shape, but they may create different impressions. Writers choose words for their associations, sounds and suitability to the situation.",
+      "A good analysis moves from the word itself to a plausible interpretation. Consider what the word suggests in this particular context and how it contributes to the writer's purpose. Avoid saying that a word makes every reader feel one exact emotion. Explain a possible effect and support it with evidence."
+    ],
+    example: "If a character is described as 'marching' rather than 'walking', the verb may suggest determination, authority or anger. The surrounding scene helps establish which interpretation best fits.",
+    check: "Use this sequence: make a point, select evidence, examine a meaningful word and explain what it suggests in context."
+  },
+
+  "Narrative Viewpoint": {
+    heading: "Who tells the story, and what can they know?",
+    paragraphs: [
+      "Narrative viewpoint determines whose perspective shapes the story and how information reaches the reader. First-person narration uses a narrator who refers to themselves as 'I' or 'we'. Third-person narration refers to characters as 'he', 'she' or 'they', but the amount of information available can vary.",
+      "A first-person narrator can give direct access to their thoughts and feelings, but readers may only know what that narrator notices or chooses to reveal. A third-person narrator may focus closely on one character or provide information about several characters. The important question is not only which pronouns are used, but how viewpoint controls knowledge.",
+      "An unreliable narrator is one whose account may not be fully trusted because they misunderstand events, conceal information or present a biased version. This can create suspense or encourage readers to question the difference between what is said and what is happening."
+    ],
+    example: "If a narrator insists that nobody is angry while describing slammed doors and clipped replies, the contrast may make readers question the narrator's understanding or honesty.",
+    check: "Ask whose perspective you receive, what information is missing and whether the narrator's account can be trusted."
+  },
+
+  "Poetry: Structure": {
+    heading: "How the organisation of a poem affects meaning",
+    paragraphs: [
+      "Poetic structure includes the way a poem is organised into lines and stanzas, as well as the movement of ideas from beginning to end. A stanza can group related thoughts, while a change of stanza may signal a shift in focus, mood or time. These choices can help the reader follow the poem's development.",
+      "Enjambment occurs when a sentence or phrase continues beyond the end of a line without a complete stop. This can carry an idea forward, create momentum or make a word at the end of a line stand out. An end-stopped line finishes with a clear pause, often through punctuation or a completed thought.",
+      "Structure should always be linked to meaning. A short line might isolate an important idea, but it might also simply fit the poem's rhythm. Explain what the line break, stanza change or ending emphasises in the specific poem instead of assuming one technique always has the same effect."
+    ],
+    example: "If a poem moves from long flowing lines to one short final line, that change may slow the reader's attention onto the final thought or make it feel isolated.",
+    check: "Notice where the poem changes direction, how lines connect and what the ending makes you reconsider."
+  },
+
+  "Shakespeare: Themes": {
+    heading: "Tracing a central idea through a play",
+    paragraphs: [
+      "A theme is a central idea explored across a text, such as ambition, power, loyalty, love or responsibility. A theme is broader than a single event. For example, one character's betrayal may contribute to a wider exploration of trust and its consequences.",
+      "To analyse a theme, follow its development through different characters and moments in the play. A character may begin with one belief and later change, or two characters may respond to the same situation in opposing ways. These contrasts help reveal the complexity of the theme.",
+      "Historical context can deepen your interpretation by explaining beliefs and expectations that mattered to the play's original audiences. Use context when it helps explain a particular line, choice or conflict. Avoid inserting historical facts that do not connect to your argument."
+    ],
+    example: "If ambition first appears to help a character achieve success but later leads to fear and isolation, the play may explore both the attraction and the destructive consequences of ambition.",
+    check: "Track the theme across the play and explain how characters, events and relevant context develop it."
+  },
+
+  "Transactional Writing": {
+    heading: "Writing effectively in different forms",
+    paragraphs: [
+      "Transactional writing is writing designed to achieve a practical purpose, such as informing, persuading, explaining or reviewing. Common forms include letters, articles, speeches, reports and reviews. Each form has conventions that help the reader recognise how the writing is meant to work.",
+      "A formal letter may need an appropriate greeting and a clear, respectful tone. An article might use a headline and an engaging opening. A speech should sound natural when spoken aloud. These conventions are useful because they help match the writing to its audience and purpose.",
+      "Before you write, identify the task's form, audience and purpose. Decide what your reader needs to know or believe, organise your ideas into paragraphs and choose vocabulary that suits the situation. Accurate punctuation and a clear structure help your message remain convincing."
+    ],
+    example: "A review should do more than say that a film is 'good'. It can briefly describe the film, explain what works well or poorly and give a reasoned recommendation to its intended audience.",
+    check: "Make sure your response looks and sounds like the form requested and fulfils the task's purpose."
+  },
+
+  "Poetry Comparison": {
+    heading: "Connecting two poems through ideas and methods",
+    paragraphs: [
+      "A poetry comparison explores how two poets present related ideas, feelings or experiences. Begin by identifying a clear connection, such as how both poems present loss, nature or conflict. Then examine how each poet develops that idea.",
+      "Use concise quotations from both poems. Compare word choices, imagery, tone, structure or the speaker's perspective where these features matter. One poem might present loss through silence and emptiness, while another might present it through vivid memories. Their different methods can reveal different responses to a shared subject.",
+      "Avoid analysing one poem in full and then adding a brief paragraph about the other. Keep the comparison active by explaining similarities and differences as you develop each point. The aim is to show how the poems relate to each other, not just to prove that you understand them separately."
+    ],
+    example: "If one poem presents nature as comforting and another presents it as powerful and uncontrollable, compare the specific language that creates these contrasting impressions.",
+    check: "Build each paragraph around a comparison and support both sides with evidence."
+  },
+
+  "Unseen Fiction": {
+    heading: "Analysing an unfamiliar extract",
+    paragraphs: [
+      "An unseen fiction task asks you to analyse a passage you have not studied in advance. You do not need to know the entire story to respond well. Your task is to understand the extract itself and explain how the writer presents the character, setting, event or idea named in the question.",
+      "Read once for the overall situation, then read again to identify significant details. Notice changes in mood, unusual word choices, contrasts, sentence patterns and the amount of information the narrator provides. Select evidence that directly relates to the question rather than trying to analyse every line.",
+      "Build a clear interpretation and develop it with quotations and explanation. If a character's behaviour is ambiguous, acknowledge a plausible interpretation and support it. Do not force a memorised idea onto a passage that does not support it."
+    ],
+    example: "If a character smiles while their hands shake, the contrast may suggest that they are hiding nervousness. Explain how both details contribute to that interpretation.",
+    check: "Read for meaning first, select relevant evidence and explain how the writer's choices shape your interpretation."
+  },
+
+  "Non-Fiction Viewpoints": {
+    heading: "Understanding opinions and persuasive choices",
+    paragraphs: [
+      "Non-fiction includes texts about real experiences, events or issues, such as articles, speeches, letters, memoirs and travel writing. A writer's viewpoint is the position or perspective they present. Their purpose may be to inform, persuade, criticise, entertain or reflect.",
+      "Writers communicate viewpoints through facts, examples, anecdotes, word choices and the details they choose to emphasise. An anecdote is a short account of an experience that can make a point more personal or relatable. Emotive language can encourage an emotional response, but it should be analysed in relation to the writer's wider argument.",
+      "Consider the intended audience and what the writer wants that audience to think or do. Distinguish between a fact that can be checked and an opinion or judgement. When comparing viewpoints, explain both what the writers think and how they communicate those ideas."
+    ],
+    example: "A writer arguing for better public transport might use a personal story about a missed appointment to show the human impact of unreliable services, then add figures to support the wider claim.",
+    check: "Identify the viewpoint, purpose and audience, then explain how the chosen evidence and language communicate the message."
+  },
+
+  "Character and Conflict": {
+    heading: "How struggles reveal character and themes",
+    paragraphs: [
+      "Conflict is a struggle or disagreement that drives tension in a story or play. Internal conflict takes place within a character's thoughts or feelings. External conflict may occur between characters, between a person and society, or between a character and their environment.",
+      "Conflict reveals what characters want and what they fear losing. A disagreement about money, for example, might expose deeper differences in loyalty, power or values. The way a character responds to pressure can reveal their personality more clearly than a simple description.",
+      "Writers can use changes in conflict to develop themes and relationships. A character who initially avoids confrontation might eventually speak up, showing a change in confidence or belief. Support your interpretation with evidence from before and after the important event."
+    ],
+    example: "If two friends argue because one has kept a secret, the conflict may explore trust as well as the immediate disagreement. Their reactions reveal how much they value the relationship.",
+    check: "Identify what the characters are struggling with, what the conflict reveals and how it changes the story."
+  },
+
+  "Planning Strong Essays": {
+    heading: "Turning a question into a clear argument",
+    paragraphs: [
+      "An essay should answer the question through a connected line of reasoning. Before writing, identify the key words in the task and decide what overall argument you want to make. This helps you select evidence that is relevant rather than including every fact or quotation you remember.",
+      "Plan a small number of points that build on each other. Each paragraph should develop a distinct part of your argument and use evidence to support it. Think about the explanation you will give before choosing a quotation; a quotation is useful because of what you can show through it, not simply because it is memorable.",
+      "An introduction establishes your response to the question, the main paragraphs develop it and the conclusion draws the argument together. A conclusion should not introduce a completely unrelated idea. Instead, it should clarify what your discussion has shown."
+    ],
+    example: "For a question about how a writer presents fear, you could plan one paragraph on the setting, one on a character's physical reactions and one on how the writer builds uncertainty.",
+    check: "Can you explain your overall argument in one sentence? Does each planned paragraph help prove it?"
+  },
+
+  "Language Paper Skills": {
+    heading: "Matching your answer to the question",
+    paragraphs: [
+      "English Language assessments often test different skills, such as retrieving information, making inferences, analysing language, evaluating ideas or comparing viewpoints. Read the command words carefully because they indicate what kind of thinking the question requires.",
+      "For an analysis question, explain how a writer's choices create meaning. For an evaluation question, make a clear judgement and support it with relevant evidence. For a comparison question, explore the relationship between the texts rather than writing two unrelated summaries. The exact requirements depend on the question and exam board.",
+      "Plan your time according to the marks and instructions, and make sure each paragraph serves the task. A longer answer is not automatically stronger: relevant evidence and developed explanation matter more than repeating the same point in different words."
+    ],
+    example: "If asked how a writer makes a place seem threatening, focus on the details that create that impression and explain them. A general summary of everything that happens would not fully answer the question.",
+    check: "Underline the task's key instruction and check that every point you make responds to it."
+  },
+
+  "Literature Essay Skills": {
+    heading: "Developing a literary interpretation",
+    paragraphs: [
+      "A literature essay presents an interpretation of a poem, play or novel. Your introduction should establish how you understand the question, and your paragraphs should develop that interpretation through textual evidence and analysis. The goal is to explain how the text creates meaning, not simply to retell the plot.",
+      "Choose short quotations that give you something meaningful to explore. Look closely at words, images, contrasts, structure or dramatic choices, and explain how they support your argument. Relevant context can deepen the discussion when it connects directly to the text.",
+      "A strong essay has a clear direction. Each paragraph should add something to your interpretation, and the conclusion should draw together the main ideas. You can acknowledge complexity or alternative readings when the evidence genuinely supports them."
+    ],
+    example: "Rather than writing 'This shows ambition', explain which words suggest ambition, what they reveal about the character and how that moment contributes to the play's wider presentation of power.",
+    check: "After every quotation, explain how it supports your interpretation and answers the question."
+  },
+
+  "Poetry: Language and Form": {
+    heading: "Connecting poetic methods to meaning",
+    paragraphs: [
+      "Poets use vocabulary, imagery, sound patterns, rhythm and form to communicate ideas and feelings. Form refers to the poem's overall type or arrangement, while structure includes the organisation and development of its lines, stanzas and ideas. These features can work together rather than operating separately.",
+      "Repetition may emphasise a feeling or idea; rhyme and rhythm may create a particular pace or sound; contrasts can highlight differences between experiences. However, a technique does not have one universal effect. Its meaning depends on the words, situation and wider movement of the poem.",
+      "A useful analysis explains why a particular method matters at a particular moment. Notice how the poem begins, whether the speaker's perspective changes and what the ending adds to the overall meaning. Support your interpretation with short quotations."
+    ],
+    example: "If a hopeful image is repeated after descriptions of hardship, the repetition may suggest that hope remains important despite the difficulties being described.",
+    check: "Identify a method, examine the evidence and connect its effect to the poem's ideas."
+  },
+
+  "Creative Writing: Description": {
+    heading: "Creating a vivid and controlled description",
+    paragraphs: [
+      "Descriptive writing aims to create a convincing impression of a person, place, object or moment. You do not need to describe everything. Choose details that support a clear atmosphere and guide the reader's attention through the scene.",
+      "Sensory language can help the reader imagine a place, while precise verbs and nouns often make a description more effective than piles of adjectives. Sentence length and paragraph breaks can control pace. A longer sentence may allow a scene to unfold gradually, while a short sentence can isolate an important detail.",
+      "Structure matters as much as individual words. You might move from a wide view to one small object, follow a sound across a setting or focus on how the atmosphere changes. After drafting, remove repeated details and check that each choice contributes to the impression you want to create."
+    ],
+    example: "Instead of describing a street as simply 'scary', show a flickering lamp, wet pavement and a distant sound that cannot be identified. The selected details allow the atmosphere to develop.",
+    check: "Choose a focus, select purposeful details, control the reader's attention and edit anything unnecessary."
+  },
+
+  "Creative Writing: Narrative": {
+    heading: "Controlling plot, character and pace",
+    paragraphs: [
+      "Narrative writing tells a story, but an effective narrative is not just a chain of events. It develops a situation and gives the reader a reason to follow what happens. A central conflict or problem helps organise the story and gives the character something to respond to.",
+      "Pacing is the speed at which the narrative unfolds. Writers can slow down an important moment through detail and reflection or speed up less important events through summary and shorter sentences. Dialogue can reveal character, show tension or move the plot forward, but too much dialogue can interrupt the narrative.",
+      "An ending should feel connected to the story. It might resolve the central problem, show a character's realisation or leave a deliberate question unanswered. A small story with a controlled structure is often more effective than a complicated plot that has no space to develop its ideas."
+    ],
+    example: "A story about a character waiting for an important result can create tension by focusing on small sounds and physical reactions rather than introducing several unrelated events.",
+    check: "Make sure the story has a central situation, purposeful development and an ending that adds meaning."
+  },
+
+  "Shakespeare: Context and Interpretation": {
+    heading: "Using historical context meaningfully",
+    paragraphs: [
+      "Context includes the social beliefs, historical circumstances and cultural expectations surrounding a text. Shakespeare's plays were written in a different period from ours, so ideas about authority, family, gender, religion or social position may influence how characters behave and how audiences respond.",
+      "Context should help explain the play, not replace analysis of it. Begin with a particular line, character choice or conflict, then consider how a relevant belief or expectation may deepen its meaning. Avoid assuming that every person in Shakespeare's time held exactly the same views.",
+      "Audiences can interpret the same moment differently because their experiences and values differ. A useful response recognises what the text supports while considering how context may shape interpretation. Evidence from the play remains essential."
+    ],
+    example: "If a play presents a ruler whose decisions affect the whole country, ideas about kingship and authority may help explain why the character's behaviour matters beyond their personal life.",
+    check: "Use context to illuminate a specific detail, and always connect it back to the play."
+  },
+
+  "Unseen Poetry": {
+    heading: "Building an interpretation from the poem itself",
+    paragraphs: [
+      "An unseen poem is one you have not prepared in advance. Begin by reading it for its overall situation: who seems to be speaking, what they are describing and what feelings or ideas appear important. Do not decide on a theme from the title alone.",
+      "Read again and notice significant word choices, imagery, contrasts, repetitions, line breaks and shifts in tone. You do not need to identify every technique. Select the details that help you explain the poem's central ideas and how they develop.",
+      "Your interpretation should be coherent and supported by evidence. If a phrase has more than one possible meaning, explore the reading that best fits the surrounding details. Avoid forcing a memorised interpretation onto a poem that does not support it."
+    ],
+    example: "If a poem begins with confident language but ends with uncertainty, that shift may suggest that the speaker's feelings or understanding have changed.",
+    check: "Read for overall meaning, choose important details and explain how they work together."
+  },
+
+  "Comparing Writers' Viewpoints": {
+    heading: "Comparing perspectives and methods",
+    paragraphs: [
+      "A viewpoint is the perspective or position a writer presents about a subject. Two writers may agree on the main issue but differ in their attitudes, priorities or suggested solutions. Comparing viewpoints means explaining these relationships and supporting them with evidence.",
+      "Writers use methods such as examples, anecdotes, statistics, contrasts and emotive vocabulary to communicate their perspectives. Consider why each writer might choose a particular method and how it supports their purpose. The same technique can work differently in different contexts.",
+      "Organise your response around meaningful points of comparison. Use evidence from both texts and explain how the writers' choices reveal similarities or differences. Simply describing one text and then the other can make the comparison less clear."
+    ],
+    example: "Two writers might both discuss traffic. One may focus on convenience for drivers, while another emphasises pollution and pedestrian safety. Their selected details reveal different priorities.",
+    check: "Compare both what the writers think and how they communicate their viewpoints."
+  },
+
+  "Argumentative Writing": {
+    heading: "Building a reasoned and balanced argument",
+    paragraphs: [
+      "Argumentative writing presents a position and supports it with reasons. A clear claim tells the reader what you believe, while the following explanation and evidence show why the position is reasonable. Each paragraph should develop a separate part of the argument.",
+      "A counterargument presents an opposing view. Considering one can show that you understand the issue's complexity. You can then respond by explaining why your position remains convincing, or acknowledge where the opposing view has merit. Balance does not require pretending that every argument is equally strong.",
+      "Examples and facts can make your reasoning more concrete, but they should be relevant and accurate. Linking phrases help the reader follow the relationship between ideas. A conclusion should reinforce the position that your reasoning has established."
+    ],
+    example: "If arguing for later school start times, you could explain your reasons, acknowledge that transport schedules may be difficult to change and then discuss how the benefits could be balanced against that challenge.",
+    check: "Make a clear claim, explain your reasons, consider relevant objections and reach a reasoned conclusion."
+  },
+
+  "Exam Timing and Planning": {
+    heading: "Managing your time without rushing",
+    paragraphs: [
+      "Exam planning helps you give each task appropriate attention within the available time. Start by reading the instructions and understanding what each question requires. The marks and task length can help guide how much time you spend, although you should follow any specific guidance from your exam board or teacher.",
+      "For an extended response, a brief plan can help you choose a clear argument and organise evidence before you begin. It does not need to be a full essay written in advance. A few focused points can reduce repetition and make it easier to stay on task.",
+      "Leave some time to check your work. Look for missing answers, unclear sentences, punctuation errors and paragraphs that drift away from the question. Practising under timed conditions helps you discover how long different tasks take and adjust your approach."
+    ],
+    example: "If a question carries many marks and requires detailed analysis, it usually deserves more time than a short question asking you to retrieve one detail.",
+    check: "Plan realistically, keep track of the task and leave time for a final check."
+  },
+
+  "Language Analysis: Precision": {
+    heading: "Making your analysis specific and thoughtful",
+    paragraphs: [
+      "Precise analysis focuses on the details that matter most. Rather than naming many techniques, choose a word, phrase or structural choice that helps explain how the writer presents the subject. Then explore its meaning in the context of the passage.",
+      "A word's connotations may suggest several connected ideas. Look at its literal meaning, its associations and the way it relates to the surrounding language. Contrasts and patterns can also matter: a repeated image may develop an idea, while a sudden change may challenge the reader's expectations.",
+      "Avoid formulaic statements that could be used for any text. Explain what the actual evidence suggests and acknowledge uncertainty where appropriate. A convincing interpretation is grounded in the passage rather than based on a fixed claim about what a technique always does."
+    ],
+    example: "If a writer calls a sound 'persistent', the word suggests that it continues and is difficult to ignore. In a scene about a character trying to sleep, this may help present the sound as irritating or oppressive.",
+    check: "Choose a meaningful detail and explain exactly what it suggests in this context."
+  },
+
+  "Literature: Developing Arguments": {
+    heading: "Sustaining an argument across an essay",
+    paragraphs: [
+      "A developed literature essay has a clear interpretation that continues throughout the response. Your introduction establishes your overall answer, while each paragraph develops one aspect of it. The paragraphs should connect logically so that the essay feels like one argument rather than a collection of unrelated observations.",
+      "Choose quotations that allow you to explore the writer's choices. Analyse language, form or structure where it helps explain the meaning, and use relevant context to deepen your interpretation. Evidence should be integrated into your reasoning rather than added without explanation.",
+      "Alternative interpretations can demonstrate thoughtful reading when they are plausible and supported by the text. You do not need to invent a different meaning for every quotation. Focus on interpretations that genuinely help explain the complexity of a character, theme or moment."
+    ],
+    example: "An essay about power might explore how a character gains authority, how that authority affects relationships and whether the character's power ultimately becomes unstable. Each point develops the same central argument.",
+    check: "Check that each paragraph adds a new step to your argument and remains connected to the question."
+  },
+
+  "Unseen Poetry: Independent Analysis": {
+    heading: "Reading carefully without relying on memorised answers",
+    paragraphs: [
+      "Independent poetry analysis begins with the poem itself. Identify the speaker, situation and central concerns before deciding which details deserve close attention. The title can provide a clue, but it should be considered alongside the poem rather than treated as a complete explanation.",
+      "Look for significant language choices, contrasts, repetitions and changes in tone. Consider how the poem develops from its opening to its ending. A change in perspective or feeling may be important because it changes the way earlier details are understood.",
+      "Build a coherent interpretation using concise evidence. You can discuss uncertainty if the poem supports more than one reading, but explain why your interpretation fits the words and structure. Memorised techniques are useful only when they help you understand the poem in front of you."
+    ],
+    example: "If the speaker first describes a memory warmly but later mentions a detail that suggests regret, the poem may present memory as both comforting and painful.",
+    check: "Let the poem's actual details guide your argument, rather than forcing it into a familiar theme."
+  },
+
+  "Comparative Poetry": {
+    heading: "Creating a connected comparison",
+    paragraphs: [
+      "Comparative poetry analysis examines how two poems present related ideas or experiences. Begin with a clear point of connection, such as the speakers' attitudes towards nature or the ways the poets present loss. This gives your discussion a direction.",
+      "Use short quotations from both poems and analyse the methods that matter to your point. One poet might use gentle imagery while another uses violent verbs to present the same subject differently. Explain what these choices suggest and how they affect the overall interpretation.",
+      "Structure your paragraphs around comparisons instead of treating the poems as separate tasks. You can discuss a similarity and then develop a meaningful difference, or organise the essay around several connected aspects of the shared theme."
+    ],
+    example: "If both poems describe the sea, one might present it as peaceful and another as dangerous. Comparing the poets' verbs, imagery and tone can show how their attitudes differ.",
+    check: "Keep both poems in each main comparison and explain why their similarities or differences matter."
+  },
+
+  "Creative Writing: Craft and Control": {
+    heading: "Making deliberate writing choices",
+    paragraphs: [
+      "Controlled creative writing begins with a clear purpose and focus. Decide what you want the reader to notice or feel, then select details that contribute to that effect. A narrow focus gives you room to develop an idea carefully instead of rushing through too many events or images.",
+      "Specific nouns and verbs often create a stronger impression than familiar clichés. Sentence length, punctuation and paragraphing can shape pace and emphasis. A paragraph break may signal a shift in focus, while a short sentence can draw attention to a significant moment.",
+      "Editing is part of crafting. Read your work to identify repeated ideas, vague vocabulary, awkward sentences and punctuation errors. Keep details that serve the purpose and remove those that distract from it."
+    ],
+    example: "If the aim is to create calm, you might focus on slow movement, gentle sounds and a steady rhythm. If the scene suddenly changes, a sharp sentence or abrupt paragraph break may make that shift more noticeable.",
+    check: "For every major choice, ask whether it supports your intended effect."
+  },
+
+  "Persuasive and Transactional Writing": {
+    heading: "Adapting a message to its purpose",
+    paragraphs: [
+      "Persuasive and transactional writing asks you to communicate for a particular reason. You might need to argue for a change, inform readers about an issue or write a speech that encourages action. The task's audience, purpose and form should shape your choices from the beginning.",
+      "A clear viewpoint gives the writing direction. Develop it with reasons, examples and explanation, and use rhetorical methods where they support the message. Different forms have different conventions: a speech should work aloud, an article may need a headline and a formal letter should use an appropriate register.",
+      "Organise the writing so that each paragraph has a purpose. Make transitions between ideas clear and finish with a conclusion that reinforces the message. Proofreading helps ensure that errors do not distract from your argument."
+    ],
+    example: "A speech and a formal letter might both argue for a school improvement, but the speech may use direct address and repetition while the letter may use a more formal structure and measured tone.",
+    check: "Identify the audience, purpose and form before choosing your structure, tone and persuasive methods."
+  },
+
+  "Shakespeare: Detailed Analysis": {
+    heading: "Analysing dialogue and dramatic choices",
+    paragraphs: [
+      "A play is written to be performed, so Shakespeare's language works alongside actions, entrances, exits and stage directions. These choices can shape what an audience notices and how they interpret a character. A pause or an entrance at a crucial moment may change the tension of a scene.",
+      "Analyse dialogue closely by considering the meaning and associations of particular words. Characters may speak differently depending on whom they address, and their language can reveal power relationships, uncertainty or attempts to persuade. Compare what they say with what they do when there is a meaningful contrast.",
+      "Soliloquies can reveal private thoughts and internal conflict, while interactions between characters can expose disagreements or shifting alliances. Relevant context may help explain a conflict, but it should deepen your reading of the actual dialogue and dramatic action."
+    ],
+    example: "If a character gives a confident public speech but later reveals doubts in a soliloquy, the contrast may suggest that their public image hides private uncertainty.",
+    check: "Analyse the words, consider how the scene might be performed and connect the moment to character or theme."
+  },
+
+  "Revision and Retrieval Practice": {
+    heading: "Learning so you can recall and apply ideas",
+    paragraphs: [
+      "Revision works best when it involves more than rereading. Retrieval practice means trying to recall information without immediately looking at the notes. For English, this could mean explaining a technique in your own words, recalling how to structure an analytical paragraph or practising an interpretation of a quotation.",
+      "After attempting to recall an idea, check your notes and correct anything missing or inaccurate. Then practise applying the knowledge to a new example. Knowing what a metaphor is, for instance, is useful, but being able to explain how a particular metaphor creates meaning is a more developed skill.",
+      "Spaced practice means revisiting material over time rather than doing everything in one session. Return to difficult topics, mix recall with practice questions and use mistakes to decide what to study next. The aim is to build understanding that you can use independently."
+    ],
+    example: "Close your notes and explain the difference between tone and mood. Check your explanation, improve it, then find an example in a poem and explain how the distinction helps your analysis.",
+    check: "Recall first, check second, correct mistakes and practise using the idea in a fresh example."
+  },
+
+  "Exam Questions and Evidence": {
+    heading: "Selecting evidence that answers the task",
+    paragraphs: [
+      "Exam questions often direct you towards a specific character, theme, viewpoint or method. Identify the key instruction and subject before choosing evidence. A quotation may be interesting but still be unhelpful if it does not support the point the question asks you to make.",
+      "Use a short quotation or precise reference, then explain its significance. The explanation should connect the evidence to your interpretation and to the wording of the question. Avoid assuming that the examiner will make the connection for you.",
+      "A focused response is usually clearer than a long answer filled with repeated points. Plan the main stages of your answer, develop each point with evidence and check that your paragraphs remain relevant. Follow the exact instructions and mark scheme for your particular assessment."
+    ],
+    example: "If asked how a writer presents a character as isolated, choose evidence showing separation, exclusion or the character's own feelings. A quotation about an unrelated event may not help unless you explain its connection.",
+    check: "For every quotation, ask whether it directly supports the point you are making."
+  },
+
+  "Proofreading and Accuracy": {
+    heading: "Checking your writing systematically",
+    paragraphs: [
+      "Proofreading means checking a piece of writing for errors and unclear expression. It is easier to spot problems when you read slowly and focus on one type of issue at a time. First check sentence boundaries and punctuation, then spelling, grammar and word choice.",
+      "Look for inconsistent verb tenses, missing words, repeated expressions and sentences that are difficult to follow. Check apostrophes carefully and make sure each paragraph develops its idea in a logical order. Reading aloud can help you notice awkward phrasing, although you should still check punctuation and grammar directly.",
+      "Proofreading is not only about correcting mistakes. It is also an opportunity to improve clarity. Replace vague wording when a more precise expression would help, but do not make a sentence more complicated just to sound formal."
+    ],
+    example: "Draft: 'The character are angry because they was ignored.' Revised: 'The characters are angry because they were ignored.' Checking subject–verb agreement and tense improves accuracy.",
+    check: "Check sentence boundaries, punctuation, spelling, grammar and clarity in separate passes."
+  }
+};
+
+let currentYear = 7;
+let currentSubject = "All";
+let currentFilter = "all";
+let currentTopic = null;
+
+const STORAGE_KEY = "studyPawsEnglishCompleted";
+let completed = [];
+
+try {
+  completed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  if (!Array.isArray(completed)) completed = [];
+} catch (error) {
+  completed = [];
+}
+
+const topicGrid = document.getElementById("topicGrid");
+const lessonPanel = document.getElementById("lessonPanel");
+const quizPanel = document.getElementById("quizPanel");
+
+function allTopicsForYear(year) {
+  return topicBank[year] || [];
+}
+
+function topicId(year, topic) {
+  return `${year}-${topic.title}`;
+}
+
+function isCompleted(year, topic) {
+  return completed.includes(topicId(year, topic));
+}
+
+function saveCompleted() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(completed));
+  } catch (error) {
+    // The page still works if browser storage is unavailable.
+  }
+}
+
+function updateStats() {
+  const topics = allTopicsForYear(currentYear);
+  const count = topics.filter(topic => isCompleted(currentYear, topic)).length;
+  const percent = topics.length ? Math.round(count / topics.length * 100) : 0;
+
+  document.getElementById("totalTopics").textContent = topics.length;
+  document.getElementById("completedTopics").textContent = count;
+  document.getElementById("progressPercent").textContent = `${percent}%`;
+  document.getElementById("progressFill").style.width = `${percent}%`;
+}
+
+function renderTopics() {
+  const topics = allTopicsForYear(currentYear);
+  const search = document.getElementById("searchInput").value.toLowerCase().trim();
+
+  const filtered = topics.filter(topic => {
+    const matchesSubject = currentSubject === "All" || topic.subject === currentSubject;
+    const matchesFilter =
+      currentFilter === "all" ||
+      (currentFilter === "done" && isCompleted(currentYear, topic)) ||
+      (currentFilter === "todo" && !isCompleted(currentYear, topic));
+
+    const searchText = [
+      topic.title,
+      topic.subject,
+      topic.description,
+      ...topic.notes,
+      ...topic.keys
+    ].join(" ").toLowerCase();
+
+    return matchesSubject && matchesFilter && searchText.includes(search);
+  });
+
+  document.getElementById("topicHeading").textContent =
+    `Year ${currentYear} topics 🌸`;
+
+  topicGrid.innerHTML = "";
+
+  if (filtered.length === 0) {
+    topicGrid.innerHTML =
+      '<div class="empty-message">No topics found 🐾 Try another search or filter!</div>';
+    updateStats();
+    return;
+  }
+
+  filtered.forEach(topic => {
+    const done = isCompleted(currentYear, topic);
+    const card = document.createElement("article");
+    card.className = "topic-card";
+
+    const tag = document.createElement("span");
+    tag.className = `topic-tag ${topic.subject.toLowerCase()}`;
+    tag.textContent = topic.subject === "Language"
+      ? "English Language"
+      : "English Literature";
+
+    const heading = document.createElement("h3");
+    heading.textContent = topic.title;
+
+    const description = document.createElement("p");
+    description.textContent = topic.description;
+
+    const status = document.createElement("span");
+    status.className = "topic-tag";
+    status.textContent = done ? "Completed ✓" : "Ready to revise";
+
+    const button = document.createElement("button");
+    button.className = "card-button";
+    button.textContent = "Open topic →";
+    button.addEventListener("click", () => openLesson(topic));
+
+    card.append(tag, heading, description, status, button);
+    topicGrid.appendChild(card);
+  });
+
+  updateStats();
+}
+
+function openLesson(topic) {
+  currentTopic = topic;
+
+  document.getElementById("lessonTitle").textContent = topic.title;
+  document.getElementById("lessonTag").textContent =
+    topic.subject === "Language" ? "English Language" : "English Literature";
+
+  const notesContainer = document.getElementById("lessonNotes");
+  notesContainer.innerHTML = "";
+
+  topic.notes.forEach(note => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = note;
+    notesContainer.appendChild(paragraph);
+  });
+
+  const deepContainer = document.getElementById("deepLessonNotes");
+deepContainer.innerHTML = "";
+
+const deep = deepExplanations[topic.title];
+
+if (deep) {
+  const heading = document.createElement("h4");
+  heading.textContent = deep.heading;
+  deepContainer.appendChild(heading);
+
+  deep.paragraphs.forEach(text => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = text;
+    deepContainer.appendChild(paragraph);
+  });
+
+  const example = document.createElement("div");
+  example.className = "learning-example";
+
+  const exampleTitle = document.createElement("strong");
+  exampleTitle.textContent = "✏️ Worked example";
+
+  const exampleText = document.createElement("p");
+  exampleText.textContent = deep.example;
+
+  example.append(exampleTitle, exampleText);
+  deepContainer.appendChild(example);
+
+  const check = document.createElement("div");
+  check.className = "learning-check";
+
+  const checkTitle = document.createElement("strong");
+  checkTitle.textContent = "🐾 Check your understanding";
+
+  const checkText = document.createElement("p");
+  checkText.textContent = deep.check;
+
+  check.append(checkTitle, checkText);
+  deepContainer.appendChild(check);
+}
+
+  document.getElementById("lessonTip").textContent = topic.tip;
+
+  const keysList = document.getElementById("lessonKeyIdeas");
+  keysList.innerHTML = "";
+
+  topic.keys.forEach(key => {
+    const item = document.createElement("li");
+    item.textContent = key;
+    keysList.appendChild(item);
+  });
+
+  document.getElementById("markDoneButton").textContent =
+    isCompleted(currentYear, topic) ? "Mark as not completed ↩" : "Mark topic complete ✓";
+
+  lessonPanel.classList.remove("hidden");
+  quizPanel.classList.add("hidden");
+  lessonPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function toggleCompleted() {
+  if (!currentTopic) return;
+
+  const id = topicId(currentYear, currentTopic);
+  if (completed.includes(id)) {
+    completed = completed.filter(item => item !== id);
+  } else {
+    completed.push(id);
+  }
+
+  saveCompleted();
+  renderTopics();
+
+  document.getElementById("markDoneButton").textContent =
+    isCompleted(currentYear, currentTopic) ? "Mark as not completed ↩" : "Mark topic complete ✓";
+}
+
+function renderQuiz() {
+  if (!currentTopic) return;
+
+  const container = document.getElementById("quizQuestions");
+  const feedback = document.getElementById("quizFeedback");
+  container.innerHTML = "";
+  feedback.innerHTML = "";
+
+  currentTopic.quiz.forEach((question, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "quiz-question";
+
+    const heading = document.createElement("p");
+    const strong = document.createElement("strong");
+    strong.textContent = `${index + 1}. ${question.q}`;
+    heading.appendChild(strong);
+    wrapper.appendChild(heading);
+
+    question.options.forEach((option, optionIndex) => {
+      const label = document.createElement("label");
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = `question-${index}`;
+      radio.value = String(optionIndex);
+      radio.required = optionIndex === 0;
+      label.append(radio, document.createTextNode(` ${option}`));
+      wrapper.appendChild(label);
+    });
+
+    container.appendChild(wrapper);
+  });
+
+  lessonPanel.classList.add("hidden");
+  quizPanel.classList.remove("hidden");
+  quizPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function submitQuiz(event) {
+  event.preventDefault();
+  if (!currentTopic) return;
+
+  let score = 0;
+  const total = currentTopic.quiz.length;
+  const feedback = document.getElementById("quizFeedback");
+  feedback.innerHTML = "";
+
+  currentTopic.quiz.forEach((question, index) => {
+    const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+    const correct = selected && Number(selected.value) === question.a;
+    if (correct) score++;
+
+    const result = document.createElement("div");
+    result.className = `feedback ${correct ? "good" : "retry"}`;
+
+    const title = document.createElement("strong");
+    title.textContent = correct ? "Correct! ✓ " : "Not quite! 💗 ";
+    const explanation = document.createElement("span");
+    explanation.textContent = question.why;
+
+    result.append(title, explanation);
+    feedback.appendChild(result);
+  });
+
+  const summary = document.createElement("h3");
+  summary.textContent = `Your score: ${score}/${total} (${Math.round(score / total * 100)}%)`;
+  feedback.prepend(summary);
+
+  if (score === total) {
+    const congrats = document.createElement("p");
+    congrats.textContent = "AMAZING! You got every question right! 🎉🐾";
+    feedback.appendChild(congrats);
+  } else {
+    const encouragement = document.createElement("p");
+    encouragement.textContent = "Keep going! Read the explanations and try again. 🌷";
+    feedback.appendChild(encouragement);
+  }
+}
+
+document.querySelectorAll("[data-year]").forEach(button => {
+  button.addEventListener("click", () => {
+    currentYear = Number(button.dataset.year);
+
+    document.querySelectorAll("[data-year]").forEach(tab => {
+      tab.classList.toggle("active", tab === button);
+    });
+
+    lessonPanel.classList.add("hidden");
+    quizPanel.classList.add("hidden");
+    renderTopics();
+  });
+});
+
+document.querySelectorAll("[data-subject]").forEach(button => {
+  button.addEventListener("click", () => {
+    currentSubject = button.dataset.subject;
+
+    document.querySelectorAll("[data-subject]").forEach(tab => {
+      tab.classList.toggle("active", tab === button);
+    });
+
+    renderTopics();
+  });
+});
+
+document.querySelectorAll("[data-filter]").forEach(button => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+
+    document.querySelectorAll("[data-filter]").forEach(tab => {
+      tab.classList.toggle("active", tab === button);
+    });
+
+    renderTopics();
+  });
+});
+
+document.getElementById("searchInput").addEventListener("input", renderTopics);
+
+document.getElementById("markDoneButton").addEventListener("click", toggleCompleted);
+document.getElementById("startQuizButton").addEventListener("click", renderQuiz);
+document.getElementById("quizForm").addEventListener("submit", submitQuiz);
+
+document.getElementById("closeLessonButton").addEventListener("click", () => {
+  lessonPanel.classList.add("hidden");
+  renderTopics();
+  document.getElementById("topicHeading").scrollIntoView({ behavior: "smooth" });
+});
+
+document.getElementById("backToLessonButton").addEventListener("click", () => {
+  quizPanel.classList.add("hidden");
+  lessonPanel.classList.remove("hidden");
+  lessonPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+renderTopics();
+
+
+(() => {
+  const englishCards = [
+    // YEAR 7
+    { year: "7", topic: "Techniques", q: "What is a simile?", a: "A comparison using 'like' or 'as'." },
+    { year: "7", topic: "Techniques", q: "What is a metaphor?", a: "A direct comparison that describes one thing as another." },
+    { year: "7", topic: "Techniques", q: "What is personification?", a: "Giving human qualities or actions to something non-human." },
+    { year: "7", topic: "Writing", q: "What is an adjective?", a: "A word that describes a noun." },
+    { year: "7", topic: "Language", q: "What is a noun?", a: "A word naming a person, place, thing or idea." },
+    { year: "7", topic: "Language", q: "What is a verb?", a: "A word expressing an action, occurrence or state." },
+
+    // YEAR 8
+    { year: "8", topic: "Techniques", q: "What is alliteration?", a: "The repetition of initial consonant sounds in nearby words." },
+    { year: "8", topic: "Techniques", q: "What is onomatopoeia?", a: "A word that imitates a sound, such as 'buzz'." },
+    { year: "8", topic: "Language", q: "What is a rhetorical question?", a: "A question asked for effect rather than to receive an answer." },
+    { year: "8", topic: "Writing", q: "What is a paragraph used for?", a: "To organise related ideas and guide the reader through a text." },
+    { year: "8", topic: "Literature", q: "What is a protagonist?", a: "The main character in a story." },
+    { year: "8", topic: "Literature", q: "What is a setting?", a: "The time and place in which a story occurs." },
+
+    // YEAR 9
+    { year: "9", topic: "Techniques", q: "What is pathetic fallacy?", a: "When weather or nature reflects a mood or atmosphere." },
+    { year: "9", topic: "Techniques", q: "What is foreshadowing?", a: "Hints that suggest events that may happen later." },
+    { year: "9", topic: "Language", q: "What is tone?", a: "The attitude or feeling conveyed by a speaker or writer." },
+    { year: "9", topic: "Literature", q: "What is a theme?", a: "A central idea or concern explored in a text." },
+    { year: "9", topic: "Writing", q: "What is a semantic field?", a: "A group of words linked by meaning or subject." },
+    { year: "9", topic: "Literature", q: "What is dramatic irony?", a: "When the audience knows something a character does not." },
+
+    // YEAR 10
+    { year: "10", topic: "Language", q: "What does PEE stand for in paragraph analysis?", a: "Point, Evidence, Explanation. Some schools use PEEL or other structures." },
+    { year: "10", topic: "Language", q: "What should you explain after using a quotation?", a: "How specific words or methods create meaning and affect the reader, linked to the question." },
+    { year: "10", topic: "Poetry", q: "What is enjambment?", a: "When a sentence or phrase continues beyond the end of a poetic line." },
+    { year: "10", topic: "Poetry", q: "What is a stanza?", a: "A grouped set of lines in a poem, similar to a paragraph." },
+    { year: "10", topic: "Shakespeare", q: "What is a soliloquy?", a: "A speech in which a character speaks their thoughts aloud, often alone on stage." },
+    { year: "10", topic: "Writing", q: "What is pathetic fallacy often used to create?", a: "Mood or atmosphere by connecting weather or nature with feelings or events." },
+
+    // YEAR 11
+    { year: "11", topic: "Language", q: "What is the difference between language analysis and structural analysis?", a: "Language analysis explores words and techniques; structural analysis explores how a text is organised and develops." },
+    { year: "11", topic: "Language", q: "What makes a strong analytical quotation?", a: "A relevant, precise quotation that supports your point and gives you specific words to analyse." },
+    { year: "11", topic: "Poetry", q: "What is a volta?", a: "A turn or shift in thought, tone or argument within a poem." },
+    { year: "11", topic: "Poetry", q: "What should you compare when analysing two poems?", a: "Their ideas, methods, language, structure and effects, using evidence from both poems." },
+    { year: "11", topic: "Shakespeare", q: "What is iambic pentameter?", a: "A poetic metre usually made of five iambs per line, often ten syllables with alternating unstressed and stressed beats." },
+    { year: "11", topic: "Writing", q: "What should a persuasive conclusion do?", a: "Reinforce the main argument and leave the reader with a clear final impression." }
+  ];
+
+  const card = document.getElementById("english-flashcard");
+  const yearSelect = document.getElementById("english-year");
+  const topicSelect = document.getElementById("english-topic");
+  const count = document.getElementById("english-card-count");
+  const label = document.getElementById("english-card-label");
+  const text = document.getElementById("english-card-text");
+  const hint = document.getElementById("english-card-hint");
+  const status = document.getElementById("english-card-status");
+
+  // Only run on the page containing the English flashcard interface.
+  if (!card || !yearSelect || !topicSelect || !count ||
+      !label || !text || !hint || !status) return;
+
+  let deck = [];
+  let index = 0;
+  let flipped = false;
+
+  function buildDeck() {
+    const year = yearSelect.value;
+    const topic = topicSelect.value;
+
+    deck = englishCards.filter(item =>
+      (year === "all" || item.year === year) &&
+      (topic === "all" || item.topic === topic)
+    );
+
+    index = 0;
+    flipped = false;
+    renderCard();
+  }
+
+  function renderCard() {
+    if (!deck.length) {
+      count.textContent = "No cards";
+      label.textContent = "NO CARDS FOUND";
+      text.textContent = "Try selecting another year or topic.";
+      hint.textContent = "Your next English adventure awaits! 💜";
+      status.textContent = "";
+      return;
+    }
+
+    const current = deck[index];
+
+    count.textContent = `Card ${index + 1} of ${deck.length}`;
+    label.textContent = flipped ? "ANSWER 💜" : "QUESTION ✨";
+    text.textContent = flipped ? current.a : current.q;
+    hint.textContent = flipped
+      ? "Click to see the question again"
+      : "Click the card to reveal the answer ✨";
+    status.textContent = `Year ${current.year} · ${current.topic}`;
+  }
+
+  function flipCard() {
+    if (!deck.length) return;
+    flipped = !flipped;
+    renderCard();
+  }
+
+  function nextCard() {
+    if (!deck.length) return;
+    index = (index + 1) % deck.length;
+    flipped = false;
+    renderCard();
+  }
+
+  function previousCard() {
+    if (!deck.length) return;
+    index = (index - 1 + deck.length) % deck.length;
+    flipped = false;
+    renderCard();
+  }
+
+  function shuffleDeck() {
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+
+    index = 0;
+    flipped = false;
+    renderCard();
+  }
+
+  document.getElementById("english-flip")
+    .addEventListener("click", flipCard);
+  card.addEventListener("click", flipCard);
+
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      flipCard();
+    }
+  });
+
+  document.getElementById("english-next")
+    .addEventListener("click", nextCard);
+  document.getElementById("english-prev")
+    .addEventListener("click", previousCard);
+  document.getElementById("english-shuffle")
+    .addEventListener("click", shuffleDeck);
+
+  document.getElementById("english-reset")
+    .addEventListener("click", buildDeck);
+
+  yearSelect.addEventListener("change", buildDeck);
+  topicSelect.addEventListener("change", buildDeck);
+
+  buildDeck();
+})();
+
+</script>
+</body>
+</html>

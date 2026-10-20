@@ -1,0 +1,1511 @@
+const KoreanAcademy = (() => {
+  "use strict";
+
+  const STORAGE_KEY = "studyPawsKoreanV1";
+  const TOTAL_WEEKS = 96;
+  const LESSONS_PER_WEEK = 4;
+
+  const worlds = [
+    { id: 1, year: 1, emoji: "🌸", name: "Hello, Seoul!", description: "Hangul, greetings and introductions." },
+    { id: 2, year: 1, emoji: "☕", name: "Cozy Café", description: "Food, drinks, numbers and ordering." },
+    { id: 3, year: 1, emoji: "🛍️", name: "Shopping Street", description: "Prices, colours, descriptions and shopping." },
+    { id: 4, year: 1, emoji: "🎮", name: "Friends & Hobbies", description: "Routines, interests, feelings and plans." },
+    { id: 5, year: 1, emoji: "🚇", name: "Explore Korea", description: "Places, transport, directions and travel." },
+    { id: 6, year: 1, emoji: "🎬", name: "Everyday Korean", description: "Past events, future plans and everyday conversations." },
+    { id: 7, year: 2, emoji: "💬", name: "Natural Conversations", description: "Longer replies, reactions and social Korean." },
+    { id: 8, year: 2, emoji: "📚", name: "Grammar Power-Up", description: "Connectors, clauses and nuanced meanings." },
+    { id: 9, year: 2, emoji: "🧳", name: "Travel Pro", description: "Travel arrangements and solving problems." },
+    { id: 10, year: 2, emoji: "🫶", name: "Life, Work & Study", description: "Opinions, relationships and formal situations." },
+    { id: 11, year: 2, emoji: "🎧", name: "Listening & Stories", description: "Longer texts, casual speech and storytelling." },
+    { id: 12, year: 2, emoji: "🏆", name: "Independent Korean", description: "Independent communication and final projects." }
+  ];
+
+  /*
+   * Each week has its own topic, vocabulary, grammar focus,
+   * dialogue, and learning target.
+   */
+  const curriculum = [
+    {
+      topic: "Hangul: basic vowels",
+      vocab: [["ㅏ", "a", "Vowel sound: a"], ["ㅓ", "eo", "Vowel sound: eo"], ["ㅗ", "o", "Vowel sound: o"], ["ㅜ", "u", "Vowel sound: u"]],
+      grammar: "Hangul is an alphabet. Learn each vowel's sound and shape before combining letters into syllable blocks.",
+      example: "아 · 어 · 오 · 우",
+      translation: "Basic vowel syllables",
+      mission: "Write each vowel five times. Read the four syllables aloud without using the romanisation."
+    },
+    {
+      topic: "Hangul: more vowels",
+      vocab: [["ㅡ", "eu", "Vowel"], ["ㅣ", "i", "Vowel"], ["ㅐ", "ae", "Vowel"], ["ㅔ", "e", "Vowel"]],
+      grammar: "Some Korean vowel contrasts vary by speaker. Practise the standard learning distinction and recognise real pronunciation differences.",
+      example: "으 · 이 · 애 · 에",
+      translation: "More vowel syllables",
+      mission: "Read the vowel set aloud, then write it from memory."
+    },
+    {
+      topic: "Hangul: first consonants",
+      vocab: [["ㄱ", "g/k", "Consonant"], ["ㄴ", "n", "Consonant"], ["ㄷ", "d/t", "Consonant"], ["ㄹ", "r/l", "Consonant"]],
+      grammar: "Korean consonant sounds can change slightly by position. Learn the basic sound first; refine pronunciation as you progress.",
+      example: "가 · 나 · 다 · 라",
+      translation: "Consonant-vowel blocks",
+      mission: "Read each syllable and identify the consonant at the beginning."
+    },
+    {
+      topic: "Hangul: consonants and syllables",
+      vocab: [["ㅁ", "m", "Consonant"], ["ㅂ", "b/p", "Consonant"], ["ㅅ", "s", "Consonant"], ["ㅇ", "silent/ng", "Consonant"]],
+      grammar: "ㅇ is silent at the start of a syllable and represents ng at the end. A syllable block combines letters into one unit.",
+      example: "마 · 바 · 사 · 아",
+      translation: "Read the syllable blocks",
+      mission: "Read the syllables aloud and explain the two positions of ㅇ."
+    },
+    {
+      topic: "Hangul: remaining basic consonants",
+      vocab: [["ㅈ", "j", "Consonant"], ["ㅊ", "ch", "Consonant"], ["ㅋ", "k", "Consonant"], ["ㅌ", "t", "Consonant"]],
+      grammar: "Some consonants are aspirated, meaning they are pronounced with a stronger burst of air. Compare ㅋ with ㄱ and ㅌ with ㄷ.",
+      example: "자 · 차 · 카 · 타",
+      translation: "Compare consonant sounds",
+      mission: "Read each block and practise the stronger airflow in aspirated consonants."
+    },
+    {
+      topic: "Hangul: final consonants",
+      vocab: [["악", "ak", "Syllable with final ㄱ"], ["안", "an", "Syllable with final ㄴ"], ["암", "am", "Syllable with final ㅁ"], ["알", "al", "Syllable with final ㄹ"]],
+      grammar: "A final consonant is called 받침 (batchim). Its position is at the bottom of a syllable block and its sound may differ from its initial sound.",
+      example: "안녕하세요",
+      translation: "Hello (polite)",
+      mission: "Find the final consonant in 안녕하세요 and practise reading syllables with 받침."
+    },
+    {
+      topic: "Reading your first Korean words",
+      vocab: [["나", "na", "I / me (casual)"], ["너", "neo", "You (casual)"], ["우리", "uri", "We / our"], ["나라", "nara", "Country"]],
+      grammar: "Read Hangul directly rather than relying on romanisation. Romanisation is a temporary aid, not a replacement for reading.",
+      example: "우리나라",
+      translation: "Our country",
+      mission: "Read all four words in Hangul, then cover the romanisation and English."
+    },
+    {
+      topic: "Greetings and politeness",
+      vocab: [["안녕하세요", "annyeonghaseyo", "Hello"], ["감사합니다", "gamsahamnida", "Thank you"], ["죄송합니다", "joesonghamnida", "I'm sorry"], ["안녕히 가세요", "annyeonghi gaseyo", "Goodbye to someone leaving"]],
+      grammar: "Korean has speech levels. The polite -요 style and formal polite endings are useful with strangers, teachers and people you do not know well.",
+      example: "안녕하세요. 감사합니다.",
+      translation: "Hello. Thank you.",
+      mission: "Perform a greeting and farewell in a polite role-play."
+    },
+    {
+      topic: "Introducing yourself",
+      vocab: [["저", "jeo", "I (polite)"], ["이름", "ireum", "Name"], ["학생", "haksaeng", "Student"], ["사람", "saram", "Person"]],
+      grammar: "저는 학생이에요 means 'I am a student.' Use 이에요 after a consonant and 예요 after a vowel.",
+      example: "저는 학생이에요.",
+      translation: "I am a student.",
+      mission: "Introduce yourself using your name and one true detail."
+    },
+    {
+      topic: "Asking someone's name",
+      vocab: [["제", "je", "My"], ["이름이 뭐예요?", "ireumi mwoyeyo?", "What is your name?"], ["만나다", "mannada", "To meet"], ["반갑다", "bangapda", "To be glad"]],
+      grammar: "이름이 뭐예요? asks someone's name politely. 제 이름은 …예요 means 'My name is …'.",
+      example: "제 이름은 민지예요.",
+      translation: "My name is Minji.",
+      mission: "Ask a partner their name, answer, and say that you are pleased to meet them."
+    },
+    {
+      topic: "Countries and nationalities",
+      vocab: [["한국", "hanguk", "Korea"], ["영국", "yeongguk", "United Kingdom"], ["미국", "miguk", "United States"], ["어디", "eodi", "Where"]],
+      grammar: "어디에서 왔어요? means 'Where are you from?' Use 에서 왔어요 to say where you came from.",
+      example: "저는 영국에서 왔어요.",
+      translation: "I am from the UK.",
+      mission: "Ask and answer where two fictional people are from."
+    },
+    {
+      topic: "Yes, no and useful responses",
+      vocab: [["네", "ne", "Yes"], ["아니요", "aniyo", "No"], ["괜찮아요", "gwaenchanayo", "It's okay"], ["천만에요", "cheonmaneyo", "You're welcome"]],
+      grammar: "네 and 아니요 are polite responses. 괜찮아요 can mean 'I'm okay' or 'It's fine', depending on the situation.",
+      example: "네, 괜찮아요.",
+      translation: "Yes, it's okay.",
+      mission: "Respond politely to a question, an apology and an offer of help."
+    },
+    {
+      topic: "Korean subject and topic markers",
+      vocab: [["은", "eun", "Topic marker after a consonant"], ["는", "neun", "Topic marker after a vowel"], ["이", "i", "Subject marker after a consonant"], ["가", "ga", "Subject marker after a vowel"]],
+      grammar: "은/는 mark the topic, while 이/가 mark the subject. Their use depends on context and emphasis; do not treat them as exact English equivalents.",
+      example: "저는 학생이에요.",
+      translation: "I am a student.",
+      mission: "Identify the topic marker in three short sentences."
+    },
+    {
+      topic: "People and family",
+      vocab: [["가족", "gajok", "Family"], ["어머니", "eomeoni", "Mother"], ["아버지", "abeoji", "Father"], ["동생", "dongsaeng", "Younger sibling"]],
+      grammar: "Korean family terms distinguish age and relationship. Choose a term based on the relationship rather than translating every English family word literally.",
+      example: "가족이 있어요.",
+      translation: "I have a family.",
+      mission: "Describe your family or invent a family for a fictional character."
+    },
+    {
+      topic: "Existence: 있어요 and 없어요",
+      vocab: [["있어요", "isseoyo", "There is / have"], ["없어요", "eopseoyo", "There isn't / don't have"], ["집", "jip", "House / home"], ["책", "chaek", "Book"]],
+      grammar: "있어요 and 없어요 describe existence or possession. 책이 있어요 can mean 'There is a book' or 'I have a book', depending on context.",
+      example: "책이 있어요.",
+      translation: "There is a book / I have a book.",
+      mission: "Say three things you have and two things you do not have."
+    },
+    {
+      topic: "Demonstratives: this and that",
+      vocab: [["이거", "igeo", "This thing"], ["그거", "geugeo", "That thing (near listener / known)"], ["저거", "jeogeo", "That thing over there"], ["뭐", "mwo", "What"]],
+      grammar: "이거, 그거 and 저거 distinguish things by distance or context. Add a polite question to ask what something is.",
+      example: "이거 뭐예요?",
+      translation: "What is this?",
+      mission: "Point to three objects and ask what each one is in Korean."
+    },
+    {
+      topic: "Everyday classroom objects",
+      vocab: [["연필", "yeonpil", "Pencil"], ["공책", "gongchaek", "Notebook"], ["가방", "gabang", "Bag"], ["책상", "chaeksang", "Desk"]],
+      grammar: "Use 이거/그거/저거 with object names. Practise identifying an item before adding descriptions.",
+      example: "이거는 연필이에요.",
+      translation: "This is a pencil.",
+      mission: "Label five objects around you in Korean."
+    },
+    {
+      topic: "Numbers: native Korean",
+      vocab: [["하나", "hana", "One"], ["둘", "dul", "Two"], ["셋", "set", "Three"], ["넷", "net", "Four"]],
+      grammar: "Native Korean numbers are commonly used for counting objects with many counters and for hours. Before counters, 하나/둘/셋/넷 often become 한/두/세/네.",
+      example: "사과 두 개",
+      translation: "Two apples",
+      mission: "Count four objects and practise the shortened forms before 개."
+    },
+    {
+      topic: "Numbers: Sino-Korean",
+      vocab: [["일", "il", "One"], ["이", "i", "Two"], ["삼", "sam", "Three"], ["사", "sa", "Four"]],
+      grammar: "Sino-Korean numbers are used for many dates, money, minutes and phone numbers. Learn which number system fits each context.",
+      example: "삼천 원",
+      translation: "Three thousand won",
+      mission: "Read prices and practise numbers from one to four in Sino-Korean."
+    },
+    {
+      topic: "Days of the week",
+      vocab: [["월요일", "woryoil", "Monday"], ["화요일", "hwayoil", "Tuesday"], ["수요일", "suyoil", "Wednesday"], ["오늘", "oneul", "Today"]],
+      grammar: "요일 means day of the week. Use 오늘, 내일 and 어제 to refer to today, tomorrow and yesterday.",
+      example: "오늘은 월요일이에요.",
+      translation: "Today is Monday.",
+      mission: "Say today's day and name two activities for different days."
+    },
+    {
+      topic: "Time and schedules",
+      vocab: [["시간", "sigan", "Time"], ["시", "si", "Hour / o'clock"], ["분", "bun", "Minute"], ["몇 시", "myeot si", "What time"]],
+      grammar: "Korean time normally uses native Korean numbers for hours and Sino-Korean numbers for minutes.",
+      example: "세 시 십 분이에요.",
+      translation: "It's 3:10.",
+      mission: "Read three times aloud and ask a fictional friend what time it is."
+    },
+    {
+      topic: "Present-tense action verbs",
+      vocab: [["가다", "gada", "To go"], ["먹다", "meokda", "To eat"], ["보다", "boda", "To see / watch"], ["하다", "hada", "To do"]],
+      grammar: "The dictionary form usually ends in 다. Common polite present forms include 가요, 먹어요, 봐요 and 해요.",
+      example: "학교에 가요.",
+      translation: "I go to school.",
+      mission: "Turn all four dictionary verbs into polite present-tense forms."
+    },
+    {
+      topic: "Daily routines",
+      vocab: [["일어나다", "ireonada", "To get up"], ["공부하다", "gongbuhada", "To study"], ["일하다", "ilhada", "To work"], ["자다", "jada", "To sleep"]],
+      grammar: "Place time expressions before the main action when appropriate. Korean often omits a subject when context makes it clear.",
+      example: "아침에 공부해요.",
+      translation: "I study in the morning.",
+      mission: "Describe your morning, afternoon and evening using three verbs."
+    },
+    {
+      topic: "Places and 에",
+      vocab: [["학교", "hakgyo", "School"], ["집", "jip", "Home"], ["카페", "kape", "Café"], ["에", "e", "To / at (destination or location)"]],
+      grammar: "에 marks a destination with movement verbs and a location with certain states. Compare 학교에 가요 with 집에 있어요.",
+      example: "카페에 가요.",
+      translation: "I go to the café.",
+      mission: "Say where you go and where you are, using 에 correctly."
+    },
+    {
+      topic: "Food vocabulary",
+      vocab: [["밥", "bap", "Rice / meal"], ["김치", "gimchi", "Kimchi"], ["불고기", "bulgogi", "Bulgogi"], ["물", "mul", "Water"]],
+      grammar: "Korean food words often refer to a dish or a meal as well as an ingredient. Learn each word in a useful phrase.",
+      example: "김치를 먹어요.",
+      translation: "I eat kimchi.",
+      mission: "Name three foods you like and one food you would like to try."
+    },
+    {
+      topic: "Ordering at a café",
+      vocab: [["커피", "keopi", "Coffee"], ["차", "cha", "Tea"], ["주세요", "juseyo", "Please give me"], ["메뉴", "menyu", "Menu"]],
+      grammar: "A simple polite request is noun + 주세요. For example, 커피 주세요 means 'Coffee, please.'",
+      example: "차 주세요.",
+      translation: "Tea, please.",
+      mission: "Order a drink and politely ask to see the menu."
+    },
+    {
+      topic: "Food preferences",
+      vocab: [["좋아하다", "joahada", "To like"], ["싫어하다", "sireohada", "To dislike"], ["맛있다", "masitda", "To be delicious"], ["매워요", "maewoyo", "It's spicy"]],
+      grammar: "좋아해요 means 'like'. 맛있어요 means 'It's delicious'. Describe both your preference and your reason.",
+      example: "김치가 맛있어요.",
+      translation: "Kimchi is delicious.",
+      mission: "Explain which dish you like and describe its taste."
+    },
+    {
+      topic: "Restaurant conversations",
+      vocab: [["메뉴판", "menyupan", "Menu"], ["주문하다", "jumunhada", "To order"], ["계산", "gyesan", "Bill / payment"], ["물 더 주세요", "mul deo juseyo", "More water, please"]],
+      grammar: "Use 주세요 for requests. 계산해 주세요 is a useful phrase when asking to pay the bill.",
+      example: "계산해 주세요.",
+      translation: "The bill, please.",
+      mission: "Role-play entering a restaurant, ordering and asking for the bill."
+    },
+    {
+      topic: "Shopping and prices",
+      vocab: [["얼마예요?", "eolmayeyo?", "How much is it?"], ["원", "won", "Korean won"], ["비싸요", "bissayo", "It's expensive"], ["싸요", "ssayo", "It's cheap"]],
+      grammar: "Ask 이거 얼마예요? to find out the price of an item. Prices are normally read using Sino-Korean numbers.",
+      example: "이거 얼마예요?",
+      translation: "How much is this?",
+      mission: "Ask about three prices and decide which item is cheaper."
+    },
+    {
+      topic: "Colours",
+      vocab: [["빨간색", "ppalgansaek", "Red"], ["파란색", "paransaek", "Blue"], ["검은색", "geomeunsaek", "Black"], ["하얀색", "hayansaek", "White"]],
+      grammar: "Colours can be used as nouns or in descriptive forms. Practise colour + object combinations.",
+      example: "파란 가방",
+      translation: "Blue bag",
+      mission: "Describe five objects by colour."
+    },
+    {
+      topic: "Clothes and sizes",
+      vocab: [["옷", "ot", "Clothes"], ["바지", "baji", "Trousers"], ["치마", "chima", "Skirt"], ["사이즈", "saijeu", "Size"]],
+      grammar: "To ask whether something is available in a size, specify the size and use 있어요? for availability.",
+      example: "큰 사이즈 있어요?",
+      translation: "Do you have a large size?",
+      mission: "Ask for a different size and explain what kind of clothing you want."
+    },
+    {
+      topic: "Describing objects",
+      vocab: [["크다", "keuda", "To be big"], ["작다", "jakda", "To be small"], ["예쁘다", "yeppeuda", "To be pretty"], ["새롭다", "saeropda", "To be new"]],
+      grammar: "Descriptive verbs change form before nouns: 큰 가방 means 'big bag'; 예쁜 옷 means 'pretty clothes'.",
+      example: "예쁜 가방이에요.",
+      translation: "It's a pretty bag.",
+      mission: "Describe an object using two adjectives."
+    },
+    {
+      topic: "Weather and seasons",
+      vocab: [["날씨", "nalssi", "Weather"], ["덥다", "deopda", "To be hot"], ["춥다", "chupda", "To be cold"], ["비", "bi", "Rain"]],
+      grammar: "Use 날씨가 좋아요 for 'The weather is nice'. Descriptive verbs conjugate differently from English adjectives.",
+      example: "오늘은 추워요.",
+      translation: "It's cold today.",
+      mission: "Describe the weather today and what you would wear."
+    },
+    {
+      topic: "Likes and dislikes",
+      vocab: [["음악", "eumak", "Music"], ["영화", "yeonghwa", "Film"], ["운동", "undong", "Exercise"], ["독서", "dokseo", "Reading"]],
+      grammar: "Use N을/를 좋아해요 to say you like something. The object marker is 을 after a consonant and 를 after a vowel.",
+      example: "음악을 좋아해요.",
+      translation: "I like music.",
+      mission: "Describe three interests and ask someone what they like."
+    },
+    {
+      topic: "Hobbies and free time",
+      vocab: [["취미", "chwimi", "Hobby"], ["게임하다", "geimhada", "To play games"], ["노래하다", "noraehada", "To sing"], ["읽다", "ikda", "To read"]],
+      grammar: "Use 취미가 뭐예요? to ask about a hobby. Add 자주 to say you do an activity often.",
+      example: "저는 책을 자주 읽어요.",
+      translation: "I often read books.",
+      mission: "Explain your hobby and how often you do it."
+    },
+    {
+      topic: "Music and entertainment",
+      vocab: [["가수", "gasu", "Singer"], ["노래", "norae", "Song"], ["콘서트", "konseoteu", "Concert"], ["춤", "chum", "Dance"]],
+      grammar: "Use 정말 to add emphasis and 좋아해요 to describe your preferences. Practise explaining why you enjoy a performer or song.",
+      example: "이 노래를 정말 좋아해요.",
+      translation: "I really like this song.",
+      mission: "Recommend a song to a friend and give one reason."
+    },
+    {
+      topic: "Making invitations",
+      vocab: [["같이", "gachi", "Together"], ["갈까요?", "galkkayo?", "Shall we go?"], ["먹을까요?", "meogeulkkayo?", "Shall we eat?"], ["좋아요", "joayo", "Sounds good"]],
+      grammar: "-(으)ㄹ까요? can suggest doing something together. The form depends on the final sound of the verb stem.",
+      example: "같이 갈까요?",
+      translation: "Shall we go together?",
+      mission: "Invite someone to eat, watch a film or go shopping."
+    },
+    {
+      topic: "Planning a weekend",
+      vocab: [["주말", "jumal", "Weekend"], ["이번 주", "ibeon ju", "This week"], ["내일", "naeil", "Tomorrow"], ["계획", "gyehoek", "Plan"]],
+      grammar: "Use -(으)ㄹ 거예요 for many future plans. Combine a time phrase with a planned action.",
+      example: "주말에 영화를 볼 거예요.",
+      translation: "I will watch a film at the weekend.",
+      mission: "Describe two weekend plans and ask a friend about theirs."
+    },
+    {
+      topic: "Feelings and moods",
+      vocab: [["행복해요", "haengbokhaeyo", "I'm happy"], ["피곤해요", "pigonhaeyo", "I'm tired"], ["슬퍼요", "seulpeoyo", "I'm sad"], ["걱정돼요", "geokjeongdwaeyo", "I'm worried"]],
+      grammar: "Korean commonly expresses states with descriptive verbs. Add 오늘 to make the time of a feeling clear.",
+      example: "오늘 조금 피곤해요.",
+      translation: "I'm a little tired today.",
+      mission: "Describe your mood and explain what might improve it."
+    },
+    {
+      topic: "Phone messages",
+      vocab: [["전화", "jeonhwa", "Phone call"], ["문자", "munja", "Text message"], ["지금", "jigeum", "Now"], ["나중에", "najunge", "Later"]],
+      grammar: "지금 통화할 수 있어요? asks whether someone can talk now. 수 있어요 expresses ability or possibility.",
+      example: "나중에 전화할게요.",
+      translation: "I'll call later.",
+      mission: "Write a short message saying you are busy and will call later."
+    },
+    {
+      topic: "Places in town",
+      vocab: [["은행", "eunhaeng", "Bank"], ["병원", "byeongwon", "Hospital"], ["약국", "yakguk", "Pharmacy"], ["역", "yeok", "Station"]],
+      grammar: "Use 어디에 있어요? to ask where a place is. Place names commonly combine with 에 있어요.",
+      example: "약국이 어디에 있어요?",
+      translation: "Where is the pharmacy?",
+      mission: "Ask for the location of three places in town."
+    },
+    {
+      topic: "Directions",
+      vocab: [["왼쪽", "oenjjok", "Left"], ["오른쪽", "oreunjjok", "Right"], ["곧장", "gotjang", "Straight ahead"], ["가까워요", "gakkawoyo", "It's nearby"]],
+      grammar: "Use 왼쪽으로 가세요 for 'Go left'. Direction phrases often combine with 으로 to show direction.",
+      example: "오른쪽으로 가세요.",
+      translation: "Go to the right.",
+      mission: "Give a route from a station to a café using two directions."
+    },
+    {
+      topic: "Public transport",
+      vocab: [["지하철", "jihacheol", "Subway"], ["버스", "beoseu", "Bus"], ["기차", "gicha", "Train"], ["타다", "tada", "To ride / board"]],
+      grammar: "Use 을/를 타요 for boarding or riding transport. Use 에서 내려요 to describe getting off at a place.",
+      example: "지하철을 타요.",
+      translation: "I take the subway.",
+      mission: "Explain how you would travel from a hotel to a museum."
+    },
+    {
+      topic: "Buying tickets",
+      vocab: [["표", "pyo", "Ticket"], ["편도", "pyeondo", "One-way"], ["왕복", "wangbok", "Round trip"], ["한 장", "han jang", "One ticket / sheet"]],
+      grammar: "장 is a counter for flat items such as tickets. Use 표 한 장 주세요 to request one ticket.",
+      example: "표 한 장 주세요.",
+      translation: "One ticket, please.",
+      mission: "Buy a one-way ticket and ask when the next train leaves."
+    },
+    {
+      topic: "Hotel check-in",
+      vocab: [["예약", "yeyak", "Reservation"], ["여권", "yeogwon", "Passport"], ["방", "bang", "Room"], ["체크인", "chekeuin", "Check-in"]],
+      grammar: "예약했어요 means 'I made a reservation'. Use 제 이름은 …입니다 for a more formal introduction.",
+      example: "예약했어요. 제 이름은 Alex입니다.",
+      translation: "I have a reservation. My name is Alex.",
+      mission: "Role-play checking in and confirming the name on a booking."
+    },
+    {
+      topic: "Travel problems",
+      vocab: [["잃어버리다", "ireobeorida", "To lose"], ["도와주세요", "dowajuseyo", "Please help me"], ["문제", "munje", "Problem"], ["분실물", "bunsilmul", "Lost property"]],
+      grammar: "Use -았/었어요 to describe a completed event. 여권을 잃어버렸어요 means 'I lost my passport'.",
+      example: "여권을 잃어버렸어요.",
+      translation: "I lost my passport.",
+      mission: "Explain a lost item to a station employee and ask for help."
+    },
+    {
+      topic: "Asking for help",
+      vocab: [["도와주다", "dowajuda", "To help"], ["다시", "dasi", "Again"], ["천천히", "cheoncheonhi", "Slowly"], ["말하다", "malhada", "To speak"]],
+      grammar: "천천히 말해 주세요 means 'Please speak slowly'. 다시 말해 주세요 asks someone to say something again.",
+      example: "다시 말해 주세요.",
+      translation: "Please say that again.",
+      mission: "Practise asking someone to repeat, slow down and explain."
+    },
+    {
+      topic: "Signs and announcements",
+      vocab: [["출구", "chulgu", "Exit"], ["입구", "ipgu", "Entrance"], ["금지", "geumji", "Prohibition"], ["주의", "juui", "Caution"]],
+      grammar: "Short Korean signs often omit full sentence endings. Recognise common nouns and compounds to understand the instruction.",
+      example: "출구",
+      translation: "Exit",
+      mission: "Explain the meaning of four signs and where you might see them."
+    },
+    {
+      topic: "Talking about yesterday",
+      vocab: [["어제", "eoje", "Yesterday"], ["갔어요", "gasseoyo", "Went"], ["먹었어요", "meogeosseoyo", "Ate"], ["봤어요", "bwasseoyo", "Saw / watched"]],
+      grammar: "Common polite past forms include 갔어요, 먹었어요 and 봤어요. Learn each verb's past form with an example.",
+      example: "어제 영화를 봤어요.",
+      translation: "I watched a film yesterday.",
+      mission: "Describe three things you did yesterday."
+    },
+    {
+      topic: "Past-tense conversations",
+      vocab: [["만났어요", "mannasseoyo", "Met"], ["공부했어요", "gongbuhaesseoyo", "Studied"], ["샀어요", "sasseoyo", "Bought"], ["쉬었어요", "swieosseoyo", "Rested"]],
+      grammar: "Past-tense endings vary according to the verb stem. 하다 verbs commonly change to 했어요.",
+      example: "친구를 만났어요.",
+      translation: "I met a friend.",
+      mission: "Ask a friend what they did and answer using past tense."
+    },
+    {
+      topic: "Talking about experiences",
+      vocab: [["경험", "gyeongheom", "Experience"], ["처음", "cheoeum", "First time"], ["가 본 적", "ga bon jeok", "Experience of having gone"], ["재미있었어요", "jaemiisseosseoyo", "It was fun"]],
+      grammar: "-아/어 본 적 있어요 asks whether someone has ever tried or experienced something. Use it for life experiences.",
+      example: "한국 음식을 먹어 본 적 있어요?",
+      translation: "Have you ever tried Korean food?",
+      mission: "Ask two experience questions and answer them honestly or invent answers."
+    },
+    {
+      topic: "Future plans",
+      vocab: [["다음 주", "daeum ju", "Next week"], ["여행", "yeohaeng", "Trip"], ["만날 거예요", "mannal geoyeyo", "Will meet"], ["할 거예요", "hal geoyeyo", "Will do"]],
+      grammar: "-(으)ㄹ 거예요 is a common way to talk about intentions or predictions. The final sound of the verb stem determines the form.",
+      example: "다음 주에 여행할 거예요.",
+      translation: "I will travel next week.",
+      mission: "Describe a plan for next week and ask another person about theirs."
+    },
+    {
+      topic: "Giving reasons with 왜냐하면",
+      vocab: [["왜", "wae", "Why"], ["왜냐하면", "waenyahamyeon", "Because"], ["바쁘다", "bappeuda", "To be busy"], ["시간이 없다", "sigani eopda", "To have no time"]],
+      grammar: "왜 asks why; 왜냐하면 introduces an explanation. Practise giving a clear reason for a choice.",
+      example: "못 가요. 왜냐하면 바빠요.",
+      translation: "I can't go because I'm busy.",
+      mission: "Give reasons for declining an invitation and changing a plan."
+    },
+    {
+      topic: "Comparisons",
+      vocab: [["더", "deo", "More"], ["가장", "gajang", "Most"], ["빠르다", "ppareuda", "To be fast"], ["느리다", "neurida", "To be slow"]],
+      grammar: "더 means 'more'; 가장 means 'most'. Use 보다 to mark the thing you are comparing against.",
+      example: "기차가 버스보다 빨라요.",
+      translation: "The train is faster than the bus.",
+      mission: "Compare two foods, two places and two ways of travelling."
+    },
+    {
+      topic: "Giving opinions",
+      vocab: [["생각하다", "saenggakhada", "To think"], ["의견", "uigyeon", "Opinion"], ["좋다고 생각해요", "jotago saenggakhaeyo", "I think it's good"], ["중요하다", "jungyohada", "To be important"]],
+      grammar: "Use -(이)라고 생각해요 or -다고 생각해요 to report an opinion. The form depends on the type of predicate.",
+      example: "좋다고 생각해요.",
+      translation: "I think it's good.",
+      mission: "State an opinion and support it with one reason."
+    },
+    {
+      topic: "Agreeing politely",
+      vocab: [["맞아요", "majayo", "That's right"], ["저도요", "jeodoyo", "Me too"], ["동의해요", "donguihaeyo", "I agree"], ["좋은 생각이에요", "joeun saenggagieyo", "That's a good idea"]],
+      grammar: "React naturally before adding your own point. 저도요 means 'Me too'; 동의해요 expresses agreement more explicitly.",
+      example: "저도 그렇게 생각해요.",
+      translation: "I think so too.",
+      mission: "Respond to three opinions with agreement and a follow-up sentence."
+    },
+    {
+      topic: "Disagreeing politely",
+      vocab: [["하지만", "hajiman", "But"], ["그렇지만", "geureochiman", "However"], ["조금", "jogeum", "A little"], ["다르게", "dareuge", "Differently"]],
+      grammar: "Soften disagreement with expressions such as 조금 다르게 생각해요 ('I think a little differently'). Explain your alternative view respectfully.",
+      example: "좋은 생각이지만 조금 다르게 생각해요.",
+      translation: "It's a good idea, but I think a little differently.",
+      mission: "Disagree with a fictional suggestion and explain your reason politely."
+    },
+    {
+      topic: "Making suggestions",
+      vocab: [["같이", "gachi", "Together"], ["해 봐요", "hae bwayo", "Let's try doing it"], ["어때요?", "eottaeyo?", "How about it?"], ["좋을 것 같아요", "joeul geot gatayo", "I think it would be good"]],
+      grammar: "-아/어 봐요 can suggest trying something. 어때요? asks what someone thinks of an idea.",
+      example: "같이 공부해 봐요.",
+      translation: "Let's try studying together.",
+      mission: "Suggest three activities and invite the other person to choose."
+    },
+    {
+      topic: "Giving advice",
+      vocab: [["조언", "joeon", "Advice"], ["쉬다", "swida", "To rest"], ["운동하다", "undonghada", "To exercise"], ["-는 게 좋다", "-neun ge jota", "It's good to…"]],
+      grammar: "-는 게 좋아요 is a common way to give advice about an action. For example, 쉬는 게 좋아요 means 'It's good to rest'.",
+      example: "오늘은 쉬는 게 좋아요.",
+      translation: "It's best to rest today.",
+      mission: "Give advice about tiredness, studying and preparing for a trip."
+    },
+    {
+      topic: "Making requests",
+      vocab: [["부탁하다", "butakhada", "To request"], ["빌리다", "billida", "To borrow"], ["잠깐", "jamkkan", "For a moment"], ["가능하다", "ganeunghada", "To be possible"]],
+      grammar: "-아/어 주세요 makes a polite request. Use a clear action verb and keep the tone appropriate to the situation.",
+      example: "잠깐 기다려 주세요.",
+      translation: "Please wait a moment.",
+      mission: "Make three polite requests and respond to someone else's request."
+    },
+    {
+      topic: "Polite and casual speech",
+      vocab: [["반말", "banmal", "Casual speech"], ["존댓말", "jondaenmal", "Honorific / polite speech"], ["친하다", "chinhada", "To be close"], ["처음 뵙겠습니다", "cheoeum boepgetseumnida", "Pleased to meet you (formal)"]],
+      grammar: "Speech level depends on relationship, age, setting and social expectations. Do not switch to casual speech without appropriate familiarity.",
+      example: "처음 뵙겠습니다.",
+      translation: "Pleased to meet you (formal).",
+      mission: "Choose a suitable speech level for a friend, teacher and new colleague."
+    },
+    {
+      topic: "Connecting sentences with 그리고",
+      vocab: [["그리고", "geurigo", "And"], ["또", "tto", "Also / again"], ["먼저", "meonjeo", "First"], ["그다음에", "geudaeume", "After that"]],
+      grammar: "Connect related ideas using 그리고. Use 먼저 and 그다음에 to make a sequence easier to follow.",
+      example: "아침을 먹고 그리고 학교에 가요.",
+      translation: "I eat breakfast and then go to school.",
+      mission: "Describe a routine in four connected steps."
+    },
+    {
+      topic: "Explaining problems",
+      vocab: [["고장 나다", "gojang nada", "To break down"], ["늦다", "neutda", "To be late"], ["잊어버리다", "ijeobeorida", "To forget"], ["불편하다", "bulpyeonhada", "To be inconvenient"]],
+      grammar: "Describe what happened first, then explain the consequence. Use past tense for completed events and -아서/어서 for connected causes or sequences.",
+      example: "버스가 늦어서 지각했어요.",
+      translation: "The bus was late, so I was late.",
+      mission: "Explain a missed appointment or a broken device."
+    },
+    {
+      topic: "Solving problems together",
+      vocab: [["방법", "bangbeop", "Method"], ["해결하다", "haegyeolhada", "To solve"], ["다시 확인하다", "dasi hwaginhada", "To check again"], ["괜찮을까요?", "gwaenchanheulkkayo?", "Would it be okay?"]],
+      grammar: "Suggest a practical next step with -(으)면 어때요? ('How about if we…?').",
+      example: "다시 확인하면 어때요?",
+      translation: "How about checking again?",
+      mission: "Work through a fictional travel problem and agree on a solution."
+    },
+    {
+      topic: "Describing memories",
+      vocab: [["기억", "gieok", "Memory"], ["어렸을 때", "eoryeosseul ttae", "When I was young"], ["추억", "chueok", "Memory / reminiscence"], ["재미있었다", "jaemiisseotda", "Was fun"]],
+      grammar: "-았/었을 때 means 'when [something happened]'. Use it to introduce the time of a memory.",
+      example: "어렸을 때 한국 만화를 봤어요.",
+      translation: "I watched Korean comics/cartoons when I was young.",
+      mission: "Tell a short memory using a time phrase and two past-tense verbs."
+    },
+    {
+      topic: "Talking about goals",
+      vocab: [["목표", "mokpyo", "Goal"], ["꿈", "kkum", "Dream"], ["노력하다", "noryeokhada", "To make an effort"], ["배우다", "baeuda", "To learn"]],
+      grammar: "Use -(으)려고 해요 to describe an intention. For example, 한국어를 배우려고 해요 means 'I intend to learn Korean'.",
+      example: "한국어를 더 배우려고 해요.",
+      translation: "I intend to learn more Korean.",
+      mission: "Explain a personal goal and three steps towards achieving it."
+    },
+    {
+      topic: "School and work",
+      vocab: [["회사", "hoesa", "Company"], ["직장", "jikjang", "Workplace"], ["수업", "sueop", "Class / lesson"], ["회의", "hoeui", "Meeting"]],
+      grammar: "Use 에서 for the place where an action takes place. 회사에서 일해요 means 'I work at a company'.",
+      example: "학교에서 한국어를 공부해요.",
+      translation: "I study Korean at school.",
+      mission: "Describe a typical day at school or work."
+    },
+    {
+      topic: "Friendship and relationships",
+      vocab: [["친구", "chingu", "Friend"], ["약속", "yaksok", "Appointment / promise"], ["연락하다", "yeollakhada", "To contact"], ["도와주다", "dowajuda", "To help"]],
+      grammar: "Use 자주 연락해요 to say you keep in touch often. Explain actions that maintain a friendship.",
+      example: "친구와 자주 연락해요.",
+      translation: "I keep in touch with my friend often.",
+      mission: "Describe how you stay in touch with friends and arrange a meeting."
+    },
+    {
+      topic: "Social etiquette",
+      vocab: [["실례합니다", "sillyehamnida", "Excuse me"], ["잠시만요", "jamsimanyo", "Just a moment"], ["먼저", "meonjeo", "First"], ["괜찮으세요?", "gwaenchanh-euseyo?", "Are you okay?"]],
+      grammar: "Politeness is expressed through vocabulary, speech level and context. Choose a phrase that fits the relationship and situation.",
+      example: "실례합니다. 잠시만요.",
+      translation: "Excuse me. Just a moment.",
+      mission: "Practise entering a conversation, apologising and checking whether someone is okay."
+    },
+    {
+      topic: "Culture and holidays",
+      vocab: [["명절", "myeongjeol", "Traditional holiday"], ["설날", "seollal", "Lunar New Year"], ["추석", "chuseok", "Chuseok harvest holiday"], ["선물", "seonmul", "Gift"]],
+      grammar: "Use 에 to refer to a holiday or time when an event happens. Describe traditions without assuming every family celebrates in the same way.",
+      example: "추석에 가족을 만나요.",
+      translation: "I meet my family at Chuseok.",
+      mission: "Compare a Korean holiday with a holiday familiar to you."
+    },
+    {
+      topic: "Korean food culture",
+      vocab: [["반찬", "banchan", "Side dishes"], ["국", "guk", "Soup"], ["젓가락", "jeotgarak", "Chopsticks"], ["숟가락", "sutgarak", "Spoon"]],
+      grammar: "Describe what is served with a meal and use 함께 to express doing something together.",
+      example: "밥과 국을 먹어요.",
+      translation: "I eat rice and soup.",
+      mission: "Describe a meal and explain what utensils or side dishes it includes."
+    },
+    {
+      topic: "K-drama reactions",
+      vocab: [["정말?", "jeongmal?", "Really?"], ["대박", "daebak", "Amazing / wow (casual)"], ["아쉽다", "aswipda", "To be a shame"], ["기대하다", "gidaehada", "To look forward to"]],
+      grammar: "Reactions depend on tone and context. Some expressions, such as 대박, are casual and may not suit formal situations.",
+      example: "정말 재미있었어요!",
+      translation: "It was really interesting!",
+      mission: "React to a fictional plot twist using an appropriate level of formality."
+    },
+    {
+      topic: "Understanding casual expressions",
+      vocab: [["진짜", "jinjja", "Really (casual)"], ["근데", "geunde", "But / by the way (casual)"], ["완전", "wanjeon", "Totally (casual)"], ["맞아", "maja", "That's right (casual)"]],
+      grammar: "Spoken Korean often shortens expressions. Learn casual forms for listening comprehension, but use polite forms when the situation requires them.",
+      example: "진짜? 완전 좋아!",
+      translation: "Really? That's totally great!",
+      mission: "Identify casual expressions in a short imagined conversation and convert them to polite alternatives."
+    },
+    {
+      topic: "Listening for key words",
+      vocab: [["누구", "nugu", "Who"], ["언제", "eonje", "When"], ["어디", "eodi", "Where"], ["왜", "wae", "Why"]],
+      grammar: "Listen for question words, names, places and time expressions before trying to understand every word.",
+      example: "언제 만나요?",
+      translation: "When shall we meet?",
+      mission: "Read the dialogue aloud, then identify who, when and where without translating every word."
+    },
+    {
+      topic: "Shadowing and pronunciation",
+      vocab: [["천천히", "cheoncheonhi", "Slowly"], ["따라 하다", "ttara hada", "To imitate"], ["발음", "bareum", "Pronunciation"], ["문장", "munjang", "Sentence"]],
+      grammar: "Shadowing means listening to a short phrase and repeating it closely, including rhythm and intonation. Work with short chunks before longer sentences.",
+      example: "천천히 따라 해 보세요.",
+      translation: "Try repeating it slowly.",
+      mission: "Repeat a short Korean dialogue three times and compare your rhythm each time."
+    },
+    {
+      topic: "Retelling a scene",
+      vocab: [["장면", "jangmyeon", "Scene"], ["등장인물", "deungjanginmul", "Character"], ["처음", "cheoeum", "At first"], ["마지막", "majimak", "Last / finally"]],
+      grammar: "Use 처음에, 그다음에 and 마지막에 to structure a retelling in chronological order.",
+      example: "처음에 친구를 만났어요. 그다음에 밥을 먹었어요.",
+      translation: "First I met a friend. Then I ate.",
+      mission: "Retell a short scene in three chronological steps."
+    },
+    {
+      topic: "Summarising information",
+      vocab: [["내용", "naeyong", "Content"], ["중요하다", "jungyohada", "To be important"], ["요약하다", "yoyakhada", "To summarise"], ["핵심", "haeksim", "Key point"]],
+      grammar: "A summary focuses on the main idea and essential details, not every sentence. Use 먼저 and 그래서 to organise your summary.",
+      example: "핵심은 두 가지예요.",
+      translation: "There are two key points.",
+      mission: "Summarise an imagined announcement in two or three Korean sentences."
+    },
+    {
+      topic: "Sharing a story",
+      vocab: [["이야기", "iyagi", "Story"], ["어느 날", "eoneu nal", "One day"], ["갑자기", "gapjagi", "Suddenly"], ["결국", "gyeolguk", "Eventually"]],
+      grammar: "Narratives are easier to follow when time expressions signal a new event. Use past-tense verbs consistently for completed events.",
+      example: "어느 날 친구를 만났어요.",
+      translation: "One day I met a friend.",
+      mission: "Create a short story with a beginning, unexpected event and ending."
+    },
+    {
+      topic: "Explaining preferences",
+      vocab: [["특히", "teukhi", "Especially"], ["왜냐하면", "waenyahamyeon", "Because"], ["편하다", "pyeonhada", "To be comfortable"], ["재미있다", "jaemiitda", "To be interesting"]],
+      grammar: "State a preference and give a supporting reason. Connect an opinion to an example instead of listing adjectives alone.",
+      example: "저는 기차를 좋아해요. 편하기 때문이에요.",
+      translation: "I like trains because they're comfortable.",
+      mission: "Explain a preference and support it with two concrete reasons."
+    },
+    {
+      topic: "Pros and cons",
+      vocab: [["장점", "jangjeom", "Advantage"], ["단점", "danjeom", "Disadvantage"], ["반면에", "banmyeone", "On the other hand"], ["편리하다", "pyeollihada", "To be convenient"]],
+      grammar: "Use 반면에 to contrast two sides. Present a balanced comparison with one advantage and one disadvantage.",
+      example: "편리해요. 반면에 비싸요.",
+      translation: "It's convenient. On the other hand, it's expensive.",
+      mission: "Compare two ways of travelling using one pro and one con for each."
+    },
+    {
+      topic: "Making a travel plan",
+      vocab: [["일정", "iljeong", "Schedule / itinerary"], ["예약하다", "yeyakhada", "To reserve"], ["출발하다", "chulbalhada", "To depart"], ["도착하다", "dochakhada", "To arrive"]],
+      grammar: "Use -(으)ㄹ 예정이에요 to express a planned event. Combine departure, arrival and reservation details.",
+      example: "오전에 출발할 예정이에요.",
+      translation: "I'm scheduled to depart in the morning.",
+      mission: "Plan a one-day trip and explain its schedule in Korean."
+    },
+    {
+      topic: "Changing a reservation",
+      vocab: [["변경하다", "byeongyeonghada", "To change"], ["취소하다", "chwisohada", "To cancel"], ["날짜", "naljja", "Date"], ["가능할까요?", "ganeunghalkkayo?", "Would it be possible?"]],
+      grammar: "Use -아/어 주실 수 있을까요? for a polite request. This is more formal than a basic request with 주세요.",
+      example: "예약을 변경해 주실 수 있을까요?",
+      translation: "Would you be able to change my reservation?",
+      mission: "Ask a hotel to change a booking date and confirm the new details."
+    },
+    {
+      topic: "Handling unexpected situations",
+      vocab: [["갑자기", "gapjagi", "Suddenly"], ["상황", "sanghwang", "Situation"], ["대신", "daesin", "Instead"], ["필요하다", "piryohada", "To be necessary"]],
+      grammar: "Explain the unexpected event, describe its effect and propose an alternative. Use 대신 to introduce a substitute.",
+      example: "기차가 취소돼서 버스를 탈 거예요.",
+      translation: "The train was cancelled, so I'll take a bus.",
+      mission: "Explain a cancelled journey and suggest a workable alternative."
+    },
+    {
+      topic: "Clarifying meaning",
+      vocab: [["무슨 뜻", "museun tteut", "What meaning"], ["이해하다", "ihaehada", "To understand"], ["다시 설명하다", "dasi seolmyeonghada", "To explain again"], ["예를 들다", "yereul deulda", "To give an example"]],
+      grammar: "Ask 무슨 뜻이에요? when you need a word explained. Requesting an example can help when a definition alone is unclear.",
+      example: "무슨 뜻이에요?",
+      translation: "What does it mean?",
+      mission: "Ask a speaker to explain an unfamiliar word and give an example."
+    },
+    {
+      topic: "Longer conversations",
+      vocab: [["그런데", "geureonde", "By the way / however"], ["그래서", "geuraeseo", "So / therefore"], ["사실", "sasil", "Actually / in fact"], ["물론", "mullon", "Of course"]],
+      grammar: "Discourse markers help listeners follow a conversation. Choose them according to the relationship between ideas, not as interchangeable fillers.",
+      example: "사실 바빴어요. 그래서 못 갔어요.",
+      translation: "Actually, I was busy. So I couldn't go.",
+      mission: "Give a longer reply that includes a detail, a reason and a follow-up question."
+    },
+    {
+      topic: "Past experiences and lessons learned",
+      vocab: [["실수", "silsu", "Mistake"], ["배우다", "baeuda", "To learn"], ["다행히", "dahaenghi", "Fortunately"], ["다음에는", "daeume-neun", "Next time"]],
+      grammar: "Use past tense to explain what happened and a future expression to describe what you will do differently next time.",
+      example: "실수했지만 많이 배웠어요.",
+      translation: "I made a mistake, but I learned a lot.",
+      mission: "Tell a story about a challenge and what you learned from it."
+    },
+    {
+      topic: "Future hopes",
+      vocab: [["바라다", "barada", "To hope"], ["언젠가", "eonjenga", "Someday"], ["계획", "gyehoek", "Plan"], ["계속", "gyesok", "Continuously"]],
+      grammar: "Use -고 싶어요 for wants and 바라요 for hopes. Explain a future goal and one action you can take towards it.",
+      example: "언젠가 한국에 가고 싶어요.",
+      translation: "I want to visit Korea someday.",
+      mission: "Describe a future hope and a practical step towards achieving it."
+    },
+    {
+      topic: "Explaining how something works",
+      vocab: [["사용하다", "sayonghada", "To use"], ["순서", "sunseo", "Order / sequence"], ["먼저", "meonjeo", "First"], ["마지막으로", "majimageuro", "Lastly"]],
+      grammar: "Instructional explanations need clear sequence markers and consistent action verbs. Explain the process in a logical order.",
+      example: "먼저 버튼을 누르세요.",
+      translation: "First, press the button.",
+      mission: "Explain how to use a simple device in four steps."
+    },
+    {
+      topic: "Comparing experiences",
+      vocab: [["지난번", "jinanbeon", "Last time"], ["이번에는", "ibeoneneun", "This time"], ["훨씬", "hwolssin", "Much / far"], ["비슷하다", "biseuthada", "To be similar"]],
+      grammar: "Use 훨씬 to emphasise a difference and 비슷해요 to describe similarity. State what is being compared.",
+      example: "이번이 지난번보다 훨씬 재미있어요.",
+      translation: "This time is much more fun than last time.",
+      mission: "Compare two experiences and explain how they differed."
+    },
+    {
+      topic: "Talking about news",
+      vocab: [["뉴스", "nyuseu", "News"], ["소식", "sosik", "News / update"], ["발표하다", "balpyohada", "To announce"], ["최근", "choegeun", "Recently"]],
+      grammar: "Use recent-time expressions and reporting verbs to explain what happened. Distinguish confirmed information from your own opinion.",
+      example: "최근에 새로운 소식이 있었어요.",
+      translation: "There has been some new news recently.",
+      mission: "Summarise a fictional announcement and identify its main point."
+    },
+    {
+      topic: "Describing a character",
+      vocab: [["성격", "seonggyeok", "Personality"], ["친절하다", "chinjeolhada", "To be kind"], ["용감하다", "yonggam-hada", "To be brave"], ["조용하다", "joyonghada", "To be quiet"]],
+      grammar: "Use descriptive verbs to describe personality and 행동 (behaviour) to describe actions. Support a description with an example.",
+      example: "그 사람은 친절하고 용감해요.",
+      translation: "That person is kind and brave.",
+      mission: "Describe a fictional character's personality and give two examples."
+    },
+    {
+      topic: "Discussing a drama episode",
+      vocab: [["줄거리", "julgeori", "Plot"], ["결말", "gyeolmal", "Ending"], ["주인공", "juingong", "Main character"], ["반전", "banjeon", "Plot twist"]],
+      grammar: "Use past tense to summarise events and opinion phrases to evaluate them. Separate a plot summary from your personal reaction.",
+      example: "결말이 정말 놀라웠어요.",
+      translation: "The ending was really surprising.",
+      mission: "Summarise an imagined episode and explain whether you liked its ending."
+    },
+    {
+      topic: "Informal speech in context",
+      vocab: [["그냥", "geunyang", "Just / simply"], ["아마", "ama", "Maybe / probably"], ["별로", "byeollo", "Not particularly"], ["어쨌든", "eojjaetdeun", "Anyway"]],
+      grammar: "Informal speech contains context-dependent expressions. Learn their conversational function and avoid assuming a single translation works every time.",
+      example: "그냥 집에 있었어요.",
+      translation: "I just stayed at home.",
+      mission: "Interpret four expressions in context and rewrite one reply politely."
+    },
+    {
+      topic: "Listening to longer dialogues",
+      vocab: [["대화", "daehwa", "Conversation"], ["의도", "uido", "Intention"], ["관계", "gwangye", "Relationship"], ["분위기", "bunwigi", "Atmosphere"]],
+      grammar: "Meaning depends on who is speaking, their relationship and the situation. Listen for the overall purpose before focusing on individual words.",
+      example: "무슨 이야기를 하고 있어요?",
+      translation: "What are they talking about?",
+      mission: "Read a longer dialogue and identify the speakers' purpose, relationship and mood."
+    },
+    {
+      topic: "Speaking without a script",
+      vocab: [["자연스럽게", "jayeonseureopge", "Naturally"], ["표현하다", "pyohyeonhada", "To express"], ["잠깐 생각하다", "jamkkan saenggakhada", "To think for a moment"], ["계속 말하다", "gyesok malhada", "To keep speaking"]],
+      grammar: "Use short planning pauses and familiar linking expressions rather than translating every English sentence word for word.",
+      example: "제 생각에는 이 방법이 좋아요.",
+      translation: "In my opinion, this method is good.",
+      mission: "Speak for one minute about a familiar topic using notes only as prompts."
+    },
+    {
+      topic: "Conversation repair strategies",
+      vocab: [["다시 말하면", "dasi malhamyeon", "In other words"], ["그러니까", "geureonikka", "So / what I mean is"], ["정확히", "jeonghwakhi", "Precisely"], ["제가 이해한 게 맞아요?", "jega ihaehan ge majayo?", "Have I understood correctly?"]],
+      grammar: "Good speakers check understanding, paraphrase and ask for clarification. Communication does not require understanding every word immediately.",
+      example: "제가 이해한 게 맞아요?",
+      translation: "Have I understood correctly?",
+      mission: "Role-play a misunderstanding and repair it without switching to English."
+    },
+    {
+      topic: "Giving a short presentation",
+      vocab: [["발표", "balpyo", "Presentation"], ["주제", "juje", "Topic"], ["첫째", "cheotjjae", "First"], ["마무리하다", "mamurihada", "To conclude"]],
+      grammar: "Structure a presentation with an opening, organised points and a conclusion. Use signposting words to help listeners follow.",
+      example: "오늘 발표할 주제는 한국 음식입니다.",
+      translation: "Today's presentation topic is Korean food.",
+      mission: "Prepare a one-minute presentation with an opening, two points and a conclusion."
+    },
+    {
+      topic: "Explaining your point of view",
+      vocab: [["관점", "gwanjeom", "Point of view"], ["근거", "geungeo", "Evidence / basis"], ["예를 들어", "yereul deureo", "For example"], ["결론", "gyeollon", "Conclusion"]],
+      grammar: "Support a claim with a reason or example. Distinguish an opinion from a fact and explain how your evidence supports the point.",
+      example: "예를 들어, 시간이 절약돼요.",
+      translation: "For example, it saves time.",
+      mission: "Present a point of view with two reasons and a relevant example."
+    },
+    {
+      topic: "Cultural discussion",
+      vocab: [["문화", "munhwa", "Culture"], ["차이", "chai", "Difference"], ["전통", "jeontong", "Tradition"], ["존중하다", "jonjunghada", "To respect"]],
+      grammar: "Use comparison language carefully when discussing cultures. Avoid generalising from one person's experience to an entire country.",
+      example: "문화마다 차이가 있어요.",
+      translation: "There are differences between cultures.",
+      mission: "Compare two customs respectfully and ask a thoughtful follow-up question."
+    },
+    {
+      topic: "Travel role-play review",
+      vocab: [["예약 확인", "yeyak hwagin", "Reservation confirmation"], ["환승", "hwanseung", "Transfer"], ["지연", "jiyeon", "Delay"], ["도착 시간", "dochak sigan", "Arrival time"]],
+      grammar: "Combine requests, time expressions, past events and future arrangements to manage a travel situation.",
+      example: "도착 시간이 언제예요?",
+      translation: "What time is arrival?",
+      mission: "Role-play a delayed journey and obtain the information you need."
+    },
+    {
+      topic: "Daily-life role-play review",
+      vocab: [["습관", "seupgwan", "Habit"], ["보통", "botong", "Usually"], ["가끔", "gakkeum", "Sometimes"], ["거의", "geoui", "Almost"]],
+      grammar: "Frequency words help describe routines. Place them naturally near the action they describe.",
+      example: "저는 보통 아침에 커피를 마셔요.",
+      translation: "I usually drink coffee in the morning.",
+      mission: "Describe your routine, compare it with another person's and ask follow-up questions."
+    },
+    {
+      topic: "Friendship role-play review",
+      vocab: [["초대하다", "chodaehada", "To invite"], ["거절하다", "geojeolhada", "To decline"], ["축하하다", "chukhahada", "To congratulate"], ["위로하다", "wirohada", "To comfort"]],
+      grammar: "Social communication includes invitations, refusals and supportive responses. Choose wording that fits the relationship and emotional context.",
+      example: "초대해 줘서 고마워요.",
+      translation: "Thank you for inviting me.",
+      mission: "Invite someone, respond to a refusal and offer encouragement."
+    },
+    {
+      topic: "K-content review",
+      vocab: [["배우", "baeu", "Actor"], ["연기", "yeongi", "Acting"], ["인상적이다", "insangjeogida", "To be impressive"], ["추천하다", "chucheonhada", "To recommend"]],
+      grammar: "Use descriptive verbs and supporting reasons when recommending a show or performer.",
+      example: "연기가 정말 인상적이었어요.",
+      translation: "The acting was really impressive.",
+      mission: "Recommend a fictional show and explain what makes it interesting."
+    },
+    {
+      topic: "Grammar review: foundations",
+      vocab: [["은/는", "eun/neun", "Topic marker"], ["이/가", "i/ga", "Subject marker"], ["을/를", "eul/reul", "Object marker"], ["에/에서", "e/e-seo", "Location / destination markers"]],
+      grammar: "Review the function of topic, subject, object and location markers. Check the role each noun plays rather than translating the particle directly.",
+      example: "저는 카페에서 커피를 마셔요.",
+      translation: "I drink coffee at a café.",
+      mission: "Identify the topic, location and object in three sentences."
+    },
+    {
+      topic: "Grammar review: connectors",
+      vocab: [["그리고", "geurigo", "And"], ["그래서", "geuraeseo", "So"], ["하지만", "hajiman", "But"], ["때문에", "ttaemune", "Because of"]],
+      grammar: "Choose a connector based on whether you are adding, contrasting or explaining an outcome. 때문에 typically attaches to a noun; -기 때문에 can follow a verb or descriptive predicate.",
+      example: "비가 와서 집에 있었어요.",
+      translation: "It rained, so I stayed home.",
+      mission: "Join six short ideas using the most suitable connector."
+    },
+    {
+      topic: "Vocabulary review: everyday life",
+      vocab: [["아침", "achim", "Morning"], ["점심", "jeomsim", "Lunch / noon"], ["저녁", "jeonyeok", "Evening / dinner"], ["밤", "bam", "Night"]],
+      grammar: "Time vocabulary becomes more useful when combined with routines, schedules and time markers.",
+      example: "저녁에 책을 읽어요.",
+      translation: "I read a book in the evening.",
+      mission: "Describe a typical day with at least four time expressions."
+    },
+    {
+      topic: "Vocabulary review: travel",
+      vocab: [["공항", "gonghang", "Airport"], ["표", "pyo", "Ticket"], ["짐", "jim", "Luggage"], ["길", "gil", "Road / way"]],
+      grammar: "Combine travel nouns with location questions, requests and direction expressions to solve a practical task.",
+      example: "공항에 어떻게 가요?",
+      translation: "How do I get to the airport?",
+      mission: "Ask for directions to the airport and confirm which transport to take."
+    },
+    {
+      topic: "Listening checkpoint",
+      vocab: [["말하다", "malhada", "To speak"], ["듣다", "deutda", "To listen"], ["질문", "jilmun", "Question"], ["대답", "daedap", "Answer"]],
+      grammar: "Use context and question words to identify the main idea. Replay or reread difficult chunks instead of guessing at the entire passage.",
+      example: "질문을 듣고 대답하세요.",
+      translation: "Listen to the question and answer.",
+      mission: "Read a dialogue and answer who, where, when and why questions."
+    },
+    {
+      topic: "Speaking checkpoint",
+      vocab: [["자기소개", "jagisogae", "Self-introduction"], ["경험", "gyeongheom", "Experience"], ["이유", "iyu", "Reason"], ["계획", "gyehoek", "Plan"]],
+      grammar: "A clear answer can include a direct response, one supporting detail and a reason. Practise speaking in complete but manageable sentences.",
+      example: "저는 한국어를 배우고 있어요. 한국 문화에 관심이 있기 때문이에요.",
+      translation: "I'm learning Korean because I'm interested in Korean culture.",
+      mission: "Speak for 90 seconds about yourself, an experience and a future plan."
+    },
+    {
+      topic: "Tell your own story",
+      vocab: [["이야기하다", "iyagihada", "To tell a story"], ["어느 날", "eoneu nal", "One day"], ["그 후에", "geu hue", "After that"], ["마침내", "machimnae", "Finally / at last"]],
+      grammar: "Organise a story in time order, keep tense consistent and use connecting expressions to make the sequence clear.",
+      example: "그 후에 집으로 돌아갔어요.",
+      translation: "After that, I returned home.",
+      mission: "Write and tell a short story with a beginning, middle and ending."
+    },
+    {
+      topic: "Plan a trip in Korean",
+      vocab: [["목적지", "mokjeokji", "Destination"], ["숙소", "sukso", "Accommodation"], ["교통편", "gyotongpyeon", "Transport option"], ["예산", "yesan", "Budget"]],
+      grammar: "A travel plan combines destinations, times, transport, reservations and reasons. Use future forms and polite requests to present it.",
+      example: "숙소를 미리 예약할 거예요.",
+      translation: "I will book accommodation in advance.",
+      mission: "Create a two-day travel plan with transport, accommodation and activities."
+    },
+    {
+      topic: "Your Korean-life simulation",
+      vocab: [["주문하다", "jumunhada", "To order"], ["물어보다", "mureoboda", "To ask"], ["설명하다", "seolmyeonghada", "To explain"], ["해결하다", "haegyeolhada", "To solve"]],
+      grammar: "Use the grammar and phrases you already know to manage a sequence of realistic situations. Prioritise being understood over producing a perfect sentence.",
+      example: "죄송하지만 다시 설명해 주실 수 있을까요?",
+      translation: "Excuse me, could you explain that again?",
+      mission: "Complete a café, transport and help-request role-play without reading a prepared script."
+    },
+    {
+      topic: "Revision Hub final challenge",
+      vocab: [["자신감", "jasingam", "Confidence"], ["독립적으로", "dongnipjeogeuro", "Independently"], ["복습하다", "bokseuphada", "To review"], ["성장하다", "seongjanghada", "To grow"]],
+      grammar: "Review your strongest grammar and identify areas that still need practice. Independent learning means using strategies to repair gaps in understanding.",
+      example: "아직 배우는 중이지만 자신감이 생겼어요.",
+      translation: "I'm still learning, but I've gained confidence.",
+      mission: "Complete a self-introduction, a short story, an opinion and a practical role-play in Korean."
+    }
+  ];
+
+  const lessonTypes = [
+    {
+      title: "Learn & Understand",
+      goal: "Understand the key vocabulary and concept.",
+      mission: "Read the examples aloud. Cover the English meanings and recall each one. Write down one sentence of your own."
+    },
+    {
+      title: "Grammar Workshop",
+      goal: "Use the week's grammar accurately.",
+      mission: "Study the grammar explanation, then create two new examples. Say both aloud and check that the grammar fits."
+    },
+    {
+      title: "Conversation Mission",
+      goal: "Use Korean in a realistic context.",
+      mission: "Perform the dialogue aloud. Swap roles, then change one detail so you are not simply repeating the model."
+    },
+    {
+      title: "Weekly Challenge",
+      goal: "Retrieve and combine what you have learned.",
+      mission: "Complete the challenge from memory first. Review any mistakes, then try the task again without reading the English."
+    }
+  ];
+
+  function buildCourse() {
+    const course = [];
+
+    for (let week = 1; week <= TOTAL_WEEKS; week++) {
+      const year = week <= 48 ? 1 : 2;
+      const world = year === 1
+        ? Math.min(6, Math.ceil(week / 8))
+        : Math.min(12, 7 + Math.floor((week - 49) / 8));
+
+      const unit = curriculum[week - 1];
+
+      for (let slot = 0; slot < LESSONS_PER_WEEK; slot++) {
+        const type = lessonTypes[slot];
+        const lessonNumber = (week - 1) * LESSONS_PER_WEEK + slot + 1;
+
+        const questionBank = [
+          {
+            question: `Which Korean expression is the main example for "${unit.topic}"?`,
+            choices: [unit.example, unit.vocab[0][0], unit.vocab[1][0]],
+            answer: unit.example,
+            explanation: `The example for this week's topic is "${unit.example}" — ${unit.translation}.`
+          },
+          {
+            question: `Which Korean word means "${unit.vocab[0][2]}"?`,
+            choices: [unit.vocab[0][0], unit.vocab[1][0], unit.vocab[2][0]],
+            answer: unit.vocab[0][0],
+            explanation: `${unit.vocab[0][0]} (${unit.vocab[0][1]}) means "${unit.vocab[0][2]}".`
+          },
+          {
+            question: `Which Korean word means "${unit.vocab[2][2]}"?`,
+            choices: [unit.vocab[1][0], unit.vocab[2][0], unit.vocab[3][0]],
+            answer: unit.vocab[2][0],
+            explanation: `${unit.vocab[2][0]} (${unit.vocab[2][1]}) means "${unit.vocab[2][2]}".`
+          },
+          {
+            question: `Which phrase best fits the topic "${unit.topic}"?`,
+            choices: [unit.example, unit.vocab[1][0], unit.vocab[3][0]],
+            answer: unit.example,
+            explanation: `"${unit.example}" is the model expression for this week's topic. Translation: ${unit.translation}.`
+          }
+        ];
+
+        const quiz = questionBank[slot];
+
+        course.push({
+          id: `w${week}l${slot + 1}`,
+          year,
+          week,
+          slot,
+          world,
+          title: `Week ${week}: ${unit.topic} — ${type.title}`,
+          goal: type.goal + " " + unit.topic + ".",
+          vocab: unit.vocab,
+          grammar: unit.grammar,
+          dialogue: [
+            ["Speaker A", unit.example, unit.translation],
+            ["Speaker B", "다시 말해 주세요.", "Please say that again."],
+            ["Speaker A", unit.example, unit.translation]
+          ],
+          mission: `${type.mission} ${unit.mission}`,
+          question: quiz.question,
+          choices: quiz.choices,
+          answer: quiz.answer,
+          explanation: quiz.explanation,
+          xp: slot === 3 ? 35 : 20,
+          lessonNumber
+        });
+      }
+    }
+
+    return course;
+  }
+
+  const lessons = buildCourse();
+
+  function defaultProgress() {
+    return {
+      xp: 0,
+      completed: [],
+      streak: 0,
+      lastStudyDate: ""
+    };
+  }
+
+  function loadProgress() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+
+      if (!saved || typeof saved !== "object") {
+        return defaultProgress();
+      }
+
+      return {
+        ...defaultProgress(),
+        ...saved,
+        completed: Array.isArray(saved.completed) ? saved.completed : []
+      };
+    } catch {
+      return defaultProgress();
+    }
+  }
+
+  let progress = loadProgress();
+
+  function saveProgress() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    } catch (error) {
+      console.warn("Revision Hub couldn't save progress.", error);
+    }
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  function todayString(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function recordStudyDay() {
+    const today = todayString();
+    if (progress.lastStudyDate === today) return;
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    progress.streak = progress.lastStudyDate === todayString(yesterday)
+      ? progress.streak + 1
+      : 1;
+
+    progress.lastStudyDate = today;
+  }
+
+  function speak(text) {
+    if (!("speechSynthesis" in window)) {
+      alert("Audio isn't supported in this browser. Try reading the phrase aloud!");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+    utterance.rate = 0.82;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function addStyles() {
+    if (document.getElementById("korean-academy-styles")) return;
+
+    const style = document.createElement("style");
+    style.id = "korean-academy-styles";
+    style.textContent = `
+      #korean-course-app {
+        max-width: 1050px;
+        margin: auto;
+        padding: 1rem;
+        color: #55465d;
+      }
+
+      #korean-course-app * { box-sizing: border-box; }
+
+      .ka-box {
+        background: #fffafd;
+        border: 1px solid #efd9e9;
+        border-radius: 20px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 5px 20px #d6b5cf22;
+      }
+
+      .ka-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .65rem;
+      }
+
+      .ka-stat {
+        background: #f8eaf4;
+        border-radius: 13px;
+        padding: .8rem;
+      }
+
+      .ka-stat strong {
+        display: block;
+        font-size: 1.35rem;
+        margin-top: .25rem;
+      }
+
+      .ka-track {
+        height: 9px;
+        background: #f0e2ed;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 1rem;
+      }
+
+      .ka-track span {
+        display: block;
+        height: 100%;
+        background: #b28acb;
+        transition: width .2s ease;
+      }
+
+      .ka-muted { color: #786a80; font-size: .9rem; }
+
+      .ka-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        margin-top: 1rem;
+      }
+
+      .ka-tabs button, .ka-back, .ka-listen {
+        background: white;
+        border: 1px solid #e8cfe2;
+        border-radius: 11px;
+        padding: .65rem .85rem;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      .ka-tabs .active { background: #e9d9f5; }
+
+      .ka-lessons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .55rem;
+        margin-top: .8rem;
+      }
+
+      .ka-lesson {
+        display: flex;
+        align-items: center;
+        gap: .65rem;
+        min-width: 0;
+        text-align: left;
+        padding: .8rem;
+        border: 1px solid #eadce9;
+        border-radius: 13px;
+        background: #fff;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .ka-lesson:disabled { opacity: .5; cursor: not-allowed; }
+      .ka-lesson.done { background: #eff8ef; border-color: #cbe5c9; }
+      .ka-lesson-main { flex: 1; min-width: 0; }
+      .ka-lesson small { display: block; color: #786a80; margin-top: .25rem; }
+
+      .ka-eyebrow {
+        color: #9873b4;
+        font-weight: 700;
+        font-size: .8rem;
+        letter-spacing: .05em;
+      }
+
+      .ka-vocab {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .6rem;
+      }
+
+      .ka-word {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .3rem;
+        background: #f8edf6;
+        padding: .8rem;
+        border-radius: 13px;
+      }
+
+      .ka-word strong { font-size: 1.4rem; }
+      .ka-word small { color: #786a80; }
+
+      .ka-dialogue {
+        background: #f5effb;
+        border-radius: 14px;
+        padding: .8rem 1rem;
+      }
+
+      .ka-dialogue small {
+        display: block;
+        color: #786a80;
+        margin: .2rem 0 .6rem;
+      }
+
+      .ka-quiz {
+        background: #fff4e9;
+        border-radius: 14px;
+        padding: 1rem;
+      }
+
+      .ka-choices { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+      .ka-choices button {
+        background: white;
+        border: 1px solid #e7d6c5;
+        border-radius: 10px;
+        padding: .7rem .8rem;
+        cursor: pointer;
+      }
+
+      .ka-choices button:disabled { cursor: default; opacity: .8; }
+      .ka-correct { outline: 2px solid #65a765; }
+
+      .ka-primary {
+        background: #9a79bc;
+        color: white;
+        border: 0;
+        border-radius: 11px;
+        padding: .8rem 1rem;
+        cursor: pointer;
+        margin-top: .5rem;
+      }
+
+      .ka-feedback { min-height: 1.4rem; }
+      .ka-success { color: #287b43; }
+      .ka-retry { color: #9b5b28; }
+
+      .ka-toast {
+        background: #eff8ef;
+        padding: .8rem;
+        border-radius: 11px;
+      }
+
+      @media (max-width: 650px) {
+        .ka-lessons, .ka-vocab, .ka-stats { grid-template-columns: 1fr; }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  function render() {
+    const root = document.getElementById("korean-course-app");
+    if (!root) return;
+
+    const year = Number(root.dataset.year || "1");
+    const yearWorlds = worlds.filter(world => world.year === year);
+    const completedCount = progress.completed.length;
+    const percent = Math.round(completedCount / lessons.length * 100);
+
+    root.innerHTML = `
+      <section class="ka-box">
+        <div class="ka-stats">
+          <div class="ka-stat">✨ Total XP<strong>${progress.xp}</strong></div>
+          <div class="ka-stat">🐾 Lessons<strong>${completedCount}/${lessons.length}</strong></div>
+          <div class="ka-stat">🔥 Study streak<strong>${progress.streak} day(s)</strong></div>
+        </div>
+
+        <div class="ka-track"><span style="width:${percent}%"></span></div>
+        <p class="ka-muted">${percent}% of your two-year course completed</p>
+
+        <div class="ka-tabs">
+          <button type="button" data-year="1" class="${year === 1 ? "active" : ""}">🌱 Year 1</button>
+          <button type="button" data-year="2" class="${year === 2 ? "active" : ""}">🌳 Year 2</button>
+        </div>
+      </section>
+
+      <h2>${year === 1 ? "🌱 Year 1 — Build your foundations" : "🌳 Year 2 — Speak more independently"}</h2>
+      <p class="ka-muted">96 weeks · 4 lessons per week · 384 lesson slots. Study steadily and revisit difficult topics.</p>
+
+      ${yearWorlds.map(world => {
+        const worldLessons = lessons.filter(lesson => lesson.world === world.id);
+
+        return `
+          <section class="ka-box">
+            <h3 class="ka-world-title">${world.emoji} ${escapeHTML(world.name)}</h3>
+            <p class="ka-muted">${escapeHTML(world.description)}</p>
+
+            <div class="ka-lessons">
+              ${worldLessons.map(lesson => {
+                const index = lessons.findIndex(item => item.id === lesson.id);
+                const completed = progress.completed.includes(lesson.id);
+                const unlocked = index === 0 ||
+                  progress.completed.includes(lessons[index - 1].id) ||
+                  completed;
+
+                return `
+                  <button type="button"
+                    class="ka-lesson ${completed ? "done" : ""}"
+                    data-lesson="${lesson.id}" ${unlocked ? "" : "disabled"}>
+                    <span>${completed ? "✅" : unlocked ? "🐾" : "🔒"}</span>
+                    <span class="ka-lesson-main">
+                      <strong>${escapeHTML(lesson.title)}</strong>
+                      <small>Week ${lesson.week} · ${lesson.xp} XP</small>
+                    </span>
+                    <span>›</span>
+                  </button>`;
+              }).join("")}
+            </div>
+          </section>`;
+      }).join("")}
+
+      <section id="ka-panel" class="ka-box" hidden></section>
+    `;
+
+    root.querySelectorAll("[data-year]").forEach(button => {
+      button.addEventListener("click", () => {
+        root.dataset.year = button.dataset.year;
+        render();
+      });
+    });
+
+    root.querySelectorAll("[data-lesson]").forEach(button => {
+      button.addEventListener("click", () => openLesson(button.dataset.lesson));
+    });
+  }
+
+  function openLesson(id) {
+    const lesson = lessons.find(item => item.id === id);
+    const panel = document.getElementById("ka-panel");
+    if (!lesson || !panel) return;
+
+    panel.hidden = false;
+
+    panel.innerHTML = `
+      <button type="button" class="ka-back" id="ka-back">← Back to world map</button>
+      <p class="ka-eyebrow">WEEK ${lesson.week} · LESSON ${lesson.slot + 1} · +${lesson.xp} XP</p>
+      <h2>${escapeHTML(lesson.title)}</h2>
+      <p>${escapeHTML(lesson.goal)}</p>
+
+      <h3>🧠 Vocabulary</h3>
+      <div class="ka-vocab">
+        ${lesson.vocab.map(word => `
+          <div class="ka-word">
+            <strong lang="ko">${escapeHTML(word[0])}</strong>
+            <span>${escapeHTML(word[1])}</span>
+            <small>${escapeHTML(word[2])}</small>
+            <button type="button" class="ka-listen" data-say="${escapeHTML(word[0])}">🔊 Listen</button>
+          </div>`).join("")}
+      </div>
+
+      <h3>📚 Grammar workshop</h3>
+      <p>${escapeHTML(lesson.grammar)}</p>
+
+      <div class="ka-dialogue">
+        <h3>✨ Model expression</h3>
+        <p lang="ko"><strong>${escapeHTML(lesson.example || lesson.dialogue[0][1])}</strong></p>
+        <p>${escapeHTML(lesson.translation || lesson.dialogue[0][2])}</p>
+        <button type="button" class="ka-listen" data-say="${escapeHTML(lesson.example || lesson.dialogue[0][1])}">🔊 Listen to the example</button>
+      </div>
+
+      <h3>💬 Conversation practice</h3>
+      <div class="ka-dialogue">
+        ${lesson.dialogue.map(line => `
+          <p><strong>${escapeHTML(line[0])}:</strong>
+          <span lang="ko">${escapeHTML(line[1])}</span>
+          <small>${escapeHTML(line[2])}</small></p>`).join("")}
+      </div>
+
+      <h3>🎯 Mission</h3>
+      <p>${escapeHTML(lesson.mission)}</p>
+
+      <div class="ka-quiz">
+        <h3>⭐ Quick challenge</h3>
+        <p>${escapeHTML(lesson.question)}</p>
+        <div class="ka-choices">
+          ${lesson.choices.map(choice => `
+            <button type="button" data-choice="${escapeHTML(choice)}">
+              ${escapeHTML(choice)}
+            </button>`).join("")}
+        </div>
+        <p id="ka-feedback" class="ka-feedback" aria-live="polite"></p>
+        <p id="ka-explanation" hidden></p>
+        <button type="button" id="ka-complete" class="ka-primary" hidden>
+          Complete lesson · +${lesson.xp} XP
+        </button>
+      </div>
+    `;
+
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    document.getElementById("ka-back").addEventListener("click", () => {
+      panel.hidden = true;
+    });
+
+    panel.querySelectorAll("[data-say]").forEach(button => {
+      button.addEventListener("click", () => speak(button.dataset.say));
+    });
+
+    panel.querySelectorAll("[data-choice]").forEach(button => {
+      button.addEventListener("click", () => {
+        panel.querySelectorAll("[data-choice]").forEach(item => {
+          item.disabled = true;
+        });
+
+        const feedback = document.getElementById("ka-feedback");
+        const explanation = document.getElementById("ka-explanation");
+        const finish = document.getElementById("ka-complete");
+        const correct = button.dataset.choice === lesson.answer;
+
+        if (correct) {
+          feedback.textContent = "정답이에요! Correct! Lovely work! 🐾";
+          feedback.className = "ka-feedback ka-success";
+          button.classList.add("ka-correct");
+          speak(lesson.answer);
+        } else {
+          feedback.textContent = `Not quite! The answer is “${lesson.answer}”.`;
+          feedback.className = "ka-feedback ka-retry";
+
+          panel.querySelectorAll("[data-choice]").forEach(item => {
+            if (item.dataset.choice === lesson.answer) {
+              item.classList.add("ka-correct");
+            }
+          });
+        }
+
+        explanation.hidden = false;
+        explanation.textContent = lesson.explanation || lesson.grammar;
+        finish.hidden = false;
+      });
+    });
+
+    document.getElementById("ka-complete").addEventListener("click", () => {
+      if (!progress.completed.includes(lesson.id)) {
+        progress.completed.push(lesson.id);
+        progress.xp += lesson.xp;
+        recordStudyDay();
+        saveProgress();
+      }
+
+      panel.hidden = true;
+      render();
+
+      const toast = document.createElement("p");
+      toast.className = "ka-toast";
+      toast.textContent = "Lesson saved! Your Korean adventure continues! 🐾";
+      document.getElementById("korean-course-app").prepend(toast);
+    });
+  }
+
+  function init() {
+    const root = document.getElementById("korean-course-app");
+    if (!root) return;
+    addStyles();
+    render();
+  }
+
+  return { init, lessons, worlds };
+})();
+
+document.addEventListener("DOMContentLoaded", KoreanAcademy.init);

@@ -1,0 +1,925 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro | Revision Hub</title>
+
+  <style>
+    :root {
+      --pink: #f4b8cc;
+      --pink-dark: #d9799b;
+      --lavender: #dcd4ff;
+      --purple: #8a78bd;
+      --cream: #fffaf7;
+      --text: #51465f;
+      --white: #ffffff;
+      --green: #b9dfc5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background: linear-gradient(135deg, #fff4f8, #f3efff);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 20px;
+    }
+
+    header h1 {
+      color: var(--purple);
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+      color: #81748f;
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 15px 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid #f0e6f5;
+      border-bottom: 1px solid #f0e6f5;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text);
+      padding: 10px 17px;
+      border-radius: 22px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: var(--lavender);
+      color: #65549b;
+    }
+
+    main {
+      width: min(1050px, 92%);
+      margin: 35px auto 60px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .intro h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .intro p {
+      color: #81748f;
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #f0e5fa;
+      border-radius: 25px;
+      padding: 26px;
+      box-shadow: 0 10px 28px rgba(116, 91, 145, 0.09);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--purple);
+    }
+
+    .mode-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 16px;
+      padding: 11px 16px;
+      font-weight: bold;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #9b89d1;
+      outline-offset: 3px;
+    }
+
+    .mode-btn {
+      background: #f5efff;
+      color: #756398;
+    }
+
+    .mode-btn.selected {
+      background: var(--lavender);
+      box-shadow: inset 0 0 0 2px #b7a8ed;
+    }
+
+    .timer-face {
+      text-align: center;
+      background: linear-gradient(145deg, #fff0f6, #f0ebff);
+      border-radius: 25px;
+      padding: 28px 15px;
+    }
+
+    .timer-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    #timer {
+      font-size: clamp(3.7rem, 10vw, 5.5rem);
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: var(--purple);
+      font-variant-numeric: tabular-nums;
+      margin: 8px 0;
+    }
+
+    #mode-description {
+      color: #82748f;
+      margin-bottom: 18px;
+    }
+
+    .timer-progress {
+      height: 10px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #e4ddf3;
+      margin: 15px 0 22px;
+    }
+
+    #timer-progress-fill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), #b6a4ef);
+      transition: width 0.4s linear;
+    }
+
+    .timer-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      background: var(--pink-dark);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: var(--lavender);
+      color: #65549b;
+    }
+
+    .green-btn {
+      background: var(--green);
+      color: #355e43;
+    }
+
+    .session-info {
+      text-align: center;
+      margin-top: 22px;
+      padding: 15px;
+      border-radius: 18px;
+      background: #fff8fc;
+    }
+
+    .session-info strong {
+      color: var(--pink-dark);
+      font-size: 1.3rem;
+    }
+
+    .session-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .session-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #e9e1f4;
+    }
+
+    .session-dot.done {
+      background: var(--pink-dark);
+    }
+
+    .task-form {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .task-form input {
+      min-width: 0;
+      flex: 1;
+      border: 2px solid #e8def4;
+      border-radius: 14px;
+      padding: 12px;
+      font: inherit;
+      color: var(--text);
+      background: #fffafd;
+    }
+
+    .task-form input:focus {
+      border-color: #b6a4ef;
+      outline: none;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0e8f6;
+      overflow-wrap: anywhere;
+    }
+
+    .task-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--pink-dark);
+      flex-shrink: 0;
+    }
+
+    .task-text {
+      flex: 1;
+    }
+
+    .task-item.completed .task-text {
+      text-decoration: line-through;
+      color: #a69baa;
+    }
+
+    .delete-btn {
+      padding: 6px 10px;
+      background: #fff0f4;
+      color: #bd6384;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .empty-message {
+      color: #9b8ca4;
+      text-align: center;
+      padding: 20px 5px;
+    }
+
+    .task-summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      color: #887994;
+      font-size: 0.95rem;
+    }
+
+    .tip {
+      text-align: center;
+      margin-top: 25px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 18px;
+      color: #81748f;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #93859d;
+      font-size: 0.9rem;
+    }
+
+    /* Timer-complete popup */
+    #alarm-popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(81, 70, 95, 0.45);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .alarm-card {
+      background: #fffafc;
+      border: 3px solid var(--lavender);
+      border-radius: 25px;
+      padding: 30px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      color: var(--text);
+      box-shadow: 0 10px 35px rgba(81, 70, 95, 0.2);
+    }
+
+    .alarm-card h2 {
+      color: var(--purple);
+    }
+
+    @media (max-width: 720px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        margin-top: 25px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .task-form {
+        flex-wrap: wrap;
+      }
+
+      .task-form button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🐾 Revision Hub</h1>
+  </header>
+
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="subjects.html">Subjects</a>
+    <a href="pomodoro.html" class="active" aria-current="page">Pomodoro</a>
+    <a href="progress.html">Progress</a>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <h2>🍓 Pomodoro Study Corner</h2>
+      <p>Focus, take breaks, and improve your grades!</p>
+    </section>
+
+    <div class="layout">
+      <section class="card" aria-labelledby="timer-heading">
+        <h3 id="timer-heading">⏰ Focus timer</h3>
+
+        <div class="mode-buttons" aria-label="Choose timer mode">
+          <button type="button" class="mode-btn selected" data-mode="focus" aria-pressed="true">
+            🍅 Focus
+          </button>
+          <button type="button" class="mode-btn" data-mode="short" aria-pressed="false">
+            ☕ Short break
+          </button>
+          <button type="button" class="mode-btn" data-mode="long" aria-pressed="false">
+            🌷 Long break
+          </button>
+        </div>
+
+        <div class="timer-face">
+          <div class="timer-emoji" id="timer-emoji">🐱</div>
+          <div id="timer" role="timer" aria-label="Time remaining">25:00</div>
+          <p id="mode-description">Time to focus!</p>
+
+          <div class="timer-progress"
+               role="progressbar"
+               aria-label="Timer progress"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+               id="timer-progress">
+            <div id="timer-progress-fill"></div>
+          </div>
+
+          <div class="timer-controls">
+            <button type="button" class="primary-btn" id="start-pause">▶ Start</button>
+            <button type="button" class="secondary-btn" id="reset-timer">↻ Reset</button>
+          </div>
+        </div>
+
+        <div class="session-info">
+          <div>Focus sessions completed</div>
+          <strong id="session-count">0</strong>
+          <div class="session-dots" id="session-dots" aria-label="Focus sessions in this cycle">
+            <span class="session-dot"></span>
+            <span class="session-dot"></span>
+            <span class="session-dot"></span>
+            <span class="session-dot"></span>
+          </div>
+          <p id="session-message">Every session is a little win! 💗</p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="tasks-heading">
+        <h3 id="tasks-heading">📚 My study tasks</h3>
+        <p>Add a few goals for this study session.</p>
+
+        <form class="task-form" id="task-form">
+          <input
+            id="task-input"
+            type="text"
+            maxlength="120"
+            placeholder="e.g. Revise Spanish verbs..."
+            aria-label="New study task"
+            required
+          >
+          <button class="primary-btn" type="submit">＋ Add task</button>
+        </form>
+
+        <ul class="task-list" id="task-list"></ul>
+
+        <div class="task-summary">
+          <span id="task-count">0 tasks left</span>
+          <button class="secondary-btn" id="clear-completed" type="button">
+            Clear completed
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div class="tip">
+      💡 <strong>Tip:</strong>
+      Try 25 minutes of focused work, followed by a 5-minute break.
+      After four focus sessions, enjoy a longer 15-minute break.
+      Remember to stretch, drink water and take breaks!
+    </div>
+  </main>
+
+  <!-- Popup is placed before the script so its button is available. -->
+  <div id="alarm-popup"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="alarm-title"
+       aria-describedby="alarm-message">
+    <div class="alarm-card">
+      <div style="font-size: 3rem;" aria-hidden="true">🐱🔔</div>
+      <h2 id="alarm-title">Time's up!</h2>
+      <p id="alarm-message">Amazing work! Time for a break. 💗</p>
+      <button type="button" class="primary-btn" id="alarm-ok">Okay! 🐾</button>
+    </div>
+  </div>
+
+  <script>
+    // All durations are in seconds.
+    const durations = {
+      focus: 25 * 60,
+      short: 5 * 60,
+      long: 15 * 60
+    };
+
+    const modeInfo = {
+      focus: {
+        emoji: "🐱",
+        description: "Time to focus on one thing!",
+        title: "Focus time"
+      },
+      short: {
+        emoji: "☕",
+        description: "Stretch, breathe and relax a little.",
+        title: "Short break"
+      },
+      long: {
+        emoji: "🌷",
+        description: "You've earned a longer rest!",
+        title: "Long break"
+      }
+    };
+
+    let currentMode = "focus";
+    let timeLeft = durations.focus;
+    let timerInterval = null;
+    let isRunning = false;
+    let completedSessions = 0;
+    let sessionCycle = 0;
+    let endTime = null;
+    let alarmAudio = null;
+    let alarmStopTimeout = null;
+
+    const timerDisplay = document.getElementById("timer");
+    const startPauseButton = document.getElementById("start-pause");
+    const resetButton = document.getElementById("reset-timer");
+    const progressFill = document.getElementById("timer-progress-fill");
+    const progressBar = document.getElementById("timer-progress");
+    const modeDescription = document.getElementById("mode-description");
+    const timerEmoji = document.getElementById("timer-emoji");
+    const sessionCount = document.getElementById("session-count");
+    const sessionMessage = document.getElementById("session-message");
+    const sessionDots = document.querySelectorAll(".session-dot");
+
+    const alarmPopup = document.getElementById("alarm-popup");
+    const alarmTitle = document.getElementById("alarm-title");
+    const alarmMessage = document.getElementById("alarm-message");
+    const alarmOkButton = document.getElementById("alarm-ok");
+
+    // Update daily and total progress for the Progress page.
+    function saveFocusSession() {
+      const now = new Date();
+
+      const dateKey =
+        now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+
+      const totalKey = "studyPawsTotalSessions";
+      const dailyKey = "studyPawsSessions-" + dateKey;
+
+      const total = Number(localStorage.getItem(totalKey)) || 0;
+      const daily = Number(localStorage.getItem(dailyKey)) || 0;
+
+      localStorage.setItem(totalKey, total + 1);
+      localStorage.setItem(dailyKey, daily + 1);
+
+      const lastDate = localStorage.getItem("studyPawsLastStudyDate");
+      let streak = Number(localStorage.getItem("studyPawsStreak")) || 0;
+
+      const yesterday = new Date(now);
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      const yesterdayKey =
+        yesterday.getFullYear() + "-" +
+        String(yesterday.getMonth() + 1).padStart(2, "0") + "-" +
+        String(yesterday.getDate()).padStart(2, "0");
+
+      if (lastDate !== dateKey) {
+        streak = lastDate === yesterdayKey ? streak + 1 : 1;
+        localStorage.setItem("studyPawsStreak", streak);
+        localStorage.setItem("studyPawsLastStudyDate", dateKey);
+      }
+    }
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+
+      return String(minutes).padStart(2, "0") + ":" +
+        String(remainingSeconds).padStart(2, "0");
+    }
+
+    function updateTimerDisplay() {
+      timerDisplay.textContent = formatTime(timeLeft);
+
+      const elapsed = durations[currentMode] - timeLeft;
+      const progress = (elapsed / durations[currentMode]) * 100;
+
+      progressFill.style.width = progress + "%";
+      progressBar.setAttribute("aria-valuenow", Math.round(progress));
+
+      document.title = isRunning
+        ? formatTime(timeLeft) + " — Revision Hub"
+        : "Pomodoro | Revision Hub";
+    }
+
+    function updateModeButtons() {
+      document.querySelectorAll(".mode-btn").forEach(button => {
+        const selected = button.dataset.mode === currentMode;
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+    }
+
+    function updateSessionDisplay() {
+      sessionCount.textContent = completedSessions;
+
+      sessionDots.forEach((dot, index) => {
+        dot.classList.toggle("done", index < sessionCycle);
+      });
+
+      if (sessionCycle === 0 && completedSessions > 0) {
+        sessionMessage.textContent = "New cycle, fresh paws! 🐾";
+      } else if (sessionCycle === 0) {
+        sessionMessage.textContent = "Every session is a little win! 💗";
+      } else {
+        sessionMessage.textContent =
+          sessionCycle + " of 4 focus sessions in this cycle ✨";
+      }
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      endTime = null;
+      startPauseButton.textContent = "▶ Start";
+      updateTimerDisplay();
+    }
+
+    function selectMode(mode) {
+      stopTimer();
+      currentMode = mode;
+      timeLeft = durations[mode];
+
+      timerEmoji.textContent = modeInfo[mode].emoji;
+      modeDescription.textContent = modeInfo[mode].description;
+
+      updateModeButtons();
+      updateTimerDisplay();
+    }
+
+    function stopAlarm() {
+      clearTimeout(alarmStopTimeout);
+      alarmStopTimeout = null;
+
+      if (alarmAudio) {
+        alarmAudio.pause();
+        alarmAudio.currentTime = 0;
+      }
+    }
+
+    function playNotification() {
+      stopAlarm();
+
+      // Put alarm.mp3 in the same folder as pomodoro.html.
+      alarmAudio = new Audio("alarm.mp3");
+      alarmAudio.volume = 0.8;
+      alarmAudio.loop = true;
+
+      alarmAudio.play()
+        .then(() => {
+          // Stop the alarm automatically after 8 seconds.
+          alarmStopTimeout = setTimeout(stopAlarm, 8000);
+        })
+        .catch(error => {
+          // The popup will still appear if the sound cannot play.
+          console.warn("Could not play alarm.mp3:", error);
+        });
+    }
+
+    function showAlarmPopup(title, message) {
+      alarmTitle.textContent = title;
+      alarmMessage.textContent = message;
+      alarmPopup.style.display = "flex";
+      alarmOkButton.focus();
+    }
+
+    function hideAlarmPopup() {
+      alarmPopup.style.display = "none";
+      stopAlarm();
+    }
+
+    // The button exists before this script runs, so this listener can attach safely.
+    alarmOkButton.addEventListener("click", hideAlarmPopup);
+
+    // Clicking outside the popup card closes it.
+    alarmPopup.addEventListener("click", event => {
+      if (event.target === alarmPopup) {
+        hideAlarmPopup();
+      }
+    });
+
+    // Escape also closes the popup.
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && alarmPopup.style.display === "flex") {
+        hideAlarmPopup();
+      }
+    });
+
+    function completeTimer() {
+      stopTimer();
+      timeLeft = 0;
+      updateTimerDisplay();
+
+      // Start the alarm without a blocking alert().
+      playNotification();
+
+      if (currentMode === "focus") {
+        completedSessions++;
+        saveFocusSession();
+
+        sessionCycle = (sessionCycle + 1) % 4;
+        updateSessionDisplay();
+
+        if (sessionCycle === 0) {
+          selectMode("long");
+          showAlarmPopup(
+            "Amazing work! 🐾",
+            "Four focus sessions completed! Time for a 15-minute long break."
+          );
+        } else {
+          selectMode("short");
+          showAlarmPopup(
+            "Focus session complete! 💗",
+            "Time for a little break. You've earned it!"
+          );
+        }
+      } else {
+        selectMode("focus");
+        showAlarmPopup(
+          "Break time is over! 🌷",
+          "Ready to focus again?"
+        );
+      }
+    }
+
+    function tick() {
+      if (!isRunning || endTime === null) return;
+
+      timeLeft = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+
+      if (timeLeft <= 0) {
+        completeTimer();
+        return;
+      }
+
+      updateTimerDisplay();
+    }
+
+    function startTimer() {
+      if (isRunning) {
+        timeLeft = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+        stopTimer();
+        return;
+      }
+
+      if (timeLeft <= 0) {
+        timeLeft = durations[currentMode];
+      }
+
+      isRunning = true;
+      endTime = Date.now() + timeLeft * 1000;
+      startPauseButton.textContent = "⏸ Pause";
+
+      timerInterval = setInterval(tick, 250);
+      updateTimerDisplay();
+    }
+
+    startPauseButton.addEventListener("click", startTimer);
+
+    resetButton.addEventListener("click", () => {
+      stopTimer();
+      timeLeft = durations[currentMode];
+      updateTimerDisplay();
+    });
+
+    document.querySelectorAll(".mode-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        selectMode(button.dataset.mode);
+      });
+    });
+
+    // Study task list: tasks are saved in localStorage.
+    const taskForm = document.getElementById("task-form");
+    const taskInput = document.getElementById("task-input");
+    const taskList = document.getElementById("task-list");
+    const taskCount = document.getElementById("task-count");
+    const clearCompletedButton = document.getElementById("clear-completed");
+
+    let tasks = [];
+
+    try {
+      const savedTasks = localStorage.getItem("studyPawsTasks");
+      tasks = savedTasks ? JSON.parse(savedTasks) : [];
+
+      if (!Array.isArray(tasks)) {
+        tasks = [];
+      }
+    } catch (error) {
+      tasks = [];
+    }
+
+    function saveTasks() {
+      try {
+        localStorage.setItem("studyPawsTasks", JSON.stringify(tasks));
+      } catch (error) {
+        console.warn("Tasks could not be saved in this browser.", error);
+      }
+    }
+
+    function renderTasks() {
+      taskList.replaceChildren();
+
+      if (tasks.length === 0) {
+        const empty = document.createElement("li");
+        empty.className = "empty-message";
+        empty.textContent = "No tasks yet. Add a little goal! 🐾";
+        taskList.appendChild(empty);
+      }
+
+      tasks.forEach(task => {
+        const item = document.createElement("li");
+        item.className = "task-item" +
+          (task.completed ? " completed" : "");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = Boolean(task.completed);
+        checkbox.setAttribute(
+          "aria-label",
+          "Mark " + task.text + " complete"
+        );
+
+        checkbox.addEventListener("change", () => {
+          task.completed = checkbox.checked;
+          saveTasks();
+          renderTasks();
+        });
+
+        const text = document.createElement("span");
+        text.className = "task-text";
+        text.textContent = task.text;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.className = "delete-btn";
+        deleteButton.textContent = "✕";
+        deleteButton.setAttribute(
+          "aria-label",
+          "Delete " + task.text
+        );
+
+        deleteButton.addEventListener("click", () => {
+          tasks = tasks.filter(savedTask => savedTask.id !== task.id);
+          saveTasks();
+          renderTasks();
+        });
+
+        item.append(checkbox, text, deleteButton);
+        taskList.appendChild(item);
+      });
+
+      const remaining = tasks.filter(task => !task.completed).length;
+
+      taskCount.textContent =
+        remaining + (remaining === 1 ? " task left" : " tasks left");
+    }
+
+    taskForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const text = taskInput.value.trim();
+      if (!text) return;
+
+      tasks.push({
+        id: Date.now() + "-" + Math.random().toString(16).slice(2),
+        text: text,
+        completed: false
+      });
+
+      saveTasks();
+      renderTasks();
+      taskInput.value = "";
+      taskInput.focus();
+    });
+
+    clearCompletedButton.addEventListener("click", () => {
+      tasks = tasks.filter(task => !task.completed);
+      saveTasks();
+      renderTasks();
+    });
+
+    // Initial page setup.
+    updateModeButtons();
+    updateTimerDisplay();
+    updateSessionDisplay();
+    renderTasks();
+  </script>
+</body>
+</html>
+```

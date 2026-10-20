@@ -1,0 +1,653 @@
+
+/* ==========================================
+   Revision Hub — SUBJECT PAGE STYLES
+   Subject headers, topic cards and lesson pages
+   ========================================== */
+
+/* ---------- Subject colour themes ---------- */
+
+:root {
+  --subject-color: #7058c8;
+  --subject-light: #f0edff;
+  --subject-dark: #5741a7;
+}
+
+body.subject-biology {
+  --subject-color: #27875b;
+  --subject-light: #e5f7ec;
+  --subject-dark: #17643f;
+}
+
+body.subject-chemistry {
+  --subject-color: #3478d4;
+  --subject-light: #e8f2ff;
+  --subject-dark: #2054a0;
+}
+
+body.subject-physics {
+  --subject-color: #8755c7;
+  --subject-light: #f1eaff;
+  --subject-dark: #6034a1;
+}
+
+body.subject-maths {
+  --subject-color: #d17b28;
+  --subject-light: #fff2df;
+  --subject-dark: #975016;
+}
+
+body.subject-english {
+  --subject-color: #ce5785;
+  --subject-light: #ffedf4;
+  --subject-dark: #98365d;
+}
+
+body.subject-history {
+  --subject-color: #a66a36;
+  --subject-light: #f9eee2;
+  --subject-dark: #75431f;
+}
+
+body.subject-geography {
+  --subject-color: #278b91;
+  --subject-light: #e2f7f5;
+  --subject-dark: #17676b;
+}
+
+body.subject-spanish {
+  --subject-color: #d74c45;
+  --subject-light: #fff0e9;
+  --subject-dark: #a32e29;
+}
+
+body.subject-korean {
+  --subject-color: #496fc1;
+  --subject-light: #eaf0ff;
+  --subject-dark: #2e4e94;
+}
+
+/* ---------- Main page layout ---------- */
+
+.subject-page {
+  width: min(1150px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 50px;
+}
+
+.subject-section {
+  margin: 32px 0;
+}
+
+.subject-section > h2 {
+  margin-bottom: 18px;
+}
+
+.subject-muted {
+  color: #69758a;
+}
+
+/* ---------- Subject hero banner ---------- */
+
+.subject-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 6vw, 60px);
+  margin-bottom: 28px;
+  border: 1px solid var(--subject-light);
+  border-radius: 24px;
+  background: var(--subject-light);
+}
+
+.subject-hero::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -55px;
+  bottom: -75px;
+  border-radius: 50%;
+  background: var(--subject-color);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.subject-hero h1 {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 14px;
+  color: var(--subject-dark);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.subject-hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  line-height: 1.8;
+}
+
+.subject-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--subject-dark);
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.subject-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* ---------- Year and level selectors ---------- */
+
+.year-selector,
+.level-selector,
+.subject-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.year-selector button,
+.level-selector button,
+.subject-tabs button {
+  padding: 10px 16px;
+  border: 1px solid #e0e3ef;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #26334a;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.year-selector button:hover,
+.level-selector button:hover,
+.subject-tabs button:hover {
+  border-color: var(--subject-color);
+  color: var(--subject-dark);
+}
+
+.year-selector button.active,
+.level-selector button.active,
+.subject-tabs button.active {
+  border-color: var(--subject-color);
+  background: var(--subject-color);
+  color: #ffffff;
+}
+
+/* ---------- Topic card grids ---------- */
+
+.subject-topic-grid,
+.subject-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.subject-topic,
+.subject-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #e3e6f0;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #26334a;
+  text-align: left;
+  box-shadow: 0 5px 18px rgba(54, 48, 100, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button.subject-topic,
+a.subject-topic,
+button.subject-card,
+a.subject-card {
+  cursor: pointer;
+}
+
+.subject-topic:hover,
+.subject-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--subject-color);
+  box-shadow: 0 10px 25px rgba(54, 48, 100, 0.1);
+}
+
+.subject-topic-icon,
+.subject-card-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: var(--subject-light);
+  font-size: 27px;
+}
+
+.subject-topic h3,
+.subject-card h3 {
+  margin: 0 0 8px;
+  color: var(--subject-dark);
+  font-size: 1.15rem;
+}
+
+.subject-topic p,
+.subject-card p {
+  margin-bottom: 14px;
+  color: #69758a;
+  line-height: 1.65;
+}
+
+.subject-topic-footer {
+  margin-top: auto;
+  color: var(--subject-dark);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+/* ---------- Lesson list ---------- */
+
+.subject-lesson-list {
+  display: grid;
+  gap: 12px;
+}
+
+.subject-lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e3e6f0;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #26334a;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.subject-lesson-item:hover {
+  border-color: var(--subject-color);
+  background: var(--subject-light);
+}
+
+.subject-lesson-number {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--subject-light);
+  color: var(--subject-dark);
+  font-weight: 900;
+}
+
+.subject-lesson-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.subject-lesson-info h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.subject-lesson-info p {
+  margin: 0;
+  color: #69758a;
+  font-size: 0.9rem;
+}
+
+.subject-lesson-arrow {
+  color: var(--subject-color);
+  font-size: 1.4rem;
+}
+
+/* ---------- Lesson reading area ---------- */
+
+.subject-lesson-content {
+  padding: clamp(20px, 4vw, 36px);
+  border: 1px solid #e3e6f0;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.subject-lesson-content h1,
+.subject-lesson-content h2 {
+  color: var(--subject-dark);
+}
+
+.subject-lesson-content h2 {
+  margin-top: 26px;
+}
+
+.subject-lesson-content p,
+.subject-lesson-content li {
+  line-height: 1.85;
+}
+
+.subject-explanation {
+  font-size: 1.04rem;
+  line-height: 1.9;
+}
+
+.subject-example,
+.subject-key-idea,
+.subject-revision-tip {
+  padding: 18px 20px;
+  margin: 22px 0;
+  border-radius: 14px;
+  line-height: 1.8;
+}
+
+.subject-example {
+  border-left: 4px solid #e5b94e;
+  background: #fff7df;
+}
+
+.subject-key-idea {
+  border-left: 4px solid var(--subject-color);
+  background: var(--subject-light);
+}
+
+.subject-revision-tip {
+  border-left: 4px solid #49a875;
+  background: #e8f8ee;
+}
+
+.subject-example h3,
+.subject-key-idea h3,
+.subject-revision-tip h3 {
+  margin-top: 0;
+}
+
+/* ---------- Definitions and vocabulary ---------- */
+
+.subject-definition {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.3fr) minmax(0, 1fr);
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e8eaf2;
+}
+
+.subject-definition:last-child {
+  border-bottom: 0;
+}
+
+.subject-definition strong {
+  color: var(--subject-dark);
+}
+
+/* ---------- Flashcards ---------- */
+
+.subject-flashcards {
+  margin-top: 30px;
+}
+
+.subject-flashcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  width: 100%;
+  min-height: 220px;
+  padding: 30px;
+  border: 1px solid var(--subject-light);
+  border-radius: 22px;
+  background: var(--subject-light);
+  color: var(--subject-dark);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.subject-flashcard:hover {
+  transform: translateY(-2px);
+}
+
+.subject-flashcard-question {
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 900;
+}
+
+.subject-flashcard-hint {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.subject-flashcard-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* ---------- Quizzes ---------- */
+
+.subject-quiz {
+  margin-top: 30px;
+  padding: clamp(18px, 4vw, 30px);
+  border: 1px solid #e3e6f0;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.subject-question {
+  padding: 18px;
+  margin: 20px 0;
+  border: 1px solid #e3e6f0;
+  border-radius: 14px;
+}
+
+.subject-question legend {
+  padding: 0 8px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.subject-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #e3e6f0;
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.subject-answer:hover {
+  background: var(--subject-light);
+}
+
+.subject-answer.correct {
+  border-color: #7acb98;
+  background: #e5f8ec;
+}
+
+.subject-answer.incorrect {
+  border-color: #e9a0a0;
+  background: #fff0f0;
+}
+
+.subject-quiz-feedback {
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 12px;
+  line-height: 1.7;
+}
+
+.subject-quiz-score {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 14px;
+  background: var(--subject-light);
+  color: var(--subject-dark);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+/* ---------- Buttons ---------- */
+
+.subject-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--subject-color);
+  border-radius: 12px;
+  background: var(--subject-color);
+  color: #ffffff;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.subject-button:hover {
+  background: var(--subject-dark);
+  border-color: var(--subject-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.subject-button-outline {
+  background: #ffffff;
+  color: var(--subject-dark);
+}
+
+.subject-button-outline:hover {
+  background: var(--subject-light);
+  color: var(--subject-dark);
+}
+
+/* ---------- Breadcrumbs ---------- */
+
+.subject-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #69758a;
+  font-size: 0.9rem;
+}
+
+.subject-breadcrumbs a {
+  color: var(--subject-dark);
+  font-weight: 700;
+}
+
+/* ---------- Empty states ---------- */
+
+.subject-empty {
+  padding: 35px 20px;
+  border: 1px dashed #cdd2e2;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #69758a;
+  text-align: center;
+}
+
+/* ---------- Tablet layout ---------- */
+
+@media (max-width: 900px) {
+  .subject-topic-grid,
+  .subject-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Mobile layout ---------- */
+
+@media (max-width: 600px) {
+  .subject-page {
+    width: calc(100% - 24px);
+    padding-top: 16px;
+  }
+
+  .subject-hero {
+    padding: 25px 20px;
+    border-radius: 18px;
+  }
+
+  .subject-topic-grid,
+  .subject-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .subject-topic,
+  .subject-card {
+    padding: 18px;
+  }
+
+  .subject-lesson-item {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .subject-lesson-content {
+    padding: 18px;
+  }
+
+  .subject-flashcard {
+    min-height: 190px;
+    padding: 22px;
+  }
+
+  .subject-definition {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .subject-hero-actions,
+  .subject-flashcard-controls {
+    flex-wrap: wrap;
+  }
+
+  .subject-button {
+    flex: 1 1 auto;
+  }
+}
+
+/* ---------- Accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .subject-topic,
+  .subject-card,
+  .subject-lesson-item,
+  .subject-flashcard,
+  .subject-button {
+    transition: none;
+  }
+}
+
+.subject-topic:focus-visible,
+.subject-card:focus-visible,
+.subject-lesson-item:focus-visible,
+.subject-flashcard:focus-visible,
+.subject-button:focus-visible {
+  outline: 3px solid var(--subject-color);
+  outline-offset: 3px;
+}

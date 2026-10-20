@@ -1,0 +1,1561 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geography | Revision Hub</title>
+
+  <style>
+    :root {
+      --purple: #8064c9;
+      --purple-light: #f0ebff;
+      --pink: #ffe8f0;
+      --blue: #e7f3ff;
+      --green: #e5f8ed;
+      --yellow: #fff4d6;
+      --text: #302b42;
+      --muted: #777287;
+      --white: #ffffff;
+      --border: #e9e4f2;
+      --shadow: 0 5px 20px rgba(70, 50, 110, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #faf9ff;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      color: var(--purple);
+      font-size: 1.7rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text);
+      padding: 9px 15px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: var(--purple-light);
+      color: var(--purple);
+    }
+
+    .hero {
+      padding: 48px 7% 40px;
+      background: linear-gradient(135deg, #eee8ff, #fff0f5);
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      color: var(--purple);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.15;
+      margin: 16px 0 12px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #5d5672;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 1100px;
+      padding: 32px 20px 60px;
+      margin: auto;
+    }
+
+    .year-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .year-btn,
+    .action-btn {
+      border: 0;
+      padding: 11px 17px;
+      border-radius: 12px;
+      background: white;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+    }
+
+    .year-btn.active,
+    .action-btn.primary {
+      background: var(--purple);
+      color: white;
+    }
+
+    .year-btn:hover,
+    .action-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .year-intro {
+      background: white;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .year-intro h2 {
+      margin-top: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--purple-light);
+    }
+
+    .stat:nth-child(2) {
+      background: var(--pink);
+    }
+
+    .stat:nth-child(3) {
+      background: var(--blue);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font: inherit;
+      background: white;
+      margin-bottom: 22px;
+      outline-color: var(--purple);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 26px 0 15px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .topic-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .topic-top {
+      padding: 19px;
+    }
+
+    .topic-icon {
+      font-size: 2rem;
+    }
+
+    .topic-card h3 {
+      margin: 8px 0;
+      font-size: 1.15rem;
+    }
+
+    .topic-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin: 0;
+    }
+
+    .topic-tag {
+      display: inline-block;
+      background: var(--purple-light);
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+
+    details {
+      border-top: 1px solid var(--border);
+    }
+
+    summary {
+      padding: 14px 19px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--purple);
+    }
+
+    .topic-notes {
+      padding: 0 19px 20px;
+    }
+
+    .topic-notes h4 {
+      margin-bottom: 5px;
+    }
+
+    .topic-notes ul {
+      padding-left: 20px;
+    }
+
+    .tip-box {
+      background: var(--yellow);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+
+    .empty-message {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      grid-column: 1 / -1;
+    }
+
+    .quiz-panel {
+      margin-top: 36px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-panel h2 {
+      margin-top: 0;
+    }
+
+    .question {
+      border-top: 1px solid var(--border);
+      padding: 17px 0;
+    }
+
+    .question p {
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    .question label {
+      display: block;
+      padding: 7px 10px;
+      margin: 5px 0;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .question label:hover {
+      background: var(--purple-light);
+    }
+
+    .question input {
+      margin-right: 8px;
+    }
+
+    #quiz-result {
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    .study-tips {
+      margin-top: 30px;
+      padding: 22px;
+      background: var(--green);
+      border-radius: 18px;
+    }
+
+    footer {
+      padding: 25px 20px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      .main-nav a {
+        padding: 8px 10px;
+      }
+
+      .hero {
+        padding: 35px 5%;
+      }
+
+      main {
+        padding: 24px 15px 45px;
+      }
+
+      .topic-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stats {
+  display: none !important;
+}
+
+
+.flashcards-panel {
+  margin-top: 35px;
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.flashcard-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.flashcard-controls label {
+  font-weight: 700;
+}
+
+.flashcard-controls select {
+  flex: 1;
+  min-width: 180px;
+  padding: 11px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+.flashcard-stage {
+  max-width: 650px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+.flashcard {
+  width: 100%;
+  min-height: 245px;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border: 2px solid #dfd3ff;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #eee7ff, #ffe5ef);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.flashcard:hover {
+  transform: translateY(-3px);
+  border-color: var(--purple);
+}
+
+.flashcard strong {
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  line-height: 1.5;
+}
+
+#flashcard-side {
+  color: var(--purple);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+#flashcard-hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.flashcard-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.flashcard-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .flashcards-panel {
+    padding: 16px;
+  }
+
+  .flashcard {
+    min-height: 220px;
+    padding: 20px 15px;
+  }
+
+  .flashcard-actions button {
+    flex: 1;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="index.html">🐾 Revision Hub</a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="subjects.html" class="active" aria-current="page">Subjects</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Geography</h1>
+      <p>
+        Discover places, people, landscapes and our changing planet.
+        Choose your school year, revise the key ideas and test your knowledge!
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <div class="section-heading">
+      <h2>Choose your year</h2>
+    </div>
+
+    <div class="year-picker" aria-label="Choose school year">
+      <button class="year-btn active" data-year="7">Year 7</button>
+      <button class="year-btn" data-year="8">Year 8</button>
+      <button class="year-btn" data-year="9">Year 9</button>
+      <button class="year-btn" data-year="10">Year 10</button>
+      <button class="year-btn" data-year="11">Year 11</button>
+    </div>
+
+    <section class="year-intro">
+      <h2 id="year-title">Year 7 Geography</h2>
+      <p id="year-description">
+        Start with geographical skills, ecosystems, coasts and places around the world.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="topic-count">6</strong>
+          Main units
+        </div>
+        <div class="stat">
+          <strong>5</strong>
+          School years
+        </div>
+        <div class="stat">
+          <strong>🌎</strong>
+          One amazing planet
+        </div>
+      </div>
+
+      <p><strong>Revision tip:</strong> Learn key terms, practise explaining processes
+        and use real examples in your answers.</p>
+    </section>
+
+    <input
+      id="topic-search"
+      class="search-box"
+      type="search"
+      placeholder="🔎 Search topics, key terms or places..."
+      aria-label="Search Geography topics"
+    >
+
+    <div class="section-heading">
+      <h2 id="units-heading">Year 7 units</h2>
+      <button class="action-btn" id="expand-all" type="button">Expand all notes</button>
+    </div>
+
+    <div id="topic-grid" class="topic-grid"></div>
+
+    
+<section class="flashcards-panel" aria-labelledby="flashcards-heading">
+  <h2 id="flashcards-heading">🃏 Geography Flashcards</h2>
+  <p>Test your memory, flip the card and become a geography genius! 🌍</p>
+
+  <div class="flashcard-controls">
+    <label for="flashcard-topic">Topic:</label>
+    <select id="flashcard-topic">
+      <option value="all">All topics for this year</option>
+      <option value="ecosystems">Ecosystems and rainforests</option>
+      <option value="coasts">Coasts</option>
+      <option value="rivers">Rivers</option>
+      <option value="climate">Climate and weather</option>
+      <option value="urban">Cities and urbanisation</option>
+      <option value="population">Population and migration</option>
+      <option value="development">Development and globalisation</option>
+      <option value="tectonics">Tectonic hazards</option>
+      <option value="resources">Resources and sustainability</option>
+      <option value="fieldwork">Fieldwork and exam skills</option>
+    </select>
+  </div>
+
+  <div class="flashcard-stage">
+    <p id="flashcard-counter" aria-live="polite">Card 1</p>
+
+    <button type="button" id="flashcard" class="flashcard"
+      aria-label="Reveal the answer">
+      <span id="flashcard-side">QUESTION</span>
+      <strong id="flashcard-text">Loading flashcards...</strong>
+      <span id="flashcard-hint">🐾 Click to flip!</span>
+    </button>
+
+    <div class="flashcard-actions">
+      <button type="button" class="action-btn" id="flashcard-prev">← Previous</button>
+      <button type="button" class="action-btn primary" id="flashcard-next">Next →</button>
+    </div>
+
+    <div class="flashcard-actions">
+      <button type="button" class="action-btn" id="flashcard-shuffle">🔀 Shuffle</button>
+      <button type="button" class="action-btn" id="flashcard-reset">↻ Restart</button>
+    </div>
+  </div>
+</section>
+
+    <p id="search-status" aria-live="polite"></p>
+
+    <section class="quiz-panel">
+      <h2>🧠 Geography mini quiz</h2>
+      <p>Try these questions to check your understanding.</p>
+
+      <form id="quiz-form">
+        <div id="quiz-questions"></div>
+        <button class="action-btn primary" type="submit">Check my answers</button>
+        <button class="action-btn" type="button" id="reset-quiz">Try again</button>
+        <p id="quiz-result" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="study-tips">
+      <h2>Revision Hub top tips</h2>
+      <ul>
+        <li>Use flashcards for key geographical terms.</li>
+        <li>Practise drawing and labelling diagrams.</li>
+        <li>Use case studies and specific facts in longer answers.</li>
+        <li>Explain why and how, not just what happened.</li>
+        <li>Test yourself without looking at your notes.</li>
+      </ul>
+    </section>
+  </main>
+
+
+  <script>
+    // These are revision topic suggestions. Year 7 uses the six
+    // main units previously identified for Redhill School.
+    // Years 8–11 are broad examples, not a verified school scheme of work.
+
+    const geographyData = {
+      7: {
+        topics: [
+          {
+            title: "Global Ecosystems and the Amazing Amazon",
+            icon: "🌳",
+            tag: "Ecosystems",
+            summary: "Explore biomes and the tropical rainforest.",
+            keywords: "biome amazon rainforest deforestation climate adaptations",
+            objectives: [
+              "Define ecosystem, biome and biodiversity.",
+              "Describe the layers of a tropical rainforest.",
+              "Explain how plants and animals adapt to rainforest conditions.",
+              "Describe causes and impacts of deforestation."
+            ],
+            terms: [
+              "Ecosystem: living organisms interacting with each other and their environment.",
+              "Biome: a large region with a characteristic climate, plants and animals.",
+              "Deforestation: the removal of forests.",
+              "Biodiversity: the variety of living organisms in an area."
+            ],
+            tip: "Practise explaining one cause and one consequence of deforestation."
+          },
+          {
+            title: "Changing Coastal Areas in the UK",
+            icon: "🌊",
+            tag: "Physical geography",
+            summary: "Investigate waves, erosion and coastal management.",
+            keywords: "coast waves erosion transportation deposition cliffs beaches",
+            objectives: [
+              "Describe erosion, transportation and deposition.",
+              "Explain how waves shape coastlines.",
+              "Identify coastal landforms.",
+              "Compare ways of managing coastal erosion."
+            ],
+            terms: [
+              "Erosion: the wearing away of rock or soil.",
+              "Transportation: the movement of sediment.",
+              "Deposition: when transported material is dropped.",
+              "Longshore drift: sediment movement along a coast by angled waves."
+            ],
+            tip: "Draw a labelled diagram to explain longshore drift."
+          },
+          {
+            title: "Changing Urban Spaces",
+            icon: "🏙️",
+            tag: "Human geography",
+            summary: "Study cities, land use and urban change.",
+            keywords: "urban city population land use regeneration migration",
+            objectives: [
+              "Explain the meaning of urbanisation.",
+              "Describe different uses of land in a city.",
+              "Identify challenges faced by urban areas.",
+              "Explain how urban areas can change over time."
+            ],
+            terms: [
+              "Urbanisation: an increasing proportion of people living in towns and cities.",
+              "Land use: the purpose for which land is used.",
+              "Regeneration: improving an area that has declined.",
+              "Infrastructure: essential services and facilities."
+            ],
+            tip: "Use examples when explaining how a city can change."
+          },
+          {
+            title: "Country Study: Russia",
+            icon: "🇷🇺",
+            tag: "Place study",
+            summary: "Explore Russia's location, climate and landscapes.",
+            keywords: "Russia Moscow Siberia climate population physical geography",
+            objectives: [
+              "Locate Russia on a world map.",
+              "Describe its size and varied landscapes.",
+              "Explain how climate affects people and activities.",
+              "Explore differences between regions."
+            ],
+            terms: [
+              "Latitude: distance north or south of the Equator.",
+              "Climate: the average weather conditions over a long period.",
+              "Population density: the number of people per unit of area.",
+              "Permafrost: ground that remains frozen for at least two consecutive years."
+            ],
+            tip: "Practise locating Russia, Moscow and Siberia on a map."
+          },
+          {
+            title: "Climate Change",
+            icon: "🌡️",
+            tag: "Environment",
+            summary: "Understand causes, effects and possible responses.",
+            keywords: "climate change greenhouse gases global warming carbon emissions",
+            objectives: [
+              "Distinguish weather from climate.",
+              "Explain the enhanced greenhouse effect.",
+              "Describe possible effects of global warming.",
+              "Compare ways to reduce emissions and adapt to change."
+            ],
+            terms: [
+              "Weather: atmospheric conditions over a short period.",
+              "Climate: average weather conditions over a long period.",
+              "Greenhouse effect: warming caused when gases absorb outgoing heat.",
+              "Mitigation: action to reduce the causes of climate change.",
+              "Adaptation: adjusting to actual or expected climate impacts."
+            ],
+            tip: "Learn the difference between mitigation and adaptation."
+          },
+          {
+            title: "Local Place Study: The Black Country",
+            icon: "📍",
+            tag: "Local geography",
+            summary: "Investigate local places, industry and geographical change.",
+            keywords: "Black Country Dudley Stourbridge West Midlands industry fieldwork",
+            objectives: [
+              "Locate the Black Country in the West Midlands.",
+              "Explore how industry influenced local places.",
+              "Compare land uses and environments.",
+              "Practise fieldwork and geographical enquiry skills."
+            ],
+            terms: [
+              "Fieldwork: collecting information outside the classroom.",
+              "Primary data: information collected first-hand.",
+              "Secondary data: information collected by someone else.",
+              "Land use: how people use an area of land."
+            ],
+            tip: "Use a map and local examples to support your answers."
+          }
+        ]
+      },
+
+      8: {
+        description: "Build your knowledge of natural hazards, rivers, development and global connections.",
+        topics: [
+          {
+            title: "Rivers and Flooding",
+            icon: "🏞️",
+            tag: "Physical geography",
+            summary: "Explore river processes and flood risk.",
+            keywords: "rivers erosion transportation deposition flooding meander",
+            objectives: [
+              "Describe river erosion, transportation and deposition.",
+              "Identify features of a river valley.",
+              "Explain why flooding occurs.",
+              "Compare flood management methods."
+            ],
+            terms: [
+              "Tributary: a smaller river that joins a larger river.",
+              "Meander: a bend in a river.",
+              "Floodplain: flat land beside a river that may flood.",
+              "Discharge: the volume of water flowing past a point per second."
+            ],
+            tip: "Draw a river cross-section and label its features."
+          },
+          {
+            title: "Weather and Extreme Events",
+            icon: "⛈️",
+            tag: "Physical geography",
+            summary: "Investigate weather hazards and their impacts.",
+            keywords: "weather storms drought heatwave rainfall hazards",
+            objectives: [
+              "Distinguish weather from climate.",
+              "Describe examples of extreme weather.",
+              "Explain how hazards affect people and places.",
+              "Explore preparation and responses."
+            ],
+            terms: [
+              "Hazard: a natural or human event that may cause harm.",
+              "Drought: a prolonged period of unusually low rainfall.",
+              "Risk: the chance of harmful consequences occurring.",
+              "Resilience: the ability to prepare for and recover from impacts."
+            ],
+            tip: "Organise case-study facts into causes, effects and responses."
+          },
+          {
+            title: "Population and Migration",
+            icon: "👥",
+            tag: "Human geography",
+            summary: "Understand population patterns and why people move.",
+            keywords: "population migration push pull birth death urbanisation",
+            objectives: [
+              "Explain why populations change.",
+              "Describe push and pull factors.",
+              "Explore reasons for migration.",
+              "Discuss effects on places of origin and destination."
+            ],
+            terms: [
+              "Migration: movement to live in another place.",
+              "Push factor: something encouraging a person to leave.",
+              "Pull factor: something attracting a person to a place.",
+              "Population density: people per unit of area."
+            ],
+            tip: "Use a real example to explain push and pull factors."
+          },
+          {
+            title: "Development and Inequality",
+            icon: "🌍",
+            tag: "Global geography",
+            summary: "Compare living standards and development.",
+            keywords: "development inequality wealth poverty quality life HDI",
+            objectives: [
+              "Describe differences in development.",
+              "Understand indicators used to measure development.",
+              "Explain reasons for inequality.",
+              "Explore ways to reduce poverty."
+            ],
+            terms: [
+              "Development: improvements in people's quality of life.",
+              "GDP per capita: economic output per person.",
+              "Life expectancy: average expected lifespan.",
+              "Inequality: an uneven distribution of resources or opportunities."
+            ],
+            tip: "Remember that one statistic cannot explain every aspect of development."
+          }
+        ]
+      },
+
+      9: {
+        description: "Explore globalisation, ecosystems, resource use and the challenges facing our planet.",
+        topics: [
+          {
+            title: "Globalisation",
+            icon: "🌐",
+            tag: "Human geography",
+            summary: "Investigate how countries and people are connected.",
+            keywords: "globalisation trade transport communication TNC",
+            objectives: [
+              "Define globalisation.",
+              "Explain how transport and communication connect places.",
+              "Describe the role of multinational companies.",
+              "Assess benefits and drawbacks of global connections."
+            ],
+            terms: [
+              "Globalisation: increasing connections between countries and people.",
+              "Trade: buying and selling goods and services.",
+              "TNC: a company operating in more than one country.",
+              "Supply chain: the stages involved in producing and delivering a product."
+            ],
+            tip: "Use an everyday product to trace a global supply chain."
+          },
+          {
+            title: "Tectonic Hazards",
+            icon: "🌋",
+            tag: "Physical geography",
+            summary: "Learn why earthquakes and volcanoes occur.",
+            keywords: "tectonic plates earthquakes volcanoes hazards",
+            objectives: [
+              "Describe the structure of the Earth.",
+              "Explain how tectonic plates move.",
+              "Compare impacts of earthquakes and volcanic eruptions.",
+              "Explore preparation and protection."
+            ],
+            terms: [
+              "Tectonic plate: a large moving section of Earth's lithosphere.",
+              "Earthquake: sudden shaking caused by energy released in Earth's crust.",
+              "Volcano: an opening through which magma and gases may escape.",
+              "Magnitude: a measure of earthquake size."
+            ],
+            tip: "Practise explaining the link between plate boundaries and hazards."
+          },
+          {
+            title: "Resource Management",
+            icon: "♻️",
+            tag: "Environment",
+            summary: "Explore energy, food, water and sustainable choices.",
+            keywords: "resources sustainability energy food water renewable",
+            objectives: [
+              "Identify key natural resources.",
+              "Compare renewable and non-renewable energy.",
+              "Explain why access to resources varies.",
+              "Describe ways to manage resources sustainably."
+            ],
+            terms: [
+              "Resource: something people use to meet a need.",
+              "Renewable: naturally replenished on a human timescale.",
+              "Non-renewable: finite or replenished extremely slowly.",
+              "Sustainability: meeting present needs without compromising future generations."
+            ],
+            tip: "Compare the advantages and disadvantages of two energy sources."
+          },
+          {
+            title: "Ecosystems and Biodiversity",
+            icon: "🐾",
+            tag: "Physical geography",
+            summary: "Explore how living things depend on their environments.",
+            keywords: "ecosystems biodiversity food chains habitats conservation",
+            objectives: [
+              "Describe relationships within ecosystems.",
+              "Explain food chains and food webs.",
+              "Identify threats to biodiversity.",
+              "Evaluate conservation approaches."
+            ],
+            terms: [
+              "Habitat: the natural home of an organism.",
+              "Food web: interconnected food chains.",
+              "Biodiversity: the variety of life in an area.",
+              "Conservation: protecting species and environments."
+            ],
+            tip: "Practise drawing a food web with labelled arrows."
+          }
+        ]
+      },
+
+      10: {
+        description: "Start GCSE-style Geography revision: physical processes, human geography and case studies.",
+        topics: [
+          {
+            title: "Natural Hazards",
+            icon: "🌋",
+            tag: "GCSE physical",
+            summary: "Study tectonic hazards, weather hazards and climate change.",
+            keywords: "GCSE hazards earthquakes volcanoes tropical storms climate",
+            objectives: [
+              "Explain tectonic processes and hazards.",
+              "Compare impacts in places at different development levels.",
+              "Describe tropical storm formation and impacts.",
+              "Evaluate hazard management."
+            ],
+            terms: [
+              "Primary effect: an immediate result of a hazard.",
+              "Secondary effect: a later or indirect result.",
+              "Prediction: estimating when and where a hazard may occur.",
+              "Protection: measures that reduce the impacts of hazards."
+            ],
+            tip: "Build a case-study sheet with named places and specific evidence."
+          },
+          {
+            title: "The Living World",
+            icon: "🌳",
+            tag: "GCSE physical",
+            summary: "Revise ecosystems, tropical rainforests and cold environments.",
+            keywords: "living world rainforest cold environments adaptations",
+            objectives: [
+              "Explain ecosystem processes and nutrient cycles.",
+              "Describe rainforest characteristics and adaptations.",
+              "Evaluate causes and effects of deforestation.",
+              "Explore sustainable management."
+            ],
+            terms: [
+              "Interdependence: organisms relying on one another.",
+              "Nutrient cycle: movement and storage of nutrients in an ecosystem.",
+              "Adaptation: a characteristic that helps an organism survive.",
+              "Sustainable management: using resources while protecting their long-term availability."
+            ],
+            tip: "Practise using evidence from the specific case studies taught in class."
+          },
+          {
+            title: "Physical Landscapes in the UK",
+            icon: "🏞️",
+            tag: "GCSE physical",
+            summary: "Study UK landscapes, rivers and coasts.",
+            keywords: "UK landscapes rivers coasts erosion deposition management",
+            objectives: [
+              "Explain coastal and river processes.",
+              "Identify landforms and how they develop.",
+              "Compare management strategies.",
+              "Use diagrams to explain physical processes."
+            ],
+            terms: [
+              "Hydraulic action: erosion caused by water or air forced into cracks.",
+              "Abrasion: rock fragments wearing away a surface.",
+              "Meander: a bend in a river channel.",
+              "Hard engineering: built structures used to manage hazards."
+            ],
+            tip: "Use a sequence of labelled diagrams to explain landform formation."
+          },
+          {
+            title: "Urban Issues and Challenges",
+            icon: "🏙️",
+            tag: "GCSE human",
+            summary: "Explore urban growth, opportunities and challenges.",
+            keywords: "urban growth megacity regeneration sustainability",
+            objectives: [
+              "Explain why cities grow.",
+              "Describe opportunities and challenges of urban growth.",
+              "Explore urban change in the UK.",
+              "Evaluate strategies for sustainable cities."
+            ],
+            terms: [
+              "Urbanisation: an increasing proportion of people living in urban areas.",
+              "Megacity: an urban area with a population of at least 10 million.",
+              "Regeneration: investment and improvement in an area.",
+              "Sustainable city: a city designed to reduce environmental and social harm."
+            ],
+            tip: "Practise balanced answers that explain both opportunities and challenges."
+          }
+        ]
+      },
+
+      11: {
+        description: "Consolidate GCSE knowledge, practise exam questions and revise case-study evidence.",
+        topics: [
+          {
+            title: "The Changing Economic World",
+            icon: "📈",
+            tag: "GCSE human",
+            summary: "Revise development, inequality and economic change.",
+            keywords: "economic development inequality aid trade industry",
+            objectives: [
+              "Compare development indicators.",
+              "Explain reasons for uneven development.",
+              "Evaluate strategies to reduce the development gap.",
+              "Revise the economic development case studies taught in class."
+            ],
+            terms: [
+              "Development gap: differences in wealth and quality of life between places.",
+              "Aid: assistance provided to people or countries.",
+              "Industrialisation: growth of manufacturing and industry.",
+              "Infrastructure: transport, energy, water and other essential systems."
+            ],
+            tip: "Memorise specific evidence and explain what each statistic shows."
+          },
+          {
+            title: "The Challenge of Resource Management",
+            icon: "💧",
+            tag: "GCSE human",
+            summary: "Review resource demand, supply and sustainability.",
+            keywords: "resource management water energy food sustainability",
+            objectives: [
+              "Explain why resource demand changes.",
+              "Describe challenges in resource supply.",
+              "Compare strategies for sustainable management.",
+              "Revise examples used in lessons."
+            ],
+            terms: [
+              "Resource security: reliable access to resources.",
+              "Water insecurity: unreliable access to sufficient safe water.",
+              "Energy mix: the combination of energy sources used.",
+              "Sustainability: managing resources for long-term needs."
+            ],
+            tip: "Practise explaining a resource challenge using a named example."
+          },
+          {
+            title: "Fieldwork and Geographical Skills",
+            icon: "🗺️",
+            tag: "Exam skills",
+            summary: "Practise maps, graphs, data and fieldwork methods.",
+            keywords: "fieldwork maps graphs data analysis evaluation six figure grid references",
+            objectives: [
+              "Describe a suitable sampling method.",
+              "Choose and interpret graphs and maps.",
+              "Analyse patterns in data.",
+              "Evaluate the strengths and limitations of an investigation."
+            ],
+            terms: [
+              "Hypothesis: a statement that can be tested.",
+              "Sampling: selecting a subset to investigate.",
+              "Anomaly: a result that differs from the overall pattern.",
+              "Evaluation: judging how reliable or effective a method was."
+            ],
+            tip: "Revise what you did, what you found and how reliable your results were."
+          },
+          {
+            title: "Case Studies and Exam Practice",
+            icon: "📝",
+            tag: "Revision",
+            summary: "Organise evidence and practise structured exam answers.",
+            keywords: "case studies revision exam command words evaluate explain describe",
+            objectives: [
+              "Recall named places and accurate evidence.",
+              "Understand describe, explain, compare and evaluate.",
+              "Structure longer answers clearly.",
+              "Check answers against the question and available marks."
+            ],
+            terms: [
+              "Describe: state what something is like.",
+              "Explain: give reasons why or how something happens.",
+              "Compare: identify similarities and differences.",
+              "Evaluate: weigh evidence and reach a supported judgement."
+            ],
+            tip: "Practise timed answers and review what would improve each response."
+          }
+        ]
+      }
+    };
+
+    const quizData = {
+      7: [
+        {
+          q: "What is a biome?",
+          options: [
+            "A type of map",
+            "A large region with a characteristic climate and ecosystem",
+            "A coastal defence",
+            "A type of rock"
+          ],
+          answer: 1
+        },
+        {
+          q: "What is deforestation?",
+          options: [
+            "Planting trees",
+            "Moving a river",
+            "Removing forests",
+            "Protecting wildlife"
+          ],
+          answer: 2
+        },
+        {
+          q: "What is longshore drift?",
+          options: [
+            "Movement of sediment along the coast",
+            "Movement of tectonic plates",
+            "A type of rainfall",
+            "The growth of cities"
+          ],
+          answer: 0
+        },
+        {
+          q: "Which statement describes climate?",
+          options: [
+            "Today's rainfall only",
+            "The average weather over a long period",
+            "The height of a mountain",
+            "A population count"
+          ],
+          answer: 1
+        },
+        {
+          q: "What is fieldwork?",
+          options: [
+            "Memorising definitions only",
+            "Collecting geographical information through investigation",
+            "Drawing fictional maps",
+            "Learning capital cities only"
+          ],
+          answer: 1
+        }
+      ],
+      8: [
+        {
+          q: "What is a tributary?",
+          options: ["A river that joins another river", "A coastal cliff", "A mountain pass", "A type of cloud"],
+          answer: 0
+        },
+        {
+          q: "What is a push factor?",
+          options: ["A reason to leave a place", "A tourist attraction", "A type of river", "A climate graph"],
+          answer: 0
+        },
+        {
+          q: "Which is a development indicator?",
+          options: ["Life expectancy", "Wave height only", "River width only", "Wind direction only"],
+          answer: 0
+        }
+      ],
+      9: [
+        {
+          q: "What is globalisation?",
+          options: ["Countries becoming less connected", "Increasing connections between countries", "A type of rock", "A river process"],
+          answer: 1
+        },
+        {
+          q: "What does renewable mean?",
+          options: ["It can be naturally replenished", "It can never be replaced", "It is always a fossil fuel", "It has no uses"],
+          answer: 0
+        },
+        {
+          q: "What is biodiversity?",
+          options: ["The variety of life", "The size of a city", "The speed of a river", "The age of a mountain"],
+          answer: 0
+        }
+      ],
+      10: [
+        {
+          q: "What is a primary effect of a hazard?",
+          options: ["An immediate result", "A result decades later only", "A weather forecast", "A population graph"],
+          answer: 0
+        },
+        {
+          q: "What is urbanisation?",
+          options: ["Growth in the proportion of people living in urban areas", "A decrease in all trade", "A type of erosion", "A change in river discharge"],
+          answer: 0
+        },
+        {
+          q: "What is hard engineering?",
+          options: ["Built structures used to manage hazards", "Planting a forest only", "Collecting data", "Drawing a climate graph"],
+          answer: 0
+        }
+      ],
+      11: [
+        {
+          q: "What is an anomaly in data?",
+          options: ["A result that differs from the overall pattern", "The average of all results", "A map key", "A case-study location"],
+          answer: 0
+        },
+        {
+          q: "What does evaluate mean in an exam?",
+          options: ["Copy a definition", "Weigh evidence and reach a supported judgement", "List places only", "Draw a map without labels"],
+          answer: 1
+        },
+        {
+          q: "What is a hypothesis?",
+          options: ["A statement that can be tested", "A type of coastal landform", "A map symbol", "A population total"],
+          answer: 0
+        }
+      ]
+    };
+
+    const yearButtons = document.querySelectorAll(".year-btn");
+    const titleEl = document.getElementById("year-title");
+    const descriptionEl = document.getElementById("year-description");
+    const countEl = document.getElementById("topic-count");
+    const headingEl = document.getElementById("units-heading");
+    const grid = document.getElementById("topic-grid");
+    const search = document.getElementById("topic-search");
+    const status = document.getElementById("search-status");
+    const quizQuestions = document.getElementById("quiz-questions");
+    const quizResult = document.getElementById("quiz-result");
+
+    let currentYear = 7;
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    function renderTopics() {
+      const yearData = geographyData[currentYear];
+      const term = search.value.trim().toLowerCase();
+
+      const filteredTopics = yearData.topics.filter(topic => {
+        const searchable = [
+          topic.title,
+          topic.summary,
+          topic.tag,
+          topic.keywords,
+          ...topic.objectives,
+          ...topic.terms
+        ].join(" ").toLowerCase();
+
+        return searchable.includes(term);
+      });
+
+      titleEl.textContent = `Year ${currentYear} Geography`;
+      descriptionEl.textContent = yearData.description;
+      countEl.textContent = yearData.topics.length;
+      headingEl.textContent = `Year ${currentYear} units`;
+
+      if (filteredTopics.length === 0) {
+        grid.innerHTML =
+          '<div class="empty-message">No topics found. Try another search.</div>';
+      } else {
+        grid.innerHTML = filteredTopics.map(topic => `
+          <article class="topic-card">
+            <div class="topic-top">
+              <div class="topic-icon" aria-hidden="true">${escapeHTML(topic.icon)}</div>
+              <h3>${escapeHTML(topic.title)}</h3>
+              <p>${escapeHTML(topic.summary)}</p>
+              <span class="topic-tag">${escapeHTML(topic.tag)}</span>
+            </div>
+
+            <details>
+              <summary>Open revision notes</summary>
+              <div class="topic-notes">
+                <h4>What to revise</h4>
+                <ul>
+                  ${topic.objectives.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+                </ul>
+
+                <h4>Key terms</h4>
+                <ul>
+                  ${topic.terms.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+                </ul>
+
+                <div class="tip-box">
+                  <strong>🐾 Study tip:</strong> ${escapeHTML(topic.tip)}
+                </div>
+              </div>
+            </details>
+          </article>
+        `).join("");
+      }
+
+      status.textContent = term
+        ? `${filteredTopics.length} topic(s) found.`
+        : `${yearData.topics.length} topics available for Year ${currentYear}.`;
+
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const questions = quizData[currentYear] || [];
+
+      quizResult.textContent = "";
+
+      quizQuestions.innerHTML = questions.map((question, index) => `
+        <div class="question">
+          <p>${index + 1}. ${escapeHTML(question.q)}</p>
+          ${question.options.map((option, optionIndex) => `
+            <label>
+              <input
+                type="radio"
+                name="question-${index}"
+                value="${optionIndex}"
+                required
+              >
+              ${escapeHTML(option)}
+            </label>
+          `).join("")}
+        </div>
+      `).join("");
+    }
+
+    yearButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        currentYear = Number(button.dataset.year);
+
+        yearButtons.forEach(item => {
+          const selected = item === button;
+          item.classList.toggle("active", selected);
+          item.setAttribute("aria-pressed", String(selected));
+        });
+
+        search.value = "";
+        renderTopics();
+      });
+    });
+
+    search.addEventListener("input", renderTopics);
+
+    document.getElementById("expand-all").addEventListener("click", () => {
+      const details = [...grid.querySelectorAll("details")];
+      if (!details.length) return;
+
+      const shouldExpand = details.some(item => !item.open);
+      details.forEach(item => item.open = shouldExpand);
+
+      document.getElementById("expand-all").textContent =
+        shouldExpand ? "Collapse all notes" : "Expand all notes";
+    });
+
+    document.getElementById("quiz-form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const questions = quizData[currentYear] || [];
+      let score = 0;
+
+      questions.forEach((question, index) => {
+        const selected = document.querySelector(
+          `input[name="question-${index}"]:checked`
+        );
+
+        if (selected && Number(selected.value) === question.answer) {
+          score++;
+        }
+      });
+
+      quizResult.textContent =
+        `You scored ${score} out of ${questions.length}! ` +
+        (score === questions.length
+          ? "Fantastic work! 🎉"
+          : "Keep revising and have another go! 🐾");
+    });
+
+    document.getElementById("reset-quiz").addEventListener("click", () => {
+      document.getElementById("quiz-form").reset();
+      quizResult.textContent = "";
+    });
+
+    
+const flashcardBank = [
+  // YEAR 7
+  {year:7, topic:"ecosystems", q:"What is an ecosystem?", a:"Living organisms interacting with each other and their environment."},
+  {year:7, topic:"ecosystems", q:"What is biodiversity?", a:"The variety of living organisms in an area."},
+  {year:7, topic:"ecosystems", q:"What is deforestation?", a:"The removal of forests."},
+  {year:7, topic:"ecosystems", q:"Name one cause of Amazon deforestation.", a:"Agriculture, cattle ranching, logging, mining or road construction."},
+  {year:7, topic:"coasts", q:"What is coastal erosion?", a:"The wearing away of rock or sediment along a coast."},
+  {year:7, topic:"coasts", q:"What is longshore drift?", a:"The movement of sediment along a coast by waves approaching at an angle."},
+  {year:7, topic:"urban", q:"What is urbanisation?", a:"An increase in the proportion of people living in towns and cities."},
+  {year:7, topic:"climate", q:"What is the difference between weather and climate?", a:"Weather is short-term atmospheric conditions; climate is average weather over a long period."},
+  {year:7, topic:"fieldwork", q:"What is primary data?", a:"Information collected first-hand by the person conducting the investigation."},
+  {year:7, topic:"fieldwork", q:"What is secondary data?", a:"Information that has already been collected by someone else."},
+
+  // YEAR 8
+  {year:8, topic:"rivers", q:"What is a tributary?", a:"A smaller river or stream that flows into a larger river."},
+  {year:8, topic:"rivers", q:"What is a meander?", a:"A bend or curve in a river channel."},
+  {year:8, topic:"rivers", q:"What is a floodplain?", a:"Flat land beside a river that may flood."},
+  {year:8, topic:"climate", q:"What is a drought?", a:"A prolonged period of unusually low rainfall."},
+  {year:8, topic:"population", q:"What is a migration push factor?", a:"Something that encourages people to leave a place."},
+  {year:8, topic:"population", q:"What is a migration pull factor?", a:"Something that attracts people to a new place."},
+  {year:8, topic:"development", q:"What is life expectancy?", a:"The average number of years a person is expected to live."},
+  {year:8, topic:"development", q:"What does inequality mean?", a:"An uneven distribution of resources, wealth or opportunities."},
+
+  // YEAR 9
+  {year:9, topic:"development", q:"What is globalisation?", a:"The increasing connections between countries, economies and people."},
+  {year:9, topic:"development", q:"What is a TNC?", a:"A transnational company that operates in more than one country."},
+  {year:9, topic:"tectonics", q:"What is a tectonic plate?", a:"A large moving section of Earth's lithosphere."},
+  {year:9, topic:"tectonics", q:"What causes an earthquake?", a:"A sudden release of energy in Earth's crust, often as rocks move along a fault."},
+  {year:9, topic:"resources", q:"What is a renewable resource?", a:"A resource that is naturally replenished on a human timescale."},
+  {year:9, topic:"resources", q:"What is sustainability?", a:"Meeting present needs without compromising future generations' ability to meet theirs."},
+  {year:9, topic:"ecosystems", q:"What is a food web?", a:"A network of interconnected food chains."},
+  {year:9, topic:"ecosystems", q:"What is conservation?", a:"Protecting and managing species, habitats and natural environments."},
+
+  // YEAR 10
+  {year:10, topic:"tectonics", q:"What is a primary hazard effect?", a:"An immediate impact caused directly by a hazard."},
+  {year:10, topic:"tectonics", q:"What is a secondary hazard effect?", a:"An indirect or later impact resulting from a hazard."},
+  {year:10, topic:"ecosystems", q:"What is an adaptation?", a:"A characteristic that helps an organism survive in its environment."},
+  {year:10, topic:"ecosystems", q:"What is interdependence?", a:"When organisms depend on each other within an ecosystem."},
+  {year:10, topic:"coasts", q:"What is hard engineering?", a:"Using built structures to manage or protect against physical processes."},
+  {year:10, topic:"urban", q:"What is urban regeneration?", a:"Investment and improvement in an area experiencing decline."},
+  {year:10, topic:"climate", q:"What is climate change mitigation?", a:"Action taken to reduce the causes of climate change."},
+  {year:10, topic:"climate", q:"What is climate change adaptation?", a:"Adjusting to actual or expected climate impacts."},
+
+  // YEAR 11
+  {year:11, topic:"development", q:"What is the development gap?", a:"Differences in wealth and quality of life between places."},
+  {year:11, topic:"resources", q:"What is an energy mix?", a:"The combination of energy sources used by a country or region."},
+  {year:11, topic:"fieldwork", q:"What is a hypothesis?", a:"A statement or prediction that can be tested through investigation."},
+  {year:11, topic:"fieldwork", q:"What is an anomaly in data?", a:"A result that differs from the overall pattern."},
+  {year:11, topic:"fieldwork", q:"What does evaluate mean in a Geography exam?", a:"Weigh evidence, consider strengths and weaknesses, and reach a supported judgement."},
+  {year:11, topic:"fieldwork", q:"What should a fieldwork conclusion include?", a:"A clear answer to the enquiry question supported by evidence from the data."}
+];
+
+const flashcardTopic = document.getElementById("flashcard-topic");
+const flashcardButton = document.getElementById("flashcard");
+const flashcardText = document.getElementById("flashcard-text");
+const flashcardSide = document.getElementById("flashcard-side");
+const flashcardHint = document.getElementById("flashcard-hint");
+const flashcardCounter = document.getElementById("flashcard-counter");
+const flashcardPrev = document.getElementById("flashcard-prev");
+const flashcardNext = document.getElementById("flashcard-next");
+
+let activeFlashcards = [];
+let flashcardIndex = 0;
+let showingAnswer = false;
+
+function loadFlashcards() {
+  const selectedTopic = flashcardTopic.value;
+
+  activeFlashcards = flashcardBank.filter(card =>
+    card.year === currentYear &&
+    (selectedTopic === "all" || card.topic === selectedTopic)
+  );
+
+  flashcardIndex = 0;
+  showingAnswer = false;
+  showFlashcard();
+}
+
+function showFlashcard() {
+  if (!activeFlashcards.length) {
+    flashcardSide.textContent = "NO CARDS YET";
+    flashcardText.textContent = "No cards for this topic and year yet. Try another topic! 🐾";
+    flashcardHint.textContent = "Choose a different topic above.";
+    flashcardCounter.textContent = "0 cards";
+    flashcardButton.disabled = true;
+    flashcardPrev.disabled = true;
+    flashcardNext.disabled = true;
+    return;
+  }
+
+  flashcardButton.disabled = false;
+  const card = activeFlashcards[flashcardIndex];
+
+  flashcardSide.textContent = showingAnswer ? "ANSWER" : "QUESTION";
+  flashcardText.textContent = showingAnswer ? card.a : card.q;
+  flashcardHint.textContent = showingAnswer
+    ? "✨ Click to see the question again"
+    : "🐾 Click to reveal the answer";
+
+  flashcardCounter.textContent =
+    `Card ${flashcardIndex + 1} of ${activeFlashcards.length} · Year ${currentYear}`;
+
+  flashcardButton.setAttribute(
+    "aria-label",
+    showingAnswer ? "Show question" : "Reveal answer"
+  );
+
+  flashcardPrev.disabled = flashcardIndex === 0;
+  flashcardNext.disabled = flashcardIndex === activeFlashcards.length - 1;
+}
+
+flashcardButton.addEventListener("click", () => {
+  if (!activeFlashcards.length) return;
+  showingAnswer = !showingAnswer;
+  showFlashcard();
+});
+
+flashcardTopic.addEventListener("change", loadFlashcards);
+
+flashcardPrev.addEventListener("click", () => {
+  if (flashcardIndex > 0) {
+    flashcardIndex--;
+    showingAnswer = false;
+    showFlashcard();
+  }
+});
+
+flashcardNext.addEventListener("click", () => {
+  if (flashcardIndex < activeFlashcards.length - 1) {
+    flashcardIndex++;
+    showingAnswer = false;
+    showFlashcard();
+  }
+});
+
+document.getElementById("flashcard-shuffle").addEventListener("click", () => {
+  for (let i = activeFlashcards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [activeFlashcards[i], activeFlashcards[j]] =
+      [activeFlashcards[j], activeFlashcards[i]];
+  }
+
+  flashcardIndex = 0;
+  showingAnswer = false;
+  showFlashcard();
+});
+
+document.getElementById("flashcard-reset").addEventListener("click", loadFlashcards);
+
+// Keep the flashcards in sync with the existing Year 7–11 buttons.
+yearButtons.forEach(button => {
+  button.addEventListener("click", loadFlashcards);
+});
+
+loadFlashcards();
+
+    renderTopics();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revision Hub Maths | Years 7–11</title>
+
+<style>
+:root {
+  --ink: #302743;
+  --purple: #7656a6;
+  --pale: #f2ebff;
+  --line: #e5dced;
+  --muted: #655d70;
+  --blue: #eaf4ff;
+  --green: #e8f7ec;
+  --gold: #fff3d5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fcfaff;
+  color: var(--ink);
+  font: 16px/1.65 system-ui, sans-serif;
+}
+
+header {
+  background: linear-gradient(120deg, #eee5ff, #ffeaf2);
+  padding: 16px max(18px, calc((100% - 1100px)/2));
+  border-bottom: 1px solid var(--line);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 900;
+  color: #503771;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.navlinks {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.navlinks a {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+.navlinks a:hover { background: white; }
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px 18px 60px;
+}
+
+.hero {
+  padding: 32px;
+  border-radius: 25px;
+  background: linear-gradient(130deg, #fff, #f1eaff);
+  box-shadow: 0 8px 24px #39224b12;
+}
+
+.eyebrow {
+  color: var(--purple);
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: .8rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+  margin: 8px 0;
+}
+
+h2 { margin: 0; }
+
+.muted { color: var(--muted); }
+
+.years {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.years a {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 15px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: 0 5px 15px #3027430b;
+}
+
+.years strong {
+  display: block;
+  color: var(--purple);
+  font-size: 1.1rem;
+}
+
+.years span {
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+#search {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  margin: 5px 0 22px;
+}
+
+.year {
+  margin: 32px 0;
+  scroll-margin-top: 15px;
+}
+
+.yearhead {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: var(--pale);
+  margin-bottom: 14px;
+}
+
+.yearhead p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lesson {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 5px 16px #3027430b;
+}
+
+.lesson summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 15px 17px;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lesson summary::-webkit-details-marker { display: none; }
+
+.lesson summary::after {
+  content: "▾";
+  color: var(--purple);
+  font-size: 1.2rem;
+}
+
+.lesson[open] summary {
+  background: #f6f1ff;
+  border-bottom: 1px solid var(--line);
+}
+
+.lesson[open] summary::after { content: "▴"; }
+
+.content { padding: 16px 18px; }
+
+.content h3 {
+  font-size: 1rem;
+  color: #604287;
+  margin: 14px 0 4px;
+}
+
+.content h3:first-child { margin-top: 0; }
+
+.content p { margin: 7px 0; }
+
+.example, .tip, .mistake {
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+
+.example {
+  background: var(--blue);
+  border-left: 4px solid #79aee8;
+}
+
+.tip {
+  background: var(--green);
+  border-left: 4px solid #78bd91;
+}
+
+.mistake {
+  background: var(--gold);
+  border-left: 4px solid #e2b44c;
+}
+
+.formula {
+  font-weight: 800;
+  color: #503771;
+}
+
+.practice {
+  border-top: 1px dashed var(--line);
+  margin-top: 14px;
+  padding-top: 12px;
+}
+
+.practice label {
+  display: block;
+  font-weight: 750;
+  margin-bottom: 5px;
+}
+
+.practice input {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #d4c9e1;
+  border-radius: 9px;
+  font: inherit;
+}
+
+.practice button {
+  margin-top: 7px;
+  border: 0;
+  border-radius: 9px;
+  padding: 8px 13px;
+  background: var(--purple);
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.practice button:hover { filter: brightness(.93); }
+
+.practice button:focus-visible,
+.practice input:focus-visible,
+#search:focus-visible {
+  outline: 3px solid #b39ad8;
+  outline-offset: 2px;
+}
+
+.feedback {
+  min-height: 1.5em;
+  font-weight: 750;
+}
+
+.footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+
+  
+}
+
+[hidden] { display: none !important; }
+
+@media (max-width: 600px) {
+  .hero { padding: 22px; }
+  .navlinks a { font-size: .9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
+
+
+/* ===== Revision Hub MAIN NAVBAR ===== */
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 18px 24px;
+    background: #fff5f8;
+    border-bottom: 2px solid #f6d6e3;
+    box-shadow: 0 4px 12px rgba(190, 105, 145, 0.12);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Navigation links */
+.main-nav a {
+    display: inline-block;
+    padding: 11px 22px;
+
+    color: #75465e;
+    background: transparent;
+
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+
+    border-radius: 25px;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.deep-learning {
+  margin-top: 22px;
+  padding: 20px;
+  border: 2px solid #e9e1fa;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fffafd, #f8f5ff);
+}
+
+.deep-learning h3 {
+  margin-bottom: 18px;
+  color: #806bb4;
+}
+
+.deep-learning h4 {
+  margin: 18px 0 7px;
+  color: #b56f98;
+}
+
+.deep-learning p {
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+/* Hover effect */
+.main-nav a:hover {
+    background: #f8dce8;
+    color: #bd4f82;
+    transform: translateY(-2px);
+}
+
+/* Active page */
+.main-nav a.active {
+    background: #e98bb5;
+    color: #ffffff;
+    box-shadow: 0 4px 9px rgba(200, 90, 140, 0.2);
+}
+
+/* Keyboard accessibility */
+.main-nav a:focus-visible {
+    outline: 3px solid #bd4f82;
+    outline-offset: 4px;
+}
+
+/* ===== MOBILE NAVBAR ===== */
+
+@media (max-width: 600px) {
+    .main-nav {
+        gap: 6px;
+        padding: 12px 8px;
+    }
+
+    .main-nav a {
+        padding: 9px 13px;
+        font-size: 13px;
+    }
+}
+
+
+
+/* 💜 REVISION HUB — MATHS FLASHCARDS */
+
+.maths-flashcards,
+.maths-flashcards * {
+  box-sizing: border-box;
+}
+
+.maths-flashcards {
+  width: 100%;
+  max-width: 950px;
+  margin: 35px auto;
+  padding: 30px;
+  border: 2px solid #e8c8ff;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, #f4dcff 0, transparent 40%),
+    linear-gradient(145deg, #fffaff, #ffedf7);
+  box-shadow: 0 12px 35px rgba(133, 69, 180, 0.12);
+  color: #45245f;
+  text-align: center;
+  font-family: inherit;
+}
+
+.maths-flashcards h2 {
+  margin: 0 0 10px;
+  color: #853dc0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+}
+
+.maths-flashcards > p {
+  line-height: 1.6;
+}
+
+.flashcard-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.flashcard-filters label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #70418e;
+}
+
+.flashcard-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 130px;
+  padding: 11px 36px 11px 14px;
+  border: 1.5px solid #d9b1fa;
+  border-radius: 13px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23853dc0' stroke-width='1.7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  color: #58316f;
+  font: inherit;
+  cursor: pointer;
+}
+
+.flashcard-filters select:focus-visible {
+  outline: 3px solid #edb5e5;
+  outline-offset: 3px;
+}
+
+/* Main flashcard */
+.maths-flashcard {
+  width: 100%;
+  max-width: 700px;
+  min-height: 290px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 2px solid #dbb2ff;
+  border-radius: 25px;
+  background: linear-gradient(155deg, #ffffff, #fff4fa);
+  box-shadow: 0 12px 28px rgba(137, 70, 183, 0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.maths-flashcard:hover {
+  transform: translateY(-4px);
+  border-color: #c58af5;
+  box-shadow: 0 17px 34px rgba(137, 70, 183, 0.19);
+}
+
+.maths-flashcard:active {
+  transform: scale(0.99);
+}
+
+#maths-card-count {
+  color: #9b6bb6;
+  font-size: 0.9rem;
+}
+
+#maths-card-label {
+  margin: 8px 0;
+  color: #a33e96;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+#maths-card-text {
+  max-width: 600px;
+  margin: 10px 0;
+  color: #39234f;
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+#maths-card-hint {
+  margin-top: 10px;
+  color: #9b78aa;
+  font-size: 0.9rem;
+}
+
+.maths-flashcard:focus-visible {
+  outline: 3px solid #e88fcf;
+  outline-offset: 5px;
+}
+
+/* Buttons */
+.maths-card-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.maths-card-controls button {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 44px;
+  padding: 11px 19px;
+  border: 1px solid #8d48c6;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #9850d0, #803bc0);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(126, 57, 180, 0.15);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.maths-card-controls button:hover {
+  background: linear-gradient(135deg, #b14ba7, #9341bd);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 15px rgba(126, 57, 180, 0.22);
+}
+
+.maths-card-controls button:active {
+  transform: translateY(0);
+}
+
+.maths-card-controls button:focus-visible {
+  outline: 3px solid #edb5e5;
+  outline-offset: 3px;
+}
+
+#maths-card-status {
+  margin-top: 20px;
+  color: #8954a5;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* 📱 Mobile layout */
+@media (max-width: 600px) {
+  .maths-flashcards {
+    padding: 18px 14px;
+    border-radius: 21px;
+  }
+
+  .flashcard-filters {
+    gap: 9px;
+  }
+
+  .flashcard-filters select {
+    min-width: 115px;
+  }
+
+  .maths-flashcard {
+    min-height: 250px;
+    padding: 22px 16px;
+  }
+
+  .maths-card-controls {
+    gap: 9px;
+  }
+
+  .maths-card-controls button {
+    flex: 1 1 40%;
+    padding: 11px 10px;
+    white-space: normal;
+  }
+}
+
+
+.maths-card-controls button {
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+
+</style>
+</head>
+
+<body>
+<header>
+   <nav class="main-nav" aria-label="Main navigation">
+  <a href="index.html">Home</a>
+  <a href="subjects.html" class="active" aria-current="page">Subjects</a>
+  <a href="pomodoro.html">Pomodoro</a>
+  <a href="progress.html">Progress</a>
+</nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1>Mathematics</h1>
+    <p class="muted">
+      Detailed Years 7–11 lessons with explanations, worked examples,
+      common mistakes and practice questions. Click any lesson heading
+      to open it. This is a broad UK secondary and GCSE learning pathway;
+      your school's exact order and exam-board coverage may differ.
+    </p>
+  </section>
+
+  <div class="years">
+    <a href="#year7"><strong>Year 7</strong><span>Number, fractions, shape</span></a>
+    <a href="#year8"><strong>Year 8</strong><span>Percentages, algebra, graphs</span></a>
+    <a href="#year9"><strong>Year 9</strong><span>Equations, proportion, geometry</span></a>
+    <a href="#year10"><strong>Year 10</strong><span>GCSE methods and applications</span></a>
+    <a href="#year11"><strong>Year 11</strong><span>Advanced skills and exam practice</span></a>
+  </div>
+
+  <input id="search" type="search"
+    placeholder="Search all lessons (e.g. fractions, graphs, probability)…"
+    aria-label="Search lessons">
+
+  <div id="lessons">
+
+    <!-- ==================== YEAR 7 ==================== -->
+    <section class="year" id="year7">
+      <div class="yearhead">
+        <h2>🐶 Year 7 Maths</h2>
+        <p>Build the foundations for everything that comes next.</p>
+      </div>
+
+      <div class="grid">
+
+        <details class="lesson">
+          <summary>1. Place value and ordering numbers</summary>
+          <div class="content">
+            <p>
+              Our number system is based on groups of ten. A digit's
+              position determines its value. In 4,582, the 4 represents
+              4,000, the 5 represents 500, the 8 represents 80 and the
+              2 represents 2. Decimals extend the same idea: tenths,
+              hundredths, then thousandths.
+            </p>
+            <p>
+              To order numbers, compare them from left to right. For
+              decimals, line up decimal points and add zeroes at the end
+              if it helps: 0.7 = 0.70.
+            </p>
+            <div class="example">
+              <b>Worked example: order 3.08, 3.8 and 3.18.</b>
+              <ol>
+                <li>Write them as 3.08, 3.80 and 3.18.</li>
+                <li>The ones digits match. Compare tenths: 0, 8, 1.</li>
+                <li>Smallest to largest: <b>3.08, 3.18, 3.8</b>.</li>
+              </ol>
+            </div>
+            <div class="tip">
+              A zero at the end of a decimal does not change its value:
+              2.5 = 2.50.
+            </div>
+            <div class="practice">
+              <label>Try it: What is the value of 6 in 4,672?</label>
+              <input data-answer="600" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>2. Four operations and BIDMAS</summary>
+          <div class="content">
+            <p>
+              Addition combines amounts; subtraction finds a difference;
+              multiplication combines equal groups; division shares
+              equally or counts groups. Estimate before calculating to
+              check whether an answer is sensible.
+            </p>
+            <p>
+              Use BIDMAS for mixed calculations: Brackets, Indices,
+              Division and Multiplication, Addition and Subtraction.
+              Division and multiplication have equal priority, working
+              left to right. Addition and subtraction also have equal
+              priority.
+            </p>
+            <div class="example">
+              <b>Worked example: 6 + 3 × (8 − 5)²</b>
+              <ol>
+                <li>Brackets: 8 − 5 = 3.</li>
+                <li>Indices: 3² = 9.</li>
+                <li>Multiplication: 3 × 9 = 27.</li>
+                <li>Addition: 6 + 27 = <b>33</b>.</li>
+              </ol>
+            </div>
+            <div class="mistake">
+              Do not automatically calculate from left to right when
+              operations have different priorities.
+            </div>
+            <div class="practice">
+              <label>Try it: 18 − 2 × 5</label>
+              <input data-answer="8" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>3. Negative numbers</summary>
+          <div class="content">
+            <p>
+              Negative numbers are below zero, like temperatures below
+              freezing. On a number line, moving right makes numbers
+              larger, so −2 is greater than −7.
+            </p>
+            <p>
+              Adding a negative moves left; subtracting a negative is the
+              same as adding a positive. For multiplication and division,
+              matching signs give a positive result; different signs give
+              a negative result.
+            </p>
+            <div class="example">
+              <b>Worked example: −5 + 8 − 6</b>
+              <p>
+                Start at −5, move 8 right to reach 3, then move 6 left
+                to reach <b>−3</b>.
+              </p>
+            </div>
+            <div class="practice">
+              <label>Try it: −4 − 7</label>
+              <input data-answer="-11" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>4. Factors, multiples, primes and powers</summary>
+          <div class="content">
+            <p>
+              A factor divides exactly into a number. A multiple is made
+              by multiplying a number by an integer. A prime number has
+              exactly two positive factors: 1 and itself. The number 1
+              is not prime. Square numbers are n × n; cube numbers are
+              n × n × n.
+            </p>
+            <div class="example">
+              <b>Worked example: prime factorise 60.</b>
+              <p>
+                60 = 2 × 30 = 2 × 2 × 15 = 2 × 2 × 3 × 5.
+                So <b>60 = 2² × 3 × 5</b>.
+              </p>
+            </div>
+            <p>
+              Prime factorisation helps find highest common factors (HCFs)
+              and lowest common multiples (LCMs).
+            </p>
+            <div class="practice">
+              <label>Try it: Is 29 prime? Type yes or no.</label>
+              <input data-answer="yes" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>5. Fractions: meaning, equivalence and simplifying</summary>
+          <div class="content">
+            <p>
+              A fraction represents equal parts of a whole. The
+              denominator (bottom) tells you how many equal parts make
+              the whole; the numerator (top) tells you how many parts
+              are counted. In 3/4, the whole is split into four equal
+              parts and three are selected.
+            </p>
+            <p>
+              Equivalent fractions have the same value. Multiply or
+              divide the numerator and denominator by the same non-zero
+              number. To simplify, divide both by their highest common
+              factor.
+            </p>
+            <div class="example">
+              <b>Worked example: simplify 18/24.</b>
+              <ol>
+                <li>The highest common factor of 18 and 24 is 6.</li>
+                <li>18 ÷ 6 = 3 and 24 ÷ 6 = 4.</li>
+                <li>So 18/24 = <b>3/4</b>.</li>
+              </ol>
+            </div>
+            <p>
+              To compare fractions, use a common denominator. For 2/3
+              and 3/5, use fifteenths: 2/3 = 10/15 and 3/5 = 9/15,
+              so 2/3 is larger.
+            </p>
+            <div class="practice">
+              <label>Try it: Simplify 12/20</label>
+              <input data-answer="3/5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>6. Decimals and rounding</summary>
+          <div class="content">
+            <p>
+              Digits after the decimal point represent tenths, hundredths,
+              thousandths and so on. To round, locate the digit in the
+              place requested, then look one place to its right. If that
+              next digit is 5–9, increase the target digit by one; if it
+              is 0–4, leave it.
+            </p>
+            <div class="example">
+              <b>Worked example: round 6.748 to 2 decimal places.</b>
+              <p>
+                The hundredths digit is 4; the next digit is 8, so round
+                4 up to 5. The answer is <b>6.75</b>.
+              </p>
+            </div>
+            <p>
+              Significant figures count from the first non-zero digit,
+              unlike decimal places, which count places after the decimal
+              point.
+            </p>
+            <div class="practice">
+              <label>Try it: Round 8.263 to 1 decimal place</label>
+              <input data-answer="8.3" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>7. Percentages of amounts</summary>
+          <div class="content">
+            <p>
+              Percent means “out of 100”, so 35% = 35/100 = 0.35.
+              Find a percentage of an amount by converting it to a
+              decimal and multiplying, or by using known facts such as
+              50% = half, 25% = a quarter and 10% = divide by ten.
+            </p>
+            <div class="example">
+              <b>Worked example: find 20% of £45.</b>
+              <p>
+                10% of £45 is £4.50. Since 20% is twice 10%, double
+                £4.50 to get <b>£9</b>.
+              </p>
+            </div>
+            <p>
+              For a percentage increase, add the percentage amount; for
+              a decrease, subtract it. Multipliers are quicker: increase
+              by 15% means ×1.15; decrease by 15% means ×0.85.
+            </p>
+            <div class="practice">
+              <label>Try it: Find 25% of 80</label>
+              <input data-answer="20" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>8. Algebra: notation, substitution and simplifying</summary>
+          <div class="content">
+            <p>
+              Letters represent numbers. In 4x, 4 is multiplied by x.
+              Like terms can be combined: 3x + 2x = 5x, but 3x + 2y
+              cannot be combined because the letters may represent
+              different values.
+            </p>
+            <div class="example">
+              <b>Worked example: simplify 5a + 3 − 2a + 7.</b>
+              <p>
+                Combine a terms: 5a − 2a = 3a. Combine constants:
+                3 + 7 = 10. Answer: <b>3a + 10</b>.
+              </p>
+            </div>
+            <p>
+              Substitution means replacing a letter with a number.
+              If x = 4, then 2x + 3 = 2 × 4 + 3 = 11. Use brackets
+              for negative substitutions: if x = −2, then
+              x² = (−2)² = 4.
+            </p>
+            <div class="practice">
+              <label>Try it: Simplify 7x − 2x + 4</label>
+              <input data-answer="5x+4" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>9. Angles and geometry facts</summary>
+          <div class="content">
+            <p>
+              Acute angles are under 90°, right angles are 90°, obtuse
+              angles are between 90° and 180°, and a straight angle is
+              180°. Angles on a straight line total 180°; around a point
+              they total 360°. Vertically opposite angles are equal.
+            </p>
+            <p>
+              Interior angles in a triangle total 180°; in a quadrilateral
+              they total 360°. Parallel lines create equal corresponding
+              and alternate angles, while co-interior angles on the same
+              side of a transversal total 180°.
+            </p>
+            <div class="example">
+              <b>Worked example: a triangle has angles 48° and 67°.</b>
+              <p>
+                Known total = 48° + 67° = 115°.
+                Missing angle = 180° − 115° = <b>65°</b>.
+              </p>
+            </div>
+            <div class="practice">
+              <label>Angles on a straight line are 132° and x. Find x.</label>
+              <input data-answer="48" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>10. Perimeter, area and units</summary>
+          <div class="content">
+            <p>
+              Perimeter is the total distance around a shape, measured
+              in units such as cm. Area is the surface inside it,
+              measured in square units such as cm².
+            </p>
+            <p class="formula">
+              Rectangle area = length × width<br>
+              Rectangle perimeter = 2(length + width)<br>
+              Triangle area = ½ × base × perpendicular height
+            </p>
+            <div class="example">
+              <b>Worked example: rectangle 8 cm by 3 cm.</b>
+              <p>
+                Area = 8 × 3 = <b>24 cm²</b>.
+                Perimeter = 2(8 + 3) = <b>22 cm</b>.
+              </p>
+            </div>
+            <div class="mistake">
+              Area needs squared units; perimeter does not. Triangle
+              height must be perpendicular to the base.
+            </div>
+            <div class="practice">
+              <label>Try it: Area of a 9 cm by 4 cm rectangle?</label>
+              <input data-answer="36" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ==================== YEAR 8 ==================== -->
+    <section class="year" id="year8">
+      <div class="yearhead">
+        <h2>🐱 Year 8 Maths</h2>
+        <p>Connect number skills to algebra, proportional reasoning and graphs.</p>
+      </div>
+
+      <div class="grid">
+
+        <details class="lesson">
+          <summary>1. Fraction operations</summary>
+          <div class="content">
+            <p>
+              For addition and subtraction, first make denominators equal.
+              Multiply the numerator and denominator by the same value
+              to create equivalent fractions. For multiplication, multiply
+              tops together and bottoms together. For division, multiply
+              by the reciprocal (flip) of the second fraction.
+            </p>
+            <div class="example">
+              <b>Worked example: 1/3 + 1/4</b>
+              <p>
+                Common denominator 12: 1/3 = 4/12 and 1/4 = 3/12.
+                Add numerators: 4/12 + 3/12 = <b>7/12</b>.
+              </p>
+              <b>Division example: 3/4 ÷ 2/5</b>
+              <p>
+                Keep 3/4, change ÷ to ×, and flip 2/5 to 5/2:
+                3/4 × 5/2 = 15/8 = <b>1 7/8</b>.
+              </p>
+            </div>
+            <div class="mistake">
+              Never add denominators directly. Only add or subtract
+              numerators once the denominators match.
+            </div>
+            <div class="practice">
+              <label>Try it: 1/2 + 1/6, simplified</label>
+              <input data-answer="2/3" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>2. Percentage change and multipliers</summary>
+          <div class="content">
+            <p>
+              Percentage change = change ÷ original amount × 100.
+              The original amount belongs in the denominator. For
+              successive changes, apply each multiplier in turn because
+              the second change uses the new value.
+            </p>
+            <div class="example">
+              <b>Worked example: price rises from £40 to £50.</b>
+              <p>
+                Change = £10. Percentage change = 10 ÷ 40 × 100 =
+                <b>25% increase</b>.
+              </p>
+              <p>
+                A 10% increase is ×1.10; a 10% decrease is ×0.90.
+                Two 10% increases make ×1.1 × 1.1 = 1.21, or 21% overall.
+              </p>
+            </div>
+            <div class="practice">
+              <label>Try it: Reduce £60 by 15%. New price?</label>
+              <input data-answer="51" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>3. Ratio and sharing</summary>
+          <div class="content">
+            <p>
+              A ratio compares quantities. In 2:3 there are 2 parts for
+              the first quantity and 3 parts for the second. Simplify
+              ratios by dividing every part by the same common factor.
+              Convert quantities into the same units before comparing.
+            </p>
+            <div class="example">
+              <b>Worked example: share £35 in the ratio 2:5.</b>
+              <ol>
+                <li>Total parts = 2 + 5 = 7.</li>
+                <li>One part = £35 ÷ 7 = £5.</li>
+                <li>Shares are 2 × £5 = £10 and 5 × £5 = £25.</li>
+              </ol>
+            </div>
+            <p>
+              Check that the shares add to the original total. For a
+              ratio with three parts, add all three parts before finding
+              one part's value.
+            </p>
+            <div class="practice">
+              <label>Try it: Share 24 in ratio 1:3. Find smaller share.</label>
+              <input data-answer="6" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>4. Expanding and factorising expressions</summary>
+          <div class="content">
+            <p>
+              To expand a bracket, multiply the term outside by every
+              term inside. Factorising reverses the process by taking out
+              a common factor. Always multiply every term, including
+              negative terms.
+            </p>
+            <div class="example">
+              <b>Expand 3(x + 4).</b>
+              <p>
+                3 × x = 3x and 3 × 4 = 12, so the answer is
+                <b>3x + 12</b>.
+              </p>
+              <b>Factorise 6x + 12.</b>
+              <p>
+                The highest common factor is 6, so the answer is
+                <b>6(x + 2)</b>.
+              </p>
+            </div>
+            <p>
+              For a negative outside, −2(x − 5) = −2x + 10.
+              A negative multiplied by a negative is positive.
+            </p>
+            <div class="practice">
+              <label>Try it: Expand 4(y + 3)</label>
+              <input data-answer="4y+12" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>5. Solving linear equations</summary>
+          <div class="content">
+            <p>
+              An equation says both sides have the same value. Keep it
+              balanced by doing the same operation to both sides. Undo
+              operations in reverse order until the letter is isolated.
+            </p>
+            <div class="example">
+              <b>Solve 3x + 5 = 20.</b>
+              <ol>
+                <li>Subtract 5 from both sides: 3x = 15.</li>
+                <li>Divide both sides by 3: x = <b>5</b>.</li>
+                <li>Check: 3 × 5 + 5 = 20.</li>
+              </ol>
+            </div>
+            <p>
+              When x appears on both sides, collect x terms on one side
+              and constants on the other. Expand brackets first if that
+              makes the equation simpler.
+            </p>
+            <div class="practice">
+              <label>Try it: Solve 2x − 7 = 9</label>
+              <input data-answer="8" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>6. Coordinates and straight-line graphs</summary>
+          <div class="content">
+            <p>
+              Coordinates are written (x,y): move horizontally, then
+              vertically. For a graph y = 2x + 1, choose x values,
+              calculate y, plot the coordinate pairs and draw a straight
+              line.
+            </p>
+            <div class="example">
+              <b>For y = 2x + 1:</b>
+              <p>
+                x = 0 gives y = 1, so (0,1). x = 1 gives y = 3,
+                so (1,3). x = 2 gives y = 5, so (2,5).
+              </p>
+            </div>
+            <p>
+              In y = mx + c, m is the gradient and c is the y-intercept.
+              A positive gradient rises from left to right; a negative
+              gradient falls.
+            </p>
+            <div class="practice">
+              <label>For y = 3x − 2, find y when x = 4.</label>
+              <input data-answer="10" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>7. Probability and sample spaces</summary>
+          <div class="content">
+            <p>
+              Probability runs from 0 (impossible) to 1 (certain).
+              For equally likely outcomes, probability = favourable
+              outcomes ÷ total outcomes. A sample space lists every
+              possible outcome, and all outcome probabilities add to 1.
+            </p>
+            <div class="example">
+              <b>Worked example: probability of an even number on a fair die.</b>
+              <p>
+                Even results are 2, 4 and 6: three favourable results
+                out of six. Probability = 3/6 = <b>1/2</b>.
+              </p>
+            </div>
+            <p>
+              Tables and tree diagrams help list combined outcomes
+              without missing any. If events are independent, the first
+              result does not change the second event's probabilities.
+            </p>
+            <div class="practice">
+              <label>Probability of rolling a 5 on a fair die?</label>
+              <input data-answer="1/6" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>8. Transformations</summary>
+          <div class="content">
+            <p>
+              A reflection flips a shape across a mirror line; a
+              rotation turns it around a centre by an angle and direction;
+              a translation slides every point the same amount. An
+              enlargement changes size using a scale factor and centre.
+            </p>
+            <div class="example">
+              <b>Translate point (2,1) by vector (−4,3).</b>
+              <p>
+                Add vector components: x = 2 − 4 = −2,
+                y = 1 + 3 = 4. New point: <b>(−2,4)</b>.
+              </p>
+            </div>
+            <p>
+              For reflection, a point and its image are the same
+              perpendicular distance from the mirror line. A rotation
+              must state centre, angle and direction. For an enlargement,
+              lengths scale by k while angles stay the same.
+            </p>
+            <div class="practice">
+              <label>Translate (1,5) by vector (2,−1)</label>
+              <input data-answer="(3,4)" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ==================== YEAR 9 ==================== -->
+    <section class="year" id="year9">
+      <div class="yearhead">
+        <h2>🦊 Year 9 Maths</h2>
+        <p>Develop algebra, proportion, geometry and statistics skills.</p>
+      </div>
+
+      <div class="grid">
+
+        <details class="lesson">
+          <summary>1. Standard form and indices</summary>
+          <div class="content">
+            <p>
+              Standard form writes a number as A × 10ⁿ where
+              1 ≤ A &lt; 10. Move the decimal point until A is between
+              1 and 10. Moving left gives a positive power for large
+              numbers; moving right gives a negative power for small
+              numbers.
+            </p>
+            <div class="example">
+              <p>
+                45,000 = <b>4.5 × 10⁴</b>. For 0.0032, move the decimal
+                three places right to get 3.2, so
+                <b>3.2 × 10⁻³</b>.
+              </p>
+            </div>
+            <p>
+              When multiplying powers with the same base, add indices;
+              when dividing, subtract them; when raising a power to a
+              power, multiply the indices. For example,
+              10² × 10³ = 10⁵ and (10²)³ = 10⁶.
+            </p>
+            <div class="practice">
+              <label>Write 720,000 in standard form</label>
+              <input data-answer="7.2x10^5|7.2×10^5|7.2*10^5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>2. Equations with brackets and unknowns on both sides</summary>
+          <div class="content">
+            <p>
+              Expand brackets, collect like terms, then gather x terms
+              on one side and constants on the other. Keep the equation
+              balanced by applying the same operation to both sides.
+            </p>
+            <div class="example">
+              <b>Solve 4(x − 2) = 2x + 6.</b>
+              <ol>
+                <li>Expand: 4x − 8 = 2x + 6.</li>
+                <li>Subtract 2x: 2x − 8 = 6.</li>
+                <li>Add 8: 2x = 14.</li>
+                <li>Divide by 2: <b>x = 7</b>.</li>
+              </ol>
+            </div>
+            <p>
+              If all x terms cancel and a true statement remains, every
+              value may work. If a false statement remains, no value works.
+            </p>
+            <div class="practice">
+              <label>Solve 3x + 4 = x + 12</label>
+              <input data-answer="4" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>3. Sequences and the nth term</summary>
+          <div class="content">
+            <p>
+              A sequence follows a rule. In a linear sequence, the same
+              amount is added each time; this is the common difference.
+              Its nth term has form an + b, where a is the common
+              difference.
+            </p>
+            <div class="example">
+              <b>Find the nth term of 5, 8, 11, 14…</b>
+              <p>
+                The difference is 3, so start with 3n. This gives
+                3, 6, 9, 12, which are each 2 below the sequence.
+                Add 2: <b>3n + 2</b>.
+              </p>
+            </div>
+            <p>
+              Check the rule by substituting n = 1, 2 and 3. It should
+              reproduce the first three sequence terms exactly.
+            </p>
+            <div class="practice">
+              <label>Nth term of 4, 7, 10, 13…</label>
+              <input data-answer="3n+1" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>4. Direct proportion, rates and speed</summary>
+          <div class="content">
+            <p>
+              Direct proportion means one quantity is a constant multiple
+              of another: y = kx. If x doubles, y doubles. Rates compare
+              quantities with different units, such as kilometres per
+              hour or pounds per kilogram.
+            </p>
+            <div class="example">
+              <p>
+                Five notebooks cost £7.50. One costs £7.50 ÷ 5 = £1.50.
+                Eight cost 8 × £1.50 = <b>£12</b>.
+              </p>
+            </div>
+            <p class="formula">
+              Speed = distance ÷ time<br>
+              Distance = speed × time<br>
+              Time = distance ÷ speed
+            </p>
+            <p>
+              Use consistent units. Convert minutes to hours when speed
+              is in km/h, for example.
+            </p>
+            <div class="practice">
+              <label>A cyclist travels 36 km in 3 hours. Average speed?</label>
+              <input data-answer="12" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>5. Pythagoras' theorem</summary>
+          <div class="content">
+            <p>
+              Pythagoras works only in right-angled triangles. The
+              hypotenuse is opposite the 90° angle and is the longest
+              side. If shorter sides are a and b and the hypotenuse is c,
+              then <b>a² + b² = c²</b>.
+            </p>
+            <div class="example">
+              <b>Shorter sides are 6 cm and 8 cm. Find the hypotenuse.</b>
+              <p>
+                c² = 6² + 8² = 36 + 64 = 100.
+                Square-root both sides: c = √100 = <b>10 cm</b>.
+              </p>
+            </div>
+            <p>
+              To find a shorter side, subtract the other short side's
+              square from the hypotenuse's square, then square-root:
+              a = √(c² − b²). Identify the hypotenuse before substituting.
+            </p>
+            <div class="practice">
+              <label>Shorter sides are 5 and 12. Hypotenuse?</label>
+              <input data-answer="13" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>6. Circles: circumference and area</summary>
+          <div class="content">
+            <p>
+              The radius r runs from centre to edge. Diameter d goes
+              across the circle through its centre, so d = 2r.
+            </p>
+            <p class="formula">
+              Circumference = 2πr = πd<br>
+              Area = πr²
+            </p>
+            <div class="example">
+              <p>
+                Radius 4 cm: circumference = 2π × 4 = 8π ≈ 25.1 cm.
+                Area = π × 4² = 16π ≈ <b>50.3 cm²</b>.
+              </p>
+            </div>
+            <p>
+              Keep answers in terms of π if asked. Circumference uses
+              length units; area uses squared units. Do not use diameter
+              as the radius.
+            </p>
+            <div class="practice">
+              <label>Circumference of a circle with diameter 10 cm, in terms of π?</label>
+              <input data-answer="10pi|10π" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>7. Averages and range</summary>
+          <div class="content">
+            <p>
+              Mean = total ÷ number of values. Median is the middle
+              after sorting. Mode is the most frequent value.
+              Range = largest − smallest.
+            </p>
+            <div class="example">
+              <p>
+                For 2, 4, 4, 7, 8: total 25, so mean = 25 ÷ 5 = 5;
+                median = 4; mode = 4; range = 8 − 2 = <b>6</b>.
+              </p>
+            </div>
+            <p>
+              The mean uses every value but is affected by extreme
+              values. The median is often more representative when
+              there is an outlier. Always sort before finding the median.
+            </p>
+            <div class="practice">
+              <label>Find the range of 3, 11, 8, 5</label>
+              <input data-answer="8" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>8. Combined probability</summary>
+          <div class="content">
+            <p>
+              Tree diagrams show sequences of events. Multiply
+              probabilities along one branch to find the probability
+              of that sequence. Add probabilities of separate branches
+              when either branch would satisfy the event.
+            </p>
+            <div class="example">
+              <p>
+                A fair coin is flipped twice. Two heads:
+                1/2 × 1/2 = <b>1/4</b>. Exactly one head means HT or TH,
+                so 1/4 + 1/4 = <b>1/2</b>.
+              </p>
+            </div>
+            <p>
+              If an object is not replaced, probabilities may change
+              after the first selection. If events are independent,
+              the first result does not affect the next probability.
+            </p>
+            <div class="practice">
+              <label>Probability of two tails in two fair coin flips?</label>
+              <input data-answer="1/4" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ==================== YEAR 10 ==================== -->
+    <section class="year" id="year10">
+      <div class="yearhead">
+        <h2>🐼 Year 10 Maths</h2>
+        <p>Apply GCSE methods to algebra, graphs, proportion and geometry.</p>
+      </div>
+
+      <div class="grid">
+
+        <details class="lesson">
+          <summary>1. Rearranging formulae</summary>
+          <div class="content">
+            <p>
+              Rearranging means making a chosen letter the subject.
+              Treat the formula as an equation and undo operations in
+              reverse order, doing the same to both sides.
+            </p>
+            <div class="example">
+              <b>Make x the subject of y = 3x + 5.</b>
+              <p>
+                Subtract 5: y − 5 = 3x. Divide by 3:
+                <b>x = (y − 5)/3</b>.
+              </p>
+            </div>
+            <p>
+              If the subject appears in multiple terms, collect those
+              terms first. For example, y = ax + bx = x(a + b), so
+              x = y/(a + b), provided a + b ≠ 0.
+            </p>
+            <div class="practice">
+              <label>Make x the subject: y = 5x − 2</label>
+              <input data-answer="(y+2)/5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>2. Simultaneous equations</summary>
+          <div class="content">
+            <p>
+              Simultaneous equations must both be true. The answer is
+              a pair of values satisfying both equations. Elimination
+              adds or subtracts equations to remove one variable;
+              substitution replaces a variable using one equation.
+            </p>
+            <div class="example">
+              <b>Solve x + y = 10 and x − y = 2.</b>
+              <ol>
+                <li>Add equations: 2x = 12, so x = 6.</li>
+                <li>Substitute into x + y = 10: 6 + y = 10.</li>
+                <li>So y = 4. Answer: <b>x = 6, y = 4</b>.</li>
+              </ol>
+            </div>
+            <p>
+              If coefficients do not match, multiply an equation
+              (or both) so one variable has equal coefficients,
+              then add or subtract.
+            </p>
+            <div class="practice">
+              <label>x + y = 9 and x − y = 1. Find x.</label>
+              <input data-answer="5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>3. Quadratic expressions and factorising</summary>
+          <div class="content">
+            <p>
+              A quadratic has an x² term as its highest power.
+              Factorising rewrites it as a product of brackets.
+              For x² + bx + c, find two numbers that multiply to c
+              and add to b.
+            </p>
+            <div class="example">
+              <b>Factorise x² + 5x + 6.</b>
+              <p>
+                2 × 3 = 6 and 2 + 3 = 5, so
+                <b>x² + 5x + 6 = (x + 2)(x + 3)</b>.
+              </p>
+            </div>
+            <p>
+              To check, expand the brackets: multiply x by x, calculate
+              the cross terms, then multiply the constants. If the
+              original expression returns, the factorisation is correct.
+            </p>
+            <div class="practice">
+              <label>Factorise x² + 7x + 12</label>
+              <input data-answer="(x+3)(x+4)|(x+4)(x+3)" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>4. Straight-line graphs and gradient</summary>
+          <div class="content">
+            <p>
+              In y = mx + c, m is the gradient and c is the y-intercept.
+              Gradient measures vertical change divided by horizontal
+              change between two points.
+            </p>
+            <p class="formula">
+              Gradient = (change in y) ÷ (change in x)
+            </p>
+            <div class="example">
+              <p>
+                Through (1,3) and (4,9): change in y = 6; change in x = 3;
+                gradient = 6 ÷ 3 = <b>2</b>.
+              </p>
+            </div>
+            <p>
+              A positive gradient rises from left to right, a negative
+              gradient falls, and a horizontal line has gradient zero.
+              A vertical line's gradient is undefined.
+            </p>
+            <div class="practice">
+              <label>Gradient between (2,4) and (5,10)?</label>
+              <input data-answer="2" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>5. Similar shapes and scale factors</summary>
+          <div class="content">
+            <p>
+              Similar shapes have equal corresponding angles and
+              proportional matching sides. If length scale factor is k,
+              lengths multiply by k, areas by k² and volumes by k³.
+            </p>
+            <div class="example">
+              <p>
+                A side of 4 cm corresponds to 10 cm, so scale factor
+                = 10 ÷ 4 = 2.5. A matching 6 cm side becomes
+                6 × 2.5 = <b>15 cm</b>.
+              </p>
+            </div>
+            <p>
+              Identify corresponding sides before calculating. If going
+              from the larger shape to the smaller one, divide by the
+              scale factor instead of multiplying.
+            </p>
+            <div class="practice">
+              <label>Scale factor 3; small side 7 cm. Large side?</label>
+              <input data-answer="21" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>6. Right-angled trigonometry</summary>
+          <div class="content">
+            <p>
+              Trigonometry links an acute angle in a right triangle to
+              side lengths. Relative to the chosen angle, identify
+              opposite, adjacent and hypotenuse. The hypotenuse is
+              opposite the right angle.
+            </p>
+            <p class="formula">
+              SOH: sin θ = opposite/hypotenuse<br>
+              CAH: cos θ = adjacent/hypotenuse<br>
+              TOA: tan θ = opposite/adjacent
+            </p>
+            <div class="example">
+              <p>
+                Angle 30°, hypotenuse 10 cm; find opposite. Use sine:
+                sin 30° = opposite/10. Therefore opposite =
+                10 sin 30° = 10 × 0.5 = <b>5 cm</b>.
+              </p>
+            </div>
+            <p>
+              For a missing angle, use inverse trig on the calculator,
+              e.g. θ = sin⁻¹(opposite/hypotenuse). Check the calculator
+              is in degrees when the question uses degrees.
+            </p>
+            <div class="practice">
+              <label>If opposite = 3 and hypotenuse = 5, find sin θ.</label>
+              <input data-answer="0.6|3/5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>7. Vectors</summary>
+          <div class="content">
+            <p>
+              A vector has magnitude and direction. In a column vector
+              (a,b), a is horizontal movement and b is vertical movement.
+              Add vectors component by component; reverse a vector by
+              changing both signs.
+            </p>
+            <div class="example">
+              <p>
+                AB = (2,5), BC = (3,−1). To travel A to C via B,
+                AC = AB + BC = (2+3, 5−1) = <b>(5,4)</b>.
+              </p>
+            </div>
+            <p>
+              Parallel vectors are scalar multiples of each other.
+              In a proof, express each route as a vector sum and show
+              that one vector is a multiple of another where needed.
+            </p>
+            <div class="practice">
+              <label>Add vectors (−2,4) and (5,3)</label>
+              <input data-answer="(3,7)" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>8. Cumulative frequency and box plots</summary>
+          <div class="content">
+            <p>
+              Cumulative frequency is a running total of frequencies,
+              showing how many values are at or below each class boundary.
+              A cumulative frequency graph plots this running total
+              against the upper class boundary.
+            </p>
+            <p>
+              A box plot summarises minimum, lower quartile Q1, median,
+              upper quartile Q3 and maximum. Interquartile range (IQR)
+              = Q3 − Q1, the spread of the middle 50%.
+            </p>
+            <div class="example">
+              <p>
+                If Q1 = 12, median = 18 and Q3 = 25,
+                IQR = 25 − 12 = <b>13</b>.
+              </p>
+            </div>
+            <p>
+              When comparing box plots, compare medians for typical
+              values and IQRs for spread. Include context and units
+              in your conclusion.
+            </p>
+            <div class="practice">
+              <label>Q1 = 8, Q3 = 19. Find the IQR.</label>
+              <input data-answer="11" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ==================== YEAR 11 ==================== -->
+    <section class="year" id="year11">
+      <div class="yearhead">
+        <h2>🦉 Year 11 Maths</h2>
+        <p>Develop higher-level GCSE skills and explain your reasoning clearly.</p>
+      </div>
+
+      <div class="grid">
+
+        <details class="lesson">
+          <summary>1. Solving quadratic equations</summary>
+          <div class="content">
+            <p>
+              A quadratic equation contains an x² term. Solving means
+              finding values of x that make the equation true. Methods
+              include factorising, completing the square and the
+              quadratic formula.
+            </p>
+            <div class="example">
+              <b>Solve x² + 5x + 6 = 0.</b>
+              <p>
+                Factorise: (x + 2)(x + 3) = 0. If a product is zero,
+                at least one factor is zero. So x + 2 = 0 gives x = −2,
+                or x + 3 = 0 gives x = −3.
+              </p>
+            </div>
+            <p class="formula">
+              For ax² + bx + c = 0:<br>
+              x = (−b ± √(b² − 4ac))/(2a)
+            </p>
+            <p>
+              The discriminant b² − 4ac tells the number of real roots:
+              positive gives two, zero gives one repeated root, and
+              negative gives no real roots.
+            </p>
+            <div class="practice">
+              <label>Solve x² − 9 = 0. Give the positive solution.</label>
+              <input data-answer="3" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>2. Completing the square</summary>
+          <div class="content">
+            <p>
+              Completing the square rewrites a quadratic in a
+              squared-bracket form. This can help solve equations and
+              identify the turning point of a quadratic graph.
+            </p>
+            <div class="example">
+              <b>Complete the square: x² + 6x + 5.</b>
+              <ol>
+                <li>Half the x coefficient: 6 ÷ 2 = 3.</li>
+                <li>(x + 3)² = x² + 6x + 9.</li>
+                <li>The original constant is 4 less than 9.</li>
+              </ol>
+              <p>
+                So x² + 6x + 5 = <b>(x + 3)² − 4</b>.
+              </p>
+            </div>
+            <p>
+              For x² + bx + c, use
+              (x + b/2)² + c − (b/2)². If the x² coefficient is not 1,
+              factor it out of the x² and x terms first.
+            </p>
+            <div class="practice">
+              <label>Complete the square: x² + 4x + 1</label>
+              <input data-answer="(x+2)^2-3|(x+2)²-3" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>3. Iteration and approximations</summary>
+          <div class="content">
+            <p>
+              Iteration applies a formula repeatedly, using each output
+              as the next input. It can approximate a solution that is
+              difficult to find exactly. Use the stated starting value
+              and keep sufficient calculator digits between steps.
+            </p>
+            <div class="example">
+              <p>
+                Given xₙ₊₁ = (xₙ + 5)/2 and x₁ = 3:
+                x₂ = (3 + 5)/2 = <b>4</b>;
+                x₃ = (4 + 5)/2 = <b>4.5</b>.
+              </p>
+            </div>
+            <p>
+              Continue until the required number of iterations or
+              accuracy is reached. Round only as instructed, usually
+              at the end, to avoid accumulating rounding error.
+            </p>
+            <div class="practice">
+              <label>x₁ = 3 and xₙ₊₁ = (xₙ + 5)/2. Find x₃.</label>
+              <input data-answer="4.5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>4. Functions and composite functions</summary>
+          <div class="content">
+            <p>
+              A function maps an input to an output. f(x) means the
+              output of function f when the input is x. If f(x) = 2x + 3,
+              then f(4) = 2 × 4 + 3 = 11.
+            </p>
+            <p>
+              A composite function applies one function after another.
+              f(g(x)) means calculate g first, then put that result into f.
+              Order matters.
+            </p>
+            <div class="example">
+              <p>
+                f(x) = 2x + 1 and g(x) = x².
+                Find f(g(3)): g(3) = 9, then f(9) = 2 × 9 + 1 =
+                <b>19</b>.
+              </p>
+            </div>
+            <p>
+              To find an inverse, write y = f(x), swap x and y, then
+              rearrange to make y the subject. An inverse reverses the
+              original mapping.
+            </p>
+            <div class="practice">
+              <label>If f(x) = 3x − 2, find f(5).</label>
+              <input data-answer="13" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>5. Circle theorems</summary>
+          <div class="content">
+            <p>
+              Circle theorems describe angle relationships. Learn the
+              condition for each theorem and mark equal angles on your
+              diagram as soon as you spot it.
+            </p>
+            <ul>
+              <li>The angle at the centre is twice the angle at the circumference subtended by the same arc.</li>
+              <li>Angles in the same segment are equal.</li>
+              <li>The angle in a semicircle is 90°.</li>
+              <li>Opposite angles in a cyclic quadrilateral add to 180°.</li>
+              <li>A tangent is perpendicular to the radius at the point of contact.</li>
+              <li>Tangents from the same external point are equal in length.</li>
+            </ul>
+            <div class="example">
+              <p>
+                An angle at the circumference is 35°. The angle at the
+                centre on the same arc is 2 × 35° = <b>70°</b>.
+              </p>
+            </div>
+            <p>
+              In exam solutions, name the theorem you used. This explains
+              why the angle relationship is valid rather than simply
+              stating a number.
+            </p>
+            <div class="practice">
+              <label>Circumference angle is 42°. Centre angle on the same arc?</label>
+              <input data-answer="84" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>6. Vector proofs</summary>
+          <div class="content">
+            <p>
+              Vector proofs show a relationship using directed journeys.
+              To travel A to C via B, add AB and BC. Reversing a journey
+              changes the signs. A point dividing a line in a ratio can
+              be expressed as a fraction of the whole vector.
+            </p>
+            <div class="example">
+              <p>
+                If AB = a and BC = 2b, then AC = a + 2b.
+                If D is the midpoint of AC, then
+                AD = ½(a + 2b) = <b>½a + b</b>.
+              </p>
+            </div>
+            <p>
+              Parallel vectors are scalar multiples. For a proof,
+              express routes clearly, simplify, and show that the
+              relevant vectors are multiples of each other when you
+              need to establish parallel lines.
+            </p>
+            <div class="practice">
+              <label>If AB = a and BC = b, write AC.</label>
+              <input data-answer="a+b" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>7. Conditional probability and Venn diagrams</summary>
+          <div class="content">
+            <p>
+              A Venn diagram shows sets and overlaps. A ∩ B means in
+              both sets; A ∪ B means in A or B or both. Mutually
+              exclusive events cannot occur together.
+            </p>
+            <p>
+              Conditional probability asks for P(A given B). Once B is
+              known to have happened, only outcomes in B remain possible.
+            </p>
+            <p class="formula">
+              P(A given B) = P(A ∩ B) ÷ P(B), when P(B) ≠ 0
+            </p>
+            <div class="example">
+              <p>
+                Of 30 students, 12 study French and 8 study both French
+                and Spanish. Given that a student studies French,
+                probability they also study Spanish = 8/12 = <b>2/3</b>.
+              </p>
+            </div>
+            <p>
+              Use the condition to choose the denominator. A frequent
+              mistake is dividing by the full group when the question
+              has restricted the group.
+            </p>
+            <div class="practice">
+              <label>5 outcomes are in both A and B; 20 are in B. Find P(A given B).</label>
+              <input data-answer="1/4|0.25" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>8. Bounds and error intervals</summary>
+          <div class="content">
+            <p>
+              Rounded measurements represent a range of possible
+              original values. If a length is 7 cm to the nearest
+              centimetre, it could be from 6.5 cm up to, but not
+              including, 7.5 cm.
+            </p>
+            <p>
+              For rounding to a given unit, the bounds are half a unit
+              below and half a unit above the rounded value. The lower
+              bound is included; the upper bound is usually excluded
+              because it rounds to the next value.
+            </p>
+            <div class="example">
+              <p>
+                240 g to the nearest 10 g means
+                <b>235 ≤ mass &lt; 245</b>, because half of 10 is 5.
+              </p>
+            </div>
+            <p>
+              For positive multiplication, minimum values usually use
+              lower bounds and maximum values use upper bounds. For
+              positive division, a minimum usually uses the smallest
+              numerator and largest denominator.
+            </p>
+            <div class="practice">
+              <label>12 cm to the nearest cm: find the lower bound.</label>
+              <input data-answer="11.5" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>9. Histograms and frequency density</summary>
+          <div class="content">
+            <p>
+              Histograms display grouped continuous data, including
+              classes of different widths. Each bar's area represents
+              frequency, so the height is frequency density, not
+              necessarily frequency.
+            </p>
+            <p class="formula">
+              Frequency density = frequency ÷ class width
+            </p>
+            <div class="example">
+              <p>
+                A class interval has width 10 and frequency 30.
+                Frequency density = 30 ÷ 10 = <b>3</b>.
+              </p>
+            </div>
+            <p>
+              Put class boundaries on the horizontal axis and frequency
+              density on the vertical axis. The bar areas should be
+              proportional to their frequencies.
+            </p>
+            <div class="practice">
+              <label>Frequency is 24 and class width is 6. Frequency density?</label>
+              <input data-answer="4" aria-label="Your answer">
+              <button type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>10. Exam problem-solving strategy</summary>
+          <div class="content">
+            <p>
+              Read the question carefully and identify exactly what it
+              asks for. Underline units and relevant information.
+              Choose a method or formula, show the steps, and check
+              whether the answer is sensible.
+            </p>
+            <ol>
+              <li><b>Read:</b> identify the target and units.</li>
+              <li><b>Plan:</b> choose a rule, formula, diagram or algebraic method.</li>
+              <li><b>Show:</b> write clear working so the reasoning can be followed.</li>
+              <li><b>Check:</b> estimate, check units and substitute solutions back when possible.</li>
+              <li><b>Review:</b> if stuck, write down what is known and make a useful first step.</li>
+            </ol>
+            <div class="example">
+              <p>
+                A circle has diameter 8 cm. Do not use 8 as the radius.
+                First r = 8 ÷ 2 = 4 cm, then area = π × 4² =
+                <b>16π cm²</b>.
+              </p>
+            </div>
+            <div class="tip">
+              Avoid rounding too early. Clear method and working can
+              earn marks even if a later arithmetic step goes wrong.
+            </div>
+          </div>
+        </details>
+
+        
+<section class="maths-flashcards">
+  <h2>🃏 Maths Flashcards</h2>
+  <p>Practise your Maths skills, one card at a time! 💜</p>
+
+  <div class="flashcard-filters">
+    <label for="maths-year">School year:</label>
+    <select id="maths-year">
+      <option value="all">All years</option>
+      <option value="7">Year 7</option>
+      <option value="8">Year 8</option>
+      <option value="9">Year 9</option>
+      <option value="10">Year 10</option>
+      <option value="11">Year 11</option>
+    </select>
+
+    <label for="maths-topic">Topic:</label>
+    <select id="maths-topic">
+      <option value="all">All topics</option>
+    </select>
+  </div>
+
+  <div class="maths-flashcard" id="maths-flashcard"
+       tabindex="0" role="button"
+       aria-label="Flashcard. Click to reveal the answer.">
+    <span id="maths-card-count">Card 1</span>
+    <h3 id="maths-card-label">QUESTION</h3>
+    <p id="maths-card-text">Loading flashcards...</p>
+    <small id="maths-card-hint">Click the card to flip it ✨</small>
+  </div>
+
+  <div class="maths-card-controls">
+    <button type="button" id="maths-prev">⬅️ Previous</button>
+    <button type="button" id="maths-flip">🔄 Flip card</button>
+    <button type="button" id="maths-next">Next ➡️</button>
+  </div>
+
+  <div class="maths-card-controls">
+    <button type="button" id="maths-shuffle">🔀 Shuffle</button>
+    <button type="button" id="maths-reset">↻ Start again</button>
+  </div>
+
+  <p id="maths-card-status" aria-live="polite"></p>
+</section>
+
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+/* Practice question answer checking */
+document.querySelectorAll('.practice button').forEach(button => {
+  button.addEventListener('click', () => {
+    const box = button.closest('.practice');
+    const input = box.querySelector('input');
+    const output = box.querySelector('.feedback');
+
+    const normalise = value => value
+      .toLowerCase()
+      .replace(/\s+/g, '')
+      .replace(/[−–]/g, '-');
+
+    const accepted = (input.dataset.answer || '')
+      .split('|')
+      .map(normalise);
+
+    const given = normalise(input.value);
+
+    if (!given) {
+      output.textContent = 'Enter an answer first.';
+      output.style.color = '#8a5b00';
+    } else if (accepted.includes(given)) {
+      output.textContent = 'Correct! Great work. 🐾';
+      output.style.color = '#237447';
+    } else {
+      output.textContent = 'Not quite — read the worked example and try again.';
+      output.style.color = '#9a3f58';
+    }
+  });
+});
+
+/* Search across all lessons */
+document.getElementById('search').addEventListener('input', event => {
+  const query = event.target.value.toLowerCase().trim();
+
+  document.querySelectorAll('.lesson').forEach(lesson => {
+    lesson.hidden = !!query &&
+      !lesson.textContent.toLowerCase().includes(query);
+  });
+
+  document.querySelectorAll('.year').forEach(year => {
+    const visibleLessons = [...year.querySelectorAll('.lesson')]
+      .some(lesson => !lesson.hidden);
+
+    year.hidden = !!query && !visibleLessons;
+  });
+});
+</script>
+
+
+<script>
+/* Revision Hub — EXPANDED MATHS LESSONS
+   Matches numbered titles and adds learning content to lessons. */
+
+const mathsDeepLessons = {
+  "Place value and ordering numbers": {
+    paragraphs: [
+      ["Understanding place value",
+      "Our number system is based on powers of ten. Each position has a value ten times the position to its right. In 4,582, the 4 represents 4,000, the 5 represents 500, the 8 represents 80 and the 2 represents 2. Decimal places continue this pattern: tenths, hundredths and thousandths."],
+      ["Comparing decimals",
+      "Compare numbers from left to right, checking each place value in turn. If decimals have different lengths, add zeros to the end so the places line up. For example, 0.7 is equal to 0.70, and 0.70 is greater than 0.65 because seven tenths is greater than six tenths."],
+      ["Common mistake",
+      "Do not assume that more digits after the decimal point means a larger number. Compare place values instead. Ascending order means smallest to largest; descending order means largest to smallest."]
+    ],
+    challenge: "Order 0.605, 0.56, 0.65 and 0.506 from smallest to largest."
+  },
+
+  "Four operations and BIDMAS": {
+    paragraphs: [
+      ["Understanding the four operations",
+      "Addition combines quantities, subtraction finds a difference, multiplication finds the total in equal groups, and division shares equally or counts how many groups fit. Estimation helps you check whether a calculated answer is reasonable."],
+      ["The order of operations",
+      "BIDMAS stands for Brackets, Indices, Division, Multiplication, Addition and Subtraction. Complete brackets first, then powers and roots. Division and multiplication have equal priority, as do addition and subtraction, so work from left to right within each pair."],
+      ["Worked example",
+      "For 6 + 3 × (8 − 5)², calculate the brackets first: 8 − 5 = 3. Then calculate the power: 3² = 9. Multiply: 3 × 9 = 27. Finally add 6, giving 33. If you added 6 + 3 first, you would change the intended calculation."]
+    ],
+    challenge: "Calculate 24 − 2 × (3 + 4)² ÷ 7. Show each step in BIDMAS order."
+  },
+
+  "Negative numbers": {
+    paragraphs: [
+      ["Understanding negative values",
+      "Negative numbers lie below zero on a number line. Numbers get smaller as you move left, so −8 is less than −3. Negative numbers can represent temperatures below zero, debt, or a position below a chosen reference point."],
+      ["Adding and subtracting",
+      "Adding a positive moves right on the number line, while adding a negative moves left. Subtracting a negative is equivalent to adding a positive: 5 − (−3) = 5 + 3 = 8. Brackets make it easier to see which negative sign belongs to which number."],
+      ["Multiplication and division",
+      "A positive multiplied or divided by a negative gives a negative answer. Two negative values multiplied or divided together give a positive answer. For example, (−6) × 4 = −24, whereas (−6) × (−4) = 24."]
+    ],
+    challenge: "Calculate −7 + 12 − (−5), then calculate (−3) × (−8) ÷ 4."
+  },
+
+  "Factors, multiples, primes and powers": {
+    paragraphs: [
+      ["Factors and multiples",
+      "A factor divides into a number exactly with no remainder. The factors of 12 are 1, 2, 3, 4, 6 and 12. Multiples are found by multiplying a number by whole numbers, so multiples of 4 include 4, 8, 12 and 16."],
+      ["Prime numbers",
+      "A prime number has exactly two positive factors: 1 and itself. The first primes are 2, 3, 5, 7, 11 and 13. The number 1 is not prime, and 2 is the only even prime number."],
+      ["Prime factorisation and powers",
+      "Prime factorisation writes a number as a product of primes. For example, 60 = 2 × 2 × 3 × 5 = 2² × 3 × 5. An index tells you how many times a base is multiplied by itself: 2³ means 2 × 2 × 2 = 8."]
+    ],
+    challenge: "Write 84 as a product of prime factors using index notation where possible."
+  },
+
+  "Fractions: meaning, equivalence and simplifying": {
+    paragraphs: [
+      ["What a fraction means",
+      "The denominator tells you how many equal parts make one whole. The numerator tells you how many of those parts are being counted. In 3/5, the whole is divided into five equal parts and three are selected."],
+      ["Equivalent fractions",
+      "Equivalent fractions have the same value even when they look different. Multiplying or dividing the numerator and denominator by the same non-zero number keeps the value unchanged. For example, 3/4 = 6/8 because both parts have been multiplied by 2."],
+      ["Simplifying fractions",
+      "To simplify, divide the numerator and denominator by a common factor. For 18/24, dividing both by 6 gives 3/4. To compare fractions, use a common denominator: 2/3 = 10/15 and 3/5 = 9/15, so 2/3 is greater."]
+    ],
+    challenge: "Simplify 42/56 fully, then write two fractions equivalent to 3/5."
+  },
+
+  "Decimals and rounding": {
+    paragraphs: [
+      ["Decimal place value",
+      "The first digit after the decimal point represents tenths, the second hundredths and the third thousandths. For example, 4.372 contains 4 ones, 3 tenths, 7 hundredths and 2 thousandths."],
+      ["Rounding to decimal places",
+      "Find the place you need to round to, then inspect the digit immediately to its right. If that digit is 5 or more, increase the target digit by one. If it is 4 or less, leave the target digit unchanged."],
+      ["Decimal places and significant figures",
+      "Decimal places count digits after the decimal point. Significant figures begin at the first non-zero digit and count meaningful digits from there. For instance, 0.00482 to two significant figures is 0.0048, because the first two significant digits are 4 and 8."]
+    ],
+    challenge: "Round 8.263 to one decimal place and 0.006784 to two significant figures."
+  },
+
+  "Percentages of amounts": {
+    paragraphs: [
+      ["What percentage means",
+      "Percent means out of 100. Therefore, 35% = 35/100 = 0.35. To convert a percentage to a decimal, divide by 100. To convert a decimal to a percentage, multiply by 100."],
+      ["Finding a percentage of an amount",
+      "You can convert the percentage into a decimal and multiply by the amount. To find 15% of £80, calculate 0.15 × 80 = £12. Alternatively, find 10% and 5% separately: £8 + £4 = £12."],
+      ["Increasing and decreasing",
+      "A percentage increase adds to the original amount; a decrease takes away from it. Multipliers make this quicker. Increasing by 15% means multiplying by 1.15, while decreasing by 15% means multiplying by 0.85."]
+    ],
+    challenge: "A jacket costs £64 and is reduced by 15%. Find the discount and the new price."
+  },
+
+  "Algebra: notation, substitution and simplifying": {
+    paragraphs: [
+      ["Letters represent numbers",
+      "Algebra uses letters to represent unknown or changing values. In 4x, the 4 and x are multiplied. Like terms have the same letters raised to the same powers, so 3x + 2x = 5x, but 3x + 2y cannot be combined."],
+      ["Simplifying expressions",
+      "Collect like terms by combining their coefficients. In 5a + 3 − 2a + 7, the letter terms give 5a − 2a = 3a, and the constants give 3 + 7 = 10. The simplified expression is 3a + 10."],
+      ["Substitution",
+      "Substitution means replacing a letter with its given value. If x = 4, then 2x + 3 = 2 × 4 + 3 = 11. If x = −2, write brackets when squaring: (−2)² = 4, whereas −2² is usually interpreted as −(2²) = −4."]
+    ],
+    challenge: "Simplify 7x − 2x + 4 + 3x − 9, then evaluate it when x = 2."
+  },
+
+  "Angles and geometry facts": {
+    paragraphs: [
+      ["Types of angles",
+      "An acute angle is smaller than 90°, a right angle is 90°, and an obtuse angle is between 90° and 180°. A straight angle is 180°, and a full turn is 360°. These facts help you recognise which angle rule applies."],
+      ["Angle sums",
+      "Angles on a straight line total 180°, and angles around a point total 360°. Vertically opposite angles are equal. The interior angles in a triangle total 180°, while those in a quadrilateral total 360°."],
+      ["Parallel lines",
+      "When a transversal crosses parallel lines, corresponding angles are equal and alternate angles are equal. Co-interior angles on the same side of the transversal add to 180°. Mark known equal angles on a diagram before calculating missing ones."]
+    ],
+    challenge: "A triangle has angles of 48° and 67°. Find the third angle and explain the rule used."
+  },
+
+  "Perimeter, area and units": {
+    paragraphs: [
+      ["Perimeter and area are different",
+      "Perimeter is the total distance around a two-dimensional shape and is measured in ordinary units such as centimetres. Area measures the surface covered inside the boundary and uses square units such as cm²."],
+      ["Choosing a formula",
+      "For a rectangle, area = length × width and perimeter = 2(length + width). For a triangle, area = ½ × base × perpendicular height. The height must meet the base at 90°, even if it falls outside the triangle."],
+      ["Compound shapes",
+      "For a compound shape, split it into familiar shapes, calculate each area and add or subtract as required. For perimeter, follow the outside boundary only. Convert measurements to consistent units before calculating."]
+    ],
+    challenge: "A rectangle is 9 cm long and 4 cm wide. Find its area and perimeter."
+  },
+
+  "Fraction operations": {
+    paragraphs: [
+      ["Adding and subtracting",
+      "Fractions need a common denominator before you add or subtract them, because the denominators describe the size of each part. For 1/3 + 1/4, use twelfths: 4/12 + 3/12 = 7/12."],
+      ["Multiplying fractions",
+      "Multiply the numerators together and the denominators together. For example, 2/3 × 3/5 = 6/15 = 2/5. You can simplify before multiplying to make the arithmetic easier."],
+      ["Dividing fractions",
+      "To divide by a fraction, multiply by its reciprocal. For 3/4 ÷ 2/5, keep 3/4, change division to multiplication, and flip 2/5 to 5/2. Then 3/4 × 5/2 = 15/8 = 1⅞."]
+    ],
+    challenge: "Calculate 1/2 + 1/6 and simplify the answer. Then calculate 2/3 ÷ 4/5."
+  },
+
+  "Percentage change and multipliers": {
+    paragraphs: [
+      ["Calculating percentage change",
+      "Percentage change = (change ÷ original amount) × 100. Always divide by the original value, not the new value. If a price rises from £40 to £50, the change is £10 and the percentage increase is 10 ÷ 40 × 100 = 25%."],
+      ["Using multipliers",
+      "The multiplier for a percentage increase is 1 plus the percentage written as a decimal. For a decrease, subtract the decimal from 1. A 10% increase uses 1.10, while a 10% decrease uses 0.90."],
+      ["Repeated percentage changes",
+      "Successive percentage changes apply to the changing amount, not the original amount each time. Two increases of 10% give 1.1 × 1.1 = 1.21, which is an overall increase of 21%, not 20%."]
+    ],
+    challenge: "Reduce £60 by 15%, then increase the new price by 10%. Give the final price."
+  },
+
+  "Ratio and sharing": {
+    paragraphs: [
+      ["Understanding ratio",
+      "A ratio compares quantities. In 2:3, there are two parts of the first quantity for every three parts of the second. To simplify a ratio, divide every part by the same common factor. Convert units first if the quantities use different units."],
+      ["Sharing in a ratio",
+      "To share £35 in the ratio 2:5, add the parts: 2 + 5 = 7. One part is £35 ÷ 7 = £5. The shares are 2 × £5 = £10 and 5 × £5 = £25."],
+      ["Checking your result",
+      "The shares must add to the original total and must preserve the ratio. If the ratio is 1:3, the second share should be three times the first. Ratio can also describe recipes, maps, scale drawings and direct proportion."]
+    ],
+    challenge: "Share £72 in the ratio 5:3. Show how you find one part before calculating each share."
+  },
+
+  "Expanding and factorising expressions": {
+    paragraphs: [
+      ["Expanding brackets",
+      "Expanding means multiplying the term outside a bracket by every term inside it. For 3(x + 4), calculate 3 × x and 3 × 4, giving 3x + 12. Every term must be multiplied."],
+      ["Negative terms",
+      "Signs matter when expanding. For −2(x − 5), calculate −2 × x = −2x and −2 × (−5) = +10, giving −2x + 10. A negative multiplied by a negative gives a positive."],
+      ["Factorising",
+      "Factorising reverses expansion by taking out a common factor. In 6x + 12, both terms are divisible by 6, so the expression becomes 6(x + 2). Check by expanding the bracket again."]
+    ],
+    challenge: "Expand 4(y + 3), then factorise 8x + 20 by taking out the highest common factor."
+  },
+
+  "Solving linear equations": {
+    paragraphs: [
+      ["An equation is a balance",
+      "An equation states that two expressions have equal values. To keep it balanced, perform the same operation on both sides. The goal is to isolate the unknown letter without changing the equation's truth."],
+      ["Undo operations in reverse order",
+      "For 3x + 5 = 20, first subtract 5 from both sides to get 3x = 15. Then divide both sides by 3, giving x = 5. Undo addition before undoing multiplication."],
+      ["Check your solution",
+      "Substitute the solution into the original equation. For x = 5, the left side is 3 × 5 + 5 = 20, which matches the right side. If the two sides are different, check your algebra."]
+    ],
+    challenge: "Solve 5x − 7 = 3x + 9. Check your answer by substitution."
+  },
+
+  "Coordinates and straight-line graphs": {
+    paragraphs: [
+      ["Plotting coordinates",
+      "A coordinate is written (x, y). The first value tells you how far to move horizontally, and the second tells you how far to move vertically. Positive x is to the right and positive y is upwards."],
+      ["Drawing a graph",
+      "For y = 2x + 1, choose x values and calculate the matching y values. If x = 0, y = 1, giving (0,1). If x = 1, y = 3, giving (1,3). Plot several points and join them with a straight line."],
+      ["Gradient and intercept",
+      "In y = mx + c, m is the gradient and c is the y-intercept. Gradient measures the change in y divided by the change in x. A positive gradient rises from left to right; a negative gradient falls."]
+    ],
+    challenge: "For y = 3x − 2, calculate y when x = 4, then find the y-intercept."
+  },
+
+  "Probability and sample spaces": {
+    paragraphs: [
+      ["Probability scale",
+      "Probability measures how likely an event is. An impossible event has probability 0 and a certain event has probability 1. For equally likely outcomes, probability = number of favourable outcomes ÷ total number of outcomes."],
+      ["Worked example",
+      "A fair six-sided die has three even results: 2, 4 and 6. Therefore, the probability of rolling an even number is 3/6 = 1/2. The probability of not rolling an even number is also 1/2."],
+      ["Sample spaces",
+      "A sample space lists every possible outcome. Tables and tree diagrams help organise combined events. The probabilities of all mutually exclusive outcomes in a complete sample space add to 1."]
+    ],
+    challenge: "A fair die is rolled once. Find the probability of rolling a number greater than 4."
+  },
+
+  "Transformations": {
+    paragraphs: [
+      ["Four main transformations",
+      "A translation slides a shape, a reflection flips it across a mirror line, a rotation turns it around a centre, and an enlargement changes its size. Translations preserve orientation, while reflections reverse orientation."],
+      ["Describing transformations",
+      "A translation is described by a vector. A rotation needs a centre, angle and direction. A reflection needs a mirror line. An enlargement needs a centre and scale factor. Include the necessary details in your answer."],
+      ["Scale factors",
+      "An enlargement with scale factor 2 doubles every length; a scale factor of ½ halves every length. Angles remain unchanged. A negative scale factor places the image on the opposite side of the centre and changes its orientation."]
+    ],
+    challenge: "Translate the point (1,5) by vector (2,−1). Then describe what information is needed to specify a rotation."
+  },
+
+  "Standard form and indices": {
+    paragraphs: [
+      ["Writing in standard form",
+      "Standard form is A × 10ⁿ, where 1 ≤ A < 10 and n is an integer. For 45,000, move the decimal point four places left to obtain 4.5 × 10⁴. For 0.0032, move it three places right to obtain 3.2 × 10⁻³."],
+      ["Index laws",
+      "When multiplying powers with the same base, add the indices: 10² × 10³ = 10⁵. When dividing, subtract the indices. When raising a power to another power, multiply the indices: (10²)³ = 10⁶."],
+      ["Why the laws work",
+      "The index tells you how many copies of the base are multiplied together. For example, 2³ × 2² contains five factors of 2, so it equals 2⁵. These laws only combine directly when the bases are the same."]
+    ],
+    challenge: "Write 720,000 and 0.00056 in standard form. Then simplify 10⁴ × 10³."
+  },
+
+  "Equations with brackets and unknowns on both sides": {
+    paragraphs: [
+      ["A reliable method",
+      "When an equation contains brackets and unknowns on both sides, expand the brackets first. Then collect the variable terms on one side and constants on the other. Divide at the end to isolate the variable."],
+      ["Worked example",
+      "Solve 4(x − 2) = 2x + 6. Expand to get 4x − 8 = 2x + 6. Subtract 2x from both sides: 2x − 8 = 6. Add 8: 2x = 14. Divide by 2 to obtain x = 7."],
+      ["Check the result",
+      "Substitute x = 7 into both original sides. The left side is 4(7 − 2) = 20, and the right side is 2 × 7 + 6 = 20. Since both sides agree, the solution works."]
+    ],
+    challenge: "Solve 3x + 4 = x + 12 and verify the answer in the original equation."
+  },
+
+  "Sequences and the nth term": {
+    paragraphs: [
+      ["Finding a pattern",
+      "A sequence is an ordered list following a rule. In a linear sequence, the difference between consecutive terms stays constant. For 5, 8, 11, 14, the common difference is 3."],
+      ["Finding the nth term",
+      "A linear sequence has an nth term of the form an + b. The coefficient a is the common difference. For 5, 8, 11, 14, start with 3n, which gives 3, 6, 9, 12. Each value is two below the sequence, so add 2: the nth term is 3n + 2."],
+      ["Checking a rule",
+      "Substitute n = 1, 2 and 3 into your formula. It should produce the first three terms. This check helps catch errors in the constant term."]
+    ],
+    challenge: "Find the nth term of 4, 7, 10, 13, then use it to find the 20th term."
+  },
+
+  "Direct proportion, rates and speed": {
+    paragraphs: [
+      ["Direct proportion",
+      "Two quantities are directly proportional when one is a constant multiple of the other: y = kx. If one quantity doubles, the other doubles. The constant k can be found by dividing y by x."],
+      ["Working with rates",
+      "A rate compares quantities measured in different units, such as kilometres per hour or pounds per kilogram. If five notebooks cost £7.50, one costs £1.50, so eight notebooks cost £12."],
+      ["Speed calculations",
+      "Speed = distance ÷ time. Rearranging gives distance = speed × time and time = distance ÷ speed. Make sure the units agree: a distance in kilometres and speed in km/h produce time in hours."]
+    ],
+    challenge: "A cyclist travels 36 km in 3 hours. Find the average speed, then calculate how far they travel in 2.5 hours at that speed."
+  },
+
+  "Pythagoras' theorem": {
+    paragraphs: [
+      ["When to use Pythagoras",
+      "Pythagoras' theorem applies only to right-angled triangles. The hypotenuse is opposite the 90° angle and is the longest side. If the shorter sides are a and b and the hypotenuse is c, then a² + b² = c²."],
+      ["Finding the hypotenuse",
+      "If the shorter sides are 6 cm and 8 cm, then c² = 6² + 8² = 36 + 64 = 100. Taking the square root gives c = 10 cm."],
+      ["Finding a shorter side",
+      "If you know the hypotenuse and one shorter side, subtract the square of the known shorter side from the square of the hypotenuse, then take the square root. Identify the hypotenuse carefully before substituting values."]
+    ],
+    challenge: "A right-angled triangle has shorter sides of 5 cm and 12 cm. Find the hypotenuse and show your calculation."
+  },
+
+  "Circles: circumference and area": {
+    paragraphs: [
+      ["Radius and diameter",
+      "The radius runs from the centre to the circumference. The diameter crosses the circle through its centre, so diameter = 2 × radius. If the diameter is known, divide it by 2 before using a formula that requires radius."],
+      ["Circumference",
+      "Circumference is the distance around the circle. Use C = 2πr or C = πd. If the radius is 4 cm, C = 8π cm, approximately 25.1 cm."],
+      ["Area",
+      "The area inside a circle is A = πr². For radius 4 cm, A = π × 4² = 16π cm², approximately 50.3 cm². Notice that the radius is squared before multiplying by π, and area uses squared units."]
+    ],
+    challenge: "A circle has diameter 10 cm. Find its circumference in terms of π and its area in terms of π."
+  },
+
+  "Averages and range": {
+    paragraphs: [
+      ["Four measures",
+      "The mean is the total divided by the number of values. The median is the middle value after sorting. The mode is the most frequent value, and the range is the largest value minus the smallest."],
+      ["Worked example",
+      "For 2, 4, 4, 7, 8, the total is 25 and there are five values, so the mean is 5. The median is 4, the mode is 4 and the range is 8 − 2 = 6."],
+      ["Choosing an average",
+      "The mean uses every value but can be affected by extreme values. The median is less affected by an outlier. Always put the data in order before identifying the median, especially when there is an even number of values."]
+    ],
+    challenge: "For 3, 11, 8, 5, find the mean, median and range."
+  },
+
+  "Combined probability": {
+    paragraphs: [
+      ["Using tree diagrams",
+      "A tree diagram shows the possible outcomes of events in sequence. Multiply probabilities along one branch to find the probability of that sequence. Add probabilities for separate branches when either outcome satisfies the event."],
+      ["Independent events",
+      "Events are independent when the outcome of one does not change the probabilities of the next. For two fair coin flips, the probability of two heads is ½ × ½ = ¼."],
+      ["With and without replacement",
+      "If an object is removed and not replaced, the total number of objects changes, so later probabilities may change too. Write the probabilities on each branch carefully and check that the branches from a single point add to 1."]
+    ],
+    challenge: "A fair coin is flipped twice. Find the probability of exactly one head by listing the possible outcomes."
+  },
+
+  "Rearranging formulae": {
+    paragraphs: [
+      ["Making a variable the subject",
+      "Rearranging a formula means isolating a chosen letter. Treat the formula as an equation and undo operations in reverse order, applying the same operation to both sides."],
+      ["Worked example",
+      "To make x the subject of y = 3x + 5, subtract 5 from both sides to get y − 5 = 3x. Divide by 3 to obtain x = (y − 5)/3."],
+      ["When the variable appears more than once",
+      "Collect terms containing the chosen variable. For y = ax + bx, factorise the right side to get y = x(a + b). Divide by (a + b) to obtain x = y/(a + b), provided a + b is not zero."]
+    ],
+    challenge: "Make x the subject of y = 5x − 2, then make r the subject of A = πr²."
+  },
+
+  "Simultaneous equations": {
+    paragraphs: [
+      ["What simultaneous equations mean",
+      "Simultaneous equations are equations that must be true at the same time. Their solution is a pair of values that satisfies both equations. The elimination method removes one variable; substitution replaces one variable with an expression."],
+      ["Elimination example",
+      "For x + y = 10 and x − y = 2, add the equations. The y terms cancel, leaving 2x = 12, so x = 6. Substitute into x + y = 10 to find y = 4."],
+      ["Checking solutions",
+      "Check both equations, not just one. For x = 6 and y = 4, the first gives 6 + 4 = 10 and the second gives 6 − 4 = 2. Both statements are true, so the pair is correct."]
+    ],
+    challenge: "Solve x + y = 9 and x − y = 1. Find both variables and check both equations."
+  },
+
+  "Quadratic expressions and factorising": {
+    paragraphs: [
+      ["Recognising a quadratic",
+      "A quadratic expression has x² as its highest power, such as x² + 5x + 6. Factorising rewrites it as a product of brackets. This is useful because it can turn a quadratic equation into simpler equations."],
+      ["Factorising x² + bx + c",
+      "For x² + bx + c, find two numbers that multiply to c and add to b. For x² + 5x + 6, the numbers 2 and 3 multiply to 6 and add to 5, so the factorisation is (x + 2)(x + 3)."],
+      ["Checking by expansion",
+      "Expand your brackets to check the result. (x + 2)(x + 3) gives x² + 3x + 2x + 6, which simplifies to x² + 5x + 6. If the middle coefficient or constant differs, revisit your chosen numbers."]
+    ],
+    challenge: "Factorise x² + 7x + 12, then expand your brackets to verify the answer."
+  },
+
+  "Straight-line graphs and gradient": {
+    paragraphs: [
+      ["Understanding gradient",
+      "Gradient measures how steep a line is. Calculate it using change in y divided by change in x. Between (1,3) and (4,9), the vertical change is 6 and the horizontal change is 3, so the gradient is 2."],
+      ["The equation y = mx + c",
+      "In y = mx + c, m is the gradient and c is the y-intercept, where the line crosses the vertical axis. A positive gradient rises from left to right; a negative gradient falls. A horizontal line has gradient zero."],
+      ["Using two points",
+      "Subtract the y-coordinates to find the vertical change and subtract the matching x-coordinates to find the horizontal change. Keep the order consistent in both calculations. A vertical line has undefined gradient because its horizontal change is zero."]
+    ],
+    challenge: "Find the gradient between (2,4) and (5,10), then write the equation of a line with that gradient and y-intercept −2."
+  },
+
+  "Similar shapes and scale factors": {
+    paragraphs: [
+      ["What similar shapes have in common",
+      "Similar shapes have equal corresponding angles and matching sides in the same ratio. They may be different sizes, but they have the same shape. Identify which sides correspond before calculating a scale factor."],
+      ["Length scale factor",
+      "The length scale factor is a corresponding image length divided by its original length. If a 4 cm side becomes 10 cm, the scale factor is 10 ÷ 4 = 2.5. A matching 6 cm side becomes 6 × 2.5 = 15 cm."],
+      ["Area and volume",
+      "If the length scale factor is k, the area scale factor is k² and the volume scale factor is k³. This happens because area involves two dimensions and volume involves three. A length scale factor of 3 therefore gives an area scale factor of 9."]
+    ],
+    challenge: "A shape is enlarged by scale factor 3. A matching small side is 7 cm. Find the large side and the area scale factor."
+  },
+
+  "Right-angled trigonometry": {
+    paragraphs: [
+      ["Label the sides",
+      "Trigonometry links an acute angle in a right-angled triangle to its side lengths. The hypotenuse is always opposite the right angle. Relative to the angle you are using, the opposite side is across from it and the adjacent side touches it without being the hypotenuse."],
+      ["SOH CAH TOA",
+      "Sine uses opposite divided by hypotenuse, cosine uses adjacent divided by hypotenuse, and tangent uses opposite divided by adjacent. Choose the ratio containing the side you know and the side you need."],
+      ["Finding angles",
+      "When the unknown is an angle, use the inverse trigonometric function on your calculator. For example, if sin θ = 0.6, then θ = sin⁻¹(0.6). Check that the calculator is in degree mode if the question uses degrees."]
+    ],
+    challenge: "In a right triangle, opposite = 3 and hypotenuse = 5. Find sin θ, then use a calculator to estimate θ in degrees."
+  },
+
+  "Vectors": {
+    paragraphs: [
+      ["Magnitude and direction",
+      "A vector describes a movement with both size and direction. In a column vector (a,b), a is the horizontal movement and b is the vertical movement. Positive and negative components indicate opposite directions."],
+      ["Adding and reversing vectors",
+      "Add vectors component by component. If AB = (2,5) and BC = (3,−1), then AC = AB + BC = (5,4). Reversing a vector changes both signs, so BA = −AB."],
+      ["Parallel vectors and proofs",
+      "Parallel vectors are scalar multiples of one another. In a proof, express each route as a vector sum, simplify it, and compare the resulting vectors. Showing one is a multiple of the other establishes that their directions are parallel."]
+    ],
+    challenge: "Add (−2,4) and (5,3). Then explain how you would show that two vectors are parallel."
+  },
+
+  "Cumulative frequency and box plots": {
+    paragraphs: [
+      ["Cumulative frequency",
+      "Cumulative frequency is a running total of frequencies. It tells you how many observations are at or below a class boundary. To build the totals, add each class frequency to the previous total."],
+      ["Reading quartiles",
+      "A box plot displays the minimum, lower quartile, median, upper quartile and maximum. The interquartile range is Q3 − Q1 and describes the spread of the middle 50% of the data."],
+      ["Comparing distributions",
+      "Use medians to compare typical values and interquartile ranges to compare the spread of the middle half. A larger IQR indicates more spread in that part of the data. Mention the context and units when explaining your conclusion."]
+    ],
+    challenge: "If Q1 = 8, the median is 13 and Q3 = 19, find the interquartile range."
+  },
+
+  "Solving quadratic equations": {
+    paragraphs: [
+      ["What a quadratic equation is",
+      "A quadratic equation contains an x² term and is usually written ax² + bx + c = 0. Solving means finding every value of x that makes the equation true. Common methods include factorising, completing the square and the quadratic formula."],
+      ["Solving by factorising",
+      "For x² + 5x + 6 = 0, factorise to get (x + 2)(x + 3) = 0. If two factors multiply to zero, at least one factor must be zero. Therefore x + 2 = 0 or x + 3 = 0, giving x = −2 or x = −3."],
+      ["The quadratic formula",
+      "For ax² + bx + c = 0, use x = (−b ± √(b² − 4ac))/(2a). The ± symbol means calculate both the plus and minus cases. Substitute a, b and c carefully, including their signs."]
+    ],
+    challenge: "Solve x² − 9 = 0 and give both solutions. Check each by substitution."
+  },
+
+  "Completing the square": {
+    paragraphs: [
+      ["The main idea",
+      "Completing the square rewrites a quadratic as a squared bracket plus or minus a constant. It helps solve equations and identify the turning point of a quadratic graph."],
+      ["Worked example",
+      "For x² + 6x + 5, take half the coefficient of x: 6 ÷ 2 = 3. The square (x + 3)² expands to x² + 6x + 9. Since the original constant is 5, subtract 4 to compensate: x² + 6x + 5 = (x + 3)² − 4."],
+      ["Using the form",
+      "For x² + bx + c, use (x + b/2)² + c − (b/2)². If the coefficient of x² is not 1, factor it out of the x² and x terms before completing the square."]
+    ],
+    challenge: "Write x² + 4x + 1 in completed-square form and expand your answer to check it."
+  },
+
+  "Iteration and approximations": {
+    paragraphs: [
+      ["What iteration means",
+      "Iteration is a process of repeating a calculation, using each answer as the next input. It can produce an approximation to a solution when an exact method is difficult or unavailable."],
+      ["Following the formula",
+      "If xₙ₊₁ = (xₙ + 5)/2 and x₁ = 3, then x₂ = (3 + 5)/2 = 4. Use that result to calculate x₃ = (4 + 5)/2 = 4.5. The subscript tells you which iteration you are finding."],
+      ["Accuracy matters",
+      "Use the stated starting value and follow the formula exactly. Keep sufficient calculator digits between iterations and round only at the end unless the question specifically instructs otherwise. Early rounding can cause later results to drift."]
+    ],
+    challenge: "Given x₁ = 3 and xₙ₊₁ = (xₙ + 5)/2, calculate x₂, x₃ and x₄."
+  },
+
+  "Functions and composite functions": {
+    paragraphs: [
+      ["Function notation",
+      "A function maps an input to an output. If f(x) = 2x + 3, then f(4) means replace x with 4, giving 2 × 4 + 3 = 11. The notation f(x) does not mean f multiplied by x."],
+      ["Composite functions",
+      "A composite function applies one function after another. In f(g(x)), calculate g(x) first and then use that result as the input for f. For example, if g(3) = 9 and f(x) = 2x + 1, then f(g(3)) = f(9) = 19."],
+      ["Inverse functions",
+      "An inverse reverses the action of a function. Write y = f(x), swap x and y, then rearrange to make y the subject. Check by applying the original function and its inverse in sequence to see whether the input is recovered."]
+    ],
+    challenge: "If f(x) = 3x − 2 and g(x) = x², find f(5) and f(g(2))."
+  },
+
+  "Circle theorems": {
+    paragraphs: [
+      ["Recognising the theorem",
+      "Circle theorems describe angle and length relationships in circles. Look carefully at the diagram: identify the centre, circumference, chord, tangent and any cyclic quadrilateral before choosing a rule."],
+      ["Important angle facts",
+      "The angle at the centre is twice the angle at the circumference subtended by the same arc. Angles in the same segment are equal, the angle in a semicircle is 90°, and opposite angles in a cyclic quadrilateral add to 180°."],
+      ["Tangents",
+      "A tangent is perpendicular to the radius at the point of contact. Tangents drawn from the same external point are equal in length. In exam answers, state the theorem that justifies each angle or length relationship."]
+    ],
+    challenge: "An angle at the circumference is 42°. Find the angle at the centre subtended by the same arc and name the theorem."
+  },
+
+  "Vector proofs": {
+    paragraphs: [
+      ["Representing journeys",
+      "Vectors can be added to describe a route between points. To travel from A to C via B, use AC = AB + BC. Reversing a route changes the sign: BA = −AB."],
+      ["Midpoints and ratios",
+      "If D is the midpoint of AC, then AD = ½AC. If AC = a + 2b, then AD = ½(a + 2b) = ½a + b. Use the stated ratio to decide what fraction of the full vector is required."],
+      ["Proving parallel lines",
+      "To prove two lines are parallel, express their direction vectors using the given vectors and simplify. If one direction vector is a scalar multiple of the other, they are parallel. Write each step so the relationship is clear."]
+    ],
+    challenge: "If AB = a and BC = b, write AC. If D is the midpoint of AC, write AD."
+  },
+
+  "Conditional probability and Venn diagrams": {
+    paragraphs: [
+      ["Venn diagram notation",
+      "A Venn diagram represents sets using overlapping regions. A ∩ B means an outcome belongs to both A and B. A ∪ B means it belongs to A, B or both. Mutually exclusive events have no overlap."],
+      ["Conditional probability",
+      "Conditional probability asks for the probability of A when B is already known to have happened. The possible outcomes are restricted to B, so the denominator becomes the total probability of B."],
+      ["The formula",
+      "P(A given B) = P(A ∩ B) ÷ P(B), provided P(B) is not zero. If 8 of the 12 students studying French also study Spanish, then the probability of Spanish given French is 8/12 = 2/3."]
+    ],
+    challenge: "If 5 outcomes are in both A and B and 20 outcomes are in B, find P(A given B)."
+  },
+
+  "Bounds and error intervals": {
+    paragraphs: [
+      ["Why rounded values have bounds",
+      "A rounded measurement represents a range of possible original values. If a length is 7 cm to the nearest centimetre, the actual value could be 6.5 cm up to, but not including, 7.5 cm."],
+      ["Finding the interval",
+      "For rounding to the nearest unit, subtract half a unit for the lower bound and add half a unit for the upper bound. The lower bound is included; the upper bound is usually excluded because it would round to the next value."],
+      ["Using bounds in calculations",
+      "For positive multiplication, a minimum often uses the lower bounds and a maximum uses the upper bounds. For positive division, a minimum typically uses the smallest numerator and largest denominator. Read the question carefully to determine whether it asks for a minimum or maximum."]
+    ],
+    challenge: "A mass is 240 g to the nearest 10 g. Write its error interval using inequality notation."
+  },
+
+  "Histograms and frequency density": {
+    paragraphs: [
+      ["Why histograms use density",
+      "Histograms represent grouped continuous data, including classes with different widths. Each bar's area represents its frequency, so bar height is frequency density rather than necessarily the frequency itself."],
+      ["The formula",
+      "Frequency density = frequency ÷ class width. If a class has frequency 30 and width 10, its density is 30 ÷ 10 = 3. If the class widths differ, the heights can differ even when the frequencies are similar."],
+      ["Drawing and reading",
+      "Place class boundaries on the horizontal axis and frequency density on the vertical axis. Bars touch because the data are continuous. The area of each bar must be proportional to the frequency represented."]
+    ],
+    challenge: "A class interval has frequency 24 and width 6. Find its frequency density."
+  },
+
+  "Exam problem-solving strategy": {
+    paragraphs: [
+      ["Understand the question",
+      "Read the question carefully and identify exactly what you need to find. Highlight units, important numbers and conditions. A correct calculation can still lose accuracy marks if it answers a different question or gives the wrong units."],
+      ["Choose a method and show working",
+      "Decide which rule, formula, diagram or algebraic method fits the problem. Write the steps clearly and keep intermediate values accurate. In multi-step problems, use the answer from one stage carefully in the next."],
+      ["Check the result",
+      "Estimate the likely size of the answer, check units and substitute solutions back into equations where possible. If you get stuck, write down what you know, draw a diagram or complete a useful first step. Clear working can earn marks even when the final answer is wrong."]
+    ],
+    challenge: "A circle has diameter 8 cm. Explain why the radius is 4 cm, then calculate its area in terms of π."
+  }
+};
+
+/* Remove the leading lesson number before looking up the content. */
+function addDeeperMathsLessons() {
+  document.querySelectorAll("details.lesson").forEach(lesson => {
+    const summary = lesson.querySelector("summary");
+    const content = lesson.querySelector(".content");
+
+    if (!summary || !content || content.querySelector(".deep-learning")) {
+      return;
+    }
+
+    const title = summary.textContent
+      .trim()
+      .replace(/^\s*\d+\.\s*/, "");
+
+    const data = mathsDeepLessons[title];
+
+    if (!data) return;
+
+    const section = document.createElement("section");
+    section.className = "deep-learning";
+
+    const heading = document.createElement("h3");
+    heading.textContent = "📚 Learn it properly";
+    section.appendChild(heading);
+
+    data.paragraphs.forEach(([subheading, paragraph]) => {
+      const h4 = document.createElement("h4");
+      h4.textContent = subheading;
+
+      const p = document.createElement("p");
+      p.textContent = paragraph;
+
+      section.append(h4, p);
+    });
+
+    const challengeHeading = document.createElement("h4");
+    challengeHeading.textContent = "🐾 Challenge yourself";
+
+    const challenge = document.createElement("p");
+    challenge.textContent = data.challenge;
+
+    section.append(challengeHeading, challenge);
+    content.appendChild(section);
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", addDeeperMathsLessons);
+} else {
+  addDeeperMathsLessons();
+}
+
+
+(() => {
+  const mathsCards = [
+    // YEAR 7 — NUMBER
+    { year: "7", topic: "Number", q: "What is 7 × 8?", a: "56" },
+    { year: "7", topic: "Number", q: "What is ¾ as a decimal?", a: "0.75" },
+    { year: "7", topic: "Fractions", q: "What is ½ + ¼?", a: "¾" },
+    { year: "7", topic: "Algebra", q: "If x = 5, what is x + 7?", a: "12" },
+
+    // YEAR 8 — NUMBER AND ALGEBRA
+    { year: "8", topic: "Percentages", q: "What is 20% of 80?", a: "16" },
+    { year: "8", topic: "Fractions", q: "What is ⅔ × 6?", a: "4" },
+    { year: "8", topic: "Algebra", q: "Simplify 3x + 2x.", a: "5x" },
+    { year: "8", topic: "Ratio", q: "Simplify the ratio 12:8.", a: "3:2" },
+
+    // YEAR 9 — ALGEBRA AND GEOMETRY
+    { year: "9", topic: "Algebra", q: "Solve x + 9 = 15.", a: "x = 6" },
+    { year: "9", topic: "Algebra", q: "Expand 3(x + 4).", a: "3x + 12" },
+    { year: "9", topic: "Geometry", q: "What is the sum of angles in a triangle?", a: "180°" },
+    { year: "9", topic: "Percentages", q: "Increase 50 by 10%.", a: "55" },
+
+    // YEAR 10 — GCSE FOUNDATION
+    { year: "10", topic: "Algebra", q: "Factorise x² + 5x.", a: "x(x + 5)" },
+    { year: "10", topic: "Geometry", q: "What is the area of a triangle?", a: "½ × base × perpendicular height" },
+    { year: "10", topic: "Probability", q: "What is the probability of rolling a 6 on a fair six-sided die?", a: "⅙" },
+    { year: "10", topic: "Pythagoras", q: "A right-angled triangle has shorter sides of 3 cm and 4 cm. Find the hypotenuse.", a: "5 cm" },
+
+    // YEAR 11 — GCSE REVISION
+    { year: "11", topic: "Algebra", q: "Solve 2x + 5 = 17.", a: "2x = 12, so x = 6" },
+    { year: "11", topic: "Quadratics", q: "Solve x² = 49.", a: "x = 7 or x = −7" },
+    { year: "11", topic: "Percentages", q: "A £80 item is reduced by 25%. What is its new price?", a: "£60" },
+    { year: "11", topic: "Statistics", q: "What is the median of 3, 5, 7, 9, 11?", a: "7" },
+    { year: "11", topic: "Probability", q: "What is the probability of an impossible event?", a: "0" }
+  ];
+
+  const card = document.getElementById("maths-flashcard");
+  const yearSelect = document.getElementById("maths-year");
+  const topicSelect = document.getElementById("maths-topic");
+  const count = document.getElementById("maths-card-count");
+  const label = document.getElementById("maths-card-label");
+  const text = document.getElementById("maths-card-text");
+  const hint = document.getElementById("maths-card-hint");
+  const status = document.getElementById("maths-card-status");
+
+  // Stop safely if the Maths flashcard HTML is not on this page.
+  if (!card || !yearSelect || !topicSelect || !count ||
+      !label || !text || !hint || !status) return;
+
+  let deck = [];
+  let index = 0;
+  let flipped = false;
+
+  function updateTopics() {
+    const year = yearSelect.value;
+    const relevant = mathsCards.filter(item =>
+      year === "all" || item.year === year
+    );
+
+    const topics = [...new Set(relevant.map(item => item.topic))].sort();
+    topicSelect.replaceChildren();
+
+    const allOption = document.createElement("option");
+    allOption.value = "all";
+    allOption.textContent = "All topics";
+    topicSelect.appendChild(allOption);
+
+    topics.forEach(topic => {
+      const option = document.createElement("option");
+      option.value = topic;
+      option.textContent = topic;
+      topicSelect.appendChild(option);
+    });
+  }
+
+  function buildDeck() {
+    const year = yearSelect.value;
+    const topic = topicSelect.value;
+
+    deck = mathsCards.filter(item =>
+      (year === "all" || item.year === year) &&
+      (topic === "all" || item.topic === topic)
+    );
+
+    index = 0;
+    flipped = false;
+    renderCard();
+  }
+
+  function renderCard() {
+    if (deck.length === 0) {
+      count.textContent = "No cards";
+      label.textContent = "NOT FOUND";
+      text.textContent = "Try selecting another year or topic.";
+      hint.textContent = "Your next Maths adventure awaits! 💜";
+      status.textContent = "";
+      return;
+    }
+
+    const current = deck[index];
+
+    count.textContent = `Card ${index + 1} of ${deck.length}`;
+    label.textContent = flipped ? "ANSWER 💜" : "QUESTION ✨";
+    text.textContent = flipped ? current.a : current.q;
+    hint.textContent = flipped
+      ? "Click to see the question again"
+      : "Click the card to reveal the answer ✨";
+
+    status.textContent =
+      `Year ${current.year} · ${current.topic}`;
+  }
+
+  function flipCard() {
+    if (!deck.length) return;
+    flipped = !flipped;
+    renderCard();
+  }
+
+  function nextCard() {
+    if (!deck.length) return;
+    index = (index + 1) % deck.length;
+    flipped = false;
+    renderCard();
+  }
+
+  function previousCard() {
+    if (!deck.length) return;
+    index = (index - 1 + deck.length) % deck.length;
+    flipped = false;
+    renderCard();
+  }
+
+  function shuffleDeck() {
+    // Fisher–Yates shuffle
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    index = 0;
+    flipped = false;
+    renderCard();
+  }
+
+  document.getElementById("maths-flip")
+    .addEventListener("click", flipCard);
+  card.addEventListener("click", flipCard);
+
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      flipCard();
+    }
+  });
+
+  document.getElementById("maths-next")
+    .addEventListener("click", nextCard);
+  document.getElementById("maths-prev")
+    .addEventListener("click", previousCard);
+  document.getElementById("maths-shuffle")
+    .addEventListener("click", shuffleDeck);
+
+  document.getElementById("maths-reset")
+    .addEventListener("click", () => {
+      buildDeck();
+    });
+
+  yearSelect.addEventListener("change", () => {
+    updateTopics();
+    buildDeck();
+  });
+
+  topicSelect.addEventListener("change", buildDeck);
+
+  updateTopics();
+  buildDeck();
+})();
+
+</script>
+
+</body>
+</html>

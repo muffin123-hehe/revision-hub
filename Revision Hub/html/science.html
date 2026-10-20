@@ -1,0 +1,2372 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science | Revision Hub</title>
+
+<style>
+:root {
+    --ink: #51465d;
+    --muted: #82758e;
+    --pink: #f4b8cf;
+    --pink-dark: #d875a0;
+    --lilac: #d9ccf4;
+    --line: #eee4f0;
+    --shadow: 0 12px 30px rgba(104, 78, 120, .09);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    background: #fffdfd;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ===== NAVBAR ===== */
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 24px;
+    background: #fff5f8;
+    border-bottom: 2px solid #f6d6e3;
+    box-shadow: 0 4px 12px rgba(190, 105, 145, .12);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-nav a {
+    display: inline-block;
+    padding: 11px 22px;
+    color: #75465e;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: .25s ease;
+}
+
+.main-nav a:hover {
+    background: #f8dce8;
+    color: #bd4f82;
+    transform: translateY(-2px);
+}
+
+.main-nav a.active {
+    background: #e98bb5;
+    color: white;
+    box-shadow: 0 4px 9px rgba(200, 90, 140, .2);
+}
+
+.main-nav a:focus-visible {
+    outline: 3px solid #bd4f82;
+    outline-offset: 4px;
+}
+
+/* ===== PAGE LAYOUT ===== */
+
+.science-app {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 18px 60px;
+}
+
+.hero {
+    padding: clamp(25px, 5vw, 48px);
+    border-radius: 30px;
+    background: linear-gradient(
+        130deg,
+        #fff0f5,
+        #f1eaff 60%,
+        #eff8ee
+    );
+    box-shadow: var(--shadow);
+    border: 1px solid white;
+}
+
+.eyebrow {
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-weight: 800;
+    color: var(--pink-dark);
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.05;
+    margin: .45rem 0 .8rem;
+}
+
+.hero p {
+    max-width: 730px;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.pill-row,
+.year-tabs,
+.actions,
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.pill,
+.year-tab,
+.button,
+.lesson-action {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 750;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: transform .15s, box-shadow .15s, background .15s;
+}
+
+.pill,
+.year-tab {
+    background: white;
+    color: var(--ink);
+}
+
+.pill[aria-pressed="true"],
+.year-tab[aria-pressed="true"] {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+}
+
+.button {
+    background: white;
+    color: var(--ink);
+}
+
+.button.primary,
+.lesson-action.primary {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #57394a;
+}
+
+.button.lilac {
+    background: #eee7ff;
+    border-color: #e2d8ff;
+}
+
+.pill:hover,
+.year-tab:hover,
+.button:hover,
+.lesson-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 15px #51465d18;
+}
+
+/* ===== YEAR SELECTOR ===== */
+
+.curriculum {
+    margin: 24px 0 16px;
+    display: grid;
+    gap: 13px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.year-tabs {
+    padding: 7px;
+    background: #f8f3fa;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    width: fit-content;
+}
+
+.year-tab {
+    border: 0;
+}
+
+/* ===== PROGRESS ===== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.stat {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 17px;
+    box-shadow: var(--shadow);
+}
+
+.stat strong {
+    display: block;
+    font-size: 1.55rem;
+}
+
+.stat span {
+    font-size: .88rem;
+    color: var(--muted);
+}
+
+.track {
+    height: 9px;
+    background: #f0eaf2;
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 11px;
+}
+
+.fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #f3b6ce, #c9b8f1);
+    border-radius: 99px;
+    transition: width .25s;
+}
+
+/* ===== SEARCH ===== */
+
+.toolbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 22px 0;
+}
+
+.search {
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    padding: 12px 15px;
+    background: white;
+    color: var(--ink);
+}
+
+.filters select {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 11px;
+    background: white;
+    color: var(--ink);
+}
+
+/* ===== TOPIC CARDS ===== */
+
+.world-list {
+    display: grid;
+    gap: 22px;
+}
+
+.world-block {
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: white;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.world-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.world-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.tag {
+    border-radius: 99px;
+    padding: 6px 10px;
+    background: #f7eff9;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.lesson-card {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 19px;
+    background: linear-gradient(145deg, white, #fffbfd);
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+}
+
+.lesson-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: start;
+}
+
+.lesson-number {
+    width: 38px;
+    height: 38px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: #f1eaff;
+    font-weight: 850;
+    flex-shrink: 0;
+}
+
+.lesson-card h4 {
+    margin: 12px 0 7px;
+    font-size: 1.08rem;
+}
+
+.lesson-card p {
+    margin: 0 0 15px;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: .92rem;
+}
+
+.meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.meta span {
+    font-size: .76rem;
+    padding: 5px 8px;
+    background: #f8f3fa;
+    border-radius: 99px;
+    color: var(--muted);
+}
+
+.lesson-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.lesson-action {
+    font-size: .86rem;
+    padding: 9px 12px;
+    background: white;
+}
+
+.empty {
+    padding: 32px;
+    text-align: center;
+    border: 1px dashed #d8cadd;
+    border-radius: 20px;
+    color: var(--muted);
+}
+
+/* ===== LESSON AND QUIZ PANELS ===== */
+
+.panel {
+    margin-top: 22px;
+    border: 1px solid var(--line);
+    border-radius: 25px;
+    background: white;
+    padding: clamp(18px, 4vw, 32px);
+    box-shadow: var(--shadow);
+}
+
+.panel[hidden] {
+    display: none;
+}
+
+.view-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.view-top h2 {
+    margin: 5px 0 8px;
+}
+
+.lesson-content {
+    line-height: 1.75;
+}
+
+.lesson-content h3 {
+    margin-top: 25px;
+}
+
+.example,
+.quiz-item {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 17px;
+    margin: 13px 0;
+    background: #fffcff;
+}
+
+.example {
+    background: #f8f4ff;
+}
+
+.key-point {
+    padding: 14px 16px;
+    border-left: 4px solid #d9ccf4;
+    background: #faf7ff;
+    border-radius: 0 14px 14px 0;
+    margin: 15px 0;
+}
+
+.quiz-item label {
+    display: block;
+    font-weight: 750;
+    margin-bottom: 9px;
+}
+
+.option-list {
+    display: grid;
+    gap: 8px;
+}
+
+.option-label {
+    display: flex !important;
+    gap: 9px;
+    align-items: center;
+    font-weight: 500 !important;
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+}
+
+.score {
+    padding: 17px;
+    border-radius: 16px;
+    background: #f2edff;
+    margin-top: 16px;
+    font-weight: 800;
+}
+
+.score[hidden] {
+    display: none;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+@media (max-width: 700px) {
+    .lesson-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .science-app {
+        padding-inline: 12px;
+    }
+
+    .world-block {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-nav {
+        gap: 6px;
+        padding: 12px 8px;
+    }
+
+    .main-nav a {
+        padding: 9px 13px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 440px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .year-tabs {
+        width: 100%;
+    }
+
+    .year-tab {
+        flex: 1;
+    }
+}
+
+
+/* 💜 REVISION HUB — SCIENCE FLASHCARDS */
+
+.science-flashcards,
+.science-flashcards * {
+  box-sizing: border-box;
+}
+
+.science-flashcards {
+  width: 100%;
+  max-width: 950px;
+  margin: 35px auto;
+  padding: 30px;
+  border: 2px solid #e8c8ff;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, #f4dcff 0, transparent 40%),
+    linear-gradient(145deg, #fffaff, #ffedf7);
+  box-shadow: 0 12px 35px rgba(133, 69, 180, 0.12);
+  color: #45245f;
+  text-align: center;
+  font-family: inherit;
+}
+
+.science-flashcards h2 {
+  margin: 0 0 10px;
+  color: #853dc0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+}
+
+.science-flashcards > p {
+  line-height: 1.6;
+}
+
+.science-flashcard-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.science-flashcard-filters label {
+  color: #70418e;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.science-flashcard-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 125px;
+  padding: 11px 32px 11px 14px;
+  border: 1.5px solid #d9b1fa;
+  border-radius: 13px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23853dc0' stroke-width='1.7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  color: #58316f;
+  font: inherit;
+  cursor: pointer;
+}
+
+.science-flashcard {
+  width: 100%;
+  max-width: 700px;
+  min-height: 290px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 2px solid #dbb2ff;
+  border-radius: 25px;
+  background: linear-gradient(155deg, #fff, #fff4fa);
+  box-shadow: 0 12px 28px rgba(137, 70, 183, 0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.science-flashcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 17px 34px rgba(137, 70, 183, 0.19);
+}
+
+#science-card-count {
+  color: #9b6bb6;
+  font-size: 0.9rem;
+}
+
+#science-card-label {
+  margin: 8px 0;
+  color: #a33e96;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+#science-card-text {
+  max-width: 600px;
+  margin: 10px 0;
+  color: #39234f;
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+#science-card-hint {
+  margin-top: 10px;
+  color: #9b78aa;
+  font-size: 0.9rem;
+}
+
+.science-flashcard:focus-visible,
+.science-flashcard-filters select:focus-visible {
+  outline: 3px solid #edb5e5;
+  outline-offset: 4px;
+}
+
+.science-card-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.science-card-controls button {
+  appearance: none;
+  min-height: 44px;
+  padding: 11px 19px;
+  border: 1px solid #8d48c6;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #9850d0, #803bc0);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(126, 57, 180, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.science-card-controls button:hover {
+  background: linear-gradient(135deg, #b14ba7, #9341bd);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 15px rgba(126, 57, 180, 0.22);
+}
+
+.science-card-controls button:focus-visible {
+  outline: 3px solid #edb5e5;
+  outline-offset: 3px;
+}
+
+#science-card-status {
+  margin-top: 20px;
+  color: #8954a5;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .science-flashcards {
+    padding: 18px 14px;
+    border-radius: 21px;
+  }
+
+  .science-flashcard {
+    min-height: 250px;
+    padding: 22px 16px;
+  }
+
+  .science-card-controls {
+    gap: 9px;
+  }
+
+  .science-card-controls button {
+    flex: 1 1 40%;
+    padding: 11px 10px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="subjects.html" class="active" aria-current="page">Subjects</a>
+    <a href="pomodoro.html">Pomodoro</a>
+    <a href="progress.html">Progress</a>
+</nav>
+
+<main class="science-app">
+
+    <section class="hero">
+        <div class="eyebrow">Revision Hub · Science</div>
+        <h1>Science</h1>
+        <p>
+            Explore the living world, discover what matter is made of,
+            and find out how energy and forces shape our universe.
+            Choose a year, open a lesson, learn the key ideas, and
+            finish with a quick knowledge check.
+        </p>
+
+        <div class="pill-row">
+            <button class="pill" id="ks3Tab" aria-pressed="true" type="button">
+                KS3 · Years 7–9
+            </button>
+            <button class="pill" id="gcseTab" aria-pressed="false" type="button">
+                GCSE · Years 10–11
+            </button>
+        </div>
+    </section>
+
+    <section class="curriculum">
+        <div class="section-heading">
+            <div>
+                <div class="eyebrow">Your learning path</div>
+                <h2 id="yearHeading">Year 7</h2>
+            </div>
+            <p class="muted" id="yearSubheading">
+                Start with the foundations and grow from there.
+            </p>
+        </div>
+
+        <div class="year-tabs" id="yearTabs" role="group" aria-label="Choose year"></div>
+    </section>
+
+    <section class="stats" aria-label="Learning progress">
+        <div class="stat">
+            <span>Topics in this year</span>
+            <strong id="topicCount">0</strong>
+            <span>Every discovery starts somewhere.</span>
+        </div>
+
+        <div class="stat">
+            <span>Topics completed</span>
+            <strong id="completedCount">0</strong>
+            <span id="completionLabel">Progress is saved on this device.</span>
+            <div class="track">
+                <div class="fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="stat">
+            <span>Science areas</span>
+            <strong>3</strong>
+            <span>Biology · Chemistry · Physics</span>
+        </div>
+    </section>
+
+    <div class="toolbar">
+        <input
+            class="search"
+            id="topicSearch"
+            type="search"
+            placeholder="Search topics, e.g. cells..."
+            aria-label="Search topics"
+        >
+
+        <div class="filters">
+            <select id="difficultyFilter" aria-label="Filter by level">
+                <option value="all">All levels</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Developing">Developing</option>
+                <option value="Stretch">Stretch</option>
+            </select>
+
+            <button class="button" id="resetSearch" type="button">
+                Clear filters
+            </button>
+        </div>
+    </div>
+
+    <section id="worldList" class="world-list" aria-live="polite"></section>
+
+    <section class="panel" id="lessonPanel" hidden>
+        <div class="view-top">
+            <div>
+                <div class="eyebrow" id="lessonKicker">Interactive lesson</div>
+                <h2 id="lessonTitle"></h2>
+                <p class="muted" id="lessonIntro"></p>
+            </div>
+            <button class="button" id="closeLesson" type="button">
+                Back to topics
+            </button>
+        </div>
+
+        <div class="lesson-content" id="lessonContent"></div>
+
+        <div class="actions">
+            <button class="button primary" id="markComplete" type="button">
+                Mark lesson complete ✓
+            </button>
+            <button class="button lilac" id="lessonToQuiz" type="button">
+                Test your knowledge
+            </button>
+        </div>
+    </section>
+
+    <section class="panel" id="quizPanel" hidden>
+        <div class="view-top">
+            <div>
+                <div class="eyebrow">Knowledge check</div>
+                <h2 id="quizTitle">Test your knowledge</h2>
+                <p class="muted" id="quizIntro">
+                    Choose an answer for every question, then check your score.
+                </p>
+            </div>
+            <button class="button" id="closeQuiz" type="button">
+                Back to topics
+            </button>
+        </div>
+
+        <form id="quizForm"></form>
+
+        <div class="actions">
+            <button class="button primary" id="submitQuiz" type="button">
+                Check my answers
+            </button>
+            <button class="button" id="retryQuiz" type="button">
+                Try again
+            </button>
+        </div>
+
+        <div class="score" id="quizScore" hidden aria-live="polite"></div>
+    </section>
+
+   
+<section class="science-flashcards">
+  <h2>🧪 Science Flashcards</h2>
+  <p>Explore Biology, Chemistry and Physics, one card at a time! 💜</p>
+
+  <div class="science-flashcard-filters">
+    <label for="science-year">School year:</label>
+    <select id="science-year">
+      <option value="all">All years</option>
+      <option value="7">Year 7</option>
+      <option value="8">Year 8</option>
+      <option value="9">Year 9</option>
+      <option value="10">Year 10</option>
+      <option value="11">Year 11</option>
+    </select>
+
+    <label for="science-topic">Subject:</label>
+    <select id="science-topic">
+      <option value="all">All subjects</option>
+      <option value="Biology">Biology</option>
+      <option value="Chemistry">Chemistry</option>
+      <option value="Physics">Physics</option>
+    </select>
+  </div>
+
+  <div class="science-flashcard" id="science-flashcard"
+       tabindex="0" role="button"
+       aria-label="Science flashcard. Click to reveal the answer.">
+    <span id="science-card-count">Card 1</span>
+    <h3 id="science-card-label">QUESTION ✨</h3>
+    <p id="science-card-text">Loading flashcards...</p>
+    <small id="science-card-hint">Click the card to reveal the answer ✨</small>
+  </div>
+
+  <div class="science-card-controls">
+    <button type="button" id="science-prev">⬅️ Previous</button>
+    <button type="button" id="science-flip">🔄 Flip card</button>
+    <button type="button" id="science-next">Next ➡️</button>
+  </div>
+
+  <div class="science-card-controls">
+    <button type="button" id="science-shuffle">🔀 Shuffle</button>
+    <button type="button" id="science-reset">↻ Start again</button>
+  </div>
+
+  <p id="science-card-status" aria-live="polite"></p>
+</section>
+
+
+</main>
+
+<script>
+/*
+Each topic stores:
+0 subject
+1 title
+2 short description
+3 difficulty
+4 detailed explanation
+5 key idea
+6 quiz question one
+7 correct answer one
+8 quiz question two
+9 correct answer two
+*/
+
+const curriculum = {
+7: [
+[
+"Biology",
+"Cells: the building blocks of life",
+"Learn how animal and plant cells are organised and how their parts work together.",
+"Foundation",
+"Cells are the smallest units that can carry out life processes. An animal cell usually has a cell membrane, cytoplasm, a nucleus and mitochondria. The membrane controls what enters and leaves; cytoplasm is where many chemical reactions happen; the nucleus contains genetic material and helps control the cell; mitochondria release energy through respiration. Plant cells also have a cellulose cell wall for support, chloroplasts to absorb light for photosynthesis, and a large permanent vacuole containing cell sap.",
+"A microscope makes tiny cells visible. Magnification = image size ÷ actual size, using the same units for both measurements.",
+"Why do plant cells have a cell wall?",
+"It strengthens and supports the cell.",
+"Which structure contains genetic material?",
+"The nucleus."
+],
+[
+"Biology",
+"Using a microscope",
+"Discover how to prepare a slide, focus carefully and observe cells safely.",
+"Foundation",
+"A light microscope uses lenses and light to make small objects appear larger. Place a thin specimen on a slide, add a drop of water or stain if appropriate, and lower a coverslip gently to avoid air bubbles. Start with the lowest-power objective lens, secure the slide, focus with the coarse adjustment, then sharpen with the fine adjustment. Keep the lens clean and carry the microscope with two hands.",
+"Total magnification = eyepiece magnification × objective magnification. A ×10 eyepiece and ×4 objective give ×40 total magnification.",
+"What magnification do ×10 and ×4 lenses give together?",
+"×40.",
+"Why start with the lowest-power objective?",
+"It makes it easier to find and focus on the specimen."
+],
+[
+"Biology",
+"Organs and organ systems",
+"Follow how cells, tissues and organs work together in a living body.",
+"Developing",
+"Cells with similar jobs can form a tissue. Different tissues work together in an organ, and organs cooperate in an organ system. For example, the heart is an organ made from several tissues; it works with blood vessels and blood as part of the circulatory system. The digestive system breaks food into soluble molecules that can be absorbed into the blood.",
+"Organisation goes from cells → tissues → organs → organ systems → organism.",
+"What is the correct level above a tissue?",
+"An organ.",
+"What system transports oxygen and nutrients around the body?",
+"The circulatory system."
+],
+[
+"Biology",
+"Food chains and food webs",
+"Trace how energy passes between organisms in an ecosystem.",
+"Foundation",
+"A food chain shows who eats whom and the direction energy moves. Producers, such as green plants, make their own food using photosynthesis. Consumers eat plants or other animals. Arrows point from the organism being eaten to the organism that eats it, showing the transfer of energy. A food web links many food chains together. If one population changes, others may be affected.",
+"Example: grass → rabbit → fox. The arrow points towards the consumer.",
+"In a food chain, what does the arrow show?",
+"The direction energy is transferred.",
+"What is an organism called if it makes its own food?",
+"A producer."
+],
+[
+"Chemistry",
+"Particles and states of matter",
+"Compare solids, liquids and gases using the particle model.",
+"Foundation",
+"All matter is made of particles. In a solid, particles are close together in a regular arrangement and vibrate around fixed positions. In a liquid, particles remain close but can move past one another. In a gas, particles are far apart and move quickly in random directions. Heating usually gives particles more kinetic energy; cooling removes energy.",
+"Melting changes solid to liquid; freezing changes liquid to solid; evaporation or boiling changes liquid to gas; condensation changes gas to liquid.",
+"Which state has particles that move freely and are far apart?",
+"Gas.",
+"What is the change from liquid to gas called?",
+"Evaporation or boiling."
+],
+[
+"Chemistry",
+"Elements, compounds and mixtures",
+"Understand the difference between pure substances and mixtures.",
+"Developing",
+"An element contains only one type of atom. A compound contains atoms of two or more elements chemically bonded in a fixed ratio. A mixture contains substances together without them being chemically bonded, so the parts can often be separated physically. Water is a compound; air is a mixture; pure copper is an element.",
+"Mixtures can be separated by methods such as filtration, evaporation, distillation or chromatography, chosen according to the properties of the substances.",
+"Is air an element, compound or mixture?",
+"A mixture.",
+"What is a compound made from?",
+"Two or more elements chemically bonded together."
+],
+[
+"Chemistry",
+"Separating mixtures",
+"Choose a suitable technique to separate substances.",
+"Developing",
+"Filtration separates an insoluble solid from a liquid: the solid stays as residue and liquid passing through is filtrate. Evaporation can recover a dissolved solid from a solution. Distillation boils a liquid and condenses its vapour, useful for collecting a solvent. Chromatography separates dissolved substances because they travel at different speeds through a material.",
+"Choose the method by asking whether the solid dissolves, whether you need the liquid back, and whether the substances travel differently through a solvent.",
+"Which method separates sand from water?",
+"Filtration.",
+"Which method can separate coloured dyes in ink?",
+"Chromatography."
+],
+[
+"Physics",
+"Forces and motion",
+"Identify pushes and pulls and explain balanced forces.",
+"Foundation",
+"A force is a push or pull measured in newtons (N). Forces can change an object's speed, direction or shape. If forces are balanced, the resultant force is zero, so an object remains still or continues moving at constant velocity. If forces are unbalanced, the object accelerates in the direction of the resultant force. Friction and air resistance oppose motion.",
+"Resultant force is the overall force after combining forces with their directions taken into account.",
+"What is the resultant force when 5 N right and 5 N left act together?",
+"0 N; the forces are balanced.",
+"What unit is used to measure force?",
+"Newtons (N)."
+],
+[
+"Physics",
+"Energy stores and transfers",
+"Recognise common energy stores and ways energy is transferred.",
+"Developing",
+"Energy can be stored chemically, thermally, kinetically, gravitationally, elastically, magnetically, electrostatically or in nuclear stores. Energy is transferred between stores by heating, mechanical work, electrical work or radiation. Energy is not created or destroyed; it is conserved, although some energy often spreads into the surroundings and becomes less useful.",
+"A falling object transfers energy from its gravitational potential store to its kinetic store.",
+"Which energy store increases when a moving object speeds up?",
+"Its kinetic energy store.",
+"What happens to energy overall in a transfer?",
+"Energy is conserved; it is transferred between stores."
+],
+[
+"Physics",
+"Sound and hearing",
+"Explain how sound waves travel and how pitch and volume differ.",
+"Foundation",
+"Sound is produced by vibrations and travels through a medium as a longitudinal wave. Particles vibrate back and forth in the same direction as the wave travels. Sound cannot travel through a vacuum because there are no particles to pass on the vibration. Higher frequency means higher pitch; greater amplitude generally means a louder sound.",
+"Frequency is measured in hertz (Hz). Amplitude is linked to loudness, while frequency is linked to pitch.",
+"Can sound travel through a vacuum?",
+"No, because there are no particles to transmit the vibrations.",
+"What does a higher sound frequency mean?",
+"A higher pitch."
+]
+],
+
+8: [
+[
+"Biology",
+"Photosynthesis",
+"Explore how plants transfer light energy into chemical energy.",
+"Developing",
+"Photosynthesis takes place mainly in chloroplasts, which contain chlorophyll to absorb light. Plants use light energy to combine carbon dioxide from the air with water absorbed by roots, producing glucose and releasing oxygen. Glucose can be used in respiration, converted to starch for storage, or used to build other substances. Light intensity, carbon dioxide concentration and temperature can limit the rate.",
+"Word equation: carbon dioxide + water → glucose + oxygen. Light and chlorophyll are needed.",
+"What gas is released during photosynthesis?",
+"Oxygen.",
+"Where in plant cells does most photosynthesis happen?",
+"In the chloroplasts."
+],
+[
+"Biology",
+"Respiration and breathing",
+"Separate the process of releasing energy from the movement of air.",
+"Developing",
+"Respiration is a chemical process in cells that releases energy from glucose. Aerobic respiration uses oxygen and releases more energy than anaerobic respiration. Breathing is ventilation: moving air into and out of the lungs. In the lungs, oxygen diffuses from the alveoli into the blood and carbon dioxide diffuses from the blood into the alveoli.",
+"Aerobic respiration: glucose + oxygen → carbon dioxide + water, with energy transferred.",
+"Is breathing the same process as respiration?",
+"No. Breathing moves air; respiration is a chemical reaction in cells.",
+"What gas is needed for aerobic respiration?",
+"Oxygen."
+],
+[
+"Biology",
+"The skeleton and muscles",
+"Learn how bones, joints and muscles enable movement and protect organs.",
+"Foundation",
+"The skeleton supports the body, protects organs and provides attachment points for muscles. Joints allow movement. Skeletal muscles usually work in antagonistic pairs: one contracts while the other relaxes. Tendons attach muscles to bones, while ligaments connect bones to other bones. Cartilage at joints reduces friction and helps cushion the ends of bones.",
+"At the elbow, the biceps contracts to bend the arm while the triceps relaxes; to straighten the arm, the roles reverse.",
+"What connects a muscle to a bone?",
+"A tendon.",
+"What do ligaments connect?",
+"Bone to bone."
+],
+[
+"Biology",
+"Variation and adaptation",
+"Explain differences within a species and how adaptations help survival.",
+"Developing",
+"Variation means differences between individuals of the same species. Some variation is inherited through genes; some is caused by the environment; many traits are influenced by both. An adaptation is a feature that helps an organism survive and reproduce in its environment. Adaptations may be structural, behavioural or physiological.",
+"A polar bear's thick fur and fat layer reduce heat loss in a cold environment.",
+"Give one example of an adaptation and explain its benefit.",
+"Thick fur insulates a polar bear and reduces heat loss.",
+"What is variation?",
+"Differences between individuals of the same species."
+],
+[
+"Chemistry",
+"Atoms, elements and the periodic table",
+"Meet the particles that make up matter and how elements are organised.",
+"Developing",
+"Atoms contain a tiny nucleus made of protons and usually neutrons, with electrons in shells around it. Protons have positive charge, electrons negative charge and neutrons no charge. An element is defined by its number of protons. The periodic table arranges elements by atomic number; elements in the same group often have similar chemical properties.",
+"In a neutral atom, the number of electrons equals the number of protons.",
+"Which particle determines the identity of an element?",
+"The proton.",
+"What charge does an electron have?",
+"Negative."
+],
+[
+"Chemistry",
+"Chemical reactions",
+"Spot the difference between a chemical change and a physical change.",
+"Developing",
+"In a chemical reaction, atoms rearrange to form new substances. Reactants are present at the start and products are formed. Signs may include a colour change, gas bubbles, a temperature change or a precipitate, but observations must be interpreted carefully. Atoms are conserved, so a balanced equation has the same number of each type of atom on both sides.",
+"A word equation names reactants on the left and products on the right: magnesium + oxygen → magnesium oxide.",
+"What happens to atoms in a chemical reaction?",
+"They rearrange; they are not created or destroyed.",
+"What do we call the substances formed in a reaction?",
+"Products."
+],
+[
+"Chemistry",
+"Acids, alkalis and indicators",
+"Use pH and indicators to describe acidic and alkaline solutions.",
+"Foundation",
+"The pH scale usually runs from 0 to 14. Values below 7 are acidic, 7 is neutral and values above 7 are alkaline. Indicators change colour depending on pH. Universal indicator gives a range of colours; litmus can show whether a solution is acidic or alkaline. Acids react with some metals and carbonates, and acids can be neutralised by alkalis.",
+"Neutralisation: acid + alkali → salt + water.",
+"What pH is neutral at room temperature?",
+"pH 7.",
+"What are the products of acid + alkali?",
+"Salt and water."
+],
+[
+"Physics",
+"Electric circuits",
+"Understand current, voltage, resistance and simple circuit diagrams.",
+"Developing",
+"A complete circuit provides a closed path for electric charge to flow. Current is the rate of flow of charge and is measured in amperes (A). Potential difference, or voltage, is energy transferred per unit charge and is measured in volts (V). Resistance is measured in ohms (Ω) and describes how much a component opposes current. Components in series share the same current; parallel branches have the same potential difference across them.",
+"Use conventional circuit symbols and ensure the circuit is a complete loop. Adding cells in series usually increases potential difference.",
+"What must a circuit have for current to flow continuously?",
+"A complete, closed conducting path.",
+"What unit measures current?",
+"Amperes (A)."
+],
+[
+"Physics",
+"Light and reflection",
+"Investigate how light travels and reflects from surfaces.",
+"Foundation",
+"Light travels in straight lines through a uniform medium. We see objects when light from them enters our eyes; luminous objects emit light, while non-luminous objects reflect it. In reflection, the angle of incidence equals the angle of reflection, measured from the normal, an imaginary line perpendicular to the surface.",
+"Angle of incidence = angle of reflection.",
+"From which line are reflection angles measured?",
+"The normal.",
+"What is a luminous object?",
+"An object that produces its own light."
+],
+[
+"Physics",
+"Heating and insulation",
+"Compare conduction, convection and radiation.",
+"Developing",
+"Thermal energy moves from warmer places to cooler places. Conduction transfers energy through particle interactions and is especially effective in solids. Convection happens in fluids when warmer, less dense fluid rises and cooler, denser fluid sinks, creating circulation. Infrared radiation can transfer energy through a vacuum. Insulation reduces the rate of energy transfer.",
+"A vacuum flask reduces conduction and convection with a vacuum gap and reduces radiation with reflective surfaces.",
+"Which heat-transfer method can travel through a vacuum?",
+"Radiation.",
+"Which method involves warmer fluid rising?",
+"Convection."
+]
+],
+
+9: [
+[
+"Biology",
+"Inheritance and DNA",
+"Learn how genetic information passes from parents to offspring.",
+"Developing",
+"DNA is a molecule that carries genetic information. Sections of DNA called genes contain instructions for making proteins, which influence characteristics. Chromosomes are long DNA molecules found in cells. Offspring inherit genetic information from their parents, creating similarities and differences. Environmental factors can also affect characteristics.",
+"A gene is a section of DNA; a chromosome contains a long DNA molecule with many genes.",
+"What molecule carries genetic information?",
+"DNA.",
+"What is a gene?",
+"A section of DNA containing instructions."
+],
+[
+"Biology",
+"Ecosystems and interdependence",
+"Explore how organisms depend on one another and their environment.",
+"Developing",
+"An ecosystem includes a community of organisms and the non-living environment they interact with. Organisms depend on resources such as food, water, light, shelter and suitable temperatures. Competition occurs when organisms need the same limited resource. Changes in one population can affect others through food webs and other relationships.",
+"Biodiversity means the variety of living organisms. Greater biodiversity can help ecosystems remain resilient, although each ecosystem has its own vulnerabilities.",
+"What is an ecosystem?",
+"A community of organisms interacting with each other and their environment.",
+"What is biodiversity?",
+"The variety of living organisms."
+],
+[
+"Biology",
+"Natural selection",
+"Explain how inherited variation can change populations over generations.",
+"Stretch",
+"Individuals in a population vary, and some differences are inherited. More offspring may be produced than can survive, so there is competition. Individuals with inherited features that suit the environment may survive and reproduce more successfully, passing those features to offspring. Over many generations, these features can become more common in the population.",
+"Natural selection acts on variation already present; individual organisms do not evolve because they decide they need a feature.",
+"Does an individual evolve during its lifetime by choosing to adapt?",
+"No. Populations change over generations through inherited variation and selection.",
+"What can make a feature more common over generations?",
+"If it is inherited and helps individuals survive and reproduce."
+],
+[
+"Chemistry",
+"The periodic table and reactivity",
+"Use groups and periods to find patterns in element properties.",
+"Developing",
+"A period is a horizontal row and a group is a vertical column. Elements in a group often share properties because their atoms have similar outer-electron arrangements. Metals are generally found on the left and centre; non-metals are mostly on the right. Some groups have characteristic reactions, such as the reactive alkali metals in Group 1.",
+"Group patterns can help predict properties, but trends should be learned for the particular group and conditions being studied.",
+"What is a vertical column in the periodic table called?",
+"A group.",
+"What is a horizontal row called?",
+"A period."
+],
+[
+"Chemistry",
+"Rates of reaction",
+"Investigate what makes chemical reactions faster or slower.",
+"Developing",
+"Reaction rate describes how quickly reactants are used up or products are made. Increasing temperature usually makes particles move faster and collide more often with more energy. Higher concentration or gas pressure increases collision frequency. Greater surface area exposes more particles, and a catalyst provides an alternative pathway with lower activation energy.",
+"For a fair test, change one factor at a time and measure reaction progress consistently.",
+"Why can powdered calcium carbonate react faster than a large lump?",
+"It has a larger surface area exposed to the reactant.",
+"What does a catalyst do?",
+"It increases reaction rate by providing an alternative pathway with lower activation energy."
+],
+[
+"Chemistry",
+"Separating and analysing substances",
+"Use practical methods to separate mixtures and identify substances.",
+"Developing",
+"Filtration separates an insoluble solid from a liquid. Crystallisation can obtain a dissolved solid from a solution. Simple distillation collects a solvent from a solution using evaporation and condensation. Paper chromatography separates dissolved substances according to how they partition between the solvent and paper. A pure substance generally gives a single spot in a suitable chromatography setup.",
+"A chromatography baseline is drawn in pencil because graphite does not usually dissolve in the solvent.",
+"Why is pencil used for the chromatography baseline rather than ink?",
+"Pencil graphite is insoluble in the solvent, so it will not run with the samples.",
+"Which method separates substances that move at different speeds through a solvent?",
+"Chromatography."
+],
+[
+"Physics",
+"Waves: frequency and wavelength",
+"Describe wave properties and compare transverse and longitudinal waves.",
+"Developing",
+"A wave transfers energy without an overall transfer of matter from one place to another. Transverse waves oscillate perpendicular to the direction of travel; longitudinal waves oscillate parallel to it. Wavelength is the distance between matching points on adjacent waves. Frequency is the number of waves passing a point each second, measured in hertz.",
+"Wave speed = frequency × wavelength (v = fλ). Use consistent units, usually m/s, Hz and metres.",
+"What is the unit of frequency?",
+"Hertz (Hz).",
+"What is wavelength?",
+"The distance between matching points on adjacent waves."
+],
+[
+"Physics",
+"Pressure in fluids",
+"Explain how pressure acts in liquids and gases.",
+"Developing",
+"Pressure is force acting per unit area. In a fluid, pressure acts in all directions and generally increases with depth because there is more fluid above. Pressure also depends on the fluid's density and gravitational field strength. Gas pressure is caused by particles colliding with the walls of their container.",
+"Pressure = force ÷ area. The SI unit is the pascal (Pa), equivalent to one newton per square metre.",
+"What happens to liquid pressure as depth increases?",
+"It increases.",
+"What is the unit of pressure?",
+"Pascals (Pa)."
+],
+[
+"Physics",
+"Magnetism and electromagnets",
+"Compare permanent magnets and magnets created by electric current.",
+"Foundation",
+"Magnets have north and south poles. Like poles repel and unlike poles attract. The magnetic field is strongest where field lines are closest together and, outside a magnet, field lines go from north to south. A current in a wire creates a magnetic field; a coil can strengthen the field, especially with a soft iron core.",
+"An electromagnet can be switched on and off by controlling its current.",
+"How can you make a coil's electromagnet stronger?",
+"Increase current, add more turns, or use a suitable iron core.",
+"What happens when two north poles are brought together?",
+"They repel."
+],
+[
+"Physics",
+"Earth and space",
+"Model day, night, seasons and the Solar System.",
+"Foundation",
+"Earth rotates once roughly every 24 hours, causing day and night. Earth orbits the Sun once each year. Earth's axis is tilted, so different hemispheres receive different angles and durations of sunlight during the year, producing seasons. The Moon orbits Earth and reflects sunlight. Planets orbit the Sun; stars produce their own light.",
+"Seasons are caused mainly by Earth's axial tilt, not by Earth being much closer to the Sun in summer.",
+"What causes day and night?",
+"Earth rotating on its axis.",
+"What causes Earth's seasons?",
+"The tilt of Earth's axis as Earth orbits the Sun."
+]
+],
+
+10: [
+[
+"Biology",
+"Cell biology and microscopy",
+"Revise cell structures, specialised cells and calculating magnification.",
+"Foundation",
+"Animal and plant cells contain structures that perform specialised roles. Bacteria are prokaryotic: they do not have a nucleus, and their DNA is found in the cytoplasm, often as a circular chromosome with possible plasmids. Specialised cells have adaptations for their jobs, such as root hair cells with a large surface area for absorption. Microscopes provide evidence about cell structure.",
+"Magnification = image size ÷ real size. Convert measurements to the same units before calculating.",
+"An image is 20 mm wide and the real cell is 0.02 mm wide. What is magnification?",
+"20 ÷ 0.02 = ×1000.",
+"Where is bacterial DNA found?",
+"In the cytoplasm, not inside a nucleus."
+],
+[
+"Biology",
+"Organisation and digestion",
+"Trace how organs work together to digest and absorb food.",
+"Developing",
+"The digestive system breaks large, insoluble food molecules into smaller soluble molecules that can be absorbed into the blood. Enzymes are biological catalysts: carbohydrases break carbohydrates into sugars, proteases break proteins into amino acids, and lipases break lipids into fatty acids and glycerol. The small intestine is adapted for absorption by its large surface area, thin walls and rich blood supply.",
+"Enzymes have optimum conditions. Temperatures that are too high can denature an enzyme, changing the shape of its active site.",
+"Why does the small intestine have villi?",
+"They increase surface area for absorption.",
+"What do proteases break proteins into?",
+"Amino acids."
+],
+[
+"Biology",
+"Infection and response",
+"Learn how pathogens spread and how the body defends itself.",
+"Developing",
+"Pathogens are microorganisms that cause infectious disease. They include bacteria, viruses, fungi and protists. They can spread through air, water, direct contact or vectors. The body has barriers such as skin and mucus, and white blood cells can engulf pathogens, produce antibodies and make antitoxins. Vaccination exposes the immune system to antigens safely so it can respond faster in future.",
+"Antibiotics treat bacterial infections, not viral infections; unnecessary use can select for antibiotic-resistant bacteria.",
+"Why do antibiotics not work against viruses?",
+"Viruses reproduce inside host cells and do not have the bacterial structures targeted by antibiotics.",
+"What do antibodies help the body do?",
+"Recognise and help neutralise specific antigens."
+],
+[
+"Biology",
+"Photosynthesis and plant transport",
+"Connect photosynthesis with limiting factors and movement of substances in plants.",
+"Developing",
+"Photosynthesis uses light energy to convert carbon dioxide and water into glucose and oxygen. Chlorophyll absorbs light. The rate may be limited by light intensity, carbon dioxide concentration or temperature. Xylem transports water and mineral ions from roots towards leaves; phloem transports dissolved sugars around the plant. Stomata allow gas exchange and are controlled by guard cells.",
+"Carbon dioxide + water → glucose + oxygen. In practical investigations, change one limiting factor at a time and control the others.",
+"Name two factors that can limit photosynthesis.",
+"Light intensity, carbon dioxide concentration, or temperature.",
+"Which plant tissue transports water from roots?",
+"Xylem."
+],
+[
+"Chemistry",
+"Atomic structure and the periodic table",
+"Use atomic number, mass number and electron arrangement.",
+"Foundation",
+"The atomic number is the number of protons. The mass number is protons plus neutrons. In a neutral atom, electrons equal protons. Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. The periodic table is arranged by atomic number, and electron arrangements help explain group properties.",
+"Number of neutrons = mass number − atomic number.",
+"An atom has atomic number 11 and mass number 23. How many neutrons?",
+"23 − 11 = 12 neutrons.",
+"What is the atomic number?",
+"The number of protons in the nucleus."
+],
+[
+"Chemistry",
+"Bonding and structure",
+"Compare ionic, covalent and metallic bonding.",
+"Developing",
+"Ionic bonding involves electron transfer, producing oppositely charged ions that attract. Covalent bonding involves shared pairs of electrons between atoms. Metallic bonding is the attraction between positive metal ions and delocalised electrons. Bonding and structure explain properties: ionic compounds often have high melting points and conduct when molten or dissolved; simple molecular substances often have low melting points; metals conduct electricity due to mobile electrons.",
+"Link structure to properties by considering particle arrangement, forces or bonds, and whether charged particles can move.",
+"Why can solid ionic compounds usually not conduct electricity?",
+"Their ions are fixed in place and cannot move to carry charge.",
+"What is shared in covalent bonding?",
+"Pairs of electrons."
+],
+[
+"Chemistry",
+"Quantitative chemistry and equations",
+"Balance equations and use conservation of mass in calculations.",
+"Developing",
+"Chemical equations show reactants becoming products. Equations must be balanced because atoms are conserved in a chemical reaction. A coefficient in front of a formula changes the number of particles; it does not change the chemical formula itself. Relative formula mass is found by adding the relative atomic masses of all atoms in a formula.",
+"Example: 2H₂ + O₂ → 2H₂O. There are four H atoms and two O atoms on each side.",
+"Why must a chemical equation be balanced?",
+"To show that the same number of each type of atom is present on both sides.",
+"What does a coefficient in an equation change?",
+"The number of particles or formula units."
+],
+[
+"Physics",
+"Energy changes and efficiency",
+"Track energy transfers and calculate useful efficiency.",
+"Developing",
+"Energy is conserved, but transfers may spread energy into the surroundings, often by heating or sound. A device is more efficient when a greater fraction of the input energy is transferred usefully. Ways to reduce unwanted transfers include insulation, lubrication and streamlining, depending on the situation.",
+"Efficiency = useful output energy ÷ total input energy × 100%.",
+"A device transfers 40 J usefully from 100 J input. What is its efficiency?",
+"40 ÷ 100 × 100% = 40%.",
+"Can the efficiency of a real energy-transfer device exceed 100%?",
+"No."
+],
+[
+"Physics",
+"Electricity: current, potential difference and resistance",
+"Use circuit rules and equations to reason about components.",
+"Developing",
+"Current is charge flow per second. Potential difference is energy transferred per unit charge. Resistance describes opposition to current. In a series circuit, current is the same everywhere and potential differences across components add to the supply. In parallel, each branch has the same potential difference as the supply and current splits between branches.",
+"Ohm's law for an ohmic conductor at constant temperature: V = I × R.",
+"A 6 V supply drives 2 A through a component. What is its resistance?",
+"R = V ÷ I = 6 ÷ 2 = 3 Ω.",
+"What is the equation linking voltage, current and resistance?",
+"V = I × R."
+],
+[
+"Physics",
+"Particle model and density",
+"Explain changes of state and calculate density.",
+"Foundation",
+"In the particle model, heating increases particles' average kinetic energy. During a change of state, energy changes the arrangement or separation of particles rather than necessarily raising temperature. Density describes how much mass is packed into a volume. Objects float in a fluid when their average density is lower than the fluid's density.",
+"Density = mass ÷ volume. Common units include kg/m³ and g/cm³; make sure units match.",
+"A block has mass 200 g and volume 50 cm³. What is its density?",
+"200 ÷ 50 = 4 g/cm³.",
+"What is the equation for density?",
+"Density = mass ÷ volume."
+]
+],
+
+11: [
+[
+"Biology",
+"Homeostasis and the nervous system",
+"Understand how the body detects and responds to changes.",
+"Developing",
+"Homeostasis keeps internal conditions within suitable limits. Receptors detect stimuli, coordination centres process information, and effectors such as muscles or glands produce responses. The nervous system uses electrical impulses for fast, targeted communication. A reflex arc can involve a receptor, sensory neurone, relay neurone, motor neurone and effector.",
+"Negative feedback reverses a change away from a set level, helping maintain stable conditions.",
+"What is the purpose of homeostasis?",
+"To keep internal conditions stable within suitable limits.",
+"What does a receptor do?",
+"It detects a stimulus or change."
+],
+[
+"Biology",
+"Hormones, blood glucose and diabetes",
+"Compare hormonal and nervous communication and explain blood-glucose control.",
+"Developing",
+"Hormones are chemical messengers released by endocrine glands and carried in the blood. Blood glucose is regulated mainly by insulin and glucagon from the pancreas. When glucose rises, insulin encourages cells to take up glucose and the liver to store it as glycogen. When glucose falls, glucagon causes stored glycogen to be converted back to glucose. Type 1 diabetes involves insufficient insulin production; Type 2 involves body cells responding less effectively to insulin.",
+"Insulin and glucagon act in opposite ways as part of a negative-feedback system.",
+"Which hormone lowers blood-glucose concentration?",
+"Insulin.",
+"Which organ produces insulin and glucagon?",
+"The pancreas."
+],
+[
+"Biology",
+"Evolution, genetics and selective breeding",
+"Connect inherited variation with evolution and human-directed breeding.",
+"Stretch",
+"Genes carry inherited information, and mutations can introduce new genetic variants. Natural selection changes populations over generations when inherited features affect survival and reproductive success. Selective breeding is directed by humans choosing parents with desired characteristics. It can produce useful traits but may reduce genetic variation and increase the chance of inherited health problems.",
+"Evolution describes changes in inherited characteristics of populations over generations, not an individual choosing to change.",
+"Give one possible disadvantage of selective breeding.",
+"Reduced genetic variation or a higher risk of inherited health problems.",
+"What is a mutation?",
+"A change in genetic material."
+],
+[
+"Biology",
+"Ecology and required practical skills",
+"Plan ecological sampling and interpret data responsibly.",
+"Developing",
+"Ecologists estimate distribution and abundance using sampling. A quadrat can estimate the frequency or percentage cover of plants in an area. Random sampling reduces bias; using more samples improves reliability. Transects are useful for studying changes across an environmental gradient. Keep methods consistent and record abiotic factors such as light, moisture or temperature.",
+"Mean = total of measurements ÷ number of measurements. Anomalies should be investigated rather than silently removed.",
+"Why should quadrat positions be chosen randomly?",
+"To reduce sampling bias and make the sample more representative.",
+"What is an abiotic factor?",
+"A non-living part of the environment, such as light or temperature."
+],
+[
+"Chemistry",
+"Chemical changes: acids, salts and electrolysis",
+"Explain neutralisation, salt preparation and movement of ions.",
+"Developing",
+"Acids react with bases to form salts; acid + alkali produces salt + water. The salt name depends on the acid, such as hydrochloric acid forming chlorides and sulfuric acid forming sulfates. Electrolysis decomposes an ionic substance when molten or dissolved because ions can move. Positive ions move to the negative cathode and gain electrons; negative ions move to the positive anode and lose electrons.",
+"In electrolysis, cations are positive and go to the cathode; anions are negative and go to the anode.",
+"Where do positive ions move during electrolysis?",
+"To the negative electrode, the cathode.",
+"What are the products of neutralisation?",
+"Salt and water."
+],
+[
+"Chemistry",
+"Rates, equilibrium and energy changes",
+"Use collision theory to explain rates and reversible reactions.",
+"Stretch",
+"A reaction rate increases when successful collisions happen more frequently. Higher temperature gives particles more kinetic energy; concentration, gas pressure and surface area can also affect collision frequency. Catalysts lower activation energy. In a reversible reaction, products can react to reform reactants. At dynamic equilibrium in a closed system, forward and reverse reactions continue at equal rates, so concentrations remain constant.",
+"An exothermic reaction transfers energy to the surroundings; an endothermic reaction takes energy in from the surroundings.",
+"At dynamic equilibrium, are reactions still happening?",
+"Yes. Forward and reverse reactions continue at equal rates.",
+"What does an exothermic reaction do?",
+"It transfers energy to the surroundings."
+],
+[
+"Chemistry",
+"Organic chemistry and Earth's resources",
+"Explore hydrocarbons, fuels, polymers and resource choices.",
+"Developing",
+"Crude oil is a mixture of hydrocarbons formed over geological time. Fractional distillation separates fractions because hydrocarbons have different boiling points. Complete combustion of a hydrocarbon produces carbon dioxide and water; incomplete combustion can produce carbon monoxide or soot. Polymers are long molecules made from repeating units. Resource choices involve environmental, economic and social trade-offs.",
+"A hydrocarbon contains only hydrogen and carbon. Burning fossil fuels releases carbon dioxide, a greenhouse gas.",
+"What two products form during complete combustion of a hydrocarbon?",
+"Carbon dioxide and water.",
+"What elements are found in hydrocarbons?",
+"Hydrogen and carbon."
+],
+[
+"Physics",
+"Forces, motion and momentum",
+"Use motion graphs and force equations to explain changes in movement.",
+"Developing",
+"A resultant force changes an object's velocity. Acceleration is change in velocity divided by time. A distance-time graph's gradient gives speed; a velocity-time graph's gradient gives acceleration and its area gives displacement. Momentum depends on mass and velocity, and total momentum is conserved in a closed system when external forces are negligible.",
+"Speed = distance ÷ time. Acceleration = change in velocity ÷ time. Resultant force = mass × acceleration.",
+"A 2 kg object accelerates at 3 m/s². What resultant force acts on it?",
+"F = ma = 2 × 3 = 6 N.",
+"What does the gradient of a distance-time graph show?",
+"Speed."
+],
+[
+"Physics",
+"Waves, radiation and the electromagnetic spectrum",
+"Compare electromagnetic waves and their uses and risks.",
+"Developing",
+"Electromagnetic waves are transverse waves that can travel through a vacuum. In a vacuum they all travel at the same speed. The spectrum from lowest to highest frequency is radio, microwave, infrared, visible, ultraviolet, X-rays and gamma rays. Higher-frequency radiation carries more energy per photon; ultraviolet, X-rays and gamma rays can damage cells and DNA.",
+"Different regions have different uses and hazards; risk depends on exposure, intensity and shielding.",
+"Which has the higher frequency: radio waves or gamma rays?",
+"Gamma rays.",
+"Can electromagnetic waves travel through a vacuum?",
+"Yes."
+],
+[
+"Physics",
+"Magnetism, motors and generators",
+"Connect magnetic fields with motors and electromagnetic induction.",
+"Stretch",
+"A current-carrying wire in a magnetic field can experience a force. In an electric motor, this force causes rotation and electrical energy is transferred to kinetic energy. A changing magnetic field through a coil induces a potential difference; a generator uses electromagnetic induction to transfer kinetic energy into electrical energy. Greater relative motion or a stronger magnetic field can increase induced potential difference.",
+"A transformer changes alternating potential difference using two coils around a shared magnetic core; it works with changing current.",
+"What must change to induce a potential difference in a coil?",
+"The magnetic field through the coil must change.",
+"What type of current do transformers require?",
+"Alternating current (AC)."
+],
+[
+"Physics",
+"Space physics and the life cycle of stars",
+"Describe gravity, orbits and how stars change over time.",
+"Developing",
+"Gravity attracts masses and keeps planets and moons in orbit. Stars form when gravity pulls gas and dust together. In a stable main-sequence star, energy from nuclear fusion in the core balances the inward pull of gravity with outward pressure. The later life cycle depends on the star's mass: Sun-like stars become red giants and then white dwarfs; massive stars can explode as supernovae and leave neutron stars or black holes.",
+"The Sun's energy is produced by nuclear fusion, which combines light nuclei and releases energy.",
+"What process releases energy in the core of a main-sequence star?",
+"Nuclear fusion.",
+"What force helps keep planets in orbit around the Sun?",
+"Gravity."
+]
+]
+};
+
+
+const detailedLessons = {
+    "Cells: the building blocks of life": {
+        paragraphs: [
+            {
+                heading: "1. What is a cell?",
+                text: `A cell is the smallest structural and functional unit of a living organism. Although cells are microscopic, they contain specialised structures that allow essential life processes to occur. These processes include respiration, growth, responding to stimuli and producing new cells. Unicellular organisms, such as many bacteria, consist of a single cell that carries out all the functions needed for survival. Multicellular organisms, including humans and flowering plants, contain many cells that become specialised for different roles.`
+            },
+            {
+                heading: "2. Animal cell structures",
+                text: `The cell membrane forms the boundary between the cell and its surroundings. It controls the movement of substances into and out of the cell, allowing useful materials to enter and waste products to leave. The cytoplasm is a jelly-like substance in which many chemical reactions take place. The nucleus contains chromosomes made from DNA and helps control the activities of the cell by regulating which genes are used. Mitochondria are the main sites of aerobic respiration, a process that transfers energy from glucose into forms the cell can use. Cells that require large amounts of energy, such as muscle cells, usually contain many mitochondria.`
+            },
+            {
+                heading: "3. How plant cells differ",
+                text: `Plant cells contain the structures found in animal cells, but they also have several additional features. A cellulose cell wall surrounds the cell membrane and strengthens the cell, helping it maintain its shape. A large permanent vacuole contains cell sap and helps maintain internal pressure, keeping plant tissues firm. Many plant cells also contain chloroplasts, which contain the green pigment chlorophyll. Chlorophyll absorbs light energy for photosynthesis. However, not every plant cell contains chloroplasts: root cells, for example, are usually underground and do not receive enough light for photosynthesis.`
+            },
+            {
+                heading: "4. From cells to organisms",
+                text: `In multicellular organisms, cells with similar structures and functions may work together as tissues. Different tissues combine to form organs, and organs cooperate in organ systems. For example, the heart contains muscle tissue, connective tissue and nervous tissue. It works with blood vessels and blood as part of the circulatory system. This organisation allows complex organisms to perform tasks that would be impossible for a single cell to carry out alone. Specialisation makes an organism more efficient because different cells can develop structures suited to their particular jobs.`
+            },
+            {
+                heading: "5. Microscopy and magnification",
+                text: `Cells are generally too small to see clearly with the unaided eye, so scientists use microscopes to observe their structures. Magnification describes how many times larger an image is than the actual object. To calculate magnification, divide the image size by the real size, making sure both measurements use the same units. For instance, if a cell measures 0.02 mm in reality and its image measures 20 mm, the magnification is 20 ÷ 0.02 = ×1000. Magnification makes an image larger, but resolution determines how clearly two close details can be distinguished. A larger image is not necessarily a clearer one.`
+            }
+        ],
+        vocabulary: [
+            ["Cell membrane", "A selectively permeable boundary controlling movement into and out of a cell."],
+            ["Cytoplasm", "The site of many chemical reactions within a cell."],
+            ["Nucleus", "Contains genetic material and helps control cell activities."],
+            ["Mitochondrion", "The main site of aerobic respiration."],
+            ["Chloroplast", "Contains chlorophyll and is the site of photosynthesis."],
+            ["Resolution", "The ability to distinguish two nearby points as separate."]
+        ],
+        misconception: "All plant cells contain chloroplasts. In reality, many plant cells, including most root cells, do not contain chloroplasts.",
+        examTip: "When asked to compare plant and animal cells, identify a structural difference and explain its function. For example, the cellulose cell wall strengthens plant cells and helps them maintain their shape."
+    },
+
+    "Using a microscope": {
+        paragraphs: [
+            {
+                heading: "1. How a light microscope works",
+                text: `A light microscope uses visible light and lenses to produce a magnified image of a specimen. Light passes through or reflects from the specimen and is focused by the objective lens and eyepiece. The objective lens forms an image that is magnified further by the eyepiece. Different objective lenses provide different magnifications. Starting with a low-power objective gives a wider field of view, making the specimen easier to locate before examining smaller details at higher power.`
+            },
+            {
+                heading: "2. Preparing a slide",
+                text: `A specimen should normally be thin enough for sufficient light to pass through it. Place the specimen on a clean microscope slide and add a drop of water or a suitable stain when required. Lower a coverslip carefully at an angle to reduce the formation of air bubbles, which could obscure the specimen. Some stains bind to particular cell structures and increase contrast, making details easier to distinguish. Stains must be chosen appropriately because not every stain is suitable for every specimen.`
+            },
+            {
+                heading: "3. Focusing safely and accurately",
+                text: `Begin with the lowest-power objective and secure the slide on the stage. Adjust the light source or diaphragm to produce suitable illumination. Use the coarse adjustment carefully to bring the specimen into view, then use the fine adjustment to sharpen the image. At high magnification, the working distance between the objective lens and slide is smaller, so careless adjustment may damage the slide or lens. Keep lenses clean using appropriate lens tissue rather than touching the glass with fingers.`
+            },
+            {
+                heading: "4. Calculating total magnification",
+                text: `Total magnification is calculated by multiplying the eyepiece magnification by the objective magnification. If the eyepiece is ×10 and the objective is ×40, total magnification is 10 × 40 = ×400. Remember that magnification has no physical unit because it is a ratio. When calculating magnification from a drawing, convert image size and actual size into the same units first. A drawing measured in millimetres cannot be divided directly by an actual size recorded in micrometres without converting one of the measurements.`
+            },
+            {
+                heading: "5. Magnification versus resolution",
+                text: `Magnification and resolution describe different properties. Magnification concerns the apparent enlargement of an image; resolution concerns the ability to distinguish nearby structures as separate. If an image is enlarged beyond the detail the microscope can resolve, it may appear bigger without revealing additional information. Light microscopes are useful for observing whole cells and larger structures, while electron microscopes can reveal much smaller structures because they have a higher resolving power.`
+            }
+        ],
+        vocabulary: [
+            ["Objective lens", "The lens close to the specimen that provides initial magnification."],
+            ["Eyepiece lens", "The lens through which the observer views the image."],
+            ["Resolution", "The ability to distinguish closely spaced details."],
+            ["Stain", "A substance used to increase contrast in a specimen."]
+        ],
+        misconception: "Using a higher magnification does not automatically guarantee a clearer image. Resolution also matters.",
+        examTip: "For magnification calculations, write the equation, convert units, substitute the values and include the magnification sign, such as ×400."
+    },
+
+    "Photosynthesis": {
+        paragraphs: [
+            {
+                heading: "1. The purpose of photosynthesis",
+                text: `Photosynthesis is the process by which plants and some other organisms use light energy to make organic substances from simpler materials. In plants, most photosynthesis occurs in chloroplasts, particularly in cells found in leaves. Chlorophyll absorbs light energy, which is transferred into chemical energy during the reactions of photosynthesis. Carbon dioxide enters leaves mainly through stomata, while water is absorbed by roots and transported to the leaves through xylem vessels. Oxygen is released as a product.`
+            },
+            {
+                heading: "2. The word equation",
+                text: `The word equation for photosynthesis is carbon dioxide + water → glucose + oxygen. Carbon dioxide and water are the reactants, while glucose and oxygen are the products. Glucose is an important carbohydrate because it stores chemical energy and supplies carbon for building other organic molecules. Plants can use glucose in respiration, convert it into starch for storage, or combine its products with mineral ions to make substances such as proteins. Oxygen can diffuse out of the leaf through stomata.`
+            },
+            {
+                heading: "3. How leaves are adapted",
+                text: `Leaves have adaptations that make photosynthesis efficient. A broad, flat surface provides a large area for absorbing light. The upper surface is often relatively transparent, allowing light to reach photosynthetic cells. Palisade cells near the upper surface usually contain many chloroplasts. Air spaces within the leaf help carbon dioxide diffuse towards these cells, while stomata allow gases to move between the leaf and atmosphere. The network of veins supplies water and carries dissolved substances away.`
+            },
+            {
+                heading: "4. Limiting factors",
+                text: `The rate of photosynthesis depends on several conditions, including light intensity, carbon dioxide concentration and temperature. If light intensity is very low, increasing it may increase the rate because more energy is available. Eventually, another factor may become limiting, so adding more light produces little or no further increase. Increasing carbon dioxide concentration can also increase the rate until a different limitation becomes important. Temperature affects enzyme-controlled reactions: low temperatures slow reactions, while excessive temperatures can damage the enzymes involved.`
+            },
+            {
+                heading: "5. Investigating photosynthesis",
+                text: `A scientific investigation can examine how one factor affects photosynthesis by changing that factor while controlling others. For example, a student could measure the oxygen produced by an aquatic plant at different light intensities. The plant, temperature, carbon dioxide availability and measurement period should be kept consistent where possible. Repeated measurements improve reliability, and a graph can reveal the relationship between light intensity and oxygen production. The measured outcome is an estimate of photosynthesis rate, so the method's limitations should also be considered.`
+            }
+        ],
+        vocabulary: [
+            ["Photosynthesis", "The process that uses light energy to make glucose from carbon dioxide and water."],
+            ["Chlorophyll", "The green pigment that absorbs light energy."],
+            ["Stomata", "Small pores that allow gas exchange in leaves."],
+            ["Limiting factor", "A condition that restricts the rate of a process."]
+        ],
+        misconception: "Plants do respire. Photosynthesis stores energy in organic molecules, while respiration releases usable energy from those molecules.",
+        examTip: "When explaining a limiting factor, state how changing it affects the rate and why the effect eventually may stop."
+    },
+
+    "Particles and states of matter": {
+        paragraphs: [
+            {
+                heading: "1. The particle model",
+                text: `The particle model explains the properties of solids, liquids and gases by describing the arrangement, movement and energy of their particles. The model is useful because it connects observations, such as a liquid flowing or a gas expanding, to the behaviour of tiny particles. Particles are always moving, although their movement depends on the state and temperature. The model is simplified: real particles interact with one another, and their behaviour can be more complex than a basic diagram suggests.`
+            },
+            {
+                heading: "2. Solids, liquids and gases",
+                text: `In a solid, particles are closely packed in an arrangement that is usually fixed. They vibrate around their positions but cannot move freely past one another, so solids retain a definite shape and volume. In a liquid, particles remain close together but can move past each other. A liquid therefore keeps approximately the same volume but takes the shape of its container. In a gas, particles are much farther apart and move rapidly in random directions. A gas spreads to fill its container and can be compressed because there is considerable space between its particles.`
+            },
+            {
+                heading: "3. Heating and changes of state",
+                text: `Heating usually increases the average kinetic energy of particles. When a solid melts, particles gain enough energy to move out of their fixed arrangement. When a liquid boils, particles throughout the liquid gain sufficient energy to form gas. Evaporation differs from boiling because it occurs at the surface and can happen below the boiling point. During a change of state, energy is used to change the arrangement or separation of particles, so the temperature of a pure substance can remain constant while the change occurs.`
+            },
+            {
+                heading: "4. Cooling and condensation",
+                text: `When a gas cools, its particles lose kinetic energy and move more slowly. If the conditions allow condensation, the gas becomes a liquid as particles come closer together. Further cooling may cause freezing, in which particles become arranged in a solid structure. These changes are physical rather than chemical: the substance itself remains the same substance. For example, liquid water, water vapour and ice all consist of H₂O molecules, even though their macroscopic properties differ.`
+            },
+            {
+                heading: "5. Explaining observations",
+                text: `Diffusion occurs when particles spread from a region of higher concentration to a region of lower concentration because of their random motion. It happens more rapidly in gases than in liquids under many ordinary conditions because gas particles move quickly and are more widely spaced. The particle model can also explain gas pressure: particles collide with the walls of their container, exerting forces over the wall's area. Increasing temperature in a sealed container usually makes these collisions more energetic.`
+            }
+        ],
+        vocabulary: [
+            ["Kinetic energy", "Energy associated with movement."],
+            ["Diffusion", "The net spreading of particles from higher to lower concentration."],
+            ["Melting", "The change of state from solid to liquid."],
+            ["Condensation", "The change of state from gas to liquid."]
+        ],
+        misconception: "Particles do not get larger when a substance is heated. Their movement and spacing change.",
+        examTip: "Use particle spacing and movement to explain properties. Avoid saying that particles themselves melt, expand or disappear."
+    }
+};
+
+const yearDescriptions = {
+    7: "Build the foundations: cells, particles, forces and energy.",
+    8: "Connect core ideas and investigate how systems work.",
+    9: "Explore more complex patterns and scientific explanations.",
+    10: "Develop GCSE knowledge, practical skills and scientific calculations.",
+    11: "Consolidate GCSE ideas and practise applying them to unfamiliar contexts."
+};
+
+const years = [7, 8, 9, 10, 11];
+
+let currentYear = 7;
+let currentTopic = null;
+let currentQuestions = [];
+
+const $ = id => document.getElementById(id);
+const completedKey = "studyPawsScienceCompleted";
+
+function getCompleted() {
+    try {
+        return JSON.parse(localStorage.getItem(completedKey) || "[]");
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveCompleted(items) {
+    localStorage.setItem(completedKey, JSON.stringify(items));
+}
+
+function topicId(year, topic) {
+    return year + "-" + topic[0] + "-" + topic[1];
+}
+
+function topicsForYear(year) {
+    return curriculum[year] || [];
+}
+
+function selectYear(year) {
+    currentYear = year;
+
+    $("yearHeading").textContent = "Year " + year;
+    $("yearSubheading").textContent = yearDescriptions[year];
+
+    $("ks3Tab").setAttribute("aria-pressed", String(year <= 9));
+    $("gcseTab").setAttribute("aria-pressed", String(year >= 10));
+
+    renderTabs();
+    renderTopics();
+    updateStats();
+    closePanels();
+}
+
+function renderTabs() {
+    $("yearTabs").innerHTML = years.map(year => `
+        <button
+            type="button"
+            class="year-tab"
+            data-year="${year}"
+            aria-pressed="${year === currentYear}">
+            Year ${year}
+        </button>
+    `).join("");
+
+    document.querySelectorAll("[data-year]").forEach(button => {
+        button.addEventListener("click", () => {
+            selectYear(Number(button.dataset.year));
+        });
+    });
+}
+
+function renderTopics() {
+    const search = $("topicSearch").value.trim().toLowerCase();
+    const difficulty = $("difficultyFilter").value;
+
+    const topics = topicsForYear(currentYear).filter(topic => {
+        const matchesDifficulty =
+            difficulty === "all" || topic[3] === difficulty;
+
+        const matchesSearch =
+            !search || topic.slice(0, 4).join(" ").toLowerCase().includes(search);
+
+        return matchesDifficulty && matchesSearch;
+    });
+
+    if (!topics.length) {
+        $("worldList").innerHTML = `
+            <div class="empty">
+                No topics match those filters.
+                Try another search or clear the filters. 🐾
+            </div>
+        `;
+        return;
+    }
+
+    const groups = {};
+
+    topics.forEach(topic => {
+        if (!groups[topic[0]]) {
+            groups[topic[0]] = [];
+        }
+        groups[topic[0]].push(topic);
+    });
+
+    $("worldList").innerHTML = Object.entries(groups).map(([subject, list]) => {
+        const emoji = subject === "Biology" ? "🌱" :
+                      subject === "Chemistry" ? "🧪" : "⚡";
+
+        return `
+            <section class="world-block">
+                <div class="world-header">
+                    <h3>${emoji} ${subject}</h3>
+                    <span class="tag">${list.length} topics</span>
+                </div>
+
+                <div class="lesson-grid">
+                    ${list.map(topic => {
+                        const done = getCompleted().includes(
+                            topicId(currentYear, topic)
+                        );
+
+                        return `
+                            <article class="lesson-card">
+                                <div class="lesson-top">
+                                    <span class="lesson-number">
+                                        ${done ? "✓" : "✦"}
+                                    </span>
+                                    <span class="tag">${topic[3]}</span>
+                                </div>
+
+                                <h4>${topic[1]}</h4>
+                                <p>${topic[2]}</p>
+
+                                <div class="meta">
+                                    <span>Year ${currentYear}</span>
+                                    <span>${subject}</span>
+                                    <span>${done ? "Completed" : "Lesson + quiz"}</span>
+                                </div>
+
+                                <div class="lesson-actions">
+                                    <button
+                                        class="lesson-action primary"
+                                        data-open="${encodeURIComponent(topic[1])}">
+                                        Open lesson
+                                    </button>
+
+                                    <button
+                                        class="lesson-action"
+                                        data-quiz="${encodeURIComponent(topic[1])}">
+                                        Quick quiz
+                                    </button>
+                                </div>
+                            </article>
+                        `;
+                    }).join("")}
+                </div>
+            </section>
+        `;
+    }).join("");
+
+    document.querySelectorAll("[data-open]").forEach(button => {
+        button.addEventListener("click", () => {
+            openLesson(decodeURIComponent(button.dataset.open));
+        });
+    });
+
+    document.querySelectorAll("[data-quiz]").forEach(button => {
+        button.addEventListener("click", () => {
+            openQuiz(decodeURIComponent(button.dataset.quiz));
+        });
+    });
+}
+
+function findTopic(title) {
+    return topicsForYear(currentYear).find(topic => topic[1] === title);
+}
+
+
+function openLesson(title) {
+    const topic = findTopic(title);
+    if (!topic) return;
+
+    currentTopic = topic;
+
+    $("lessonKicker").textContent =
+        `Year ${currentYear} · ${topic[0]} · ${topic[3]}`;
+
+    $("lessonTitle").textContent = topic[1];
+    $("lessonIntro").textContent = topic[2];
+
+    const extra = detailedLessons[topic[1]];
+
+    let lessonHTML = "";
+
+    if (extra) {
+        lessonHTML += extra.paragraphs.map(section => `
+            <section class="lesson-section">
+                <h3>${section.heading}</h3>
+                <p>${section.text}</p>
+            </section>
+        `).join("");
+
+        lessonHTML += `
+            <h3>Essential scientific vocabulary</h3>
+            <div class="vocabulary-list">
+                ${extra.vocabulary.map(item => `
+                    <article class="example">
+                        <strong>${item[0]}</strong>
+                        <p>${item[1]}</p>
+                    </article>
+                `).join("")}
+            </div>
+
+            <h3>A common misconception</h3>
+            <div class="key-point">
+                ${extra.misconception}
+            </div>
+
+            <h3>How to earn marks in an exam</h3>
+            <div class="example">
+                <p>${extra.examTip}</p>
+            </div>
+        `;
+    } else {
+        /*
+        Topics without expanded content still show their
+        original explanation and key idea.
+        */
+        lessonHTML += `
+            <h3>Core explanation</h3>
+            <p>${topic[4]}</p>
+
+            <h3>Understanding the science</h3>
+            <p>
+                Connect the scientific idea to the evidence you can observe.
+                Identify the relevant structures, particles, forces or
+                processes, then explain how they produce the result described.
+                Use accurate scientific vocabulary and make each step in
+                your explanation clear.
+            </p>
+
+            <h3>Apply your knowledge</h3>
+            <div class="example">
+                <p>
+                    ${topic[6]}
+                </p>
+                <details>
+                    <summary>Reveal the answer</summary>
+                    <p>${topic[7]}</p>
+                </details>
+            </div>
+        `;
+    }
+
+    lessonHTML += `
+        <h3>Key idea to remember</h3>
+        <div class="key-point">${topic[5]}</div>
+
+        <div class="example">
+            <strong>Active recall: question one</strong>
+            <p>${topic[6]}</p>
+            <details>
+                <summary>Reveal the answer</summary>
+                <p>${topic[7]}</p>
+            </details>
+        </div>
+
+        <div class="example">
+            <strong>Active recall: question two</strong>
+            <p>${topic[8]}</p>
+            <details>
+                <summary>Reveal the answer</summary>
+                <p>${topic[9]}</p>
+            </details>
+        </div>
+
+        <div class="key-point">
+            <strong>Study strategy:</strong>
+            Close the lesson and explain the main idea aloud without looking.
+            Then reopen it and check whether you included the important
+            details, vocabulary and scientific reasoning.
+        </div>
+    `;
+
+    $("lessonContent").innerHTML = lessonHTML;
+
+    $("lessonPanel").hidden = false;
+    $("quizPanel").hidden = true;
+
+    $("lessonPanel").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    $("markComplete").textContent =
+        getCompleted().includes(topicId(currentYear, topic))
+        ? "Completed ✓"
+        : "Mark lesson complete ✓";
+}
+
+
+function openQuiz(title) {
+    const topic = findTopic(title);
+    if (!topic) return;
+
+    currentTopic = topic;
+
+    currentQuestions = [
+        { q: topic[6], a: topic[7] },
+        { q: topic[8], a: topic[9] }
+    ];
+
+    $("quizTitle").textContent = topic[1] + " · Quick quiz";
+    $("quizIntro").textContent =
+        "Choose the best answer for both questions, then check your score.";
+
+    renderQuiz();
+
+    $("quizPanel").hidden = false;
+    $("lessonPanel").hidden = true;
+
+    $("quizPanel").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function renderQuiz() {
+    $("quizScore").hidden = true;
+
+    $("quizForm").innerHTML = currentQuestions.map((question, index) => {
+        const correct = question.a;
+
+        const distractors = [
+            "It happens randomly and has no pattern.",
+            "It is always the opposite of the correct answer.",
+            "It is unrelated to the process described."
+        ].filter(answer => answer !== correct);
+
+        const options = [
+            correct,
+            ...distractors.slice(0, 2)
+        ].sort(() => Math.random() - 0.5);
+
+        return `
+            <div class="quiz-item">
+                <label>${index + 1}. ${question.q}</label>
+
+                <div class="option-list">
+                    ${options.map((option, optionIndex) => `
+                        <label class="option-label">
+                            <input
+                                type="radio"
+                                name="q${index}"
+                                value="${optionIndex}">
+                            <span>${option}</span>
+                        </label>
+                    `).join("")}
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function closePanels() {
+    $("lessonPanel").hidden = true;
+    $("quizPanel").hidden = true;
+}
+
+function updateStats() {
+    const topics = topicsForYear(currentYear);
+    const completed = getCompleted();
+
+    const numberCompleted = topics.filter(topic =>
+        completed.includes(topicId(currentYear, topic))
+    ).length;
+
+    $("topicCount").textContent = topics.length;
+    $("completedCount").textContent = numberCompleted;
+
+    $("progressFill").style.width =
+        (topics.length ? numberCompleted / topics.length * 100 : 0) + "%";
+
+    $("completionLabel").textContent =
+        "Progress is saved on this device.";
+}
+
+/* Year group shortcuts */
+
+$("ks3Tab").addEventListener("click", () => {
+    selectYear(Math.min(currentYear, 9));
+});
+
+$("gcseTab").addEventListener("click", () => {
+    selectYear(Math.max(currentYear, 10));
+});
+
+/* Search and filters */
+
+$("topicSearch").addEventListener("input", renderTopics);
+$("difficultyFilter").addEventListener("change", renderTopics);
+
+$("resetSearch").addEventListener("click", () => {
+    $("topicSearch").value = "";
+    $("difficultyFilter").value = "all";
+    renderTopics();
+});
+
+/* Panel controls */
+
+$("closeLesson").addEventListener("click", () => {
+    closePanels();
+    $("worldList").scrollIntoView({ behavior: "smooth" });
+});
+
+$("closeQuiz").addEventListener("click", () => {
+    closePanels();
+    $("worldList").scrollIntoView({ behavior: "smooth" });
+});
+
+/* Mark a lesson complete */
+
+$("markComplete").addEventListener("click", () => {
+    if (!currentTopic) return;
+
+    const id = topicId(currentYear, currentTopic);
+    const completed = getCompleted();
+
+    if (!completed.includes(id)) {
+        completed.push(id);
+    }
+
+    saveCompleted(completed);
+    updateStats();
+    renderTopics();
+
+    $("markComplete").textContent = "Completed ✓";
+});
+
+/* Open a quiz from a lesson */
+
+$("lessonToQuiz").addEventListener("click", () => {
+    if (currentTopic) {
+        openQuiz(currentTopic[1]);
+    }
+});
+
+/* Check quiz answers */
+
+$("submitQuiz").addEventListener("click", () => {
+    let score = 0;
+
+    currentQuestions.forEach((question, index) => {
+        const selected = document.querySelector(
+            `input[name="q${index}"]:checked`
+        );
+
+        if (!selected) return;
+
+        const options = currentQuestions[index].options;
+
+        // The correct answer is stored directly on each question.
+        if (selected.value === question.a) {
+            score++;
+        }
+    });
+
+    $("quizScore").hidden = false;
+
+    $("quizScore").textContent =
+        `You scored ${score} out of ${currentQuestions.length}. ` +
+        (score === currentQuestions.length
+            ? "Excellent work! 🌟"
+            : score === 1
+                ? "Good start! Review the lesson and try again."
+                : "Keep going! Revisit the explanation, then have another go.");
+});
+
+$("retryQuiz").addEventListener("click", renderQuiz);
+
+/* Start on Year 7 */
+
+selectYear(7);
+
+
+(() => {
+  const scienceCards = [
+    // YEAR 7
+    { year: "7", topic: "Biology", q: "What is the basic unit of life?", a: "The cell." },
+    { year: "7", topic: "Biology", q: "Which organelle releases energy through aerobic respiration?", a: "The mitochondria." },
+    { year: "7", topic: "Biology", q: "What do plants absorb from the air for photosynthesis?", a: "Carbon dioxide." },
+    { year: "7", topic: "Chemistry", q: "What are the three common states of matter?", a: "Solid, liquid and gas." },
+    { year: "7", topic: "Chemistry", q: "What is a mixture?", a: "Two or more substances together that are not chemically bonded." },
+    { year: "7", topic: "Physics", q: "What is the unit of force?", a: "The newton (N)." },
+    { year: "7", topic: "Physics", q: "What is the unit of electrical current?", a: "The ampere (A)." },
+
+    // YEAR 8
+    { year: "8", topic: "Biology", q: "What is the role of red blood cells?", a: "To transport oxygen around the body using haemoglobin." },
+    { year: "8", topic: "Biology", q: "What is a food chain used to show?", a: "How energy passes between organisms through feeding." },
+    { year: "8", topic: "Chemistry", q: "What is an element?", a: "A substance containing only one type of atom." },
+    { year: "8", topic: "Chemistry", q: "What is the pH of a neutral solution at room temperature?", a: "Approximately 7." },
+    { year: "8", topic: "Physics", q: "What is the difference between mass and weight?", a: "Mass measures the amount of matter; weight is the force due to gravity." },
+    { year: "8", topic: "Physics", q: "How is energy transferred in conduction?", a: "Through particle collisions and interactions within a material." },
+
+    // YEAR 9
+    { year: "9", topic: "Biology", q: "What is the function of enzymes?", a: "They act as biological catalysts, speeding up reactions." },
+    { year: "9", topic: "Biology", q: "What is diffusion?", a: "The net movement of particles from higher to lower concentration." },
+    { year: "9", topic: "Chemistry", q: "What is the difference between an atom and an ion?", a: "An atom is neutral; an ion has gained or lost electrons and has a charge." },
+    { year: "9", topic: "Chemistry", q: "What is the chemical formula for carbon dioxide?", a: "CO₂." },
+    { year: "9", topic: "Physics", q: "What is the equation linking speed, distance and time?", a: "Speed = distance ÷ time." },
+    { year: "9", topic: "Physics", q: "What happens to current in a series circuit?", a: "The current is the same at every point in the circuit." },
+
+    // YEAR 10
+    { year: "10", topic: "Biology", q: "What is osmosis?", a: "The net movement of water through a partially permeable membrane from a dilute solution to a more concentrated solution." },
+    { year: "10", topic: "Biology", q: "What is the word equation for aerobic respiration?", a: "Glucose + oxygen → carbon dioxide + water." },
+    { year: "10", topic: "Chemistry", q: "What is the relative charge of a proton?", a: "+1." },
+    { year: "10", topic: "Chemistry", q: "What is the purpose of electrolysis?", a: "To use electricity to decompose an ionic substance." },
+    { year: "10", topic: "Physics", q: "What is the equation linking force, mass and acceleration?", a: "Force = mass × acceleration (F = ma)." },
+    { year: "10", topic: "Physics", q: "What is the unit of energy?", a: "The joule (J)." },
+
+    // YEAR 11
+    { year: "11", topic: "Biology", q: "What is natural selection?", a: "Individuals with advantageous inherited variations are more likely to survive and reproduce, passing those variations on." },
+    { year: "11", topic: "Biology", q: "What is the role of the kidneys?", a: "They filter blood and help regulate water and ion levels by producing urine." },
+    { year: "11", topic: "Chemistry", q: "What is oxidation in terms of electrons?", a: "Loss of electrons." },
+    { year: "11", topic: "Chemistry", q: "What does a catalyst do?", a: "Increases reaction rate by providing an alternative pathway with lower activation energy, without being used up overall." },
+    { year: "11", topic: "Physics", q: "What is the equation linking power, energy transferred and time?", a: "Power = energy transferred ÷ time." },
+    { year: "11", topic: "Physics", q: "What happens to the resistance of a filament lamp as its temperature increases?", a: "Its resistance increases as the filament gets hotter." }
+  ];
+
+  const card = document.getElementById("science-flashcard");
+  const yearSelect = document.getElementById("science-year");
+  const topicSelect = document.getElementById("science-topic");
+  const count = document.getElementById("science-card-count");
+  const label = document.getElementById("science-card-label");
+  const text = document.getElementById("science-card-text");
+  const hint = document.getElementById("science-card-hint");
+  const status = document.getElementById("science-card-status");
+
+  // Run only on pages that contain the Science flashcard section.
+  if (!card || !yearSelect || !topicSelect || !count ||
+      !label || !text || !hint || !status) return;
+
+  let deck = [];
+  let index = 0;
+  let flipped = false;
+
+  function buildDeck() {
+    const year = yearSelect.value;
+    const topic = topicSelect.value;
+
+    deck = scienceCards.filter(item =>
+      (year === "all" || item.year === year) &&
+      (topic === "all" || item.topic === topic)
+    );
+
+    index = 0;
+    flipped = false;
+    renderCard();
+  }
+
+  function renderCard() {
+    if (deck.length === 0) {
+      count.textContent = "No cards";
+      label.textContent = "NO CARDS FOUND";
+      text.textContent = "Try choosing another year or subject.";
+      hint.textContent = "Your next science adventure awaits! 💜";
+      status.textContent = "";
+      return;
+    }
+
+    const current = deck[index];
+
+    count.textContent = `Card ${index + 1} of ${deck.length}`;
+    label.textContent = flipped ? "ANSWER 💜" : "QUESTION ✨";
+    text.textContent = flipped ? current.a : current.q;
+    hint.textContent = flipped
+      ? "Click to see the question again"
+      : "Click the card to reveal the answer ✨";
+    status.textContent = `Year ${current.year} · ${current.topic}`;
+  }
+
+  function flipCard() {
+    if (!deck.length) return;
+    flipped = !flipped;
+    renderCard();
+  }
+
+  function nextCard() {
+    if (!deck.length) return;
+    index = (index + 1) % deck.length;
+    flipped = false;
+    renderCard();
+  }
+
+  function previousCard() {
+    if (!deck.length) return;
+    index = (index - 1 + deck.length) % deck.length;
+    flipped = false;
+    renderCard();
+  }
+
+  function shuffleDeck() {
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+
+    index = 0;
+    flipped = false;
+    renderCard();
+  }
+
+  document.getElementById("science-flip")
+    .addEventListener("click", flipCard);
+  card.addEventListener("click", flipCard);
+
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      flipCard();
+    }
+  });
+
+  document.getElementById("science-next")
+    .addEventListener("click", nextCard);
+  document.getElementById("science-prev")
+    .addEventListener("click", previousCard);
+  document.getElementById("science-shuffle")
+    .addEventListener("click", shuffleDeck);
+
+  document.getElementById("science-reset")
+    .addEventListener("click", () => {
+      buildDeck();
+    });
+
+  yearSelect.addEventListener("change", buildDeck);
+  topicSelect.addEventListener("change", buildDeck);
+
+  buildDeck();
+})();
+
+</script>
+</body>
+</html>
